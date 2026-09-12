@@ -1,0 +1,329 @@
+[
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html",
+    "href": "lessons/01-introduction-to-programming-and-python.html",
+    "title": "Introduction to Programming and Python",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\nexplain the basic steps involved in creating and running a computer program;\ndistinguish between an editor, compiler, interpreter, linker, loader, and IDE;\ndescribe the main characteristics of the Python programming language;\nidentify common application areas of Python;\ncreate and run a simple Python program in Google Colab;\ndistinguish between syntax, runtime, and logic errors;\nuse the print() function to display output;\nuse the sep and end arguments of the print() function;\nuse basic escape sequences in strings.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#learning-objectives",
+    "href": "lessons/01-introduction-to-programming-and-python.html#learning-objectives",
+    "title": "Introduction to Programming and Python",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\nexplain the basic steps involved in creating and running a computer program;\ndistinguish between an editor, compiler, interpreter, linker, loader, and IDE;\ndescribe the main characteristics of the Python programming language;\nidentify common application areas of Python;\ncreate and run a simple Python program in Google Colab;\ndistinguish between syntax, runtime, and logic errors;\nuse the print() function to display output;\nuse the sep and end arguments of the print() function;\nuse basic escape sequences in strings.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#introduction-to-programming",
+    "href": "lessons/01-introduction-to-programming-and-python.html#introduction-to-programming",
+    "title": "Introduction to Programming and Python",
+    "section": "Introduction to programming",
+    "text": "Introduction to programming\nA computer program is a sequence of instructions that tells a computer how to perform a particular task.\nComputers ultimately execute instructions represented in machine code. Programming languages allow programmers to express algorithms and instructions in a form that is easier for humans to write, read, and maintain.\nProgramming languages can be classified in several ways. One common distinction is between low-level and high-level programming languages.\nHigh-level programming languages provide abstractions that allow programmers to focus more on solving the problem and less on the technical details of the underlying hardware.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#the-python-language",
+    "href": "lessons/01-introduction-to-programming-and-python.html#the-python-language",
+    "title": "Introduction to Programming and Python",
+    "section": "The Python language",
+    "text": "The Python language\nPython is a general-purpose, high-level programming language.\nSome of its main characteristics are:\n\neasy to read and write;\nfree and open source;\nsupports multiple programming paradigms;\nstrongly and dynamically typed;\ninterpreted;\nhas a large standard library;\ncross-platform.\n\n\n\n\n\n\n\nNotePython in this course\n\n\n\nThe primary goal of this course is not simply to learn the Python language.\nPython is used as a tool for learning fundamental programming concepts, problem-solving techniques, and algorithmic thinking.\nWhen designing algorithms, we primarily use the three fundamental control structures:\n\nsequence – instructions are executed one after another,\nselection – different paths can be chosen depending on a condition,\niteration – instructions can be repeated using loops.\n\nThe course focuses on solving problems using the core features of Python. External libraries such as NumPy and pandas are not used.\nThe main exception is Python’s built-in random module, which will be used in some exercises when random values are required.\nThe concepts introduced in this course can also be applied when learning other programming languages.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#what-is-python-commonly-used-for",
+    "href": "lessons/01-introduction-to-programming-and-python.html#what-is-python-commonly-used-for",
+    "title": "Introduction to Programming and Python",
+    "section": "What is Python commonly used for?",
+    "text": "What is Python commonly used for?\nPython is used in many areas of computing, including:\n\ndata analysis and machine learning;\nweb applications;\ntask automation;\nsoftware testing and prototyping;\nbusiness applications;\nscientific computing;\nscripting and everyday programming tasks.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#a-brief-history-of-python",
+    "href": "lessons/01-introduction-to-programming-and-python.html#a-brief-history-of-python",
+    "title": "Introduction to Programming and Python",
+    "section": "A brief history of Python",
+    "text": "A brief history of Python\nPython was created by Guido van Rossum in the late 1980s.\nSome important milestones are:\n\n1994 – Python 1.0\n\ncore data types and functions;\nsupport for functional programming;\n\n2000 – Python 2.0\n\nUnicode support;\nlist comprehensions;\ngarbage collection;\n\n2008 – Python 3.0\n\nmajor redesign and simplification of the language;\nremoval of several duplicated or outdated language constructs;\nnot backward compatible with Python 2.\n\n\nPython 3 is the current generation of the language and is used throughout this course.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#tools-used-to-create-and-run-programs",
+    "href": "lessons/01-introduction-to-programming-and-python.html#tools-used-to-create-and-run-programs",
+    "title": "Introduction to Programming and Python",
+    "section": "Tools used to create and run programs",
+    "text": "Tools used to create and run programs\nWriting source code is only one part of creating a program. Several tools may be involved in transforming source code into a program that can be executed by a computer.\n\nEditor\nAn editor is used to create and modify the source code of a program.\nIt allows the programmer to write, edit, and save the instructions that make up the program.\n\n\nCompiler\nA compiler translates source code into another representation, usually machine code or object code, before the program is executed.\nThe translation is typically performed for a larger part of the program at once.\n\n\nInterpreter\nAn interpreter executes a program with the help of another program rather than producing a complete standalone machine-code program before execution.\nPython uses an interpreter.\n\n\nLinker\nA linker combines separately translated program modules and libraries into the form required to create an executable program.\n\n\nLoader\nA loader loads the executable program into memory so that the operating system can start its execution.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#integrated-development-environment",
+    "href": "lessons/01-introduction-to-programming-and-python.html#integrated-development-environment",
+    "title": "Introduction to Programming and Python",
+    "section": "Integrated Development Environment",
+    "text": "Integrated Development Environment\nAn Integrated Development Environment (IDE) combines several tools needed for software development in one environment.\nAn IDE typically provides:\n\na source code editor;\ntools for running programs;\ndebugging tools;\nsyntax highlighting;\ncode completion;\nproject and file management.\n\n\nCommon Python IDEs\nThere are several popular IDEs available for Python programming:\n\nGoogle Colab\nJupyter Notebook\nVisual Studio Code\nPyCharm\nSpyder\nIDLE\n\n\n\n\n\n\n\nTipOur environment: Google Colab\n\n\n\nIn this course, we will primarily use Google Colab.\nGoogle Colab is a good choice for beginners because it is:\n\nbrowser-based – it runs directly in a web browser;\neasy to use – students can start programming with minimal setup;\ninstallation-free – no local Python installation is required;\nplatform-independent – it can be used on Windows, macOS, Linux, and other systems with a modern web browser;\ncloud-based – notebooks can be saved online and accessed from different computers;\neasy to share – notebooks can be shared similarly to other Google documents.\n\n\n\nOpen Google Colab in your browser: Google Colab\nImportant: You need a Google Account to use Colab and save your notebooks.\n\n\n\n\n\n\nFigure 1: Google Colab interface",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#getting-started-with-google-colab",
+    "href": "lessons/01-introduction-to-programming-and-python.html#getting-started-with-google-colab",
+    "title": "Introduction to Programming and Python",
+    "section": "Getting started with Google Colab",
+    "text": "Getting started with Google Colab\nGoogle Colab provides a browser-based notebook environment for writing and executing Python programs.\nA notebook consists of cells.\nThe two most important cell types are:\n\ncode cells – contain executable Python code;\ntext cells – contain explanations, headings, notes, and other formatted text.\n\n\nCreating a new notebook\nTo create and run your first notebook:\n\nopen Google Colab;\ncreate a new notebook;\nclick inside a code cell;\nenter Python code;\nrun the cell using the Run button or by pressing Shift + Enter.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#your-first-python-program",
+    "href": "lessons/01-introduction-to-programming-and-python.html#your-first-python-program",
+    "title": "Introduction to Programming and Python",
+    "section": "Your first Python program",
+    "text": "Your first Python program\nTraditionally, the first program written when learning a programming language displays the text Hello World.\n\nprint(\"Hello World\")\n\nThe statement calls the Python print() function.\nThe text between quotation marks is passed to the function and displayed as output.\nBoth single and double quotation marks can be used:\n\nprint(\"Hello World\")\nprint('Hello World')",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#errors-in-programs",
+    "href": "lessons/01-introduction-to-programming-and-python.html#errors-in-programs",
+    "title": "Introduction to Programming and Python",
+    "section": "Errors in programs",
+    "text": "Errors in programs\nMaking mistakes is a normal part of programming. Finding and correcting errors is an important programming skill.\nThere are several common types of errors.\n\nSyntax errors\nA syntax error occurs when the source code violates the grammatical rules of the programming language.\nFor example:\nprint(\"Hello World)\nPython cannot execute this statement because the closing quotation mark is missing.\nA syntax error usually results in an error message.\n\n\nRuntime errors\nA runtime error occurs while the program is being executed.\nFor example:\nprint(5 / 0)\nThe syntax is valid, but division by zero cannot be performed.\nPython reports an exception such as:\nZeroDivisionError: division by zero\n\n\nLogic errors\nA logic error occurs when the program can be executed but does not produce the intended result.\nFor example:\n\nprint(\"5\" + \"6\")\n\nThe result is:\n56\nrather than:\n11\nLogic errors can be especially difficult to find because the program may run without displaying an error message.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#debugging",
+    "href": "lessons/01-introduction-to-programming-and-python.html#debugging",
+    "title": "Introduction to Programming and Python",
+    "section": "Debugging",
+    "text": "Debugging\nThe process of identifying and correcting errors in a program is called debugging.\nWhen a program does not work as expected:\n\nread the error message carefully;\nidentify the line where the problem occurred;\ncheck the code for syntax errors;\ncheck for typing mistakes;\ncheck whether the algorithm itself is correct;\ntest smaller parts of the program separately;\nuse the documentation or development tools if necessary.\n\nLearning to understand error messages is an essential programming skill.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#the-print-function",
+    "href": "lessons/01-introduction-to-programming-and-python.html#the-print-function",
+    "title": "Introduction to Programming and Python",
+    "section": "The print() function",
+    "text": "The print() function\nThe print() function is used to display one or more values.\n\nPrinting a single value\n\nprint(\"Hello\")\n\n\n\nPrinting multiple values\nSeveral values can be passed to the print() function:\n\nprint(\"Monday\", \"Tuesday\", \"Wednesday\")\n\nBy default, Python separates the values with spaces.\nText, numbers, and expressions can also be combined:\n\nprint(\"5 * 6 is\", 5 * 6)\n\n\n\nPrinting an empty line\nCalling print() without an argument produces an empty line:\n\nprint(\"First line\")\nprint()\nprint(\"Third line\")",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#the-sep-argument",
+    "href": "lessons/01-introduction-to-programming-and-python.html#the-sep-argument",
+    "title": "Introduction to Programming and Python",
+    "section": "The sep argument",
+    "text": "The sep argument\nThe optional sep argument specifies the separator placed between multiple values.\nBy default, the separator is a single space.\n\nprint(\"One\", \"Two\", \"Three\")\n\nA different separator can be specified:\n\nprint(\"One\", \"Two\", \"Three\", sep=\"-\")\n\n\nprint(\"One\", \"Two\", \"Three\", sep=\"|\")\n\nAn empty string can also be used:\n\nprint(\"One\", \"Two\", \"Three\", sep=\"\")",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#the-end-argument",
+    "href": "lessons/01-introduction-to-programming-and-python.html#the-end-argument",
+    "title": "Introduction to Programming and Python",
+    "section": "The end argument",
+    "text": "The end argument\nBy default, the print() function ends its output with a new line.\nThe optional end argument can change this behaviour.\n\nprint(\"One\", \"Two\", sep=\" \", end=\" \")\nprint(\"Three\")\n\nIn this example, the second print() call continues on the same line.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#escape-sequences",
+    "href": "lessons/01-introduction-to-programming-and-python.html#escape-sequences",
+    "title": "Introduction to Programming and Python",
+    "section": "Escape sequences",
+    "text": "Escape sequences\nAn escape sequence represents a special character inside a string.\nSome commonly used escape sequences are:\n\n\n\nEscape sequence\nMeaning\n\n\n\n\n\\n\nnew line\n\n\n\\t\nhorizontal tab\n\n\n\\r\ncarriage return\n\n\n\n\nNew line\n\nprint(\"Monday\\nTuesday\\nWednesday\")\n\n\n\nTab\n\nprint(\"Name\\tScore\")\nprint(\"Anna\\t85\")\nprint(\"John\\t92\")",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#quotation-marks-inside-strings",
+    "href": "lessons/01-introduction-to-programming-and-python.html#quotation-marks-inside-strings",
+    "title": "Introduction to Programming and Python",
+    "section": "Quotation marks inside strings",
+    "text": "Quotation marks inside strings\nSometimes quotation marks themselves need to appear in the output.\nOne possibility is to use different quotation marks around the string:\n\nprint(\"My name is 'Alain'\")\n\nAnother possibility is to use escape characters:\n\nprint(\"My name is \\\"Alain\\\"\")\n\nSimilarly:\n\nprint('My name is \"Alain\"')",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#multiline-strings",
+    "href": "lessons/01-introduction-to-programming-and-python.html#multiline-strings",
+    "title": "Introduction to Programming and Python",
+    "section": "Multiline strings",
+    "text": "Multiline strings\nTriple quotation marks can be used to create strings that span several lines.\n\nprint(\"\"\"This text\ncontains\nseveral lines.\"\"\")\n\nBoth triple double quotation marks and triple single quotation marks can be used.\n\nprint('''First line\nSecond line\nThird line''')",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#unicode-characters",
+    "href": "lessons/01-introduction-to-programming-and-python.html#unicode-characters",
+    "title": "Introduction to Programming and Python",
+    "section": "Unicode characters",
+    "text": "Unicode characters\nPython strings support Unicode characters.\nFor example:\n\nprint(\"Python \\u263A\")\n\nUnicode support makes it possible to work with characters from many different languages and symbol sets.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "lessons/01-introduction-to-programming-and-python.html#summary",
+    "href": "lessons/01-introduction-to-programming-and-python.html#summary",
+    "title": "Introduction to Programming and Python",
+    "section": "Summary",
+    "text": "Summary\nIn this lesson, you learned:\n\nwhat a programming language is;\nthe main characteristics and application areas of Python;\nthe basic history of Python;\nthe role of an editor, compiler, interpreter, linker, and loader;\nwhat an IDE is and some common Python IDEs;\nwhy Google Colab is used in this course;\nhow to write and run a simple Python program;\nthe difference between syntax, runtime, and logic errors;\nthe basic process of debugging;\nhow to use the print() function;\nhow to use the sep and end arguments;\nhow to use basic escape sequences and quotation marks in strings.\n\nIn the next lesson, we will introduce variables, expressions, and simple data types.",
+    "crumbs": [
+      "Lessons",
+      "1. Introduction to Programming and Python"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Course Materials",
+    "section": "Course structure",
+    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#programming-environment",
+    "href": "index.html#programming-environment",
+    "title": "Course Materials",
+    "section": "Programming environment",
+    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.\n\n\n\n\n\n\nNote\n\n\n\nThe materials are version-controlled with Git and can be published through GitHub Pages. Moodle can therefore link to one continuously updated course website.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html",
+    "href": "exercises/01-class-exercises.html",
+    "title": "Class Exercises 1",
+    "section": "",
+    "text": "Introduction to Data Science and Programming\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 1 — 10 minutes",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\n\n# Write your solution here",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 2 — 10 minutes",
+    "text": "Exercise 2 — 10 minutes\nWrite a program that introduces you as follows.\nFirst, display the information in one line, for example:\n\nName: “Edit White” & Neptun-code: “ABCDEF” & Age: 25 years\n\nThen display:\nIntroduction\nName: Edit White\nNeptun-code: ABCDEF\nAge: 25 years\n\n# Write your solution here",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 3 — 10 minutes",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that performs the following operations and displays the results as shown:\n2*1000 + 2*10 + 1*3 = 2023\nThe solution of the equation 4x + 2 = 14 is x = 3\nThe number of seconds in a week is 604800\nCalculate the number of seconds in a week in your program.\n\n# Write your solution here",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 4 — 10 minutes",
+    "text": "Exercise 4 — 10 minutes\nPrint the multiplication table of 7 from 1 to 10 in the following format:\nMultiplication table of 7:\n1 * 7 = 7\n2 * 7 = 14\n...\n10 * 7 = 70\nArrange all values in 5 columns.\n\n# Write your solution here",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#homework",
+    "href": "exercises/01-class-exercises.html#homework",
+    "title": "Class Exercises 1",
+    "section": "Homework",
+    "text": "Homework\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n# Write your solution here",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-5---10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-5---10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 5 - 10 minutes",
+    "text": "Exercise 5 - 10 minutes\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n::: {#4d66f773 .cell}\n``` {.python .cell-code}\n\n# Write your solution here\n:::",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  }
+]
