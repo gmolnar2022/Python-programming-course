@@ -4,7 +4,7 @@
     "href": "exercises/01-class-exercises.html",
     "title": "Class Exercises 1",
     "section": "",
-    "text": "Introduction to Data Science and Programming\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.\nimport sys\nfrom pathlib import Path\n\nproject_root = Path.cwd().parent\nsys.path.append(str(project_root))\n\nfrom checker.checker import check_previous_cell",
+    "text": "Introduction to Data Science and Programming\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.\nfrom checker.checker import check_previous_cell",
     "crumbs": [
       "Lessons",
       "Class Exercises"
