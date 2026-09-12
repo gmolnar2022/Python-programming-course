@@ -8,6 +8,7 @@ One task ID corresponds to one whole exercise.
 import io
 import calendar
 from contextlib import redirect_stdout
+from IPython import get_ipython
 
 TASKS = {
     "week01_ex01": {
