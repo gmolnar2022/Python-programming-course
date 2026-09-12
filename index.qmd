@@ -22,6 +22,4 @@ Assessment materials and preparation tasks for the two midterm tests and the fin
 
 The main programming environment for the course is planned to be **Google Colab**. It allows Python notebooks to be created and executed directly in a web browser.
 
-::: {.callout-note}
-The materials are version-controlled with Git and can be published through GitHub Pages. Moodle can therefore link to one continuously updated course website.
-:::
+
