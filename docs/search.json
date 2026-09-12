@@ -4,7 +4,7 @@
     "href": "exercises/01-class-exercises.html",
     "title": "Class Exercises 1",
     "section": "",
-    "text": "Introduction to Data Science and Programming\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "text": "Introduction to Data Science and Programming\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.\nfrom checker.checker import check_previous_cell",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -15,7 +15,7 @@
     "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
     "title": "Class Exercises 1",
     "section": "Exercise 1 — 10 minutes",
-    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\n\n# Write your solution here",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\n\n# Write your solution here\n\n\ncheck_previous_cell(\"week01_ex01b\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
