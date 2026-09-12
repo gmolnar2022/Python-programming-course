@@ -1,0 +1,7 @@
+---
+title: "Lesson 8 – Procedures and Functions"
+---
+
+::: {.callout-note}
+This lesson will be added during the semester.
+:::

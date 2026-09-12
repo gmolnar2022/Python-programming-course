@@ -1,0 +1,10 @@
+/* Small course-specific additions. Keep custom styling minimal so that
+   Quarto theme updates remain easy to maintain. */
+
+.callout-important .callout-title-container {
+  font-weight: 700;
+}
+
+table {
+  width: auto;
+}

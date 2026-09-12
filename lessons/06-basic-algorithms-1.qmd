@@ -1,0 +1,7 @@
+---
+title: "Lesson 6 – Basic Algorithms I"
+---
+
+::: {.callout-note}
+This lesson will be added during the semester.
+:::

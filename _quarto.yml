@@ -1,0 +1,84 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - lessons/01-introduction-to-programming-and-python.qmd
+    # Uncomment pages below when they are ready to publish:
+    # - lessons/02-simple-data-types.qmd
+    # - lessons/03-conditional-statements.qmd
+    # - lessons/04-loops.qmd
+    # - lessons/05-complex-data-types-1.qmd
+    # - lessons/06-basic-algorithms-1.qmd
+    # - lessons/07-basic-algorithms-2.qmd
+    # - lessons/08-functions.qmd
+    # - lessons/09-complex-data-types-2.qmd
+    # - lessons/10-oop.qmd
+    # - lessons/11-complex-problem.qmd
+    # - lessons/12-review.qmd
+    # - assessments/index.qmd
+    # - assessments/midterm-1.qmd
+    # - assessments/midterm-2.qmd
+    # - assessments/final.qmd
+
+website:
+  title: "Introduction to Data Science and Programming"
+  site-path: "/"
+  search: true
+  page-navigation: true
+  sidebar:
+    style: "docked"
+    contents:
+      - href: index.qmd
+        text: Home
+      - section: "Lessons"
+        contents:
+          - href: lessons/01-introduction-to-programming-and-python.qmd
+            text: "1. Introduction to Programming and Python"
+          # Uncomment lessons below when they are ready to publish:
+          # - href: lessons/02-simple-data-types.qmd
+          #   text: "2. Working with Simple Data Types"
+          # - href: lessons/03-conditional-statements.qmd
+          #   text: "3. Conditional Statements in Python"
+          # - href: lessons/04-loops.qmd
+          #   text: "4. Loops in Python"
+          # - href: lessons/05-complex-data-types-1.qmd
+          #   text: "5. Complex Data Types I"
+          # - href: lessons/06-basic-algorithms-1.qmd
+          #   text: "6. Basic Algorithms I"
+          # - href: lessons/07-basic-algorithms-2.qmd
+          #   text: "7. Basic Algorithms II"
+          # - href: lessons/08-functions.qmd
+          #   text: "8. Procedures and Functions"
+          # - href: lessons/09-complex-data-types-2.qmd
+          #   text: "9. Complex Data Types II"
+          # - href: lessons/10-oop.qmd
+          #   text: "10. Object-Oriented Programming"
+          # - href: lessons/11-complex-problem.qmd
+          #   text: "11. Solving a Complex Problem"
+          # - href: lessons/12-review.qmd
+          #   text: "12. Review and Integrated Problem Solving"
+      # Uncomment the Assessment section when assessment materials are published:
+      # - section: "Assessment"
+      #   contents:
+      #     - href: assessments/index.qmd
+      #       text: Overview
+      #     - href: assessments/midterm-1.qmd
+      #       text: Midterm Test 1
+      #     - href: assessments/midterm-2.qmd
+      #       text: Midterm Test 2
+      #     - href: assessments/final.qmd
+      #       text: Final Test
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap
+    link-external-newwindow: true
+
+execute:
+  enabled: false

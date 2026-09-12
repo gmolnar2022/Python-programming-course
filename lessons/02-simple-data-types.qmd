@@ -1,0 +1,7 @@
+---
+title: "Lesson 2 – Working with Simple Data Types"
+---
+
+::: {.callout-note}
+This lesson will be added during the semester.
+:::

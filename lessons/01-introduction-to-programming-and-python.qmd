@@ -1,0 +1,413 @@
+---
+title: "Lesson 1 – Introduction to Programming and Python"
+---
+
+## Learning objectives
+
+After completing this lesson, you should be able to:
+
+- explain the basic steps involved in creating and running a computer program;
+- distinguish between an editor, compiler, interpreter, linker, loader, and IDE;
+- describe the main characteristics of the Python programming language;
+- identify common application areas of Python;
+- create and run a simple Python program in Google Colab;
+- distinguish between syntax, runtime, and logic errors;
+- use the `print()` function to produce output;
+- use the `sep` and `end` arguments of `print()`;
+- use basic escape sequences in strings.
+
+## Programming languages and Python
+
+### What is a programming language?
+
+A computer program is a sequence of instructions that tells a computer how to perform a particular task.
+
+Computers ultimately execute instructions represented in machine code. Programming languages allow programmers to express algorithms and instructions in a form that is easier for humans to write, read, and maintain.
+
+Programming languages can be classified in several ways. One common distinction is between **low-level** and **high-level** programming languages.
+
+High-level languages provide abstractions that allow programmers to concentrate more on solving the problem and less on the details of the underlying hardware.
+
+Python is a **general-purpose, high-level programming language**.
+
+### Main characteristics of Python
+
+Python has several characteristics that make it suitable both for learning programming and for developing real-world applications:
+
+- it is relatively easy to read and write;
+- it is free and open source;
+- it supports multiple programming paradigms;
+- it is strongly and dynamically typed;
+- it is interpreted;
+- it has an extensive standard library;
+- it is cross-platform.
+
+### What is Python used for?
+
+Python is used in many areas of computing, including:
+
+- data analysis and machine learning;
+- web applications;
+- task automation;
+- software testing and prototyping;
+- business applications;
+- scientific computing;
+- scripting and everyday programming tasks.
+
+::: {.callout-important}
+## Python in this course
+
+The primary goal of this course is **not simply to learn the Python language**.
+
+Python is used as a tool for learning fundamental programming concepts, problem-solving techniques, and algorithmic thinking. The concepts introduced in this course can also be applied when learning other programming languages.
+:::
+
+## A brief history of Python
+
+Python was created by **Guido van Rossum** in the late 1980s.
+
+Some important milestones are:
+
+- **1994 – Python 1.0:** core data types, functions, and support for functional programming;
+- **2000 – Python 2.0:** Unicode support, list comprehensions, and garbage collection;
+- **2008 – Python 3.0:** major redesign and simplification of the language.
+
+Python 3 is the generation of the language used throughout this course.
+
+## From source code to a running program
+
+Writing source code is only one part of creating a program. Several software components may be involved in transforming source code into a program that can be executed by a computer.
+
+### Editor
+
+An **editor** is used to create and modify the source code of a program.
+
+Examples include simple text editors as well as editors specifically designed for programming.
+
+### Compiler
+
+A **compiler** translates source code into another representation, typically machine code or object code, before the program is executed.
+
+The translation is normally performed for a larger part of the program at once.
+
+### Interpreter
+
+An **interpreter** executes a program with the help of another program rather than producing a complete standalone machine-code program before execution.
+
+Python is commonly described as an **interpreted programming language**.
+
+::: {.callout-note}
+The distinction between compiled and interpreted languages is useful for understanding the basic concepts, although modern language implementations can combine several techniques.
+:::
+
+### Linker
+
+A **linker** combines separately translated program modules and libraries into the form required to create an executable program.
+
+### Loader
+
+A **loader** loads the executable program into memory so that the operating system can start its execution.
+
+### Integrated Development Environment
+
+An **Integrated Development Environment (IDE)** combines several tools needed for software development in one environment.
+
+An IDE typically provides:
+
+- a source code editor;
+- tools for running programs;
+- debugging tools;
+- syntax highlighting;
+- code completion;
+- project and file management.
+
+Different programming languages and programming tasks may use different development environments.
+
+## Our programming environment: Google Colab
+
+In this course, we use **Google Colab** to write and execute Python programs.
+
+Google Colab provides a browser-based notebook environment. This means that no local Python installation is required for the exercises used in the course.
+
+A notebook consists of **cells**. The two most important cell types are:
+
+- **code cells** – contain executable Python code;
+- **text cells** – contain explanations, headings, notes, and other formatted text.
+
+### Creating and running a notebook
+
+1. Open Google Colab.
+2. Create a new notebook.
+3. Click inside a code cell.
+4. Enter Python code.
+5. Run the cell using the Run button or **Shift + Enter**.
+
+::: {.callout-tip}
+Current Google Colab screenshots can later be added to this section in `assets/images/lesson01/`.
+:::
+
+## Your first Python program
+
+Traditionally, the first program written when learning a programming language displays the text `Hello World`.
+
+```python
+print("Hello World")
+```
+
+Output:
+
+```text
+Hello World
+```
+
+The instruction calls the Python `print()` function. The text between quotation marks is passed to the function and displayed as output.
+
+Both single and double quotation marks can be used:
+
+```python
+print("Hello World")
+print('Hello World')
+```
+
+## Errors in programs
+
+Making mistakes is a normal part of programming. Finding and correcting errors is an important programming skill.
+
+### Syntax errors
+
+A **syntax error** occurs when the source code violates the grammatical rules of the programming language.
+
+For example:
+
+```python
+print("Hello World)
+```
+
+Python cannot execute this statement because the quotation mark is missing.
+
+### Runtime errors
+
+A **runtime error** occurs while the program is being executed.
+
+For example:
+
+```python
+print(5 / 0)
+```
+
+The syntax is valid, but division by zero cannot be performed. Python reports an exception such as:
+
+```text
+ZeroDivisionError: division by zero
+```
+
+### Logic errors
+
+A **logic error** occurs when the program can be executed but does not produce the intended result.
+
+For example:
+
+```python
+print("5" + "6")
+```
+
+Output:
+
+```text
+56
+```
+
+The program runs successfully, but the result may not be what the programmer intended.
+
+Logic errors are particularly important because the programming environment may not display an error message.
+
+### What should you do when an error occurs?
+
+When a program does not work as expected:
+
+1. read the error message carefully;
+2. identify the line where the problem occurred;
+3. check the syntax;
+4. check names and possible typing errors;
+5. consider whether the algorithm itself is correct;
+6. test individual parts of the program.
+
+Learning to understand error messages is an essential programming skill.
+
+## The `print()` function
+
+The `print()` function displays one or more values.
+
+### Printing a single value
+
+```python
+print("Hello")
+```
+
+Output:
+
+```text
+Hello
+```
+
+### Printing multiple values
+
+Several values can be passed to `print()`:
+
+```python
+print("Monday", "Tuesday", "Wednesday")
+```
+
+Output:
+
+```text
+Monday Tuesday Wednesday
+```
+
+By default, Python separates multiple values with spaces.
+
+Values and expressions can also be combined:
+
+```python
+print("5 * 6 is", 5 * 6)
+```
+
+Output:
+
+```text
+5 * 6 is 30
+```
+
+### Printing an empty line
+
+Calling `print()` without an argument produces an empty line:
+
+```python
+print("First line")
+print()
+print("Third line")
+```
+
+## The `sep` argument
+
+The optional `sep` argument specifies the separator placed between values.
+
+```python
+print("One", "Two", "Three", sep="-")
+```
+
+Output:
+
+```text
+One-Two-Three
+```
+
+Another example:
+
+```python
+print("One", "Two", "Three", sep="|")
+```
+
+An empty string can also be used:
+
+```python
+print("One", "Two", "Three", sep="")
+```
+
+## The `end` argument
+
+Normally, `print()` ends its output with a newline.
+
+The `end` argument can change this behaviour:
+
+```python
+print("One", "Two", sep=" ", end=" ")
+print("Three")
+```
+
+Output:
+
+```text
+One Two Three
+```
+
+## Escape sequences
+
+An **escape sequence** represents a special character inside a string.
+
+| Escape sequence | Meaning |
+|---|---|
+| `\\n` | new line |
+| `\\t` | horizontal tab |
+| `\\r` | carriage return |
+
+Example:
+
+```python
+print("Monday\\nTuesday\\nWednesday")
+```
+
+Output:
+
+```text
+Monday
+Tuesday
+Wednesday
+```
+
+Tab characters can be used to separate pieces of text:
+
+```python
+print("Name\\tScore")
+print("Anna\\t85")
+```
+
+## Quotation marks inside strings
+
+Sometimes quotation marks themselves need to appear in the output.
+
+One possibility is to use different quotation marks around the string:
+
+```python
+print("My name is 'Alain'")
+```
+
+Another possibility is to escape the quotation marks:
+
+```python
+print("My name is \\"Alain\\"")
+```
+
+## Multiline strings
+
+Triple quotation marks can be used to create strings that span several lines:
+
+```python
+print("""This text
+contains
+several lines.""")
+```
+
+## Unicode characters
+
+Python strings support Unicode characters.
+
+For example:
+
+```python
+print("Python \\u263A")
+```
+
+## Summary
+
+In this lesson, you learned:
+
+- the role of programming languages;
+- the basic steps and tools involved in creating and running programs;
+- the difference between an editor, compiler, interpreter, linker, loader, and IDE;
+- the main characteristics and application areas of Python;
+- how to write and execute simple Python programs;
+- the basic types of programming errors;
+- how to use the `print()` function and some of its most important options.
+
+In the next lesson, we will introduce **variables, expressions, and simple data types**.

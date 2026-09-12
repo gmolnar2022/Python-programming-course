@@ -1,0 +1,27 @@
+---
+title: "Course Materials"
+---
+
+Welcome to the online materials for **Introduction to Data Science and Programming**.
+
+The primary goal of this course is to develop **programming skills, problem-solving techniques, and algorithmic thinking**. Python is the programming language used as the practical environment for learning these concepts.
+
+## Course structure
+
+The course consists of 12 teaching weeks. Each lesson will gradually contain:
+
+- concise theoretical notes;
+- worked examples;
+- practical exercises;
+- additional practice tasks;
+- solutions released when appropriate.
+
+Assessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.
+
+## Programming environment
+
+The main programming environment for the course is planned to be **Google Colab**. It allows Python notebooks to be created and executed directly in a web browser.
+
+::: {.callout-note}
+The materials are version-controlled with Git and can be published through GitHub Pages. Moodle can therefore link to one continuously updated course website.
+:::

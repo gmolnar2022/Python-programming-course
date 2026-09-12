@@ -1,0 +1,7 @@
+---
+title: "Assessment Overview"
+---
+
+This section will contain preparation materials for the two midterm tests and the final test.
+
+Mini quizzes and instructor-only solutions should preferably be kept outside the public repository until they are intended for release.
