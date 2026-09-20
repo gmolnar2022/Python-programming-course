@@ -147,7 +147,7 @@
     "href": "exercises/01-class-exercises.html",
     "title": "Class Exercises 1",
     "section": "",
-    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -474,7 +474,7 @@
     "href": "exercises/02-class-exercises.html",
     "title": "Class Exercises 2",
     "section": "",
-    "text": "Working with simple data types\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "text": "Working with simple data types\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
     "crumbs": [
       "Lessons",
       "Class Exercises"
