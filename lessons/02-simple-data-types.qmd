@@ -11,7 +11,7 @@ After completing this lesson, you should be able to:
 - use the `type()` function to inspect the type of a value;
 - understand the convention used for constants in Python;
 - distinguish between implicit and explicit type conversion;
-- display variable values using `print()`, `format()`, and f-strings;
+- display variable values using `print()` and f-strings;
 - use raw strings when backslashes should be treated literally;
 - read values from the user with `input()`;
 - use arithmetic operators and evaluate arithmetic expressions.
@@ -32,6 +32,32 @@ For example:
 age = 25
 name = "Joe"
 ```
+
+::: {.callout-note title="Type hints"}
+Python also allows us to indicate the expected type of a variable using a **type hint**:
+
+```python
+age: int = 25
+height: float = 1.82
+name: str = "Anna"
+is_student: bool = True
+```
+
+A type hint provides information about the intended type, but Python does **not enforce it**:
+
+```python
+age: int = 25
+age = "twenty-five"   # Python allows this
+```
+
+In this course, we will normally create variables without type hints:
+
+```python
+age = 25
+```
+
+We will return to type hints later when working with functions.
+:::
 
 ### Variable naming rules
 
@@ -224,40 +250,20 @@ print("Name:", name, "Age:", age, "Is_student:", is_student)
 
 ## Formatting output
 
-### The `format()` method
+### String formatting: `format()` and f-strings
 
-The `format()` method inserts values into placeholders marked by `{}` in a string.
-
-```python
-language = "Python"
-print("{} is our programming language".format(language))
-```
-
-Multiple values can be inserted:
-
-```python
-name = "Joe"
-age = 50
-is_student = True
-
-print("Name: {0}, Age: {1}, Is_student: {2}".format(name, age, is_student))
-```
-
-Values can also be formatted. For example, `.3f` displays a floating-point value with three digits after the decimal point:
-
-```python
-result = 5 * 5.25
-print("5 * 5.25 is {:.3f}".format(result))
-```
+Python also provides the older **`format()` method** for inserting values into strings. You may encounter it in existing Python code, but in this course we will use **f-strings** for formatted output.
 
 ### f-strings
 
-An **f-string** is a string prefixed with `f`. Expressions or variable names can be placed directly inside `{}`.
+An **f-string** is a string prefixed with `f`. Variable names and expressions can be placed directly inside `{}`.
 
 ```python
 language = "Python"
 print(f"{language} is our programming language")
 ```
+
+Multiple values can be included in the same f-string:
 
 ```python
 name = "Joe"
@@ -267,15 +273,23 @@ is_student = True
 print(f"Name: {name}, Age: {age}, Is_student: {is_student}")
 ```
 
-Formatting specifications can also be used with f-strings:
+Expressions can also be evaluated directly inside an f-string:
+
+```python
+x = 5
+y = 4
+print(f"{x} * {y} = {x * y}")
+```
+
+Values can be formatted using a **format specification**. For example, `.3f` displays a floating-point value with three digits after the decimal point:
 
 ```python
 result = 5 * 5.25
 print(f"5 * 5.25 is {result:.3f}")
 ```
 
-::: {.callout-tip title="Recommended style"}
-Both `format()` and f-strings are useful to understand. For new Python code, f-strings are usually the clearest way to combine text and values.
+::: {.callout-tip title="In this course"}
+Use **f-strings** when you need to combine text, variable values, or expressions in formatted output. The `format()` method is mentioned only so that you can recognize it in existing Python code.
 :::
 
 ### Raw strings (`r`-strings)
@@ -403,7 +417,7 @@ In this lesson, you learned how to:
 - inspect types with `type()`;
 - use Python's convention for constants;
 - perform explicit and implicit type conversion;
-- display values using `print()`, `format()`, and f-strings;
+- display values using `print()` and f-strings;
 - use raw strings;
 - read input with `input()` and convert it when necessary;
 - use arithmetic operators and understand operator precedence.
