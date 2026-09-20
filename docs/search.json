@@ -4,7 +4,7 @@
     "href": "lessons/02-simple-data-types.html",
     "title": "Working with Simple Data Types",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print(), format(), and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
       "2. Working with Simple Data Types"
@@ -15,7 +15,7 @@
     "href": "lessons/02-simple-data-types.html#learning-objectives",
     "title": "Working with Simple Data Types",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print(), format(), and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
       "2. Working with Simple Data Types"
@@ -26,7 +26,7 @@
     "href": "lessons/02-simple-data-types.html#variables",
     "title": "Working with Simple Data Types",
     "section": "Variables",
-    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
+    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\n\n\n\n\n\nNoteType hints\n\n\n\nPython also allows us to indicate the expected type of a variable using a type hint:\nage: int = 25\nheight: float = 1.82\nname: str = \"Anna\"\nis_student: bool = True\nA type hint provides information about the intended type, but Python does not enforce it:\nage: int = 25\nage = \"twenty-five\"   # Python allows this\nIn this course, we will normally create variables without type hints:\nage = 25\nWe will return to type hints later when working with functions.\n\n\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
     "crumbs": [
       "Lessons",
       "2. Working with Simple Data Types"
@@ -92,7 +92,7 @@
     "href": "lessons/02-simple-data-types.html#formatting-output",
     "title": "Working with Simple Data Types",
     "section": "Formatting output",
-    "text": "Formatting output\n\nThe format() method\nThe format() method inserts values into placeholders marked by {} in a string.\nlanguage = \"Python\"\nprint(\"{} is our programming language\".format(language))\nMultiple values can be inserted:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name: {0}, Age: {1}, Is_student: {2}\".format(name, age, is_student))\nValues can also be formatted. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(\"5 * 5.25 is {:.3f}\".format(result))\n\n\nf-strings\nAn f-string is a string prefixed with f. Expressions or variable names can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nFormatting specifications can also be used with f-strings:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipRecommended style\n\n\n\nBoth format() and f-strings are useful to understand. For new Python code, f-strings are usually the clearest way to combine text and values.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
+    "text": "Formatting output\n\nString formatting: format() and f-strings\nPython also provides the older format() method for inserting values into strings. You may encounter it in existing Python code, but in this course we will use f-strings for formatted output.\n\n\nf-strings\nAn f-string is a string prefixed with f. Variable names and expressions can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nMultiple values can be included in the same f-string:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nExpressions can also be evaluated directly inside an f-string:\nx = 5\ny = 4\nprint(f\"{x} * {y} = {x * y}\")\nValues can be formatted using a format specification. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipIn this course\n\n\n\nUse f-strings when you need to combine text, variable values, or expressions in formatted output. The format() method is mentioned only so that you can recognize it in existing Python code.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
     "crumbs": [
       "Lessons",
       "2. Working with Simple Data Types"
@@ -136,10 +136,117 @@
     "href": "lessons/02-simple-data-types.html#summary",
     "title": "Working with Simple Data Types",
     "section": "Summary",
-    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print(), format(), and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
+    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print() and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
     "crumbs": [
       "Lessons",
       "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html",
+    "href": "exercises/01-class-exercises.html",
+    "title": "Class Exercises 1",
+    "section": "",
+    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#setup",
+    "href": "exercises/01-class-exercises.html#setup",
+    "title": "Class Exercises 1",
+    "section": "Setup",
+    "text": "Setup\nRun the following cell once at the beginning of the session.\n\n# Run this cell once before starting the exercises\n\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\n\nfrom checker import check_button\n\nprint(\"✓ Exercise checker is ready.\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 1 — 10 minutes",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex01\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 2 — 10 minutes",
+    "text": "Exercise 2 — 10 minutes\nWrite a program that introduces you as follows.\nFirst, display the information in one line, for example:\n\nName: “Edit White” & Neptun-code: “ABCDEF” & Age: 25 years\n\nThen display:\nIntroduction\nName: Edit White\nNeptun-code: ABCDEF\nAge: 25 years\nUse your own data. Produce both forms in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex02\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 3 — 10 minutes",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that performs the following operations and displays the results as shown:\n2*1000 + 2*10 + 1*3 = 2023\nThe solution of the equation 4x + 2 = 14 is x = 3\nThe number of seconds in a week is 604800\nCalculate the number of seconds in a week in your program.\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex03\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "title": "Class Exercises 1",
+    "section": "Exercise 4 — 10 minutes",
+    "text": "Exercise 4 — 10 minutes\nPrint the multiplication table of 7 from 1 to 10 in the following format:\nMultiplication table of 7:\n1 * 7 = 7\n2 * 7 = 14\n...\n10 * 7 = 70\nArrange all values in 5 columns.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex04\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html#exercise-5",
+    "href": "exercises/01-class-exercises.html#exercise-5",
+    "title": "Class Exercises 1",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex05\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Course Materials",
+    "section": "Course structure",
+    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#programming-environment",
+    "href": "index.html#programming-environment",
+    "title": "Course Materials",
+    "section": "Programming environment",
+    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -363,110 +470,66 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Materials",
+    "objectID": "exercises/02-class-exercises.html",
+    "href": "exercises/02-class-exercises.html",
+    "title": "Class Exercises 2",
     "section": "",
-    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
-    "crumbs": [
-      "Home"
-    ]
+    "text": "Introduction to Data Science and Programming\nWeek 2 – Working with Simple Data Types\nComplete the exercises in order. Write your solution in the code cell below each task."
   },
   {
-    "objectID": "index.html#course-structure",
-    "href": "index.html#course-structure",
-    "title": "Course Materials",
-    "section": "Course structure",
-    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#programming-environment",
-    "href": "index.html#programming-environment",
-    "title": "Course Materials",
-    "section": "Programming environment",
-    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "exercises/01-class-exercises.html",
-    "href": "exercises/01-class-exercises.html",
-    "title": "Class Exercises 1",
-    "section": "",
-    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
-  },
-  {
-    "objectID": "exercises/01-class-exercises.html#setup",
-    "href": "exercises/01-class-exercises.html#setup",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#setup",
+    "href": "exercises/02-class-exercises.html#setup",
+    "title": "Class Exercises 2",
     "section": "Setup",
-    "text": "Setup\nRun the following cell once at the beginning of the session.\n\n# Run this cell once before starting the exercises\n\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\n\nfrom checker import check_button\n\nprint(\"✓ Exercise checker is ready.\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "text": "Setup\nRun this cell once at the beginning of the session.\n\n# Setup – run this cell first\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\nimport importlib, checker\nimportlib.reload(checker)\nfrom checker import check_button\nprint(\"✓ Exercise checker is ready.\")"
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-1-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-1-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-1-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 1 — 10 minutes",
-    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex01\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "text": "Exercise 1 — 10 minutes\nWrite a program that calculates and displays on the screen:\n\nthe sum, difference, product, and quotient of two integers,\nthe remainder when the first number is divided by the second,\nthe first number increased by 1 and the second number decreased by 1.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex01\")"
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-2-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-2-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-2-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-2-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 2 — 10 minutes",
-    "text": "Exercise 2 — 10 minutes\nWrite a program that introduces you as follows.\nFirst, display the information in one line, for example:\n\nName: “Edit White” & Neptun-code: “ABCDEF” & Age: 25 years\n\nThen display:\nIntroduction\nName: Edit White\nNeptun-code: ABCDEF\nAge: 25 years\nUse your own data. Produce both forms in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex02\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "text": "Exercise 2 — 10 minutes\nWrite a program that solves a linear equation.\n\nThe coefficients of the equation should be asked from the user.\n\nYou may assume that the coefficient of x is not zero.\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex02\")"
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-3-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-3-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-3-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-3-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 3 — 10 minutes",
-    "text": "Exercise 3 — 10 minutes\nWrite a program that performs the following operations and displays the results as shown:\n2*1000 + 2*10 + 1*3 = 2023\nThe solution of the equation 4x + 2 = 14 is x = 3\nThe number of seconds in a week is 604800\nCalculate the number of seconds in a week in your program.\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex03\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "text": "Exercise 3 — 10 minutes\nWrite a program that calculates and displays the volume and surface area of a cuboid.\n\nThe edges should be floating-point numbers entered by the user.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex03\")"
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-4-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-4-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-4-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-4-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nPrint the multiplication table of 7 from 1 to 10 in the following format:\nMultiplication table of 7:\n1 * 7 = 7\n2 * 7 = 14\n...\n10 * 7 = 70\nArrange all values in 5 columns.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex04\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "text": "Exercise 4 — 10 minutes\nYou are interested in buying a new laptop with a given net price and tax rate. Calculate and display the gross price.\n\nAsk the user for the necessary values.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex04\")"
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-5",
-    "href": "exercises/01-class-exercises.html#exercise-5",
-    "title": "Class Exercises 1",
-    "section": "Exercise 5",
-    "text": "Exercise 5\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex05\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
+    "objectID": "exercises/02-class-exercises.html#exercise-5-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-5-10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 5 — 10 minutes",
+    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives grades from 5 subjects. Write a program that:\n\nreads the values of grades one by one,\ncalculates the average grade.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex05\")"
+  },
+  {
+    "objectID": "exercises/02-class-exercises.html#exercise-6-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-6-10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 6 — 10 minutes",
+    "text": "Exercise 6 — 10 minutes\nWe put a given amount of money in the bank at a given annual interest rate. How much money will we have in 5 years?\n\nRead the amount and the interest rate.\nCalculate the ending amount.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex06\")"
+  },
+  {
+    "objectID": "exercises/02-class-exercises.html#homework",
+    "href": "exercises/02-class-exercises.html#homework",
+    "title": "Class Exercises 2",
+    "section": "Homework",
+    "text": "Homework\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse the exchange rates from the sample solution:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")"
   }
 ]

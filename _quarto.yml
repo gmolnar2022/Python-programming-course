@@ -8,6 +8,7 @@ project:
     - index.qmd
     - lessons/01-introduction-to-programming-and-python.qmd
     - exercises/01-class-exercises.ipynb
+    - exercises/02-class-exercises.ipynb
     # Uncomment pages below when they are ready to publish:
     - lessons/02-simple-data-types.qmd
     # - lessons/03-conditional-statements.qmd
@@ -44,6 +45,8 @@ website:
           # Uncomment lessons below when they are ready to publish:
           - href: lessons/02-simple-data-types.qmd
             text: "2. Working with Simple Data Types"
+          - href: exercises/02-class-exercises.ipynb
+            text: "Class Exercises"
           # - href: lessons/03-conditional-statements.qmd
           #   text: "3. Conditional Statements in Python"
           # - href: lessons/04-loops.qmd
