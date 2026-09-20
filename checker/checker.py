@@ -7,7 +7,9 @@ One task ID corresponds to one whole exercise.
 
 import io
 import calendar
+import re
 from contextlib import redirect_stdout
+from unittest.mock import patch
 from IPython import get_ipython
 
 TASKS = {
@@ -63,6 +65,15 @@ of the week, matching the layout shown in the exercise.
         "allowed_concepts": "print(), strings, spacing and line breaks",
         "mode": "special",
     },
+
+    # Week 2
+    "week02_ex01": {"description": "Read two integers and display their sum, difference, product, quotient, remainder, the first number increased by 1, and the second number decreased by 1.", "allowed_concepts": "variables, int(), input(), arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["10","3"], [13,7,30,10/3,1,11,2]), (["20","4"], [24,16,80,5,0,21,3])]},
+    "week02_ex02": {"description": "Solve a linear equation a*x + b = 0 using coefficients entered by the user.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["2","-8"], [4]), (["5","10"], [-2])]},
+    "week02_ex03": {"description": "Read three floating-point cuboid edges and display its volume and surface area.", "allowed_concepts": "variables, float(), input(), arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["2","3","4"], [24,52]), (["1.5","2","3"], [9,21])]},
+    "week02_ex04": {"description": "Read a laptop's net price and tax rate and display its gross price. The tax rate is entered as a percentage.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["100","27"], [127]), (["800","25"], [1000])]},
+    "week02_ex05": {"description": "Read five grades one by one and display their average.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["1","2","3","4","5"], [3]), (["5","5","4","4","3"], [4.2])]},
+    "week02_ex06": {"description": "Read an initial amount and an annual interest rate and calculate the ending amount after 5 years using compound interest.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators including **, print(), f-strings", "mode": "numeric", "tests": [(["1000","10"], [1610.51]), (["2000","5"], [2552.56])]},
+    "week02_ex07": {"description": "Convert an amount in US dollars to euros and Hungarian forints using 1 USD = 0.93 EUR and 1 USD = 354.15 HUF.", "allowed_concepts": "variables, constants, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["100"], [93,35415]), (["50"], [46.5,17707.5])]},
 }
 
 
@@ -167,11 +178,47 @@ Rules:
         return f"AI feedback is temporarily unavailable ({type(exc).__name__})."
 
 
+
+def _run_code_with_inputs(student_code, inputs):
+    output = io.StringIO()
+    values = iter(inputs)
+    def fake_input(prompt=""):
+        try:
+            return next(values)
+        except StopIteration:
+            raise RuntimeError("The program requested more input values than expected.")
+    try:
+        namespace = {}
+        with patch("builtins.input", fake_input), redirect_stdout(output):
+            exec(student_code, namespace, namespace)
+        return output.getvalue(), None
+    except Exception as exc:
+        return output.getvalue(), f"{type(exc).__name__}: {exc}"
+
+def _numbers(text):
+    return [float(v) for v in re.findall(r"(?<![A-Za-z])[-+]?\d+(?:\.\d+)?", text)]
+
+def _contains_expected_numbers(output, expected, tolerance=0.02):
+    numbers = _numbers(output)
+    return all(any(abs(n-v) <= tolerance for n in numbers) for v in expected)
+
+
 def check_solution(task_id, student_code):
     if task_id not in TASKS:
         raise ValueError(f"Unknown task id: {task_id}")
 
     task = TASKS[task_id]
+
+    if task["mode"] == "numeric":
+        for inputs, expected in task["tests"]:
+            actual_output, error = _run_code_with_inputs(student_code, inputs)
+            if error or not _contains_expected_numbers(actual_output, expected):
+                print("⚠️ Not quite yet.")
+                print("🤖 Hint:", _ai_feedback(task, student_code, actual_output, error))
+                return False
+        print("✅ Correct! Your program passed the test cases.")
+        return True
+
     actual_output, error = _run_code(student_code)
 
     if error:
