@@ -1,7 +1,409 @@
 ---
-title: "Lesson 2 – Working with Simple Data Types"
+title: "Working with Simple Data Types"
 ---
 
-::: {.callout-note}
-This lesson will be added during the semester.
+## Learning objectives
+
+After completing this lesson, you should be able to:
+
+- create variables containing integer, floating-point, Boolean, and string values;
+- follow Python's basic variable naming rules;
+- use the `type()` function to inspect the type of a value;
+- understand the convention used for constants in Python;
+- distinguish between implicit and explicit type conversion;
+- display variable values using `print()`, `format()`, and f-strings;
+- use raw strings when backslashes should be treated literally;
+- read values from the user with `input()`;
+- use arithmetic operators and evaluate arithmetic expressions.
+
+## Variables
+
+A **variable** is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.
+
+A new variable can be created with an **assignment statement**:
+
+```python
+variable_name = value
+```
+
+For example:
+
+```python
+age = 25
+name = "Joe"
+```
+
+### Variable naming rules
+
+Python variable names:
+
+- must begin with a letter or an underscore (`_`);
+- may contain letters, digits, and underscores;
+- cannot contain spaces;
+- are case-sensitive;
+- cannot be Python keywords.
+
+For example, `age`, `student_age`, and `_counter` are valid names, while `2age` and `student age` are not.
+
+::: {.callout-note title="Dynamic typing"}
+In Python, the type belongs to the **value** associated with a variable. A variable can therefore refer to values of different types at different points in a program.
 :::
+
+```python
+x = 10
+print(type(x))
+
+x = "apple"
+print(type(x))
+
+x = 4.4
+print(type(x))
+```
+
+## Simple data types
+
+In this lesson we use four basic Python data types:
+
+| Type | Meaning | Example |
+|---|---|---|
+| `int` | integer number | `25` |
+| `float` | floating-point number | `5.5` |
+| `str` | text (string) | `"Hello"` |
+| `bool` | Boolean value | `True`, `False` |
+
+### Creating variables
+
+```python
+# int
+x = 25
+
+# float
+y = 5.5
+
+# str
+s = "Hello"
+t = "World"
+
+# bool
+b = True
+c = False
+```
+
+Python does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.
+
+## The `type()` function
+
+The `type()` function can be used to determine the type of a value or variable.
+
+```python
+x = 25
+y = 5.5
+s = "Hello"
+b = True
+
+print(type(x))
+print(type(y))
+print(type(s))
+print(type(b))
+```
+
+Output:
+
+```text
+<class 'int'>
+<class 'float'>
+<class 'str'>
+<class 'bool'>
+```
+
+The type can also change after reassignment:
+
+```python
+a = 10
+print(type(a))
+
+a = "apple"
+print(type(a))
+
+a = 4.4
+print(type(a))
+```
+
+## Constants
+
+A **constant** is a value that is intended not to change while a program is running.
+
+Python has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:
+
+- use capital letters;
+- separate words with underscores.
+
+```python
+DEFAULT_TIMEOUT = 10
+MAX_NUMBER_OF_ATTEMPTS = 3
+```
+
+::: {.callout-important title="Convention, not enforcement"}
+Python does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.
+:::
+
+Constants are also often defined in separate modules and imported where they are needed.
+
+## Type conversion
+
+Sometimes a value must be converted from one data type to another. Python supports both **explicit** and **implicit** type conversion.
+
+### Explicit type conversion
+
+Explicit type conversion, also called **type casting**, takes place when the programmer deliberately converts a value using a conversion function such as `int()`, `float()`, or `str()`.
+
+```python
+a = 5
+print(type(a))
+
+a = float(a)
+print(type(a))
+```
+
+```python
+b = 23
+print(type(b))
+
+b = int(b)
+print(type(b))
+```
+
+```python
+c = 10
+print(type(c))
+
+c = str(c)
+print(type(c))
+```
+
+A conversion is possible only if the value can meaningfully be converted to the requested type.
+
+### Implicit type conversion
+
+Implicit type conversion takes place automatically when Python converts a value to another type during an operation.
+
+```python
+a = 25
+c = 30.0
+
+x = c / a
+
+print(type(a))
+print(type(c))
+print(type(x))
+```
+
+Here `a` is an `int`, `c` is a `float`, and the result `x` is a `float`.
+
+## Printing variable values
+
+The `print()` function can display literal text as well as the values stored in variables.
+
+```python
+x = 15
+y = 20
+
+print(x)
+print(y)
+```
+
+Several values can be printed in the same statement:
+
+```python
+name = "Joe"
+age = 50
+is_student = True
+
+print("Name:", name, "Age:", age, "Is_student:", is_student)
+```
+
+## Formatting output
+
+### The `format()` method
+
+The `format()` method inserts values into placeholders marked by `{}` in a string.
+
+```python
+language = "Python"
+print("{} is our programming language".format(language))
+```
+
+Multiple values can be inserted:
+
+```python
+name = "Joe"
+age = 50
+is_student = True
+
+print("Name: {0}, Age: {1}, Is_student: {2}".format(name, age, is_student))
+```
+
+Values can also be formatted. For example, `.3f` displays a floating-point value with three digits after the decimal point:
+
+```python
+result = 5 * 5.25
+print("5 * 5.25 is {:.3f}".format(result))
+```
+
+### f-strings
+
+An **f-string** is a string prefixed with `f`. Expressions or variable names can be placed directly inside `{}`.
+
+```python
+language = "Python"
+print(f"{language} is our programming language")
+```
+
+```python
+name = "Joe"
+age = 50
+is_student = True
+
+print(f"Name: {name}, Age: {age}, Is_student: {is_student}")
+```
+
+Formatting specifications can also be used with f-strings:
+
+```python
+result = 5 * 5.25
+print(f"5 * 5.25 is {result:.3f}")
+```
+
+::: {.callout-tip title="Recommended style"}
+Both `format()` and f-strings are useful to understand. For new Python code, f-strings are usually the clearest way to combine text and values.
+:::
+
+### Raw strings (`r`-strings)
+
+A **raw string** is prefixed with `r`. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.
+
+```python
+path = r"c:\users\public"
+print(path)
+```
+
+Compare the following strings:
+
+```python
+print("Today\nis\nWednesday")
+print(r"Today\nis\nWednesday")
+```
+
+The first string interprets `\n` as a newline. The raw string displays the backslash and the letter `n` literally.
+
+## Reading user input
+
+The `input()` function allows the user to enter a value while a program is running.
+
+Its optional parameter is displayed as a prompt before the input:
+
+```python
+x = input("Name: ")
+print(x)
+print(type(x))
+```
+
+::: {.callout-warning title="`input()` returns a string"}
+The value returned by `input()` is always a `str`. If a numeric value is required, explicit type conversion is usually necessary.
+:::
+
+For example:
+
+```python
+x = input("Age: ")
+print(x)
+print(type(x))
+
+y = int(input("Age: "))
+print(y)
+print(type(y))
+```
+
+A Boolean value can also be produced by comparing the entered text:
+
+```python
+answer = input("Are you a student? (yes or no) ")
+is_student = answer == "yes"
+print(is_student)
+```
+
+## Arithmetic operators
+
+Python provides the following basic arithmetic operators:
+
+| Operator | Description | Example | Result |
+|:---:|---|---|---:|
+| `+` | addition | `10 + 5` | `15` |
+| `-` | subtraction | `20 - 7` | `13` |
+| `*` | multiplication | `4 * 6` | `24` |
+| `/` | division | `12 / 5` | `2.4` |
+| `//` | floor division | `12 // 5` | `2` |
+| `%` | remainder (modulo) | `12 % 5` | `2` |
+| `**` | exponentiation | `2 ** 5` | `32` |
+
+::: {.callout-note title="Division and floor division"}
+`/` performs division and produces a floating-point result. `//` performs floor division: the result is rounded down to the next smaller whole number.
+:::
+
+## Arithmetic expressions
+
+An **arithmetic expression** is a combination of numeric values, arithmetic operators, and optionally parentheses.
+
+```python
+x = 3 + 2 * 5
+print(x)
+```
+
+The result is `13`, because multiplication has higher precedence than addition.
+
+When several operators occur in an expression, **operator precedence** determines the order of evaluation.
+
+| Precedence | Operators |
+|:---:|---|
+| 1 | `()` |
+| 2 | `**` |
+| 3 | unary `+`, unary `-` |
+| 4 | `*`, `/`, `//`, `%` |
+| 5 | `+`, `-` |
+
+Examples:
+
+```python
+x = 3 + 2 * 5
+print(x)
+```
+
+```python
+y = 2 ** 4 + 3
+print(y)
+```
+
+Parentheses can be used to make the intended order explicit:
+
+```python
+z = (-5 + 16 ** 0.5) / (2 * 0.5)
+print(z)
+```
+
+::: {.callout-tip title="Use parentheses for clarity"}
+Even when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.
+:::
+
+## Summary
+
+In this lesson, you learned how to:
+
+- create and reassign variables;
+- work with `int`, `float`, `str`, and `bool` values;
+- inspect types with `type()`;
+- use Python's convention for constants;
+- perform explicit and implicit type conversion;
+- display values using `print()`, `format()`, and f-strings;
+- use raw strings;
+- read input with `input()` and convert it when necessary;
+- use arithmetic operators and understand operator precedence.

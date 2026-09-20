@@ -1,0 +1,440 @@
+---
+title: "1. hét – Első virtuális gépünk az Azure-ban"
+subtitle: "Azure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI"
+---
+
+## A gyakorlat célja
+
+Az első alkalommal egy működő Windows 11 virtuális gépet hozunk létre az Azure-ban, majd megismerkedünk az Azure Cloud Shell és az Azure PowerShell alapjaival.
+
+A gyakorlat végére képes leszel:
+
+- belépni az Azure környezetbe;
+- Windows 11 virtuális gépet létrehozni;
+- távoli asztallal kapcsolódni a géphez;
+- megnyitni az Azure Cloud Shellt;
+- alapvető Azure PowerShell parancsokat futtatni;
+- rövid PowerShell scriptet készíteni;
+- AI segítségével egyszerű scriptet létrehozni és ellenőrizni;
+- a virtuális gépet szabályosan leállítani.
+
+::: {.callout-important title="Fontos"}
+A gyakorlat során létrehozott virtuális gép Azure-erőforrást és kreditet használ.  
+A gyakorlat végén mindig ellenőrizd, hogy a már nem használt gép le van-e állítva.
+:::
+
+---
+
+## 1. feladat – Belépés az Azure-ba
+
+### Feladat
+
+Lépj be az Azure Portalra a saját egyetemi / Azure for Students hozzáféréseddel.
+
+### Válasz
+
+**Használt előfizetés neve:**
+
+> Írd ide a választ!
+
+### Ellenőrzés
+
+A Portal felső részén ellenőrizd, hogy sikeresen bejelentkeztél, és elérhető az Azure-előfizetésed.
+
+---
+
+## 2. feladat – Virtuális gép létrehozása: Alapadatok
+
+### Feladat
+
+Kezdd el egy új **Windows 11** virtuális gép létrehozását.
+
+Állítsd be legalább az alábbiakat:
+
+- Resource Group
+- virtuális gép neve
+- régió
+- Windows 11 image
+- VM méret
+- adminisztrátori felhasználónév
+
+### Válasz
+
+**Resource Group:**
+
+> 
+
+**VM neve:**
+
+> 
+
+**Régió:**
+
+> 
+
+**Image:**
+
+> 
+
+**VM mérete:**
+
+> 
+
+---
+
+## 3. feladat – Lemezek
+
+### Feladat
+
+Tekintsd át a virtuális gép lemezbeállításait.
+
+### Válasz
+
+**OS disk típusa:**
+
+> 
+
+**Módosítottál valamit az alapértelmezett beállításon?**
+
+> 
+
+---
+
+## 4. feladat – Hálózat
+
+### Feladat
+
+Tekintsd át a virtuális gép hálózati beállításait.
+
+Figyeld meg az alábbi elemeket:
+
+- Virtual Network
+- Subnet
+- Public IP
+- Network Interface
+- RDP-hozzáférés
+
+### Válasz
+
+**Virtual Network neve:**
+
+> 
+
+**Subnet neve:**
+
+> 
+
+**Public IP létrejön?**
+
+> Igen / Nem
+
+---
+
+## 5. feladat – Áttekintés és létrehozás
+
+### Feladat
+
+Nyisd meg a **Review + create** oldalt, ellenőrizd a beállításokat, majd indítsd el a telepítést.
+
+### Válasz
+
+**Sikeres volt a validáció?**
+
+> 
+
+**A telepítés eredménye:**
+
+> 
+
+---
+
+## 6. feladat – Az elkészült virtuális gép megnyitása
+
+### Feladat
+
+Nyisd meg az elkészült virtuális gép erőforrásoldalát.
+
+Jegyezd fel a fontosabb adatokat.
+
+### Válasz
+
+**VM neve:**
+
+> 
+
+**Resource Group:**
+
+> 
+
+**Private IP:**
+
+> 
+
+**Public IP:**
+
+> 
+
+**Állapot:**
+
+> 
+
+---
+
+## 7. feladat – Távoli asztal kapcsolat
+
+### Feladat
+
+Kapcsolódj a Windows 11 virtuális géphez **Remote Desktop (RDP)** segítségével.
+
+### Válasz
+
+**Sikerült kapcsolódni?**
+
+> Igen / Nem
+
+**Milyen operációs rendszer fogadott?**
+
+> 
+
+---
+
+## 8. feladat – Azure Cloud Shell megnyitása
+
+Az **Azure Cloud Shell** egy böngészőből használható parancssori környezet, amelyből Azure-erőforrásokat lehet kezelni.
+
+A kurzus során elsősorban az **Azure PowerShell** parancsait fogjuk használni.
+
+::: {.callout-note title="Miért használjuk a Cloud Shellt?"}
+A Cloud Shell használatához nem kell PowerShell-modulokat telepíteni a saját számítógépre, ezért az egyetemi gépeken és otthon is ugyanaz a környezet használható.
+:::
+
+### Feladat
+
+1. Nyisd meg az Azure Portalban a **Cloud Shell** környezetet.
+2. Válaszd a **PowerShell** opciót.
+3. Várd meg, amíg megjelenik a parancssor.
+
+### Ellenőrzés
+
+Futtasd:
+
+```powershell
+Get-Date
+```
+
+### Válasz
+
+**A parancs eredménye:**
+
+```text
+# Másold ide az eredményt!
+```
+
+---
+
+## 9. feladat – Azure-előfizetések listázása
+
+Az Azure-ban létrehozott erőforrások mindig egy **előfizetéshez (subscription)** tartoznak. Egy felhasználóhoz több előfizetés is tartozhat.
+
+Az aktuálisan elérhető előfizetések lekérdezésére az Azure PowerShell `Get-AzSubscription` parancsa használható.
+
+### Feladat
+
+1. Listázd az Azure-előfizetéseidet!
+2. Figyeld meg a visszakapott objektum tulajdonságait!
+3. Jelenítsd meg csak az előfizetés **nevét** (`Name`) és **állapotát** (`State`)!
+
+::: {.callout-tip title="Tipp"}
+A PowerShellben a visszakapott objektumok kiválasztott tulajdonságait a `Select-Object` paranccsal jeleníthetjük meg.
+:::
+
+### Válasz
+
+#### 1. Az előfizetések listázására használt parancs
+
+```powershell
+# Írd ide a parancsot!
+
+```
+
+#### 2. Csak a Name és State tulajdonságok megjelenítése
+
+Egészítsd ki:
+
+```powershell
+Get-AzSubscription |
+```
+
+#### 3. Eredmény
+
+```text
+# Másold ide az eredményt!
+
+```
+
+### Ellenőrzés
+
+A megoldás megfelelő, ha az eredményben az előfizetés neve és állapota jelenik meg.
+
+::: {.callout-note title="Mit tanultunk?"}
+Az Azure PowerShell parancsai **objektumokat** adnak vissza.  
+A kapott objektumokból kiválaszthatjuk azokat a tulajdonságokat, amelyekre szükségünk van.
+:::
+
+---
+
+## 10. feladat – Resource Groupok lekérdezése
+
+### Feladat
+
+Listázd a meglévő Resource Groupokat Azure PowerShell segítségével.
+
+### Válasz
+
+```powershell
+# Írd ide a használt parancsot!
+
+```
+
+**A saját virtuális géped Resource Groupjának neve:**
+
+> 
+
+---
+
+## 11. feladat – Virtuális gépek lekérdezése
+
+### Feladat
+
+Listázd az előfizetéshez tartozó virtuális gépeket.
+
+### Válasz
+
+```powershell
+# Írd ide a használt parancsot!
+
+```
+
+**A saját virtuális géped neve:**
+
+> 
+
+---
+
+## 12. feladat – A virtuális gép állapota
+
+### Feladat
+
+Kérdezd le a virtuális géped aktuális állapotát.
+
+### Válasz
+
+```powershell
+# Írd ide a használt parancsot!
+
+```
+
+**A VM aktuális állapota:**
+
+> 
+
+---
+
+## 13. feladat – Első PowerShell script
+
+### Feladat
+
+Készíts egy rövid `.ps1` scriptet, amely lekérdezi a saját virtuális géped nevét és állapotát.
+
+### Válasz
+
+```powershell
+# Írd ide a scriptedet!
+
+```
+
+---
+
+## 14. feladat – AI-támogatott PowerShell script
+
+### Feladat
+
+Használj egy generatív AI-eszközt egy rövid Azure PowerShell script elkészítéséhez.
+
+A script feladata:
+
+> Listázza az adott Resource Groupban található virtuális gépek nevét és aktuális állapotát.
+
+::: {.callout-warning title="Fontos"}
+Az AI által generált kódot ne futtasd le automatikusan.  
+Először olvasd át, és ellenőrizd, hogy nem tartalmaz-e módosító vagy törlő parancsot.
+:::
+
+### Válasz
+
+**A használt prompt:**
+
+> Írd ide!
+
+**Az AI által generált / általad javított script:**
+
+```powershell
+# Másold ide a végleges scriptedet!
+
+```
+
+**Módosítottál valamit az AI javaslatán? Ha igen, mit?**
+
+> 
+
+---
+
+## 15. feladat – Leállítás és mobil menedzsment
+
+### Feladat
+
+1. Állítsd le a virtuális gépet.
+2. Ellenőrizd az állapotát.
+3. Telepítsd az **Azure mobilalkalmazást** a telefonodra.
+4. Jelentkezz be, és keresd meg a létrehozott virtuális gépet.
+
+### Válasz
+
+**A leállításhoz használt PowerShell-parancs:**
+
+```powershell
+# Írd ide!
+
+```
+
+**A VM állapota a leállítás után:**
+
+> 
+
+**Sikerült a VM-et megtalálni a mobilalkalmazásban?**
+
+> Igen / Nem
+
+---
+
+## A gyakorlat összefoglalása
+
+A mai alkalom során:
+
+- létrehoztál egy Windows 11 virtuális gépet;
+- csatlakoztál hozzá RDP segítségével;
+- megnyitottad az Azure Cloud Shellt;
+- Azure PowerShell parancsokat használtál;
+- készítettél egy rövid scriptet;
+- AI segítségével is készítettél scriptet;
+- leállítottad a virtuális gépet.
+
+### Rövid reflexió
+
+**Melyik lépés volt a legkevésbé egyértelmű?**
+
+> 
+
+**Melyik PowerShell parancsot találtad a leghasznosabbnak?**
+
+> 

@@ -1,0 +1,11 @@
+---
+title: "IT Architektúra – Gyakorlati munkafüzet"
+---
+
+## Gyakorlati anyagok
+
+A gyakorlati munkafüzet hetenként külön könyvtárban található.
+
+- [1. hét – Első virtuális gépünk az Azure-ban](weeks/week01/index.qmd)
+
+A további hetek anyagai később kerülnek hozzáadásra.
