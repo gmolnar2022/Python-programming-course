@@ -474,7 +474,7 @@
     "href": "exercises/02-class-exercises.html",
     "title": "Class Exercises 2",
     "section": "",
-    "text": "Introduction to Data Science and Programming\nWeek 2 – Working with Simple Data Types\nOpen in Google Colab\nComplete the exercises in order. Write your solution in the code cell below each task.",
+    "text": "Working with simple data types\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -485,7 +485,7 @@
     "href": "exercises/02-class-exercises.html#setup",
     "title": "Class Exercises 2",
     "section": "Setup",
-    "text": "Setup\nRun this cell once at the beginning of the session.\n\n# Setup – run this cell first\n\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\n\nimport importlib\nimport checker\nimportlib.reload(checker)\n\nfrom checker import check_button\n\nprint(\"✓ Exercise checker is ready.\")",
+    "text": "Setup\nRun this cell once at the beginning of the session.\n\n# Setup – run this cell first\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\nimport importlib, checker\nimportlib.reload(checker)\nfrom checker import check_button\nprint(\"✓ Exercise checker is ready.\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -496,7 +496,7 @@
     "href": "exercises/02-class-exercises.html#exercise-1-10-minutes",
     "title": "Class Exercises 2",
     "section": "Exercise 1 — 10 minutes",
-    "text": "Exercise 1 — 10 minutes\nWrite a program that calculates and displays on the screen:\n\nthe sum, difference, product, and quotient of two integers,\nthe remainder when the first number is divided by the second,\nthe first number increased by 1 and the second number decreased by 1.\n\nAsk the user to enter the two integers.\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex01\")",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that calculates and displays on the screen:\n\nthe sum, difference, product, and quotient of two integers,\nthe remainder when the first number is divided by the second,\nthe first number increased by 1 and the second number decreased by 1.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex01\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -529,7 +529,7 @@
     "href": "exercises/02-class-exercises.html#exercise-4-10-minutes",
     "title": "Class Exercises 2",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nYou are interested in buying a new laptop with a given net price and tax rate. Calculate and display the gross price of the laptop.\n\nAsk the user for the necessary values.\nEnter the tax rate as a percentage (for example, 27 for 27%).\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex04\")",
+    "text": "Exercise 4 — 10 minutes\nYou are interested in buying a new laptop with a given net price and tax rate. Calculate and display the gross price.\n\nAsk the user for the necessary values.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex04\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -551,7 +551,7 @@
     "href": "exercises/02-class-exercises.html#exercise-6-10-minutes",
     "title": "Class Exercises 2",
     "section": "Exercise 6 — 10 minutes",
-    "text": "Exercise 6 — 10 minutes\nWe put a given amount of money in the bank at a given annual interest rate. How much money will we have in 5 years?\n\nRead the amount and the interest rate.\nCalculate the ending amount.\nEnter the interest rate as a percentage (for example, 5 for 5%).\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex06\")",
+    "text": "Exercise 6 — 10 minutes\nWe put a given amount of money in the bank at a given annual interest rate. How much money will we have in 5 years?\n\nRead the amount and the interest rate.\nCalculate the ending amount.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex06\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -563,6 +563,17 @@
     "title": "Class Exercises 2",
     "section": "Homework",
     "text": "Homework\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse these exchange rates:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/02-class-exercises.html#exercise-7---10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-7---10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 7 - 10 minutes",
+    "text": "Exercise 7 - 10 minutes\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse the exchange rates from the sample solution:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"

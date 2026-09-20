@@ -203,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exercise-4-10-minutes" id="toc-exercise-4-10-minutes" class="nav-link" data-scroll-target="#exercise-4-10-minutes">Exercise 4 — 10 minutes</a></li>
   <li><a href="#exercise-5-10-minutes" id="toc-exercise-5-10-minutes" class="nav-link" data-scroll-target="#exercise-5-10-minutes">Exercise 5 — 10 minutes</a></li>
   <li><a href="#exercise-6-10-minutes" id="toc-exercise-6-10-minutes" class="nav-link" data-scroll-target="#exercise-6-10-minutes">Exercise 6 — 10 minutes</a></li>
-  <li><a href="#homework" id="toc-homework" class="nav-link" data-scroll-target="#homework">Homework</a></li>
+  <li><a href="#exercise-7---10-minutes" id="toc-exercise-7---10-minutes" class="nav-link" data-scroll-target="#exercise-7---10-minutes">Exercise 7 - 10 minutes</a></li>
   </ul>
 </nav>
     </div>
@@ -229,31 +229,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>Introduction to Data Science and Programming</strong><br>
-<strong>Week 2 – Working with Simple Data Types</strong></p>
+<p><strong>Working with simple data types</strong></p>
+<p>Complete the exercises in order. Write your solution in the code cell below each task.</p>
 <p><a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/02-class-exercises.ipynb">Open in Google Colab</a></p>
 <blockquote class="blockquote">
-<p>⚠️ <strong>Before you start</strong></p>
-<p>After opening the notebook in Google Colab, save your own copy: <strong>File → Save a copy in Drive</strong></p>
-<p>Work in your own copy.</p>
-<p>Run the <strong>Setup</strong> cell below once before starting the exercises.</p>
+<p><strong>Before you start</strong></p>
+<p>After opening this notebook in Colab, select <strong>File → Save a copy in Drive</strong> and work in your own copy. Run the <strong>Setup</strong> cell below once before starting.</p>
 </blockquote>
-<p>Complete the exercises in order. Write your solution in the code cell below each task.</p>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Run this cell once at the beginning of the session.</p>
-<div id="cell-3" class="cell">
+<div id="6cf43bee" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup – run this cell first</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>raw.githubusercontent.com<span class="op">/</span>gmolnar2022<span class="op">/</span>Python<span class="op">-</span>programming<span class="op">-</span>course<span class="op">/</span>main<span class="op">/</span>checker<span class="op">/</span>checker.py <span class="op">-</span>O checker.py</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> checker</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(checker)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> checker <span class="im">import</span> check_button</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Exercise checker is ready."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>raw.githubusercontent.com<span class="op">/</span>gmolnar2022<span class="op">/</span>Python<span class="op">-</span>programming<span class="op">-</span>course<span class="op">/</span>main<span class="op">/</span>checker<span class="op">/</span>checker.py <span class="op">-</span>O checker.py</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib, checker</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(checker)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> checker <span class="im">import</span> check_button</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Exercise checker is ready."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="exercise-1-10-minutes" class="level2">
@@ -264,11 +256,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>the <strong>remainder</strong> when the first number is divided by the second,</li>
 <li>the first number <strong>increased by 1</strong> and the second number <strong>decreased by 1</strong>.</li>
 </ul>
-<p>Ask the user to enter the two integers.</p>
-<div id="cell-5" class="cell">
+<div id="84a9c5d4" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="3f41cafb" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex01"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -279,10 +270,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The coefficients of the equation should be asked from the user.</li>
 </ul>
 <p>You may assume that the coefficient of <code>x</code> is not zero.</p>
-<div id="cell-8" class="cell">
+<div id="320928ad" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="a87c1762" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex02"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -292,24 +283,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>The edges should be floating-point numbers entered by the user.</li>
 </ul>
-<div id="cell-11" class="cell">
+<div id="0bb49f96" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="c6b9a7a9" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex03"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="exercise-4-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4-10-minutes">Exercise 4 — 10 minutes</h2>
-<p>You are interested in buying a new laptop with a given <strong>net price</strong> and <strong>tax rate</strong>. Calculate and display the <strong>gross price</strong> of the laptop.</p>
+<p>You are interested in buying a new laptop with a given <strong>net price</strong> and <strong>tax rate</strong>. Calculate and display the <strong>gross price</strong>.</p>
 <ul>
 <li>Ask the user for the necessary values.</li>
-<li>Enter the tax rate as a percentage (for example, <code>27</code> for 27%).</li>
 </ul>
-<div id="cell-14" class="cell">
+<div id="86946165" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="2b1bfe9c" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex04"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -320,10 +310,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>reads the values of grades one by one,</li>
 <li>calculates the <strong>average grade</strong>.</li>
 </ul>
-<div id="cell-17" class="cell">
+<div id="3d7f2089" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="1762f78a" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex05"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -333,27 +323,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Read the amount and the interest rate.</li>
 <li>Calculate the ending amount.</li>
-<li>Enter the interest rate as a percentage (for example, <code>5</code> for 5%).</li>
 </ul>
-<div id="cell-20" class="cell">
+<div id="efa9c4bb" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="b0e6830c" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex06"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="homework" class="level2">
-<h2 class="anchored" data-anchor-id="homework">Homework</h2>
+<section id="exercise-7---10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-7---10-minutes">Exercise 7 - 10 minutes</h2>
 <p>Write a program that converts an amount given in <strong>US dollars</strong> into <strong>euros</strong> and <strong>Hungarian forints</strong>.</p>
-<p>Use these exchange rates:</p>
+<p>Use the exchange rates from the sample solution:</p>
 <ul>
 <li><code>1 USD = 0.93 EUR</code></li>
 <li><code>1 USD = 354.15 HUF</code></li>
 </ul>
-<div id="cell-23" class="cell">
+<div id="3c2370e2" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div id="b9a60532" class="cell" data-cellview="form" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week02_ex07"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
