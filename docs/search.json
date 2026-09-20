@@ -325,5 +325,148 @@
       "Lessons",
       "1. Introduction to Programming and Python"
     ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html",
+    "href": "lessons/02-simple-data-types.html",
+    "title": "Working with Simple Data Types",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print(), format(), and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#learning-objectives",
+    "href": "lessons/02-simple-data-types.html#learning-objectives",
+    "title": "Working with Simple Data Types",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print(), format(), and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#variables",
+    "href": "lessons/02-simple-data-types.html#variables",
+    "title": "Working with Simple Data Types",
+    "section": "Variables",
+    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#simple-data-types",
+    "href": "lessons/02-simple-data-types.html#simple-data-types",
+    "title": "Working with Simple Data Types",
+    "section": "Simple data types",
+    "text": "Simple data types\nIn this lesson we use four basic Python data types:\n\n\n\nType\nMeaning\nExample\n\n\n\n\nint\ninteger number\n25\n\n\nfloat\nfloating-point number\n5.5\n\n\nstr\ntext (string)\n\"Hello\"\n\n\nbool\nBoolean value\nTrue, False\n\n\n\n\nCreating variables\n# int\nx = 25\n\n# float\ny = 5.5\n\n# str\ns = \"Hello\"\nt = \"World\"\n\n# bool\nb = True\nc = False\nPython does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#the-type-function",
+    "href": "lessons/02-simple-data-types.html#the-type-function",
+    "title": "Working with Simple Data Types",
+    "section": "The type() function",
+    "text": "The type() function\nThe type() function can be used to determine the type of a value or variable.\nx = 25\ny = 5.5\ns = \"Hello\"\nb = True\n\nprint(type(x))\nprint(type(y))\nprint(type(s))\nprint(type(b))\nOutput:\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'str'&gt;\n&lt;class 'bool'&gt;\nThe type can also change after reassignment:\na = 10\nprint(type(a))\n\na = \"apple\"\nprint(type(a))\n\na = 4.4\nprint(type(a))",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#constants",
+    "href": "lessons/02-simple-data-types.html#constants",
+    "title": "Working with Simple Data Types",
+    "section": "Constants",
+    "text": "Constants\nA constant is a value that is intended not to change while a program is running.\nPython has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:\n\nuse capital letters;\nseparate words with underscores.\n\nDEFAULT_TIMEOUT = 10\nMAX_NUMBER_OF_ATTEMPTS = 3\n\n\n\n\n\n\nImportantConvention, not enforcement\n\n\n\nPython does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.\n\n\nConstants are also often defined in separate modules and imported where they are needed.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#type-conversion",
+    "href": "lessons/02-simple-data-types.html#type-conversion",
+    "title": "Working with Simple Data Types",
+    "section": "Type conversion",
+    "text": "Type conversion\nSometimes a value must be converted from one data type to another. Python supports both explicit and implicit type conversion.\n\nExplicit type conversion\nExplicit type conversion, also called type casting, takes place when the programmer deliberately converts a value using a conversion function such as int(), float(), or str().\na = 5\nprint(type(a))\n\na = float(a)\nprint(type(a))\nb = 23\nprint(type(b))\n\nb = int(b)\nprint(type(b))\nc = 10\nprint(type(c))\n\nc = str(c)\nprint(type(c))\nA conversion is possible only if the value can meaningfully be converted to the requested type.\n\n\nImplicit type conversion\nImplicit type conversion takes place automatically when Python converts a value to another type during an operation.\na = 25\nc = 30.0\n\nx = c / a\n\nprint(type(a))\nprint(type(c))\nprint(type(x))\nHere a is an int, c is a float, and the result x is a float.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#printing-variable-values",
+    "href": "lessons/02-simple-data-types.html#printing-variable-values",
+    "title": "Working with Simple Data Types",
+    "section": "Printing variable values",
+    "text": "Printing variable values\nThe print() function can display literal text as well as the values stored in variables.\nx = 15\ny = 20\n\nprint(x)\nprint(y)\nSeveral values can be printed in the same statement:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name:\", name, \"Age:\", age, \"Is_student:\", is_student)",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#formatting-output",
+    "href": "lessons/02-simple-data-types.html#formatting-output",
+    "title": "Working with Simple Data Types",
+    "section": "Formatting output",
+    "text": "Formatting output\n\nThe format() method\nThe format() method inserts values into placeholders marked by {} in a string.\nlanguage = \"Python\"\nprint(\"{} is our programming language\".format(language))\nMultiple values can be inserted:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name: {0}, Age: {1}, Is_student: {2}\".format(name, age, is_student))\nValues can also be formatted. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(\"5 * 5.25 is {:.3f}\".format(result))\n\n\nf-strings\nAn f-string is a string prefixed with f. Expressions or variable names can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nFormatting specifications can also be used with f-strings:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipRecommended style\n\n\n\nBoth format() and f-strings are useful to understand. For new Python code, f-strings are usually the clearest way to combine text and values.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#reading-user-input",
+    "href": "lessons/02-simple-data-types.html#reading-user-input",
+    "title": "Working with Simple Data Types",
+    "section": "Reading user input",
+    "text": "Reading user input\nThe input() function allows the user to enter a value while a program is running.\nIts optional parameter is displayed as a prompt before the input:\nx = input(\"Name: \")\nprint(x)\nprint(type(x))\n\n\n\n\n\n\nWarninginput() returns a string\n\n\n\nThe value returned by input() is always a str. If a numeric value is required, explicit type conversion is usually necessary.\n\n\nFor example:\nx = input(\"Age: \")\nprint(x)\nprint(type(x))\n\ny = int(input(\"Age: \"))\nprint(y)\nprint(type(y))\nA Boolean value can also be produced by comparing the entered text:\nanswer = input(\"Are you a student? (yes or no) \")\nis_student = answer == \"yes\"\nprint(is_student)",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "href": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic operators",
+    "text": "Arithmetic operators\nPython provides the following basic arithmetic operators:\n\n\n\nOperator\nDescription\nExample\nResult\n\n\n\n\n+\naddition\n10 + 5\n15\n\n\n-\nsubtraction\n20 - 7\n13\n\n\n*\nmultiplication\n4 * 6\n24\n\n\n/\ndivision\n12 / 5\n2.4\n\n\n//\nfloor division\n12 // 5\n2\n\n\n%\nremainder (modulo)\n12 % 5\n2\n\n\n**\nexponentiation\n2 ** 5\n32\n\n\n\n\n\n\n\n\n\nNoteDivision and floor division\n\n\n\n/ performs division and produces a floating-point result. // performs floor division: the result is rounded down to the next smaller whole number.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "href": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic expressions",
+    "text": "Arithmetic expressions\nAn arithmetic expression is a combination of numeric values, arithmetic operators, and optionally parentheses.\nx = 3 + 2 * 5\nprint(x)\nThe result is 13, because multiplication has higher precedence than addition.\nWhen several operators occur in an expression, operator precedence determines the order of evaluation.\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n()\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n\nExamples:\nx = 3 + 2 * 5\nprint(x)\ny = 2 ** 4 + 3\nprint(y)\nParentheses can be used to make the intended order explicit:\nz = (-5 + 16 ** 0.5) / (2 * 0.5)\nprint(z)\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#summary",
+    "href": "lessons/02-simple-data-types.html#summary",
+    "title": "Working with Simple Data Types",
+    "section": "Summary",
+    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print(), format(), and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
   }
 ]
