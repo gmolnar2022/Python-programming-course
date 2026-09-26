@@ -234,6 +234,20 @@ body {
   overflow-x: clip;
 }
 
+
+/* Wider article column without breaking Quarto's sidebar/page grid. */
+:root {
+  --bs-body-font-size: 1rem;
+}
+body .page-columns {
+  --quarto-body-width: 1050px;
+  --quarto-margin-width: 220px;
+  --quarto-gutter-width: 1.5rem;
+}
+#quarto-document-content {
+  width: 100%;
+}
+
 </style>
 <h1>Class Exercises 3</h1><div class="sub">Conditional Statements in Python</div>
 <div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>

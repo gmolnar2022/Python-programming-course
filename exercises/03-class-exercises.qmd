@@ -45,6 +45,20 @@ body {
   overflow-x: clip;
 }
 
+
+/* Wider article column without breaking Quarto's sidebar/page grid. */
+:root {
+  --bs-body-font-size: 1rem;
+}
+body .page-columns {
+  --quarto-body-width: 1050px;
+  --quarto-margin-width: 220px;
+  --quarto-gutter-width: 1.5rem;
+}
+#quarto-document-content {
+  width: 100%;
+}
+
 </style>
 
 ```{=html}
