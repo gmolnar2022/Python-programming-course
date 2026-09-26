@@ -212,31 +212,26 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
 .summary-grid{display:grid;grid-template-columns:1.5fr 1.4fr .9fr .55fr .65fr .55fr;margin-top:12px;border-top:1px solid #ddd;border-left:1px solid #ddd}.summary-grid>div{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}.summary-head{font-weight:700;background:#f5f5f5}@media(max-width:760px){.summary-grid{grid-template-columns:1fr 1fr}.summary-head{display:none}}
 
 
-/* Week 3 exercise page: use the available browser width. */
-#quarto-content.page-columns,
-.page-columns,
-main.content {
-  max-width: none !important;
-}
-main.content {
-  width: min(1400px, calc(100vw - 3rem)) !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-.ex {
+
+
+
+/* Widen only the exercise content; keep Quarto's own page grid intact. */
+.ex,
+#summary {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
-.workspace textarea:not(.stdin),
+.workspace,
+.workspace textarea,
 .workspace pre,
 .workspace .output {
   width: 100%;
+  max-width: 100%;
   box-sizing: border-box;
 }
-@media (max-width: 768px) {
-  main.content {
-    width: calc(100vw - 1.5rem) !important;
-  }
+body {
+  overflow-x: clip;
 }
 
 </style>
