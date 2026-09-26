@@ -1,252 +1,266 @@
 [
   {
-    "objectID": "lessons/02-simple-data-types.html",
-    "href": "lessons/02-simple-data-types.html",
-    "title": "Working with Simple Data Types",
+    "objectID": "lessons/03-conditional-statements.html",
+    "href": "lessons/03-conditional-statements.html",
+    "title": "Conditional Statements in Python",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#learning-objectives",
-    "href": "lessons/02-simple-data-types.html#learning-objectives",
-    "title": "Working with Simple Data Types",
+    "objectID": "lessons/03-conditional-statements.html#learning-objectives",
+    "href": "lessons/03-conditional-statements.html#learning-objectives",
+    "title": "Conditional Statements in Python",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#variables",
-    "href": "lessons/02-simple-data-types.html#variables",
-    "title": "Working with Simple Data Types",
-    "section": "Variables",
-    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\n\n\n\n\n\nNoteType hints\n\n\n\nPython also allows us to indicate the expected type of a variable using a type hint:\nage: int = 25\nheight: float = 1.82\nname: str = \"Anna\"\nis_student: bool = True\nA type hint provides information about the intended type, but Python does not enforce it:\nage: int = 25\nage = \"twenty-five\"   # Python allows this\nIn this course, we will normally create variables without type hints:\nage = 25\nWe will return to type hints later when working with functions.\n\n\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
+    "objectID": "lessons/03-conditional-statements.html#logical-expressions",
+    "href": "lessons/03-conditional-statements.html#logical-expressions",
+    "title": "Conditional Statements in Python",
+    "section": "Logical expressions",
+    "text": "Logical expressions\nA logical expression is an expression that evaluates to a Boolean value: either True or False.\nFor example:\nx = 4\n\nprint(x == 4)\nprint(x &gt; 3)\nprint(x &lt; 5)\nOutput:\nTrue\nTrue\nTrue\nLogical expressions are particularly important when a program has to make a decision. A condition in an if statement is a logical expression.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#simple-data-types",
-    "href": "lessons/02-simple-data-types.html#simple-data-types",
-    "title": "Working with Simple Data Types",
-    "section": "Simple data types",
-    "text": "Simple data types\nIn this lesson we use four basic Python data types:\n\n\n\nType\nMeaning\nExample\n\n\n\n\nint\ninteger number\n25\n\n\nfloat\nfloating-point number\n5.5\n\n\nstr\ntext (string)\n\"Hello\"\n\n\nbool\nBoolean value\nTrue, False\n\n\n\n\nCreating variables\n# int\nx = 25\n\n# float\ny = 5.5\n\n# str\ns = \"Hello\"\nt = \"World\"\n\n# bool\nb = True\nc = False\nPython does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.",
+    "objectID": "lessons/03-conditional-statements.html#logical-operators",
+    "href": "lessons/03-conditional-statements.html#logical-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Logical operators",
+    "text": "Logical operators\nLogical operators operate on Boolean expressions and combine their results into a single Boolean value.\nPython provides three basic logical operators:\n\nnot – True if its operand is False, and False if its operand is True;\nand – True if and only if both operands are True;\nor – True if at least one operand is True.\n\n\nTruth table\n\n\n\nX\nY\nX and Y\nX or Y\nnot X\nnot Y\n\n\n\n\nTrue\nTrue\nTrue\nTrue\nFalse\nFalse\n\n\nTrue\nFalse\nFalse\nTrue\nFalse\nTrue\n\n\nFalse\nTrue\nFalse\nTrue\nTrue\nFalse\n\n\nFalse\nFalse\nFalse\nFalse\nTrue\nTrue\n\n\n\nExamples:\nx = 10\ny = 8\n\nprint(x == 10 and y == 8)\nprint(x == 10 or y == 20)\nprint(not (x == 10))\nOutput:\nTrue\nTrue\nFalse\nLogical operators can also be combined:\na = True\nb = False\nc = False\n\nr = (a and b) and (b or c)\nprint(r)",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#the-type-function",
-    "href": "lessons/02-simple-data-types.html#the-type-function",
-    "title": "Working with Simple Data Types",
-    "section": "The type() function",
-    "text": "The type() function\nThe type() function can be used to determine the type of a value or variable.\nx = 25\ny = 5.5\ns = \"Hello\"\nb = True\n\nprint(type(x))\nprint(type(y))\nprint(type(s))\nprint(type(b))\nOutput:\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'str'&gt;\n&lt;class 'bool'&gt;\nThe type can also change after reassignment:\na = 10\nprint(type(a))\n\na = \"apple\"\nprint(type(a))\n\na = 4.4\nprint(type(a))",
+    "objectID": "lessons/03-conditional-statements.html#comparison-operators",
+    "href": "lessons/03-conditional-statements.html#comparison-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Comparison operators",
+    "text": "Comparison operators\nComparison operators compare two values or expressions. The result of a comparison is a Boolean value.\n\n\n\nOperator\nDescription\nExample\n\n\n\n\n&lt;\nLess than\nx &lt; 5\n\n\n&gt;\nGreater than\ny &gt; 3\n\n\n&lt;=\nLess than or equal to\nx + 5 &lt;= y\n\n\n&gt;=\nGreater than or equal to\ny &gt;= x - 2\n\n\n==\nEqual to\nx == 3\n\n\n!=\nNot equal to\nx != y\n\n\n\nFor example:\nx = 5\n\nprint(x &gt; 3)\nprint(x == 5)\nprint(x != 5)\n\n\n\n\n\n\nImportantAssignment or comparison?\n\n\n\nDo not confuse the assignment operator = with the equality comparison operator ==.\nx = 5       # assign the value 5 to x\nx == 5      # compare x with 5\nThe first statement changes the value associated with x. The second expression evaluates to True or False.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#constants",
-    "href": "lessons/02-simple-data-types.html#constants",
-    "title": "Working with Simple Data Types",
-    "section": "Constants",
-    "text": "Constants\nA constant is a value that is intended not to change while a program is running.\nPython has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:\n\nuse capital letters;\nseparate words with underscores.\n\nDEFAULT_TIMEOUT = 10\nMAX_NUMBER_OF_ATTEMPTS = 3\n\n\n\n\n\n\nImportantConvention, not enforcement\n\n\n\nPython does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.\n\n\nConstants are also often defined in separate modules and imported where they are needed.",
+    "objectID": "lessons/03-conditional-statements.html#assignment-operators",
+    "href": "lessons/03-conditional-statements.html#assignment-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Assignment operators",
+    "text": "Assignment operators\nAssignment operators are used to assign values to variables. Python also provides compound assignment operators, which combine an arithmetic operation with assignment.\n\n\n\nOperator\nExample\nMeaning\n\n\n\n\n=\nx = 10\nassign 10 to x\n\n\n+=\nx += 10\nx = x + 10\n\n\n-=\ny -= 5\ny = y - 5\n\n\n*=\nz *= 2\nz = z * 2\n\n\n/=\na /= 3\na = a / 3\n\n\n%=\nb %= 5\nb = b % 5\n\n\n//=\nc //= 5\nc = c // 5\n\n\n\nFor example:\nx = 10\nx += 5\nprint(x)\nOutput:\n15",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#type-conversion",
-    "href": "lessons/02-simple-data-types.html#type-conversion",
-    "title": "Working with Simple Data Types",
-    "section": "Type conversion",
-    "text": "Type conversion\nSometimes a value must be converted from one data type to another. Python supports both explicit and implicit type conversion.\n\nExplicit type conversion\nExplicit type conversion, also called type casting, takes place when the programmer deliberately converts a value using a conversion function such as int(), float(), or str().\na = 5\nprint(type(a))\n\na = float(a)\nprint(type(a))\nb = 23\nprint(type(b))\n\nb = int(b)\nprint(type(b))\nc = 10\nprint(type(c))\n\nc = str(c)\nprint(type(c))\nA conversion is possible only if the value can meaningfully be converted to the requested type.\n\n\nImplicit type conversion\nImplicit type conversion takes place automatically when Python converts a value to another type during an operation.\na = 25\nc = 30.0\n\nx = c / a\n\nprint(type(a))\nprint(type(c))\nprint(type(x))\nHere a is an int, c is a float, and the result x is a float.",
+    "objectID": "lessons/03-conditional-statements.html#precedence-of-operators",
+    "href": "lessons/03-conditional-statements.html#precedence-of-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Precedence of operators",
+    "text": "Precedence of operators\nWhen an expression contains several operators, operator precedence determines which operation is evaluated first.\nThe following simplified precedence table contains the operators used in this course so far, from higher to lower precedence:\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n(), []\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n6\n&lt;, &gt;, ==, !=, &lt;=, &gt;=\n\n\n7\nnot\n\n\n8\nand\n\n\n9\nor\n\n\n\nFor example:\nx = 5\nresult = x &gt; 3 and x &lt; 10\nprint(result)\nThe comparisons are evaluated before the and operator.\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when you know the precedence rules, parentheses can make a complex logical expression easier to read:\nresult = (x &gt; 3) and (x &lt; 10)",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#printing-variable-values",
-    "href": "lessons/02-simple-data-types.html#printing-variable-values",
-    "title": "Working with Simple Data Types",
-    "section": "Printing variable values",
-    "text": "Printing variable values\nThe print() function can display literal text as well as the values stored in variables.\nx = 15\ny = 20\n\nprint(x)\nprint(y)\nSeveral values can be printed in the same statement:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name:\", name, \"Age:\", age, \"Is_student:\", is_student)",
+    "objectID": "lessons/03-conditional-statements.html#selection",
+    "href": "lessons/03-conditional-statements.html#selection",
+    "title": "Conditional Statements in Python",
+    "section": "Selection",
+    "text": "Selection\nSo far, our programs have mainly executed instructions one after another. This is called sequence.\nSelection allows a program to choose between different paths depending on a condition. The condition is a logical expression that evaluates to either True or False.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#formatting-output",
-    "href": "lessons/02-simple-data-types.html#formatting-output",
-    "title": "Working with Simple Data Types",
-    "section": "Formatting output",
-    "text": "Formatting output\n\nString formatting: format() and f-strings\nPython also provides the older format() method for inserting values into strings. You may encounter it in existing Python code, but in this course we will use f-strings for formatted output.\n\n\nf-strings\nAn f-string is a string prefixed with f. Variable names and expressions can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nMultiple values can be included in the same f-string:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nExpressions can also be evaluated directly inside an f-string:\nx = 5\ny = 4\nprint(f\"{x} * {y} = {x * y}\")\nValues can be formatted using a format specification. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipIn this course\n\n\n\nUse f-strings when you need to combine text, variable values, or expressions in formatted output. The format() method is mentioned only so that you can recognize it in existing Python code.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
+    "objectID": "lessons/03-conditional-statements.html#binary-selection-ifelse",
+    "href": "lessons/03-conditional-statements.html#binary-selection-ifelse",
+    "title": "Conditional Statements in Python",
+    "section": "Binary selection: if–else",
+    "text": "Binary selection: if–else\nBinary selection means that the program can follow one of two possible paths depending on a condition.\nThe general form is:\nif condition:\n    commands\nelse:\n    other_commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    print(f\"{x} is negative\")\nAnother example can be used to prevent an invalid division:\na = 10\nb = int(input(\"Enter a whole number: \"))\n\nif b == 0:\n    print(\"The division cannot be performed\")\nelse:\n    print(f\"The quotient of {a} and {b}: {a / b}\")\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to determine which statements belong to a branch.\nif x &gt; 0:\n    print(\"Positive\")\n    print(\"This line also belongs to the if branch\")\nStatements at the same indentation level belong to the same block.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#reading-user-input",
-    "href": "lessons/02-simple-data-types.html#reading-user-input",
-    "title": "Working with Simple Data Types",
-    "section": "Reading user input",
-    "text": "Reading user input\nThe input() function allows the user to enter a value while a program is running.\nIts optional parameter is displayed as a prompt before the input:\nx = input(\"Name: \")\nprint(x)\nprint(type(x))\n\n\n\n\n\n\nWarninginput() returns a string\n\n\n\nThe value returned by input() is always a str. If a numeric value is required, explicit type conversion is usually necessary.\n\n\nFor example:\nx = input(\"Age: \")\nprint(x)\nprint(type(x))\n\ny = int(input(\"Age: \"))\nprint(y)\nprint(type(y))\nA Boolean value can also be produced by comparing the entered text:\nanswer = input(\"Are you a student? (yes or no) \")\nis_student = answer == \"yes\"\nprint(is_student)",
+    "objectID": "lessons/03-conditional-statements.html#unary-selection-if",
+    "href": "lessons/03-conditional-statements.html#unary-selection-if",
+    "title": "Conditional Statements in Python",
+    "section": "Unary selection: if",
+    "text": "Unary selection: if\nSometimes an action is required only when a condition is true. In this case, an else branch is not necessary.\nThis is unary selection:\nif condition:\n    commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x % 5 == 0:\n    print(f\"{x} can be divided by 5\")\nIf the condition is False, the indented statement is simply skipped and execution continues after the if statement.\nA unary selection can also be used when additional information is needed only in a particular case:\nfirst_name = input(\"First name: \")\nlast_name = input(\"Last name: \")\nanswer = input(\"Do you have a middle name? (yes/no): \")\n\nif answer == \"yes\":\n    middle_name = input(\"Middle name: \")\n    print(f\"Hello {first_name} {middle_name} {last_name}\")",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#arithmetic-operators",
-    "href": "lessons/02-simple-data-types.html#arithmetic-operators",
-    "title": "Working with Simple Data Types",
-    "section": "Arithmetic operators",
-    "text": "Arithmetic operators\nPython provides the following basic arithmetic operators:\n\n\n\nOperator\nDescription\nExample\nResult\n\n\n\n\n+\naddition\n10 + 5\n15\n\n\n-\nsubtraction\n20 - 7\n13\n\n\n*\nmultiplication\n4 * 6\n24\n\n\n/\ndivision\n12 / 5\n2.4\n\n\n//\nfloor division\n12 // 5\n2\n\n\n%\nremainder (modulo)\n12 % 5\n2\n\n\n**\nexponentiation\n2 ** 5\n32\n\n\n\n\n\n\n\n\n\nNoteDivision and floor division\n\n\n\n/ performs division and produces a floating-point result. // performs floor division: the result is rounded down to the next smaller whole number.",
+    "objectID": "lessons/03-conditional-statements.html#nested-conditionals",
+    "href": "lessons/03-conditional-statements.html#nested-conditionals",
+    "title": "Conditional Statements in Python",
+    "section": "Nested conditionals",
+    "text": "Nested conditionals\nA conditional statement can be placed inside another conditional statement. This is called a nested conditional.\nGeneral form:\nif condition:\n    commands\nelse:\n    if condition2:\n        commands2\n    else:\n        other_commands\nFor example, we can distinguish between positive, zero, and negative numbers:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    if x == 0:\n        print(f\"{x} is zero\")\n    else:\n        print(f\"{x} is negative\")\nThe second if statement is evaluated only when the first condition is false.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#arithmetic-expressions",
-    "href": "lessons/02-simple-data-types.html#arithmetic-expressions",
-    "title": "Working with Simple Data Types",
-    "section": "Arithmetic expressions",
-    "text": "Arithmetic expressions\nAn arithmetic expression is a combination of numeric values, arithmetic operators, and optionally parentheses.\nx = 3 + 2 * 5\nprint(x)\nThe result is 13, because multiplication has higher precedence than addition.\nWhen several operators occur in an expression, operator precedence determines the order of evaluation.\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n()\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n\nExamples:\nx = 3 + 2 * 5\nprint(x)\ny = 2 ** 4 + 3\nprint(y)\nParentheses can be used to make the intended order explicit:\nz = (-5 + 16 ** 0.5) / (2 * 0.5)\nprint(z)\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.",
+    "objectID": "lessons/03-conditional-statements.html#chained-conditionals-elif",
+    "href": "lessons/03-conditional-statements.html#chained-conditionals-elif",
+    "title": "Conditional Statements in Python",
+    "section": "Chained conditionals: elif",
+    "text": "Chained conditionals: elif\nWhen several mutually exclusive conditions have to be checked, nested if statements can often be written more clearly using elif.\nelif combines else and if:\nif condition:\n    commands\nelif condition2:\n    commands2\nelse:\n    other_commands\nThe previous example can therefore be written as:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelif x == 0:\n    print(f\"{x} is zero\")\nelse:\n    print(f\"{x} is negative\")\nMore than one elif branch can be used:\nif condition1:\n    commands1\nelif condition2:\n    commands2\nelif condition3:\n    commands3\nelse:\n    other_commands\nPython checks the conditions from top to bottom. Once a true condition is found, its branch is executed and the remaining branches are skipped.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/02-simple-data-types.html#summary",
-    "href": "lessons/02-simple-data-types.html#summary",
-    "title": "Working with Simple Data Types",
+    "objectID": "lessons/03-conditional-statements.html#matchcase-statement",
+    "href": "lessons/03-conditional-statements.html#matchcase-statement",
+    "title": "Conditional Statements in Python",
+    "section": "match–case statement",
+    "text": "match–case statement\nStarting from Python 3.10, the match–case statement can be used to implement multi-way selection.\nIts general structure is:\nmatch parameter_value:\n    case value1:\n        commands1\n    case value2:\n        commands2\n    case value3:\n        commands3\n    case _:\n        other_commands\nThe special pattern _ acts as the default case.\nFor example:\ngrade = int(input(\"Enter your grade: \"))\n\nmatch grade:\n    case 1:\n        print(\"Failed\")\n    case 2:\n        print(\"Sufficient\")\n    case 3:\n        print(\"Average\")\n    case 4:\n        print(\"Good\")\n    case 5:\n        print(\"Excellent\")\n    case _:\n        print(\"You entered a wrong number\")\n\n\n\n\n\n\nNoteWhen is match–case useful?\n\n\n\nmatch–case can make code easier to read when one value is compared with several possible alternatives. The same type of problem can often also be solved with an if–elif–else chain.",
+    "crumbs": [
+      "Lessons",
+      "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/03-conditional-statements.html#conditional-expressions",
+    "href": "lessons/03-conditional-statements.html#conditional-expressions",
+    "title": "Conditional Statements in Python",
+    "section": "Conditional expressions",
+    "text": "Conditional expressions\nFor a very simple binary selection, Python provides a conditional expression, sometimes called the ternary operator.\nIts form is:\nresult_if_true if condition else result_if_false\nFor example:\nx = 5\nprint(\"Even\" if x % 2 == 0 else \"Odd\")\nOutput:\nOdd\n\n\n\n\n\n\nTipKeep it simple\n\n\n\nConditional expressions are useful for short, simple decisions. For more complex logic, a normal if–else statement is usually easier to read.",
+    "crumbs": [
+      "Lessons",
+      "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/03-conditional-statements.html#summary",
+    "href": "lessons/03-conditional-statements.html#summary",
+    "title": "Conditional Statements in Python",
     "section": "Summary",
-    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print() and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
+    "text": "Summary\nIn this lesson, we introduced the selection control structure. A program can make decisions by evaluating logical expressions and executing different statements depending on their Boolean result.\nThe main Python constructs introduced were:\n\nlogical operators: not, and, or;\ncomparison operators such as &lt;, &gt;, ==, and !=;\nbinary selection with if–else;\nunary selection with if;\nnested conditionals;\nchained conditionals with elif;\nmulti-way selection with match–case;\nconditional expressions for simple two-way decisions.",
     "crumbs": [
       "Lessons",
-      "2. Working with Simple Data Types"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html",
-    "href": "exercises/01-class-exercises.html",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html",
+    "href": "exercises/02-class-exercises.html",
+    "title": "Class Exercises 2",
     "section": "",
-    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
+    "text": "Working with simple data types\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#setup",
-    "href": "exercises/01-class-exercises.html#setup",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#setup",
+    "href": "exercises/02-class-exercises.html#setup",
+    "title": "Class Exercises 2",
     "section": "Setup",
-    "text": "Setup\nRun the following cell once at the beginning of the session.\n\n# Run this cell once before starting the exercises\n\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\n\nfrom checker import check_button\n\nprint(\"✓ Exercise checker is ready.\")",
+    "text": "Setup\nRun this cell once at the beginning of the session.\n\n# Setup – run this cell first\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\nimport importlib, checker\nimportlib.reload(checker)\nfrom checker import check_button\nprint(\"✓ Exercise checker is ready.\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-1-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-1-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-1-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 1 — 10 minutes",
-    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex01\")",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that calculates and displays on the screen:\n\nthe sum, difference, product, and quotient of two integers,\nthe remainder when the first number is divided by the second,\nthe first number increased by 1 and the second number decreased by 1.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex01\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-2-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-2-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-2-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-2-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 2 — 10 minutes",
-    "text": "Exercise 2 — 10 minutes\nWrite a program that introduces you as follows.\nFirst, display the information in one line, for example:\n\nName: “Edit White” & Neptun-code: “ABCDEF” & Age: 25 years\n\nThen display:\nIntroduction\nName: Edit White\nNeptun-code: ABCDEF\nAge: 25 years\nUse your own data. Produce both forms in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex02\")",
+    "text": "Exercise 2 — 10 minutes\nWrite a program that solves a linear equation.\n\nThe coefficients of the equation should be asked from the user.\n\nYou may assume that the coefficient of x is not zero.\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex02\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-3-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-3-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-3-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-3-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 3 — 10 minutes",
-    "text": "Exercise 3 — 10 minutes\nWrite a program that performs the following operations and displays the results as shown:\n2*1000 + 2*10 + 1*3 = 2023\nThe solution of the equation 4x + 2 = 14 is x = 3\nThe number of seconds in a week is 604800\nCalculate the number of seconds in a week in your program.\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex03\")",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that calculates and displays the volume and surface area of a cuboid.\n\nThe edges should be floating-point numbers entered by the user.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex03\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-4-10-minutes",
-    "href": "exercises/01-class-exercises.html#exercise-4-10-minutes",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html#exercise-4-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-4-10-minutes",
+    "title": "Class Exercises 2",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nPrint the multiplication table of 7 from 1 to 10 in the following format:\nMultiplication table of 7:\n1 * 7 = 7\n2 * 7 = 14\n...\n10 * 7 = 70\nArrange all values in 5 columns.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex04\")",
+    "text": "Exercise 4 — 10 minutes\nYou are interested in buying a new laptop with a given net price and tax rate. Calculate and display the gross price.\n\nAsk the user for the necessary values.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex04\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html#exercise-5",
-    "href": "exercises/01-class-exercises.html#exercise-5",
-    "title": "Class Exercises 1",
-    "section": "Exercise 5",
-    "text": "Exercise 5\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex05\")",
+    "objectID": "exercises/02-class-exercises.html#exercise-5-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-5-10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 5 — 10 minutes",
+    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives grades from 5 subjects. Write a program that:\n\nreads the values of grades one by one,\ncalculates the average grade.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex05\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "objectID": "exercises/02-class-exercises.html#exercise-6-10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-6-10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 6 — 10 minutes",
+    "text": "Exercise 6 — 10 minutes\nWe put a given amount of money in the bank at a given annual interest rate. How much money will we have in 5 years?\n\nRead the amount and the interest rate.\nCalculate the ending amount.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex06\")",
     "crumbs": [
-      "Home"
+      "Lessons",
+      "Class Exercises"
     ]
   },
   {
-    "objectID": "index.html#course-structure",
-    "href": "index.html#course-structure",
-    "title": "Course Materials",
-    "section": "Course structure",
-    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "objectID": "exercises/02-class-exercises.html#exercise-7---10-minutes",
+    "href": "exercises/02-class-exercises.html#exercise-7---10-minutes",
+    "title": "Class Exercises 2",
+    "section": "Exercise 7 - 10 minutes",
+    "text": "Exercise 7 - 10 minutes\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse the exchange rates from the sample solution:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")",
     "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#programming-environment",
-    "href": "index.html#programming-environment",
-    "title": "Course Materials",
-    "section": "Programming environment",
-    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
-    "crumbs": [
-      "Home"
+      "Lessons",
+      "Class Exercises"
     ]
   },
   {
@@ -470,102 +484,253 @@
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html",
-    "href": "exercises/02-class-exercises.html",
-    "title": "Class Exercises 2",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Materials",
     "section": "",
-    "text": "Working with simple data types\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
+    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Course Materials",
+    "section": "Course structure",
+    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#programming-environment",
+    "href": "index.html#programming-environment",
+    "title": "Course Materials",
+    "section": "Programming environment",
+    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html",
+    "href": "exercises/01-class-exercises.html",
+    "title": "Class Exercises 1",
+    "section": "",
+    "text": "Introduction to Data Science and Programming\nComplete the exercises in order. Write your solution in the code cell below each task.\nOpen in Google Colab",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#setup",
-    "href": "exercises/02-class-exercises.html#setup",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/01-class-exercises.html#setup",
+    "href": "exercises/01-class-exercises.html#setup",
+    "title": "Class Exercises 1",
     "section": "Setup",
-    "text": "Setup\nRun this cell once at the beginning of the session.\n\n# Setup – run this cell first\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\nimport importlib, checker\nimportlib.reload(checker)\nfrom checker import check_button\nprint(\"✓ Exercise checker is ready.\")",
+    "text": "Setup\nRun the following cell once at the beginning of the session.\n\n# Run this cell once before starting the exercises\n\n!wget -q https://raw.githubusercontent.com/gmolnar2022/Python-programming-course/main/checker/checker.py -O checker.py\n\nfrom checker import check_button\n\nprint(\"✓ Exercise checker is ready.\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-1-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-1-10-minutes",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-1-10-minutes",
+    "title": "Class Exercises 1",
     "section": "Exercise 1 — 10 minutes",
-    "text": "Exercise 1 — 10 minutes\nWrite a program that calculates and displays on the screen:\n\nthe sum, difference, product, and quotient of two integers,\nthe remainder when the first number is divided by the second,\nthe first number increased by 1 and the second number decreased by 1.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex01\")",
+    "text": "Exercise 1 — 10 minutes\nWrite a program that displays on the screen:\n\nThis is my second Python program\n\n\nFirst, display each word on a new line.\nThen, display each word in a separate column.\nFinally, use - as the separator character between words.\n\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex01\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-2-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-2-10-minutes",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-2-10-minutes",
+    "title": "Class Exercises 1",
     "section": "Exercise 2 — 10 minutes",
-    "text": "Exercise 2 — 10 minutes\nWrite a program that solves a linear equation.\n\nThe coefficients of the equation should be asked from the user.\n\nYou may assume that the coefficient of x is not zero.\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex02\")",
+    "text": "Exercise 2 — 10 minutes\nWrite a program that introduces you as follows.\nFirst, display the information in one line, for example:\n\nName: “Edit White” & Neptun-code: “ABCDEF” & Age: 25 years\n\nThen display:\nIntroduction\nName: Edit White\nNeptun-code: ABCDEF\nAge: 25 years\nUse your own data. Produce both forms in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex02\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-3-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-3-10-minutes",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-3-10-minutes",
+    "title": "Class Exercises 1",
     "section": "Exercise 3 — 10 minutes",
-    "text": "Exercise 3 — 10 minutes\nWrite a program that calculates and displays the volume and surface area of a cuboid.\n\nThe edges should be floating-point numbers entered by the user.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex03\")",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that performs the following operations and displays the results as shown:\n2*1000 + 2*10 + 1*3 = 2023\nThe solution of the equation 4x + 2 = 14 is x = 3\nThe number of seconds in a week is 604800\nCalculate the number of seconds in a week in your program.\nComplete all three parts in the same code cell.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex03\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-4-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-4-10-minutes",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "href": "exercises/01-class-exercises.html#exercise-4-10-minutes",
+    "title": "Class Exercises 1",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nYou are interested in buying a new laptop with a given net price and tax rate. Calculate and display the gross price.\n\nAsk the user for the necessary values.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex04\")",
+    "text": "Exercise 4 — 10 minutes\nPrint the multiplication table of 7 from 1 to 10 in the following format:\nMultiplication table of 7:\n1 * 7 = 7\n2 * 7 = 14\n...\n10 * 7 = 70\nArrange all values in 5 columns.\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex04\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-5-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-5-10-minutes",
-    "title": "Class Exercises 2",
-    "section": "Exercise 5 — 10 minutes",
-    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives grades from 5 subjects. Write a program that:\n\nreads the values of grades one by one,\ncalculates the average grade.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex05\")",
+    "objectID": "exercises/01-class-exercises.html#exercise-5",
+    "href": "exercises/01-class-exercises.html#exercise-5",
+    "title": "Class Exercises 1",
+    "section": "Exercise 5",
+    "text": "Exercise 5\nWrite a program that displays the calendar of a given month and year as follows:\nNovember 2023\nMo Tu We Th Fr Sa Su\n       1  2  3  4  5\n 6  7  8  9 10 11 12\n13 14 15 16 17 18 19\n20 21 22 23 24 25 26\n27 28 29 30\n\n# Write your solution here\n\n\ncheck_button(\"week01_ex05\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-6-10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-6-10-minutes",
-    "title": "Class Exercises 2",
-    "section": "Exercise 6 — 10 minutes",
-    "text": "Exercise 6 — 10 minutes\nWe put a given amount of money in the bank at a given annual interest rate. How much money will we have in 5 years?\n\nRead the amount and the interest rate.\nCalculate the ending amount.\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex06\")",
+    "objectID": "lessons/02-simple-data-types.html",
+    "href": "lessons/02-simple-data-types.html",
+    "title": "Working with Simple Data Types",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
-      "Class Exercises"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#exercise-7---10-minutes",
-    "href": "exercises/02-class-exercises.html#exercise-7---10-minutes",
-    "title": "Class Exercises 2",
-    "section": "Exercise 7 - 10 minutes",
-    "text": "Exercise 7 - 10 minutes\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse the exchange rates from the sample solution:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")",
+    "objectID": "lessons/02-simple-data-types.html#learning-objectives",
+    "href": "lessons/02-simple-data-types.html#learning-objectives",
+    "title": "Working with Simple Data Types",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
-      "Class Exercises"
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#variables",
+    "href": "lessons/02-simple-data-types.html#variables",
+    "title": "Working with Simple Data Types",
+    "section": "Variables",
+    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\n\n\n\n\n\nNoteType hints\n\n\n\nPython also allows us to indicate the expected type of a variable using a type hint:\nage: int = 25\nheight: float = 1.82\nname: str = \"Anna\"\nis_student: bool = True\nA type hint provides information about the intended type, but Python does not enforce it:\nage: int = 25\nage = \"twenty-five\"   # Python allows this\nIn this course, we will normally create variables without type hints:\nage = 25\nWe will return to type hints later when working with functions.\n\n\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#simple-data-types",
+    "href": "lessons/02-simple-data-types.html#simple-data-types",
+    "title": "Working with Simple Data Types",
+    "section": "Simple data types",
+    "text": "Simple data types\nIn this lesson we use four basic Python data types:\n\n\n\nType\nMeaning\nExample\n\n\n\n\nint\ninteger number\n25\n\n\nfloat\nfloating-point number\n5.5\n\n\nstr\ntext (string)\n\"Hello\"\n\n\nbool\nBoolean value\nTrue, False\n\n\n\n\nCreating variables\n# int\nx = 25\n\n# float\ny = 5.5\n\n# str\ns = \"Hello\"\nt = \"World\"\n\n# bool\nb = True\nc = False\nPython does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#the-type-function",
+    "href": "lessons/02-simple-data-types.html#the-type-function",
+    "title": "Working with Simple Data Types",
+    "section": "The type() function",
+    "text": "The type() function\nThe type() function can be used to determine the type of a value or variable.\nx = 25\ny = 5.5\ns = \"Hello\"\nb = True\n\nprint(type(x))\nprint(type(y))\nprint(type(s))\nprint(type(b))\nOutput:\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'str'&gt;\n&lt;class 'bool'&gt;\nThe type can also change after reassignment:\na = 10\nprint(type(a))\n\na = \"apple\"\nprint(type(a))\n\na = 4.4\nprint(type(a))",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#constants",
+    "href": "lessons/02-simple-data-types.html#constants",
+    "title": "Working with Simple Data Types",
+    "section": "Constants",
+    "text": "Constants\nA constant is a value that is intended not to change while a program is running.\nPython has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:\n\nuse capital letters;\nseparate words with underscores.\n\nDEFAULT_TIMEOUT = 10\nMAX_NUMBER_OF_ATTEMPTS = 3\n\n\n\n\n\n\nImportantConvention, not enforcement\n\n\n\nPython does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.\n\n\nConstants are also often defined in separate modules and imported where they are needed.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#type-conversion",
+    "href": "lessons/02-simple-data-types.html#type-conversion",
+    "title": "Working with Simple Data Types",
+    "section": "Type conversion",
+    "text": "Type conversion\nSometimes a value must be converted from one data type to another. Python supports both explicit and implicit type conversion.\n\nExplicit type conversion\nExplicit type conversion, also called type casting, takes place when the programmer deliberately converts a value using a conversion function such as int(), float(), or str().\na = 5\nprint(type(a))\n\na = float(a)\nprint(type(a))\nb = 23\nprint(type(b))\n\nb = int(b)\nprint(type(b))\nc = 10\nprint(type(c))\n\nc = str(c)\nprint(type(c))\nA conversion is possible only if the value can meaningfully be converted to the requested type.\n\n\nImplicit type conversion\nImplicit type conversion takes place automatically when Python converts a value to another type during an operation.\na = 25\nc = 30.0\n\nx = c / a\n\nprint(type(a))\nprint(type(c))\nprint(type(x))\nHere a is an int, c is a float, and the result x is a float.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#printing-variable-values",
+    "href": "lessons/02-simple-data-types.html#printing-variable-values",
+    "title": "Working with Simple Data Types",
+    "section": "Printing variable values",
+    "text": "Printing variable values\nThe print() function can display literal text as well as the values stored in variables.\nx = 15\ny = 20\n\nprint(x)\nprint(y)\nSeveral values can be printed in the same statement:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name:\", name, \"Age:\", age, \"Is_student:\", is_student)",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#formatting-output",
+    "href": "lessons/02-simple-data-types.html#formatting-output",
+    "title": "Working with Simple Data Types",
+    "section": "Formatting output",
+    "text": "Formatting output\n\nString formatting: format() and f-strings\nPython also provides the older format() method for inserting values into strings. You may encounter it in existing Python code, but in this course we will use f-strings for formatted output.\n\n\nf-strings\nAn f-string is a string prefixed with f. Variable names and expressions can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nMultiple values can be included in the same f-string:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nExpressions can also be evaluated directly inside an f-string:\nx = 5\ny = 4\nprint(f\"{x} * {y} = {x * y}\")\nValues can be formatted using a format specification. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipIn this course\n\n\n\nUse f-strings when you need to combine text, variable values, or expressions in formatted output. The format() method is mentioned only so that you can recognize it in existing Python code.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#reading-user-input",
+    "href": "lessons/02-simple-data-types.html#reading-user-input",
+    "title": "Working with Simple Data Types",
+    "section": "Reading user input",
+    "text": "Reading user input\nThe input() function allows the user to enter a value while a program is running.\nIts optional parameter is displayed as a prompt before the input:\nx = input(\"Name: \")\nprint(x)\nprint(type(x))\n\n\n\n\n\n\nWarninginput() returns a string\n\n\n\nThe value returned by input() is always a str. If a numeric value is required, explicit type conversion is usually necessary.\n\n\nFor example:\nx = input(\"Age: \")\nprint(x)\nprint(type(x))\n\ny = int(input(\"Age: \"))\nprint(y)\nprint(type(y))\nA Boolean value can also be produced by comparing the entered text:\nanswer = input(\"Are you a student? (yes or no) \")\nis_student = answer == \"yes\"\nprint(is_student)",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "href": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic operators",
+    "text": "Arithmetic operators\nPython provides the following basic arithmetic operators:\n\n\n\nOperator\nDescription\nExample\nResult\n\n\n\n\n+\naddition\n10 + 5\n15\n\n\n-\nsubtraction\n20 - 7\n13\n\n\n*\nmultiplication\n4 * 6\n24\n\n\n/\ndivision\n12 / 5\n2.4\n\n\n//\nfloor division\n12 // 5\n2\n\n\n%\nremainder (modulo)\n12 % 5\n2\n\n\n**\nexponentiation\n2 ** 5\n32\n\n\n\n\n\n\n\n\n\nNoteDivision and floor division\n\n\n\n/ performs division and produces a floating-point result. // performs floor division: the result is rounded down to the next smaller whole number.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "href": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic expressions",
+    "text": "Arithmetic expressions\nAn arithmetic expression is a combination of numeric values, arithmetic operators, and optionally parentheses.\nx = 3 + 2 * 5\nprint(x)\nThe result is 13, because multiplication has higher precedence than addition.\nWhen several operators occur in an expression, operator precedence determines the order of evaluation.\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n()\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n\nExamples:\nx = 3 + 2 * 5\nprint(x)\ny = 2 ** 4 + 3\nprint(y)\nParentheses can be used to make the intended order explicit:\nz = (-5 + 16 ** 0.5) / (2 * 0.5)\nprint(z)\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
+    ]
+  },
+  {
+    "objectID": "lessons/02-simple-data-types.html#summary",
+    "href": "lessons/02-simple-data-types.html#summary",
+    "title": "Working with Simple Data Types",
+    "section": "Summary",
+    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print() and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
+    "crumbs": [
+      "Lessons",
+      "2. Working with Simple Data Types"
     ]
   }
 ]

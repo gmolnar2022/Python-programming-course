@@ -11,7 +11,7 @@ project:
     - exercises/02-class-exercises.ipynb
     # Uncomment pages below when they are ready to publish:
     - lessons/02-simple-data-types.qmd
-    # - lessons/03-conditional-statements.qmd
+    - lessons/03-conditional-statements.qmd
     # - lessons/04-loops.qmd
     # - lessons/05-complex-data-types-1.qmd
     # - lessons/06-basic-algorithms-1.qmd
