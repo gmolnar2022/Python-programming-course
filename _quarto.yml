@@ -47,8 +47,8 @@ website:
             text: "2. Working with Simple Data Types"
           - href: exercises/02-class-exercises.ipynb
             text: "Class Exercises"
-          # - href: lessons/03-conditional-statements.qmd
-          #   text: "3. Conditional Statements in Python"
+          - href: lessons/03-conditional-statements.qmd
+            text: "3. Conditional Statements in Python"
           # - href: lessons/04-loops.qmd
           #   text: "4. Loops in Python"
           # - href: lessons/05-complex-data-types-1.qmd

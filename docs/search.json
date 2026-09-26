@@ -558,17 +558,6 @@
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html#homework",
-    "href": "exercises/02-class-exercises.html#homework",
-    "title": "Class Exercises 2",
-    "section": "Homework",
-    "text": "Homework\nWrite a program that converts an amount given in US dollars into euros and Hungarian forints.\nUse these exchange rates:\n\n1 USD = 0.93 EUR\n1 USD = 354.15 HUF\n\n\n# Write your solution here\n\n\ncheck_button(\"week02_ex07\")",
-    "crumbs": [
-      "Lessons",
-      "Class Exercises"
-    ]
-  },
-  {
     "objectID": "exercises/02-class-exercises.html#exercise-7---10-minutes",
     "href": "exercises/02-class-exercises.html#exercise-7---10-minutes",
     "title": "Class Exercises 2",
