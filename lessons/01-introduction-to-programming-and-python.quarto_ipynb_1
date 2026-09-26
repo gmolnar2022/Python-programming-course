@@ -1,0 +1,752 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Introduction to Programming and Python\"\n",
+        "---\n",
+        "\n",
+        "## Learning objectives\n",
+        "\n",
+        "After completing this lesson, you should be able to:\n",
+        "\n",
+        "- explain the basic steps involved in creating and running a computer program;\n",
+        "- distinguish between an editor, compiler, interpreter, linker, loader, and IDE;\n",
+        "- describe the main characteristics of the Python programming language;\n",
+        "- identify common application areas of Python;\n",
+        "- create and run a simple Python program in Google Colab;\n",
+        "- distinguish between syntax, runtime, and logic errors;\n",
+        "- use the `print()` function to display output;\n",
+        "- use the `sep` and `end` arguments of the `print()` function;\n",
+        "- use basic escape sequences in strings.\n",
+        "\n",
+        "## Introduction to programming\n",
+        "\n",
+        "A computer program is a sequence of instructions that tells a computer how to\n",
+        "perform a particular task.\n",
+        "\n",
+        "Computers ultimately execute instructions represented in machine code.\n",
+        "Programming languages allow programmers to express algorithms and instructions\n",
+        "in a form that is easier for humans to write, read, and maintain.\n",
+        "\n",
+        "Programming languages can be classified in several ways. One common distinction\n",
+        "is between **low-level** and **high-level** programming languages.\n",
+        "\n",
+        "High-level programming languages provide abstractions that allow programmers to\n",
+        "focus more on solving the problem and less on the technical details of the\n",
+        "underlying hardware.\n",
+        "\n",
+        "## The Python language\n",
+        "\n",
+        "Python is a **general-purpose, high-level programming language**.\n",
+        "\n",
+        "Some of its main characteristics are:\n",
+        "\n",
+        "- easy to read and write;\n",
+        "- free and open source;\n",
+        "- supports multiple programming paradigms;\n",
+        "- strongly and dynamically typed;\n",
+        "- interpreted;\n",
+        "- has a large standard library;\n",
+        "- cross-platform.\n",
+        "\n",
+        "::: {.callout-note}\n",
+        "## Python in this course\n",
+        "\n",
+        "The primary goal of this course is **not simply to learn the Python language**.\n",
+        "\n",
+        "Python is used as a tool for learning fundamental programming concepts,\n",
+        "problem-solving techniques, and algorithmic thinking.\n",
+        "\n",
+        "When designing algorithms, we primarily use the three fundamental control structures:\n",
+        "\n",
+        "- **sequence** – instructions are executed one after another,\n",
+        "- **selection** – different paths can be chosen depending on a condition,\n",
+        "- **iteration** – instructions can be repeated using loops.\n",
+        "\n",
+        "The course focuses on solving problems using the core features of Python. \n",
+        "External libraries such as **NumPy** and **pandas** are not used.\n",
+        "\n",
+        "The only exception is Python's built-in **`random` module**, which will be used \n",
+        "in some exercises when random values are required.\n",
+        "\n",
+        "The concepts introduced in this course can also be applied when learning other\n",
+        "programming languages.\n",
+        ":::\n",
+        "\n",
+        "## What is Python commonly used for?\n",
+        "\n",
+        "Python is used in many areas of computing, including:\n",
+        "\n",
+        "- data analysis and machine learning;\n",
+        "- web applications;\n",
+        "- task automation;\n",
+        "- software testing and prototyping;\n",
+        "- business applications;\n",
+        "- scientific computing;\n",
+        "- scripting and everyday programming tasks.\n",
+        "\n",
+        "## A brief history of Python\n",
+        "\n",
+        "Python was created by **Guido van Rossum** in the late 1980s.\n",
+        "\n",
+        "Some important milestones are:\n",
+        "\n",
+        "- **1994 – Python 1.0**\n",
+        "  - core data types and functions;\n",
+        "  - support for functional programming;\n",
+        "\n",
+        "- **2000 – Python 2.0**\n",
+        "  - Unicode support;\n",
+        "  - list comprehensions;\n",
+        "  - garbage collection;\n",
+        "\n",
+        "- **2008 – Python 3.0**\n",
+        "  - major redesign and simplification of the language;\n",
+        "  - removal of several duplicated or outdated language constructs;\n",
+        "  - not backward compatible with Python 2.\n",
+        "\n",
+        "Python 3 is the current generation of the language and is used throughout this\n",
+        "course.\n",
+        "\n",
+        "## Tools used to create and run programs\n",
+        "\n",
+        "Writing source code is only one part of creating a program. Several tools may\n",
+        "be involved in transforming source code into a program that can be executed by\n",
+        "a computer.\n",
+        "\n",
+        "### Editor\n",
+        "\n",
+        "An **editor** is used to create and modify the source code of a program.\n",
+        "\n",
+        "It allows the programmer to write, edit, and save the instructions that make up\n",
+        "the program.\n",
+        "\n",
+        "### Compiler\n",
+        "\n",
+        "A **compiler** translates source code into another representation, usually\n",
+        "machine code or object code, before the program is executed.\n",
+        "\n",
+        "The translation is typically performed for a larger part of the program at\n",
+        "once.\n",
+        "\n",
+        "### Interpreter\n",
+        "\n",
+        "An **interpreter** executes a program with the help of another program rather\n",
+        "than producing a complete standalone machine-code program before execution.\n",
+        "\n",
+        "Python uses an interpreter.\n",
+        "\n",
+        "### Linker\n",
+        "\n",
+        "A **linker** combines separately translated program modules and libraries into\n",
+        "the form required to create an executable program.\n",
+        "\n",
+        "### Loader\n",
+        "\n",
+        "A **loader** loads the executable program into memory so that the operating\n",
+        "system can start its execution.\n",
+        "\n",
+        "## Integrated Development Environment\n",
+        "\n",
+        "An **Integrated Development Environment (IDE)** combines several tools needed\n",
+        "for software development in one environment.\n",
+        "\n",
+        "An IDE typically provides:\n",
+        "\n",
+        "- a source code editor;\n",
+        "- tools for running programs;\n",
+        "- debugging tools;\n",
+        "- syntax highlighting;\n",
+        "- code completion;\n",
+        "- project and file management.\n",
+        "\n",
+        "### Common Python IDEs\n",
+        "\n",
+        "There are several popular IDEs available for Python programming:\n",
+        "\n",
+        "- **Google Colab**\n",
+        "- **Jupyter Notebook**\n",
+        "- **Visual Studio Code**\n",
+        "- **PyCharm**\n",
+        "- **Spyder**\n",
+        "- **IDLE**\n",
+        "\n",
+        "::: {.callout-tip}\n",
+        "## Our environment: Google Colab\n",
+        "\n",
+        "In this course, we will primarily use **Google Colab**.\n",
+        "\n",
+        "Google Colab is a good choice for beginners because it is:\n",
+        "\n",
+        "- **browser-based** – it runs directly in a web browser;\n",
+        "- **easy to use** – students can start programming with minimal setup;\n",
+        "- **installation-free** – no local Python installation is required;\n",
+        "- **platform-independent** – it can be used on Windows, macOS, Linux, and\n",
+        "  other systems with a modern web browser;\n",
+        "- **cloud-based** – notebooks can be saved online and accessed from different\n",
+        "  computers;\n",
+        "- **easy to share** – notebooks can be shared similarly to other Google\n",
+        "  documents.\n",
+        ":::\n",
+        "\n",
+        "Open Google Colab in your browser: [Google Colab](https://colab.research.google.com/)\n",
+        "\n",
+        "**Important:** You need a Google Account to use Colab and save your notebooks. \n",
+        "\n",
+        "![Google Colab interface](../assets/images/lesson01/welcome_to_colab.png){#fig-colab-interface .screenshot fig-align=\"left\" width=\"75%\"}\n",
+        "\n",
+        "## Getting started with Google Colab\n",
+        "\n",
+        "Google Colab provides a browser-based notebook environment for writing and\n",
+        "executing Python programs.\n",
+        "\n",
+        "A notebook consists of **cells**.\n",
+        "\n",
+        "The two most important cell types are:\n",
+        "\n",
+        "- **code cells** – contain executable Python code;\n",
+        "- **text cells** – contain explanations, headings, notes, and other formatted\n",
+        "  text.\n",
+        "\n",
+        "### Creating a new notebook\n",
+        "\n",
+        "To create and run your first notebook:\n",
+        "\n",
+        "1. open Google Colab;\n",
+        "2. create a new notebook;\n",
+        "3. click inside a code cell;\n",
+        "4. enter Python code;\n",
+        "5. run the cell using the **Run** button or by pressing **Shift + Enter**.\n",
+        "\n",
+        "## Your first Python program\n",
+        "\n",
+        "Traditionally, the first program written when learning a programming language\n",
+        "displays the text `Hello World`."
+      ],
+      "id": "64e69f6b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Hello World\")"
+      ],
+      "id": "655b0de7",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The statement calls the Python `print()` function.\n",
+        "\n",
+        "The text between quotation marks is passed to the function and displayed as\n",
+        "output.\n",
+        "\n",
+        "Both single and double quotation marks can be used:"
+      ],
+      "id": "8abf02bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Hello World\")\n",
+        "print('Hello World')"
+      ],
+      "id": "9d1fa38c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Errors in programs\n",
+        "\n",
+        "Making mistakes is a normal part of programming. Finding and correcting errors\n",
+        "is an important programming skill.\n",
+        "\n",
+        "There are several common types of errors.\n",
+        "\n",
+        "### Syntax errors\n",
+        "\n",
+        "A **syntax error** occurs when the source code violates the grammatical rules of\n",
+        "the programming language.\n",
+        "\n",
+        "For example:\n",
+        "\n",
+        "```python\n",
+        "print(\"Hello World)\n",
+        "```\n",
+        "\n",
+        "Python cannot execute this statement because the closing quotation mark is\n",
+        "missing.\n",
+        "\n",
+        "A syntax error usually results in an error message.\n",
+        "\n",
+        "### Runtime errors\n",
+        "\n",
+        "A **runtime error** occurs while the program is being executed.\n",
+        "\n",
+        "For example:\n",
+        "\n",
+        "```python\n",
+        "print(5 / 0)\n",
+        "```\n",
+        "\n",
+        "The syntax is valid, but division by zero cannot be performed.\n",
+        "\n",
+        "Python reports an exception such as:\n",
+        "\n",
+        "```text\n",
+        "ZeroDivisionError: division by zero\n",
+        "```\n",
+        "\n",
+        "### Logic errors\n",
+        "\n",
+        "A **logic error** occurs when the program can be executed but does not produce\n",
+        "the intended result.\n",
+        "\n",
+        "For example:"
+      ],
+      "id": "1d7fd914"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"5\" + \"6\")"
+      ],
+      "id": "4b75f2bf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "The result is:\n",
+        "\n",
+        "```text\n",
+        "56\n",
+        "```\n",
+        "\n",
+        "rather than:\n",
+        "\n",
+        "```text\n",
+        "11\n",
+        "```\n",
+        "\n",
+        "Logic errors can be especially difficult to find because the program may run\n",
+        "without displaying an error message.\n",
+        "\n",
+        "## Debugging\n",
+        "\n",
+        "The process of identifying and correcting errors in a program is called\n",
+        "**debugging**.\n",
+        "\n",
+        "When a program does not work as expected:\n",
+        "\n",
+        "1. read the error message carefully;\n",
+        "2. identify the line where the problem occurred;\n",
+        "3. check the code for syntax errors;\n",
+        "4. check for typing mistakes;\n",
+        "5. check whether the algorithm itself is correct;\n",
+        "6. test smaller parts of the program separately;\n",
+        "7. use the documentation or development tools if necessary.\n",
+        "\n",
+        "Learning to understand error messages is an essential programming skill.\n",
+        "\n",
+        "## The `print()` function\n",
+        "\n",
+        "The `print()` function is used to display one or more values.\n",
+        "\n",
+        "### Printing a single value"
+      ],
+      "id": "3a923cdf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Hello\")"
+      ],
+      "id": "bd933137",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Printing multiple values\n",
+        "\n",
+        "Several values can be passed to the `print()` function:"
+      ],
+      "id": "8d04d5c9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Monday\", \"Tuesday\", \"Wednesday\")"
+      ],
+      "id": "6951b492",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "By default, Python separates the values with spaces.\n",
+        "\n",
+        "Text, numbers, and expressions can also be combined:"
+      ],
+      "id": "4118d3bf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"5 * 6 is\", 5 * 6)"
+      ],
+      "id": "d3f7f95c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Printing an empty line\n",
+        "\n",
+        "Calling `print()` without an argument produces an empty line:"
+      ],
+      "id": "dfd5d798"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"First line\")\n",
+        "print()\n",
+        "print(\"Third line\")"
+      ],
+      "id": "9719c1e6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## The `sep` argument\n",
+        "\n",
+        "The optional `sep` argument specifies the separator placed between multiple\n",
+        "values.\n",
+        "\n",
+        "By default, the separator is a single space."
+      ],
+      "id": "a9477a4f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"One\", \"Two\", \"Three\")"
+      ],
+      "id": "e75b8215",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "A different separator can be specified:"
+      ],
+      "id": "1443241f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"One\", \"Two\", \"Three\", sep=\"-\")"
+      ],
+      "id": "d5c36491",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"One\", \"Two\", \"Three\", sep=\"|\")"
+      ],
+      "id": "30dc54d8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "An empty string can also be used:"
+      ],
+      "id": "35a2c319"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"One\", \"Two\", \"Three\", sep=\"\")"
+      ],
+      "id": "4d895fbb",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## The `end` argument\n",
+        "\n",
+        "By default, the `print()` function ends its output with a new line.\n",
+        "\n",
+        "The optional `end` argument can change this behaviour."
+      ],
+      "id": "1a8af227"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"One\", \"Two\", sep=\" \", end=\" \")\n",
+        "print(\"Three\")"
+      ],
+      "id": "15e789fc",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "In this example, the second `print()` call continues on the same line.\n",
+        "\n",
+        "## Escape sequences\n",
+        "\n",
+        "An **escape sequence** represents a special character inside a string.\n",
+        "\n",
+        "Some commonly used escape sequences are:\n",
+        "\n",
+        "| Escape sequence | Meaning |\n",
+        "|---|---|\n",
+        "| `\\n` | new line |\n",
+        "| `\\t` | horizontal tab |\n",
+        "| `\\r` | carriage return |\n",
+        "\n",
+        "### New line"
+      ],
+      "id": "0f1d61a1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Monday\\nTuesday\\nWednesday\")"
+      ],
+      "id": "43fc78a8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Tab"
+      ],
+      "id": "b7dcb8e7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Name\\tScore\")\n",
+        "print(\"Anna\\t85\")\n",
+        "print(\"John\\t92\")"
+      ],
+      "id": "dc01c590",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Quotation marks inside strings\n",
+        "\n",
+        "Sometimes quotation marks themselves need to appear in the output.\n",
+        "\n",
+        "One possibility is to use different quotation marks around the string:"
+      ],
+      "id": "78137658"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"My name is 'Alain'\")"
+      ],
+      "id": "62c0fd82",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Another possibility is to use escape characters:"
+      ],
+      "id": "d46add0a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"My name is \\\"Alain\\\"\")"
+      ],
+      "id": "181479f3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Similarly:"
+      ],
+      "id": "51ccd84b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('My name is \"Alain\"')"
+      ],
+      "id": "7dfd4b7e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Multiline strings\n",
+        "\n",
+        "Triple quotation marks can be used to create strings that span several lines."
+      ],
+      "id": "89664711"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"\"\"This text\n",
+        "contains\n",
+        "several lines.\"\"\")"
+      ],
+      "id": "335e96d1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Both triple double quotation marks and triple single quotation marks can be\n",
+        "used."
+      ],
+      "id": "20fdf1d0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print('''First line\n",
+        "Second line\n",
+        "Third line''')"
+      ],
+      "id": "b92e2ba1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Unicode characters\n",
+        "\n",
+        "Python strings support Unicode characters.\n",
+        "\n",
+        "For example:"
+      ],
+      "id": "7e233f48"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(\"Python \\u263A\")"
+      ],
+      "id": "00d20ec2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Unicode support makes it possible to work with characters from many different\n",
+        "languages and symbol sets.\n",
+        "\n",
+        "## Summary\n",
+        "\n",
+        "In this lesson, you learned:\n",
+        "\n",
+        "- what a programming language is;\n",
+        "- the main characteristics and application areas of Python;\n",
+        "- the basic history of Python;\n",
+        "- the role of an editor, compiler, interpreter, linker, and loader;\n",
+        "- what an IDE is and some common Python IDEs;\n",
+        "- why Google Colab is used in this course;\n",
+        "- how to write and run a simple Python program;\n",
+        "- the difference between syntax, runtime, and logic errors;\n",
+        "- the basic process of debugging;\n",
+        "- how to use the `print()` function;\n",
+        "- how to use the `sep` and `end` arguments;\n",
+        "- how to use basic escape sequences and quotation marks in strings.\n",
+        "\n",
+        "In the next lesson, we will introduce **variables, expressions, and simple data\n",
+        "types**."
+      ],
+      "id": "73e555a0"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\gmolnar\\Anaconda3\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
