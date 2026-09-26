@@ -1,14 +1,15 @@
 ---
 title: "Class Exercises 3"
 subtitle: "Conditional Statements in Python"
-toc: true
+toc: false
+page-layout: full
 ---
 
 <script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
 
 <style>
 
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:980px;margin:32px auto;padding:0 20px;color:#222;line-height:1.5}
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#222;line-height:1.5}
 h1{margin-bottom:0}.sub{color:#666;margin-bottom:26px}.ex{border:1px solid #ddd;border-radius:9px;padding:18px 20px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}
 .status{font-size:.9rem;padding:5px 9px;background:#f4f4f4;border-radius:5px;white-space:nowrap}.controls button{padding:8px 13px;margin:8px 7px 8px 0;cursor:pointer}
 .workspace{display:none;border-top:1px solid #ddd;margin-top:14px;padding-top:14px}.workspace.active{display:block}
@@ -46,23 +47,9 @@ body {
 }
 
 
-/* Wider article column without breaking Quarto's sidebar/page grid. */
-:root {
-  --bs-body-font-size: 1rem;
-}
-body .page-columns {
-  --quarto-body-width: 1050px;
-  --quarto-margin-width: 220px;
-  --quarto-gutter-width: 1.5rem;
-}
-#quarto-document-content {
-  width: 100%;
-}
-
 </style>
 
 ```{=html}
-<h1>Class Exercises 3</h1><div class="sub">Conditional Statements in Python</div>
 <div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
 <div id="list"></div><div id="summary"></div>
 ```
