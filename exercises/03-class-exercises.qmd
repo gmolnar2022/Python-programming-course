@@ -1,0 +1,169 @@
+---
+title: "Class Exercises 3"
+subtitle: "Conditional Statements in Python"
+toc: true
+---
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
+
+<style>
+
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:980px;margin:32px auto;padding:0 20px;color:#222;line-height:1.5}
+h1{margin-bottom:0}.sub{color:#666;margin-bottom:26px}.ex{border:1px solid #ddd;border-radius:9px;padding:18px 20px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.status{font-size:.9rem;padding:5px 9px;background:#f4f4f4;border-radius:5px;white-space:nowrap}.controls button{padding:8px 13px;margin:8px 7px 8px 0;cursor:pointer}
+.workspace{display:none;border-top:1px solid #ddd;margin-top:14px;padding-top:14px}.workspace.active{display:block}
+textarea.code{width:100%;height:220px;box-sizing:border-box;font:14px/1.5 Consolas,monospace;padding:12px;border:1px solid #aaa;border-radius:6px}
+textarea.stdin{width:100%;height:58px;box-sizing:border-box;font:14px Consolas,monospace;padding:8px}
+pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;white-space:pre-wrap;min-height:34px}
+.checkpanel{border:1px solid #ddd;border-radius:6px;padding:10px;margin-top:8px}.ok{font-weight:600}.bad{font-weight:600}.small{font-size:.9rem;color:#666}
+.timer{font-variant-numeric:tabular-nums}.hint{background:#f6f6f6;padding:9px;border-radius:5px;margin-top:8px}
+.summary{background:#f7f7f7;padding:12px 15px;border-radius:7px;margin:18px 0}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
+
+.summary-table{width:100%;border-collapse:collapse;margin-top:12px}.summary-table th,.summary-table td{border-bottom:1px solid #ddd;padding:8px;text-align:left}.summary-table th{background:#f5f5f5}.summary-total{font-weight:700}
+
+</style>
+
+```{=html}
+<h1>Class Exercises 3</h1><div class="sub">Conditional Statements in Python</div>
+<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
+<div id="list"></div><div id="summary"></div>
+```
+
+<script>
+
+const EX=[
+{id:"ex01",title:"Exercise 1",task:`Write a program that asks the user for a <strong>non-zero integer</strong> and checks whether it is <strong>positive or negative</strong>.`,tests:[[8,"positive"],[-3,"negative"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex02",title:"Exercise 2",task:`Write a program that reads <strong>two different floating-point numbers</strong> and displays the larger one.<br><br><span class="small">Example: The given numbers are 23.4 and 11.2, the larger one is 23.4</span>`,tests:[[["23.4","11.2"],"23.4"],[["-2.5","4.75"],"4.75"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex03",title:"Exercise 3",task:`Write a program that solves a <strong>quadratic equation</strong>: <code>ax² + bx + c = 0</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise03-flowchart.png" alt="Flowchart for Exercise 3" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["1","-5","6"],["2","3"]],[["1","0","1"],"no real"]],need:["input","if","comparison","print"],match:"quadratic"},
+{id:"ex04",title:"Exercise 4",task:`Write a program that reads <strong>three integers</strong> and finds the largest one.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise04-flowchart.png" alt="Flowchart for Exercise 4" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["14","22","11"],"22"],[["9","3","5"],"9"],[["2","4","8"],"8"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex05",title:"Exercise 5",task:`At the end of the semester, a student receives marks in three subjects: <strong>Physics, Mathematics, and Chemistry</strong>. Each mark is between <code>0</code> and <code>100</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise05-flowchart.png" alt="Flowchart for Exercise 5" style="max-width:375px;width:100%;height:auto"></div><br><span class="small">The student passes if the percentage is at least 50 and every mark is at least 40. Display the student's name and Passed/Failed.</span>`,tests:[[["Anna","70","60","80"],"passed"],[["Ben","90","35","90"],"failed"],[["Cara","45","45","45"],"failed"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex06",title:"Exercise 6",task:`Write a program that reads a temperature in degrees Celsius and displays: <strong>Hot</strong> if &gt; 30, <strong>Normal</strong> if 10–30, <strong>Cold</strong> if 0–&lt;10, and <strong>Freezing</strong> if &lt;0.`,tests:[[["31"],"hot"],[["30"],"normal"],[["10"],"normal"],[["5"],"cold"],[["0"],"cold"],[["-1"],"freezing"]],need:["input","if","comparison","print"],match:"ends"}];
+let pyodide=null, active=null, lastTick=Date.now();
+
+function key(id){return "pycourse_week03_"+id}
+function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"","time":0,"runs":0,"checks":0,"hints":0,"completed":false,"started":false}')}
+function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderSummary(){
+ let rows=EX.map(e=>{let s=state(e.id);return `<tr><td>${e.title}</td><td>${s.completed?"✓ Completed":s.started?"In progress / paused":"Not started"}</td><td>${fmt(s.time)}</td><td>${s.runs}</td><td>${s.checks}</td><td>${s.hints}</td></tr>`}).join("");
+ let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 3 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><table class="summary-table"><thead><tr><th>Exercise</th><th>Status</th><th>Active time</th><th>Runs</th><th>Checks</th><th>Hints</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
+function render(){
+ list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
+ <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
+ <div class="workspace" id="${e.id}-ws">
+ <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
+ <p><strong>Your Python code</strong></p><textarea class="code" id="${e.id}-code" spellcheck="false">${esc(s.code)}</textarea>
+ <div class="controls"><button onclick="runEx('${e.id}')">▶ Run</button><button onclick="checkEx('${e.id}')">✓ Check my solution</button><button onclick="hintEx('${e.id}')">💡 Hint</button><button onclick="stopEx('${e.id}')">■ Stop</button></div>
+ <strong>Output</strong><pre id="${e.id}-out"></pre><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
+ renderSummary();
+}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+async function ensurePy(){if(!pyodide){document.title="Loading Python…";pyodide=await loadPyodide();document.title="Class Exercises 3 – Conditional Statements in Python"}}
+async function startEx(id){
+ if(active&&active!==id) stopEx(active);
+ let s=state(id);
+ document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id+"-ws").classList.add("active");
+ document.getElementById(id+"-code").value=s.code;
+ if(!s.completed){
+   active=id; s.started=true; save(id,s); lastTick=Date.now();
+ } else {
+   active=null; // review does not add to completion time
+ }
+ await ensurePy(); updateStatus(id);
+}
+function persistCode(id){let s=state(id),el=document.getElementById(id+"-code");if(el)s.code=el.value;save(id,s)}
+function stopEx(id){if(active===id){tick();persistCode(id);active=null} document.getElementById(id+"-ws").classList.remove("active");updateStatus(id)}
+function tick(){let now=Date.now();if(active&&!document.hidden){let s=state(active);s.time+=(now-lastTick)/1000;save(active,s);let el=document.getElementById(active+"-time");if(el)el.textContent=fmt(s.time)}lastTick=now;renderSummary()}
+setInterval(tick,1000);document.addEventListener("visibilitychange",()=>{tick();lastTick=Date.now()});
+window.addEventListener("beforeunload",()=>{tick();if(active)persistCode(active)});
+function updateStatus(id){
+ let s=state(id),el=document.getElementById(id+"-status"),btn=document.getElementById(id+"-start");
+ if(el)el.innerHTML=(s.completed?"✓ Completed":active===id?"In progress":s.started?"Paused":"Not started")+" · <span class='timer'>"+fmt(s.time)+"</span>";
+ if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
+ renderSummary();
+}
+async function execute(code,inputs){
+ await ensurePy();pyodide.globals.set("student_code",code);pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
+ let x=await pyodide.runPythonAsync(`
+import json,builtins,io,contextlib
+def _run(src, vals):
+    it=iter(json.loads(vals)); out=io.StringIO()
+    def inp(prompt=""):
+        if prompt: print(prompt,end="")
+        try:return next(it)
+        except StopIteration: raise EOFError("No more input values.")
+    old=builtins.input
+    try:
+        builtins.input=inp
+        ns={"__name__":"__main__"}
+        with contextlib.redirect_stdout(out),contextlib.redirect_stderr(out):
+            exec(compile(src,"<student_code>","exec"),ns,ns)
+        return json.dumps({"ok":True,"output":out.getvalue().strip()})
+    except Exception as e:return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
+    finally:builtins.input=old
+_run(student_code,student_inputs_json)
+`);return JSON.parse(String(x))
+}
+async function structure(code){
+ pyodide.globals.set("student_code",code);let x=await pyodide.runPythonAsync(`
+import ast,json
+def _st(src):
+ t=ast.parse(src)
+ return json.dumps({"input":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="input" for n in ast.walk(t)),"if":any(isinstance(n,ast.If) for n in ast.walk(t)),"comparison":any(isinstance(n,ast.Compare) for n in ast.walk(t)),"print":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="print" for n in ast.walk(t))})
+_st(student_code)
+`);return JSON.parse(String(x))
+}
+function inputPrompts(code){
+ // Extract simple input("prompt") / input('prompt') calls in source order.
+ const rx=/input\s*\(\s*(?:(["'])(.*?)\1)?\s*\)/g;
+ let a=[],m; while((m=rx.exec(code))!==null)a.push(m[2]||"Enter a value:");
+ return a;
+}
+async function runEx(id){
+ let s=state(id),code=document.getElementById(id+"-code").value;
+ s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
+ let prompts=inputPrompts(code),vals=[];
+ if(prompts.length===0) prompts=["Enter input value:"];
+ for(const p of prompts){let v=window.prompt(p);if(v===null)return;vals.push(v)}
+ let r=await execute(code,vals);
+ document.getElementById(id+"-out").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
+}
+function matches(e,out,expected){
+ let o=out.trim().toLowerCase();
+ if(e.match==="quadratic"){if(Array.isArray(expected))return expected.every(v=>o.includes(v));return o.includes("no real")||o.includes("no solution")}
+ if(e.match==="ends")return o.endsWith(String(expected).toLowerCase());
+ return o.includes(String(expected).toLowerCase())
+}
+async function checkEx(id){
+ let e=EX.find(x=>x.id===id),s=state(id),code=document.getElementById(id+"-code").value;s.code=code;s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
+ let panel=document.getElementById(id+"-panel");panel.innerHTML="Checking…";
+ try{
+   await ensurePy(); let st=await structure(code),missing=e.need.filter(n=>!st[n]);
+   let passed=0,rows=[];
+   for(let t of e.tests){let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code,inputs);if(!r.ok){panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='bad'>✗ Runtime</div><div>"+esc(r.error)+"</div>";return}let ok=matches(e,r.output,t[1]);if(ok)passed++;rows.push({inputs,exp:t[1],got:r.output,ok})}
+   let all=passed===e.tests.length&&missing.length===0;
+   panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='"+(missing.length?"bad":"ok")+"'>"+(missing.length?"✗":"✓")+" Expected structure</div><div class='"+(passed===e.tests.length?"ok":"bad")+"'>"+(passed===e.tests.length?"✓":"✗")+" Functional tests: "+passed+" / "+e.tests.length+"</div>"+rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → expected "+esc(Array.isArray(r.exp)?r.exp.join(" and "):String(r.exp))+(r.ok?"":" · got: "+esc(r.got||"(no output)"))+"</div>").join("");
+   if(all){
+   tick(); s=state(id); s.completed=true; s.code=code; save(id,s);
+   panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
+   if(active===id) active=null;
+   updateStatus(id);
+ }
+ }catch(err){panel.innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+}
+function hintEx(id){let s=state(id);s.hints=Math.min(s.hints+1,3);save(id,s);document.getElementById(id+"-hints").textContent=s.hints;let e=EX.find(x=>x.id===id);let hints={
+ex01:["Think about the condition that separates positive and negative values.","Which comparison with zero distinguishes the two cases?","Use a conditional branch based on whether the number is greater than or less than zero."],
+ex02:["Think about how two values can be compared.","Your condition should decide which of the two numbers is greater.","Check that both possible orderings produce the correct larger value."],
+ex03:["Start with the discriminant.","The sign of the discriminant determines whether real roots exist.","For non-negative discriminant, calculate the roots using the quadratic formula."],
+ex04:["Compare the three values systematically.","Make sure every number has a chance to be selected as the largest.","Test cases where the first, second, and third number is largest."],
+ex05:["There are two requirements for passing.","Check both the overall percentage and every individual mark.","Passing requires percentage ≥ 50 AND each of the three marks ≥ 40."],
+ex06:["Check the boundary conditions.","Pay special attention to 30, 10 and 0.","30 and 10 belong to Normal; 0 belongs to Cold."]
+};document.getElementById(id+"-panel").innerHTML+="<div class='hint'><strong>Hint "+s.hints+":</strong> "+hints[id][s.hints-1]+"</div>"}
+render();
+
+</script>
