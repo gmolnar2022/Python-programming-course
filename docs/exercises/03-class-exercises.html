@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Course Materials – Introduction to Data Science and Programming</title>
+<title>Class Exercises 3 – Introduction to Data Science and Programming</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,27 +23,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./lessons/01-introduction-to-programming-and-python.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../lessons/03-conditional-statements.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -72,8 +107,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked quarto-light">
@@ -85,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/03-class-exercises.html">Class Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -100,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Introduction to Data Science and Programming</a> 
+      <a href="../">Introduction to Data Science and Programming</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -112,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -127,37 +191,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1. Introduction to Programming and Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2. Working with Simple Data Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">3. Conditional Statements in Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
@@ -173,17 +237,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-structure" id="toc-course-structure" class="nav-link active" data-scroll-target="#course-structure">Course structure</a></li>
-  <li><a href="#programming-environment" id="toc-programming-environment" class="nav-link" data-scroll-target="#programming-environment">Programming environment</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#exercise-1-10-minutes" id="toc-exercise-1-10-minutes" class="nav-link" data-scroll-target="#exercise-1-10-minutes">Exercise 1 — 10 minutes</a></li>
+  <li><a href="#exercise-2-10-minutes" id="toc-exercise-2-10-minutes" class="nav-link" data-scroll-target="#exercise-2-10-minutes">Exercise 2 — 10 minutes</a></li>
+  <li><a href="#exercise-3-10-minutes" id="toc-exercise-3-10-minutes" class="nav-link" data-scroll-target="#exercise-3-10-minutes">Exercise 3 — 10 minutes</a></li>
+  <li><a href="#exercise-4-10-minutes" id="toc-exercise-4-10-minutes" class="nav-link" data-scroll-target="#exercise-4-10-minutes">Exercise 4 — 10 minutes</a></li>
+  <li><a href="#exercise-5-10-minutes" id="toc-exercise-5-10-minutes" class="nav-link" data-scroll-target="#exercise-5-10-minutes">Exercise 5 — 10 minutes</a></li>
+  <li><a href="#exercise-6-10-minutes" id="toc-exercise-6-10-minutes" class="nav-link" data-scroll-target="#exercise-6-10-minutes">Exercise 6 — 10 minutes</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/03-class-exercises.html">Class Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Course Materials</h1>
+<h1 class="title">Class Exercises 3</h1>
 </div>
 
 
@@ -200,23 +269,110 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the online materials for <strong>Introduction to Data Science and Programming</strong>.</p>
-<p>The primary goal of this course is to develop <strong>programming skills, problem-solving techniques, and algorithmic thinking</strong>. Python is the programming language used as the practical environment for learning these concepts.</p>
-<section id="course-structure" class="level2">
-<h2 class="anchored" data-anchor-id="course-structure">Course structure</h2>
-<p>The course consists of 12 teaching weeks. Each lesson will gradually contain:</p>
-<ul>
-<li>concise theoretical notes;</li>
-<li>worked examples;</li>
-<li>practical exercises;</li>
-<li>additional practice tasks;</li>
-<li>solutions released when appropriate.</li>
-</ul>
-<p>Assessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.</p>
+<p><strong>Conditional Statements in Python</strong></p>
+<p>Complete the exercises in order. Write your solution in the code cell below each task.</p>
+<p><a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/03-class-exercises.ipynb">Open in Google Colab</a></p>
+<blockquote class="blockquote">
+<p><strong>Before you start</strong></p>
+<p>If Colab displays a security warning, select <strong>Run anyway</strong>. Then select <strong>File → Save a copy in Drive</strong> and work in your own copy. Run the <strong>Setup</strong> cell below once before starting.</p>
+</blockquote>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Run this cell once at the beginning of the session.</p>
+<div id="cell-3" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup – run this cell first</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>wget <span class="op">-</span>q https:<span class="op">//</span>raw.githubusercontent.com<span class="op">/</span>gmolnar2022<span class="op">/</span>Python<span class="op">-</span>programming<span class="op">-</span>course<span class="op">/</span>main<span class="op">/</span>checker<span class="op">/</span>checker.py <span class="op">-</span>O checker.py</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib, checker</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>importlib.<span class="bu">reload</span>(checker)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> checker <span class="im">import</span> check_button</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✓ Exercise checker is ready."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="programming-environment" class="level2">
-<h2 class="anchored" data-anchor-id="programming-environment">Programming environment</h2>
-<p>The main programming environment for the course is planned to be <strong>Google Colab</strong>. It allows Python notebooks to be created and executed directly in a web browser.</p>
+<section id="exercise-1-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-10-minutes">Exercise 1 — 10 minutes</h2>
+<p>Write a program that asks the user for a <strong>non-zero integer</strong> and checks whether it is <strong>positive or negative</strong>.</p>
+<div id="cell-5" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-6" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex01"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-2-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-10-minutes">Exercise 2 — 10 minutes</h2>
+<p>Write a program that reads <strong>two different floating-point numbers</strong> and displays the larger one.</p>
+<p>Example output:</p>
+<pre class="text"><code>The given numbers are 23.4 and 11.2, the larger one is 23.4</code></pre>
+<div id="cell-8" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex02"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-3-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3-10-minutes">Exercise 3 — 10 minutes</h2>
+<p>Write a program that solves a <strong>quadratic equation</strong> <span class="math inline">\(ax^2 + bx + c = 0\)</span>.</p>
+<ul>
+<li>Read <code>a</code>, <code>b</code>, and <code>c</code> as floating-point numbers.</li>
+<li>Calculate the discriminant: <code>d = b**2 - 4*a*c</code>.</li>
+<li>If there is <strong>no real solution</strong>, display an error message.</li>
+<li>Otherwise, calculate and display the two real solutions.</li>
+<li>Follow the logic of the flowchart in the original exercise sheet.</li>
+</ul>
+<div id="cell-11" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex03"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-4-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4-10-minutes">Exercise 4 — 10 minutes</h2>
+<p>Write a program that reads <strong>three integers</strong> and finds the largest one.</p>
+<p>Example output:</p>
+<pre class="text"><code>The given numbers are 14, 22, 11, the largest one is 22</code></pre>
+<p>Follow the logic of the flowchart in the original exercise sheet.</p>
+<div id="cell-14" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex04"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-5-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5-10-minutes">Exercise 5 — 10 minutes</h2>
+<p>At the end of the semester, a student receives marks in three subjects: <strong>Physics, Mathematics, and Chemistry</strong>. Each mark is between <code>0</code> and <code>100</code>.</p>
+<p>Write a program that:</p>
+<ol type="1">
+<li>reads the student’s <strong>name</strong> and the three marks,</li>
+<li>calculates the <strong>total marks</strong> and the <strong>percentage</strong>,</li>
+<li>checks whether the percentage is at least <strong>50%</strong>,</li>
+<li>also checks that <strong>none of the three marks is below 40</strong>,</li>
+<li>displays the student’s name and the result: <strong>Passed</strong> or <strong>Failed</strong>.</li>
+</ol>
+<div id="cell-17" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex05"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="exercise-6-10-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6-10-minutes">Exercise 6 — 10 minutes</h2>
+<p>Write a program that reads a temperature in degrees Celsius and displays:</p>
+<ul>
+<li><strong>Hot</strong> if the temperature is greater than <code>30</code>,</li>
+<li><strong>Normal</strong> if the temperature is between <code>10</code> and <code>30</code>,</li>
+<li><strong>Cold</strong> if the temperature is less than <code>10</code> but greater than or equal to <code>0</code>,</li>
+<li><strong>Freezing</strong> if the temperature is below <code>0</code>.</li>
+</ul>
+<div id="cell-20" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex06"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>
@@ -629,11 +785,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../lessons/03-conditional-statements.html" class="pagination-link" aria-label="3. Conditional Statements in Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">3. Conditional Statements in Python</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lessons/01-introduction-to-programming-and-python.html" class="pagination-link" aria-label="1. Introduction to Programming and Python">
-        <span class="nav-page-text">1. Introduction to Programming and Python</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
