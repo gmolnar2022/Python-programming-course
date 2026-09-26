@@ -107,35 +107,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -312,14 +283,15 @@ window.Quarto = {
 </section>
 <section id="exercise-3-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3-10-minutes">Exercise 3 — 10 minutes</h2>
-<p>Write a program that solves a <strong>quadratic equation</strong> <span class="math inline">\(ax^2 + bx + c = 0\)</span>.</p>
-<ul>
-<li>Read <code>a</code>, <code>b</code>, and <code>c</code> as floating-point numbers.</li>
-<li>Calculate the discriminant: <code>d = b**2 - 4*a*c</code>.</li>
-<li>If there is <strong>no real solution</strong>, display an error message.</li>
-<li>Otherwise, calculate and display the two real solutions.</li>
-<li>Follow the logic of the flowchart in the original exercise sheet.</li>
-</ul>
+<p>Write a program that solves a <strong>quadratic equation</strong>:</p>
+<p>[ ax^2 + bx + c = 0 ]</p>
+<p><strong>Implement the solution based on the following flowchart.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/week03/exercise03-flowchart.png" class="img-fluid figure-img"></p>
+<figcaption>Flowchart for Exercise 3</figcaption>
+</figure>
+</div>
 <div id="cell-11" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -330,32 +302,35 @@ window.Quarto = {
 <section id="exercise-4-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4-10-minutes">Exercise 4 — 10 minutes</h2>
 <p>Write a program that reads <strong>three integers</strong> and finds the largest one.</p>
-<p>Example output:</p>
-<pre class="text"><code>The given numbers are 14, 22, 11, the largest one is 22</code></pre>
-<p>Follow the logic of the flowchart in the original exercise sheet.</p>
+<p><strong>Implement the solution based on the following flowchart.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/week03/exercise04-flowchart.png" class="img-fluid figure-img"></p>
+<figcaption>Flowchart for Exercise 4</figcaption>
+</figure>
+</div>
 <div id="cell-14" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex04"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex04"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="exercise-5-10-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5-10-minutes">Exercise 5 — 10 minutes</h2>
 <p>At the end of the semester, a student receives marks in three subjects: <strong>Physics, Mathematics, and Chemistry</strong>. Each mark is between <code>0</code> and <code>100</code>.</p>
-<p>Write a program that:</p>
-<ol type="1">
-<li>reads the student’s <strong>name</strong> and the three marks,</li>
-<li>calculates the <strong>total marks</strong> and the <strong>percentage</strong>,</li>
-<li>checks whether the percentage is at least <strong>50%</strong>,</li>
-<li>also checks that <strong>none of the three marks is below 40</strong>,</li>
-<li>displays the student’s name and the result: <strong>Passed</strong> or <strong>Failed</strong>.</li>
-</ol>
+<p><strong>Implement the solution based on the following flowchart.</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../assets/week03/exercise05-flowchart.png" class="img-fluid figure-img"></p>
+<figcaption>Flowchart for Exercise 5</figcaption>
+</figure>
+</div>
 <div id="cell-17" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex05"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex05"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="exercise-6-10-minutes" class="level2">
@@ -368,10 +343,10 @@ window.Quarto = {
 <li><strong>Freezing</strong> if the temperature is below <code>0</code>.</li>
 </ul>
 <div id="cell-20" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your solution here</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;jupyter&quot;,&quot;value&quot;:{&quot;source_hidden&quot;:true}}" data-cellview="form">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex06"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>check_button(<span class="st">"week03_ex06"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

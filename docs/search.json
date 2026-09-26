@@ -213,7 +213,7 @@
     "href": "exercises/03-class-exercises.html#exercise-3-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 3 — 10 minutes",
-    "text": "Exercise 3 — 10 minutes\nWrite a program that solves a quadratic equation \\(ax^2 + bx + c = 0\\).\n\nRead a, b, and c as floating-point numbers.\nCalculate the discriminant: d = b**2 - 4*a*c.\nIf there is no real solution, display an error message.\nOtherwise, calculate and display the two real solutions.\nFollow the logic of the flowchart in the original exercise sheet.\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex03\")",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that solves a quadratic equation:\n[ ax^2 + bx + c = 0 ]\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 3\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex03\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -224,7 +224,7 @@
     "href": "exercises/03-class-exercises.html#exercise-4-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nWrite a program that reads three integers and finds the largest one.\nExample output:\nThe given numbers are 14, 22, 11, the largest one is 22\nFollow the logic of the flowchart in the original exercise sheet.\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex04\")",
+    "text": "Exercise 4 — 10 minutes\nWrite a program that reads three integers and finds the largest one.\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 4\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex04\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -235,7 +235,7 @@
     "href": "exercises/03-class-exercises.html#exercise-5-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 5 — 10 minutes",
-    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives marks in three subjects: Physics, Mathematics, and Chemistry. Each mark is between 0 and 100.\nWrite a program that:\n\nreads the student’s name and the three marks,\ncalculates the total marks and the percentage,\nchecks whether the percentage is at least 50%,\nalso checks that none of the three marks is below 40,\ndisplays the student’s name and the result: Passed or Failed.\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex05\")",
+    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives marks in three subjects: Physics, Mathematics, and Chemistry. Each mark is between 0 and 100.\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 5\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex05\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
