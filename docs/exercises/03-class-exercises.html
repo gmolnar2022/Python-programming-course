@@ -209,7 +209,35 @@ pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;whit
 .summary{background:#f7f7f7;padding:12px 15px;border-radius:7px;margin:18px 0}
 code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
 
-.summary-table{width:100%;border-collapse:collapse;margin-top:12px}.summary-table th,.summary-table td{border-bottom:1px solid #ddd;padding:8px;text-align:left}.summary-table th{background:#f5f5f5}.summary-total{font-weight:700}
+.summary-grid{display:grid;grid-template-columns:1.5fr 1.4fr .9fr .55fr .65fr .55fr;margin-top:12px;border-top:1px solid #ddd;border-left:1px solid #ddd}.summary-grid>div{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}.summary-head{font-weight:700;background:#f5f5f5}@media(max-width:760px){.summary-grid{grid-template-columns:1fr 1fr}.summary-head{display:none}}
+
+
+/* Week 3 exercise page: use the available browser width. */
+#quarto-content.page-columns,
+.page-columns,
+main.content {
+  max-width: none !important;
+}
+main.content {
+  width: min(1400px, calc(100vw - 3rem)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.ex {
+  width: 100%;
+  box-sizing: border-box;
+}
+.workspace textarea:not(.stdin),
+.workspace pre,
+.workspace .output {
+  width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  main.content {
+    width: calc(100vw - 1.5rem) !important;
+  }
+}
 
 </style>
 <h1>Class Exercises 3</h1><div class="sub">Conditional Statements in Python</div>
@@ -220,9 +248,9 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
 const EX=[
 {id:"ex01",title:"Exercise 1",task:`Write a program that asks the user for a <strong>non-zero integer</strong> and checks whether it is <strong>positive or negative</strong>.`,tests:[[8,"positive"],[-3,"negative"]],need:["input","if","comparison","print"],match:"contains"},
 {id:"ex02",title:"Exercise 2",task:`Write a program that reads <strong>two different floating-point numbers</strong> and displays the larger one.<br><br><span class="small">Example: The given numbers are 23.4 and 11.2, the larger one is 23.4</span>`,tests:[[["23.4","11.2"],"23.4"],[["-2.5","4.75"],"4.75"]],need:["input","if","comparison","print"],match:"contains"},
-{id:"ex03",title:"Exercise 3",task:`Write a program that solves a <strong>quadratic equation</strong>: <code>ax² + bx + c = 0</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise03-flowchart.png" alt="Flowchart for Exercise 3" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["1","-5","6"],["2","3"]],[["1","0","1"],"no real"]],need:["input","if","comparison","print"],match:"quadratic"},
-{id:"ex04",title:"Exercise 4",task:`Write a program that reads <strong>three integers</strong> and finds the largest one.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise04-flowchart.png" alt="Flowchart for Exercise 4" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["14","22","11"],"22"],[["9","3","5"],"9"],[["2","4","8"],"8"]],need:["input","if","comparison","print"],match:"contains"},
-{id:"ex05",title:"Exercise 5",task:`At the end of the semester, a student receives marks in three subjects: <strong>Physics, Mathematics, and Chemistry</strong>. Each mark is between <code>0</code> and <code>100</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="assets/images/lesson03/exercise05-flowchart.png" alt="Flowchart for Exercise 5" style="max-width:375px;width:100%;height:auto"></div><br><span class="small">The student passes if the percentage is at least 50 and every mark is at least 40. Display the student's name and Passed/Failed.</span>`,tests:[[["Anna","70","60","80"],"passed"],[["Ben","90","35","90"],"failed"],[["Cara","45","45","45"],"failed"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex03",title:"Exercise 3",task:`Write a program that solves a <strong>quadratic equation</strong>: <code>ax² + bx + c = 0</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson03/exercise03-flowchart.png" alt="Flowchart for Exercise 3" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["1","-5","6"],["2","3"]],[["1","0","1"],"no real"]],need:["input","if","comparison","print"],match:"quadratic"},
+{id:"ex04",title:"Exercise 4",task:`Write a program that reads <strong>three integers</strong> and finds the largest one.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson03/exercise04-flowchart.png" alt="Flowchart for Exercise 4" style="max-width:375px;width:100%;height:auto"></div>`,tests:[[["14","22","11"],"22"],[["9","3","5"],"9"],[["2","4","8"],"8"]],need:["input","if","comparison","print"],match:"contains"},
+{id:"ex05",title:"Exercise 5",task:`At the end of the semester, a student receives marks in three subjects: <strong>Physics, Mathematics, and Chemistry</strong>. Each mark is between <code>0</code> and <code>100</code>.<br><strong>Implement the solution based on the following flowchart.</strong><div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson03/exercise05-flowchart.png" alt="Flowchart for Exercise 5" style="max-width:375px;width:100%;height:auto"></div><br><span class="small">The student passes if the percentage is at least 50 and every mark is at least 40. Display the student's name and Passed/Failed.</span>`,tests:[[["Anna","70","60","80"],"passed"],[["Ben","90","35","90"],"failed"],[["Cara","45","45","45"],"failed"]],need:["input","if","comparison","print"],match:"contains"},
 {id:"ex06",title:"Exercise 6",task:`Write a program that reads a temperature in degrees Celsius and displays: <strong>Hot</strong> if &gt; 30, <strong>Normal</strong> if 10–30, <strong>Cold</strong> if 0–&lt;10, and <strong>Freezing</strong> if &lt;0.`,tests:[[["31"],"hot"],[["30"],"normal"],[["10"],"normal"],[["5"],"cold"],[["0"],"cold"],[["-1"],"freezing"]],need:["input","if","comparison","print"],match:"ends"}];
 let pyodide=null, active=null, lastTick=Date.now();
 
@@ -231,9 +259,9 @@ function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"",
 function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
 function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 function renderSummary(){
- let rows=EX.map(e=>{let s=state(e.id);return `<tr><td>${e.title}</td><td>${s.completed?"✓ Completed":s.started?"In progress / paused":"Not started"}</td><td>${fmt(s.time)}</td><td>${s.runs}</td><td>${s.checks}</td><td>${s.hints}</td></tr>`}).join("");
+ let cells=EX.map(e=>{let s=state(e.id),status=s.completed?"✓ Completed":s.started?"In progress / paused":"Not started";return `<div>${e.title}</div><div>${status}</div><div>${fmt(s.time)}</div><div>${s.runs}</div><div>${s.checks}</div><div>${s.hints}</div>`}).join("");
  let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
- document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 3 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><table class="summary-table"><thead><tr><th>Exercise</th><th>Status</th><th>Active time</th><th>Runs</th><th>Checks</th><th>Hints</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 3 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
 }
 function render(){
  list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
@@ -279,9 +307,14 @@ import json,builtins,io,contextlib
 def _run(src, vals):
     it=iter(json.loads(vals)); out=io.StringIO()
     def inp(prompt=""):
-        if prompt: print(prompt,end="")
-        try:return next(it)
-        except StopIteration: raise EOFError("No more input values.")
+        try:
+            value=next(it)
+        except StopIteration:
+            raise EOFError("No more input values.")
+        if prompt:
+            print(prompt,end="")
+        print(value)
+        return value
     old=builtins.input
     try:
         builtins.input=inp
