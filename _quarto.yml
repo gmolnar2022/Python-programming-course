@@ -9,6 +9,7 @@ project:
     - lessons/01-introduction-to-programming-and-python.qmd
     - exercises/01-class-exercises.ipynb
     - exercises/02-class-exercises.ipynb
+    - exercises/03-class-exercises.ipynb
     # Uncomment pages below when they are ready to publish:
     - lessons/02-simple-data-types.qmd
     - lessons/03-conditional-statements.qmd
@@ -49,6 +50,8 @@ website:
             text: "Class Exercises"
           - href: lessons/03-conditional-statements.qmd
             text: "3. Conditional Statements in Python"
+          - href: exercises/03-class-exercises.ipynb
+            text: "Class Exercises"
           # - href: lessons/04-loops.qmd
           #   text: "4. Loops in Python"
           # - href: lessons/05-complex-data-types-1.qmd

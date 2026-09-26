@@ -74,6 +74,15 @@ of the week, matching the layout shown in the exercise.
     "week02_ex05": {"description": "Read five grades one by one and display their average.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["1","2","3","4","5"], [3]), (["5","5","4","4","3"], [4.2])]},
     "week02_ex06": {"description": "Read an initial amount and an annual interest rate and calculate the ending amount after 5 years using compound interest.", "allowed_concepts": "variables, input(), type conversion, arithmetic operators including **, print(), f-strings", "mode": "numeric", "tests": [(["1000","10"], [1610.51]), (["2000","5"], [2552.56])]},
     "week02_ex07": {"description": "Convert an amount in US dollars to euros and Hungarian forints using 1 USD = 0.93 EUR and 1 USD = 354.15 HUF.", "allowed_concepts": "variables, constants, input(), type conversion, arithmetic operators, print(), f-strings", "mode": "numeric", "tests": [(["100"], [93,35415]), (["50"], [46.5,17707.5])]},
+
+    # Week 3
+    "week03_ex01": {"description":"Read a non-zero integer and display whether it is positive or negative.","allowed_concepts":"variables, input(), type conversion, comparison operators, if, else, print(), f-strings","mode":"io","tests":[{"inputs":["8"],"words":["positive"]},{"inputs":["-3"],"words":["negative"]}]},
+    "week03_ex02": {"description":"Read two different floating-point numbers and display the larger one.","allowed_concepts":"variables, float(), input(), comparison operators, if, else, print(), f-strings","mode":"io","tests":[{"inputs":["23.4","11.2"],"numbers":[23.4]},{"inputs":["-2.5","4.75"],"numbers":[4.75]}]},
+    "week03_ex03": {"description":"Solve ax**2 + bx + c = 0. If the discriminant is negative, report no real solution; otherwise display both real roots.","allowed_concepts":"variables, float(), input(), arithmetic, comparison operators, if, else, **, print(), f-strings","mode":"quadratic","tests":[{"inputs":["1","-5","6"],"roots":[2.0,3.0]},{"inputs":["1","0","1"],"no_real":True}]},
+    "week03_ex04": {"description":"Read three integers and display the largest one.","allowed_concepts":"variables, int(), input(), comparison and logical operators, if, elif, else, print(), f-strings","mode":"io","tests":[{"inputs":["14","22","11"],"numbers":[22]},{"inputs":["9","3","5"],"numbers":[9]},{"inputs":["2","4","8"],"numbers":[8]}]},
+    "week03_ex05": {"description":"Read a student's name and marks in Physics, Mathematics and Chemistry. Calculate total and percentage. Pass requires at least 50 percent overall and no mark below 40. Display the name and Passed or Failed.","allowed_concepts":"variables, input(), type conversion, arithmetic, comparison and logical operators, if, else, print(), f-strings","mode":"io","tests":[{"inputs":["Anna","70","60","80"],"words":["anna","passed"]},{"inputs":["Ben","90","35","90"],"words":["ben","failed"]},{"inputs":["Cara","45","45","45"],"words":["cara","failed"]}]},
+    "week03_ex06": {"description":"Read a Celsius temperature and display Hot (>30), Normal (10 to 30), Cold (0 to below 10), or Freezing (below 0).","allowed_concepts":"variables, input(), type conversion, comparison operators, if, elif, else, print(), f-strings","mode":"io","tests":[{"inputs":["31"],"words":["hot"]},{"inputs":["30"],"words":["normal"]},{"inputs":["10"],"words":["normal"]},{"inputs":["5"],"words":["cold"]},{"inputs":["0"],"words":["cold"]},{"inputs":["-1"],"words":["freezing"]}]},
+
 }
 
 
@@ -203,11 +212,44 @@ def _contains_expected_numbers(output, expected, tolerance=0.02):
     return all(any(abs(n-v) <= tolerance for n in numbers) for v in expected)
 
 
+
+def _contains_words(output, words):
+    low = output.lower()
+    return all(word.lower() in low for word in words)
+
+def _io_test_passes(output, test):
+    if "words" in test and not _contains_words(output, test["words"]):
+        return False
+    if "numbers" in test and not _contains_expected_numbers(output, test["numbers"]):
+        return False
+    return True
+
+def _quadratic_test_passes(output, test):
+    if test.get("no_real"):
+        low = output.lower()
+        return "no real" in low or ("real" in low and ("not" in low or "none" in low))
+    return _contains_expected_numbers(output, test["roots"])
+
+
 def check_solution(task_id, student_code):
     if task_id not in TASKS:
         raise ValueError(f"Unknown task id: {task_id}")
 
     task = TASKS[task_id]
+
+    if task["mode"] in ("io", "quadratic"):
+        for test in task["tests"]:
+            actual_output, error = _run_code_with_inputs(student_code, test["inputs"])
+            if task["mode"] == "io":
+                passed = (not error) and _io_test_passes(actual_output, test)
+            else:
+                passed = (not error) and _quadratic_test_passes(actual_output, test)
+            if not passed:
+                print("⚠️ Not quite yet.")
+                print("🤖 Hint:", _ai_feedback(task, student_code, actual_output, error))
+                return False
+        print("✅ Correct! Your program passed the test cases.")
+        return True
 
     if task["mode"] == "numeric":
         for inputs, expected in task["tests"]:
