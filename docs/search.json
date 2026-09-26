@@ -213,7 +213,7 @@
     "href": "exercises/03-class-exercises.html#exercise-3-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 3 — 10 minutes",
-    "text": "Exercise 3 — 10 minutes\nWrite a program that solves a quadratic equation:\n[ ax^2 + bx + c = 0 ]\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 3\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex03\")",
+    "text": "Exercise 3 — 10 minutes\nWrite a program that solves a quadratic equation:\n[ ax^2 + bx + c = 0 ]\nImplement the solution based on the following flowchart.\n {width=55%}\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex03\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -224,7 +224,7 @@
     "href": "exercises/03-class-exercises.html#exercise-4-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 4 — 10 minutes",
-    "text": "Exercise 4 — 10 minutes\nWrite a program that reads three integers and finds the largest one.\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 4\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex04\")",
+    "text": "Exercise 4 — 10 minutes\nWrite a program that reads three integers and finds the largest one.\nImplement the solution based on the following flowchart.\n {width=55%}\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex04\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -235,7 +235,7 @@
     "href": "exercises/03-class-exercises.html#exercise-5-10-minutes",
     "title": "Class Exercises 3",
     "section": "Exercise 5 — 10 minutes",
-    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives marks in three subjects: Physics, Mathematics, and Chemistry. Each mark is between 0 and 100.\nImplement the solution based on the following flowchart.\n\n\n\nFlowchart for Exercise 5\n\n\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex05\")",
+    "text": "Exercise 5 — 10 minutes\nAt the end of the semester, a student receives marks in three subjects: Physics, Mathematics, and Chemistry. Each mark is between 0 and 100.\nImplement the solution based on the following flowchart.\n {width=55%}\n\n# Write your solution here\n\n\ncheck_button(\"week03_ex05\")",
     "crumbs": [
       "Lessons",
       "Class Exercises"
