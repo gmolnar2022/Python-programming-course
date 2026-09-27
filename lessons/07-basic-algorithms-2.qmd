@@ -1,7 +1,0 @@
----
-title: "Lesson 7 – Basic Algorithms II"
----
-
-::: {.callout-note}
-This lesson will be added during the semester.
-:::
