@@ -199,34 +199,246 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="practice-warm-up-test" class="level2">
 <h2 class="anchored" data-anchor-id="practice-warm-up-test">Practice Warm-up Test</h2>
-<p>This is a practice test and does not count towards your grade.</p>
-<p>Enter your <strong>Neptun code</strong> and start the test. Your seminar group and task will be assigned automatically.</p>
-<div id="warmup-app">
-  <label for="neptun"><strong>Neptun code</strong></label>
-  <input id="neptun" maxlength="6" autocomplete="off">
-  <button id="start-warmup">Start Warm-up Test</button>
-  <p id="warmup-message"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<blockquote class="blockquote">
-<p>This prototype frontend is prepared for the backend architecture. Set <code>API_BASE</code> after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.</p>
-</blockquote>
-<script>
-const API_BASE = ""; // e.g. Azure Function endpoint, configured after deployment
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is a <strong>practice test</strong> and does not count towards your grade.</p>
+<p>You have <strong>10 minutes</strong> from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.</p>
+</div>
+</div>
+<p>Enter your <strong>Neptun code</strong> and start the test. Your seminar group and task will be assigned automatically.</p>
+<style>
+#warmup-app { max-width: 980px; margin: 1rem 0; }
+.warmup-row { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; margin:.7rem 0; }
+#warmup-app input { max-width: 180px; text-transform: uppercase; }
+#warmup-app button { padding:.45rem .8rem; }
+#warmup-panel { display:none; margin-top:1.2rem; }
+#warmup-meta { display:flex; gap:1.2rem; flex-wrap:wrap; margin:.6rem 0 1rem; }
+#warmup-task { padding:1rem; border:1px solid #d9d9d9; border-radius:.4rem; margin-bottom:1rem; }
+#code-editor { width:100%; min-height:330px; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:14px; padding:.8rem; }
+#program-output { min-height:90px; white-space:pre-wrap; padding:.8rem; border:1px solid #d9d9d9; border-radius:.4rem; background:#f7f7f7; }
+#warmup-message { font-weight:600; }
+.timer-warning { font-weight:700; }
+.submitted-box { padding:1rem; border:1px solid #d9d9d9; border-radius:.4rem; }
+</style>
 
-document.getElementById("start-warmup").addEventListener("click", async () => {
-  const n = document.getElementById("neptun").value.trim().toUpperCase();
-  const msg = document.getElementById("warmup-message");
-  if (!/^[A-Z0-9]{6}$/.test(n)) {
-    msg.textContent = "Please enter a valid 6-character Neptun code.";
-    return;
+<div id="warmup-app">
+  <div id="start-panel">
+    <div class="warmup-row">
+      <label for="neptun"><strong>Neptun code</strong></label>
+      <input id="neptun" maxlength="6" autocomplete="off">
+      <button id="start-warmup" type="button">Start Warm-up Test</button>
+    </div>
+    <p id="warmup-message"></p>
+  </div>
+
+  <div id="warmup-panel">
+    <div id="warmup-meta">
+      <span><strong>Group:</strong> <span id="group-value"></span></span>
+      <span><strong>Time remaining:</strong> <span id="timer">10:00</span></span>
+    </div>
+
+    <div id="warmup-task"></div>
+
+    <label for="code-editor"><strong>Your Python solution</strong></label>
+    <textarea id="code-editor" spellcheck="false"></textarea>
+
+    <div class="warmup-row">
+      <button id="run-code" type="button">Run</button>
+      <button id="submit-code" type="button">Submit</button>
+      <span id="runtime-status"></span>
+    </div>
+
+    <p><strong>Program output</strong></p>
+    <pre id="program-output"></pre>
+    <p id="submission-message"></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
+
+<script>
+(() => {
+  const API_BASE = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+  const WEEK = "03";
+
+  let assignment = null;
+  let pyodide = null;
+  let runCount = 0;
+  let timerHandle = null;
+  let submitting = false;
+  let submitted = false;
+
+  const $ = (id) => document.getElementById(id);
+  const neptunInput = $("neptun");
+  const startButton = $("start-warmup");
+  const startMessage = $("warmup-message");
+  const panel = $("warmup-panel");
+  const editor = $("code-editor");
+  const output = $("program-output");
+  const runButton = $("run-code");
+  const submitButton = $("submit-code");
+  const runtimeStatus = $("runtime-status");
+  const submissionMessage = $("submission-message");
+
+  const savedNeptun = localStorage.getItem("pycourse_neptun");
+  if (savedNeptun) neptunInput.value = savedNeptun;
+
+  function validNeptun(value) {
+    return /^[A-Z0-9]{6}$/.test(value);
   }
-  if (!API_BASE) {
-    msg.textContent = "Prototype ready: backend endpoint has not been configured yet.";
-    return;
+
+  async function postJson(url, body) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(body)
+    });
+    let data = {};
+    try { data = await response.json(); } catch (_) {}
+    if (!response.ok || data.success === false) {
+      throw new Error(data.error || `Request failed (${response.status}).`);
+    }
+    return data;
   }
-  // Production call: POST only the Neptun code to /start.
-  // The backend returns only the student's assigned group/task/deadline.
-});
+
+  function formatRemaining(ms) {
+    const total = Math.max(0, Math.ceil(ms / 1000));
+    const min = Math.floor(total / 60);
+    const sec = total % 60;
+    return `${min}:${String(sec).padStart(2, "0")}`;
+  }
+
+  function startTimer() {
+    clearInterval(timerHandle);
+    const tick = async () => {
+      const remaining = new Date(assignment.deadline).getTime() - Date.now();
+      $("timer").textContent = formatRemaining(remaining);
+      $("timer").classList.toggle("timer-warning", remaining <= 60000);
+      if (remaining <= 0) {
+        clearInterval(timerHandle);
+        await submitSolution("timeout");
+      }
+    };
+    tick();
+    timerHandle = setInterval(tick, 1000);
+  }
+
+  function showAssignment(data) {
+    assignment = data;
+    $("group-value").textContent = data.group;
+    $("warmup-task").textContent = data.task.text;
+    startButton.disabled = true;
+    neptunInput.disabled = true;
+    panel.style.display = "block";
+    startTimer();
+  }
+
+  startButton.addEventListener("click", async () => {
+    const neptun = neptunInput.value.trim().toUpperCase();
+    neptunInput.value = neptun;
+
+    if (!validNeptun(neptun)) {
+      startMessage.textContent = "Please enter a valid 6-character Neptun code.";
+      return;
+    }
+
+    startButton.disabled = true;
+    startMessage.textContent = "Starting...";
+    try {
+      const data = await postJson(`${API_BASE}/startWarmup`, {neptun, week: WEEK});
+      localStorage.setItem("pycourse_neptun", neptun);
+      startMessage.textContent = "";
+      showAssignment(data);
+    } catch (err) {
+      startMessage.textContent = err.message;
+      startButton.disabled = false;
+    }
+  });
+
+  async function ensurePyodide() {
+    if (pyodide) return pyodide;
+    runtimeStatus.textContent = "Loading Python...";
+    pyodide = await loadPyodide();
+    runtimeStatus.textContent = "Python ready.";
+    return pyodide;
+  }
+
+  runButton.addEventListener("click", async () => {
+    if (!assignment || submitted) return;
+    if (Date.now() >= new Date(assignment.deadline).getTime()) {
+      await submitSolution("timeout");
+      return;
+    }
+
+    runButton.disabled = true;
+    output.textContent = "";
+    try {
+      const py = await ensurePyodide();
+      py.setStdout({batched: (s) => { output.textContent += s + "\n"; }});
+      py.setStderr({batched: (s) => { output.textContent += s + "\n"; }});
+      runCount += 1;
+      await py.runPythonAsync(editor.value);
+    } catch (err) {
+      output.textContent += String(err);
+    } finally {
+      if (!submitted) runButton.disabled = false;
+    }
+  });
+
+  async function submitSolution(type) {
+    if (!assignment || submitted || submitting) return;
+    submitting = true;
+    runButton.disabled = true;
+    submitButton.disabled = true;
+    editor.disabled = true;
+    submissionMessage.textContent = type === "timeout" ? "Time is up. Submitting..." : "Submitting...";
+
+    try {
+      const data = await postJson(`${API_BASE}/submitWarmup`, {
+        neptun: neptunInput.value.trim().toUpperCase(),
+        week: WEEK,
+        assignment_id: assignment.assignment_id,
+        code: editor.value,
+        run_count: runCount,
+        submission_type: type
+      });
+
+      submitted = true;
+      clearInterval(timerHandle);
+      $("warmup-task").style.display = "none";
+      output.style.display = "none";
+      runtimeStatus.textContent = "";
+
+      submissionMessage.className = "submitted-box";
+      submissionMessage.textContent = type === "timeout"
+        ? "Time is up. Your solution has been submitted automatically. Your result will be available by the next class at the latest."
+        : (data.message || "Submission successful. Your result will be available by the next class at the latest.");
+    } catch (err) {
+      // Do not claim success until the backend confirms storage.
+      editor.disabled = false;
+      if (Date.now() < new Date(assignment.deadline).getTime()) {
+        runButton.disabled = false;
+        submitButton.disabled = false;
+      } else {
+        // Keep Submit available after a failed timeout submission so the student can retry.
+        submitButton.disabled = false;
+      }
+      submissionMessage.textContent = `Submission failed: ${err.message} Please try Submit again.`;
+    } finally {
+      submitting = false;
+    }
+  }
+
+  submitButton.addEventListener("click", () => submitSolution("manual"));
+})();
 </script>
 
 

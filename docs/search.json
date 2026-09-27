@@ -4,7 +4,7 @@
     "href": "warmup/03-warmup-practice.html",
     "title": "Practice Warm-up Test – Week 3",
     "section": "",
-    "text": "This is a practice test and does not count towards your grade.\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n  Neptun code\n  \n  Start Warm-up Test\n  \n\n\nThis prototype frontend is prepared for the backend architecture. Set API_BASE after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.",
+    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output",
     "crumbs": [
       "Lessons",
       "Warm-up test sample"
@@ -15,7 +15,7 @@
     "href": "warmup/03-warmup-practice.html#practice-warm-up-test",
     "title": "Practice Warm-up Test – Week 3",
     "section": "",
-    "text": "This is a practice test and does not count towards your grade.\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n  Neptun code\n  \n  Start Warm-up Test\n  \n\n\nThis prototype frontend is prepared for the backend architecture. Set API_BASE after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.",
+    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output",
     "crumbs": [
       "Lessons",
       "Warm-up test sample"
