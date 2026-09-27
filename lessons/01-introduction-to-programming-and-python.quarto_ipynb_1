@@ -226,7 +226,7 @@
         "Traditionally, the first program written when learning a programming language\n",
         "displays the text `Hello World`."
       ],
-      "id": "a4f378b0"
+      "id": "f58d5ed8"
     },
     {
       "cell_type": "code",
@@ -234,7 +234,7 @@
       "source": [
         "print(\"Hello World\")"
       ],
-      "id": "40068ff8",
+      "id": "50d4a426",
       "execution_count": null,
       "outputs": []
     },
@@ -249,7 +249,7 @@
         "\n",
         "Both single and double quotation marks can be used:"
       ],
-      "id": "b83d1461"
+      "id": "aab4f150"
     },
     {
       "cell_type": "code",
@@ -258,7 +258,7 @@
         "print(\"Hello World\")\n",
         "print('Hello World')"
       ],
-      "id": "21f855a1",
+      "id": "3a02e444",
       "execution_count": null,
       "outputs": []
     },
@@ -314,7 +314,7 @@
         "\n",
         "For example:"
       ],
-      "id": "098c3270"
+      "id": "25e951cb"
     },
     {
       "cell_type": "code",
@@ -322,7 +322,7 @@
       "source": [
         "print(\"5\" + \"6\")"
       ],
-      "id": "f1fbf7c3",
+      "id": "1a7e2c81",
       "execution_count": null,
       "outputs": []
     },
@@ -368,7 +368,7 @@
         "\n",
         "### Printing a single value"
       ],
-      "id": "99a23469"
+      "id": "e56d9a83"
     },
     {
       "cell_type": "code",
@@ -376,7 +376,7 @@
       "source": [
         "print(\"Hello\")"
       ],
-      "id": "9e595776",
+      "id": "7fc71421",
       "execution_count": null,
       "outputs": []
     },
@@ -388,7 +388,7 @@
         "\n",
         "Several values can be passed to the `print()` function:"
       ],
-      "id": "61f14639"
+      "id": "0d0323a8"
     },
     {
       "cell_type": "code",
@@ -396,7 +396,7 @@
       "source": [
         "print(\"Monday\", \"Tuesday\", \"Wednesday\")"
       ],
-      "id": "19799741",
+      "id": "0afe2507",
       "execution_count": null,
       "outputs": []
     },
@@ -408,7 +408,7 @@
         "\n",
         "Text, numbers, and expressions can also be combined:"
       ],
-      "id": "ea7ace7c"
+      "id": "e83edec2"
     },
     {
       "cell_type": "code",
@@ -416,7 +416,7 @@
       "source": [
         "print(\"5 * 6 is\", 5 * 6)"
       ],
-      "id": "b42836ea",
+      "id": "94d43882",
       "execution_count": null,
       "outputs": []
     },
@@ -428,7 +428,7 @@
         "\n",
         "Calling `print()` without an argument produces an empty line:"
       ],
-      "id": "85115ef0"
+      "id": "9f591df8"
     },
     {
       "cell_type": "code",
@@ -438,7 +438,7 @@
         "print()\n",
         "print(\"Third line\")"
       ],
-      "id": "8a5362bc",
+      "id": "ebb3acf4",
       "execution_count": null,
       "outputs": []
     },
@@ -453,7 +453,7 @@
         "\n",
         "By default, the separator is a single space."
       ],
-      "id": "1f108e9c"
+      "id": "eb274784"
     },
     {
       "cell_type": "code",
@@ -461,7 +461,7 @@
       "source": [
         "print(\"One\", \"Two\", \"Three\")"
       ],
-      "id": "332e92d8",
+      "id": "df8f7ce7",
       "execution_count": null,
       "outputs": []
     },
@@ -471,7 +471,7 @@
       "source": [
         "A different separator can be specified:"
       ],
-      "id": "90b5bfc3"
+      "id": "97c2f85b"
     },
     {
       "cell_type": "code",
@@ -479,7 +479,7 @@
       "source": [
         "print(\"One\", \"Two\", \"Three\", sep=\"-\")"
       ],
-      "id": "8dc0c5d8",
+      "id": "5dbbe949",
       "execution_count": null,
       "outputs": []
     },
@@ -489,7 +489,7 @@
       "source": [
         "print(\"One\", \"Two\", \"Three\", sep=\"|\")"
       ],
-      "id": "f797a0a3",
+      "id": "00d0969c",
       "execution_count": null,
       "outputs": []
     },
@@ -499,7 +499,7 @@
       "source": [
         "An empty string can also be used:"
       ],
-      "id": "d75e115f"
+      "id": "ae75513e"
     },
     {
       "cell_type": "code",
@@ -507,7 +507,7 @@
       "source": [
         "print(\"One\", \"Two\", \"Three\", sep=\"\")"
       ],
-      "id": "a68c85e2",
+      "id": "4d1d4693",
       "execution_count": null,
       "outputs": []
     },
@@ -521,7 +521,7 @@
         "\n",
         "The optional `end` argument can change this behaviour."
       ],
-      "id": "63414946"
+      "id": "5a722db7"
     },
     {
       "cell_type": "code",
@@ -530,7 +530,7 @@
         "print(\"One\", \"Two\", sep=\" \", end=\" \")\n",
         "print(\"Three\")"
       ],
-      "id": "a30e8f21",
+      "id": "685cc2ea",
       "execution_count": null,
       "outputs": []
     },
@@ -554,7 +554,7 @@
         "\n",
         "### New line"
       ],
-      "id": "ea8515c3"
+      "id": "7e652c9a"
     },
     {
       "cell_type": "code",
@@ -562,7 +562,7 @@
       "source": [
         "print(\"Monday\\nTuesday\\nWednesday\")"
       ],
-      "id": "ca701490",
+      "id": "c5acdf48",
       "execution_count": null,
       "outputs": []
     },
@@ -572,7 +572,7 @@
       "source": [
         "### Tab"
       ],
-      "id": "cccca5c8"
+      "id": "070d5bb5"
     },
     {
       "cell_type": "code",
@@ -582,7 +582,7 @@
         "print(\"Anna\\t85\")\n",
         "print(\"John\\t92\")"
       ],
-      "id": "16069d10",
+      "id": "8203fa6b",
       "execution_count": null,
       "outputs": []
     },
@@ -596,7 +596,7 @@
         "\n",
         "One possibility is to use different quotation marks around the string:"
       ],
-      "id": "f6c3035a"
+      "id": "b53a4bec"
     },
     {
       "cell_type": "code",
@@ -604,7 +604,7 @@
       "source": [
         "print(\"My name is 'Alain'\")"
       ],
-      "id": "e74d26b0",
+      "id": "cbddec26",
       "execution_count": null,
       "outputs": []
     },
@@ -614,7 +614,7 @@
       "source": [
         "Another possibility is to use escape characters:"
       ],
-      "id": "9a7e381b"
+      "id": "f3001c06"
     },
     {
       "cell_type": "code",
@@ -622,7 +622,7 @@
       "source": [
         "print(\"My name is \\\"Alain\\\"\")"
       ],
-      "id": "49495955",
+      "id": "0e485a50",
       "execution_count": null,
       "outputs": []
     },
@@ -632,7 +632,7 @@
       "source": [
         "Similarly:"
       ],
-      "id": "a37478fc"
+      "id": "16afb240"
     },
     {
       "cell_type": "code",
@@ -640,7 +640,7 @@
       "source": [
         "print('My name is \"Alain\"')"
       ],
-      "id": "4665c5e3",
+      "id": "a61b7e4a",
       "execution_count": null,
       "outputs": []
     },
@@ -652,7 +652,7 @@
         "\n",
         "Triple quotation marks can be used to create strings that span several lines."
       ],
-      "id": "ae0a58d4"
+      "id": "3294d59e"
     },
     {
       "cell_type": "code",
@@ -662,7 +662,7 @@
         "contains\n",
         "several lines.\"\"\")"
       ],
-      "id": "203734dc",
+      "id": "dc609976",
       "execution_count": null,
       "outputs": []
     },
@@ -673,7 +673,7 @@
         "Both triple double quotation marks and triple single quotation marks can be\n",
         "used."
       ],
-      "id": "43eeda99"
+      "id": "f82cb457"
     },
     {
       "cell_type": "code",
@@ -683,7 +683,7 @@
         "Second line\n",
         "Third line''')"
       ],
-      "id": "5a0f3298",
+      "id": "ebcb7608",
       "execution_count": null,
       "outputs": []
     },
@@ -697,7 +697,7 @@
         "\n",
         "For example:"
       ],
-      "id": "4996f76b"
+      "id": "bab86e57"
     },
     {
       "cell_type": "code",
@@ -705,7 +705,7 @@
       "source": [
         "print(\"Python \\u263A\")"
       ],
-      "id": "9bba7dd7",
+      "id": "dbacf857",
       "execution_count": null,
       "outputs": []
     },
@@ -736,7 +736,7 @@
         "In the next lesson, we will introduce **variables, expressions, and simple data\n",
         "types**."
       ],
-      "id": "73b10d70"
+      "id": "0a7cdfa1"
     }
   ],
   "metadata": {
