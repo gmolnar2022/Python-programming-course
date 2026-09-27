@@ -48,6 +48,9 @@ body {
 
 
 
+.version-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.version-box p{margin:.35rem 0 .65rem}.version-links{display:flex;flex-direction:column;gap:.45rem}.version-links a,.version-current{display:block}.version-current{color:#444}
+
 .student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
 .student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
 .student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
@@ -56,6 +59,16 @@ button:disabled{opacity:.5;cursor:not-allowed}
 </style>
 
 ```{=html}
+<div class="version-box">
+  <strong>Exercise versions</strong>
+  <p class="small">The same exercise set is available in three versions.</p>
+  <div class="version-links">
+    <span class="version-current"><strong>Classroom Version</strong> — you are using this version</span>
+    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/03-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the same exercises in Colab</a>
+    <a href="03-class-exercises-jupyter.ipynb" download><strong>Jupyter Version</strong> — download the same exercises for Jupyter Notebook/JupyterLab</a>
+  </div>
+</div>
+
 <div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
 
 <div id="student-identification" class="student-id-box">
@@ -124,7 +137,9 @@ function saveNeptun(){
 
 function render(){
  list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
- <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="head"><div><h2>${e.title}</h2>
+${COURSE_CONFIG.showExpectedTime ? `<div class="expected-time"><strong>Expected time:</strong> ${e.expectedTime || COURSE_CONFIG.expectedTimeMinutes} minutes</div>` : ""}
+<div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
  <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
  <div class="workspace" id="${e.id}-ws">
  <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
