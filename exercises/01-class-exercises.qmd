@@ -1,0 +1,267 @@
+---
+title: "Class Exercises 1"
+subtitle: "Introduction to Programming and Python"
+toc: false
+page-layout: full
+---
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
+
+<style>
+
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#222;line-height:1.5}
+h1{margin-bottom:0}.sub{color:#666;margin-bottom:26px}.ex{border:1px solid #ddd;border-radius:9px;padding:18px 20px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.status{font-size:.9rem;padding:5px 9px;background:#f4f4f4;border-radius:5px;white-space:nowrap}.controls button{padding:8px 13px;margin:8px 7px 8px 0;cursor:pointer}
+.workspace{display:none;border-top:1px solid #ddd;margin-top:14px;padding-top:14px}.workspace.active{display:block}
+textarea.code{width:100%;height:220px;box-sizing:border-box;font:14px/1.5 Consolas,monospace;padding:12px;border:1px solid #aaa;border-radius:6px}
+textarea.stdin{width:100%;height:58px;box-sizing:border-box;font:14px Consolas,monospace;padding:8px}
+pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;white-space:pre-wrap;min-height:34px}
+.checkpanel{border:1px solid #ddd;border-radius:6px;padding:10px;margin-top:8px}.ok{font-weight:600}.bad{font-weight:600}.small{font-size:.9rem;color:#666}
+.timer{font-variant-numeric:tabular-nums}.hint{background:#f6f6f6;padding:9px;border-radius:5px;margin-top:8px}
+.summary{background:#f7f7f7;padding:12px 15px;border-radius:7px;margin:18px 0}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
+
+.summary-grid{display:grid;grid-template-columns:1.5fr 1.4fr .9fr .55fr .65fr .55fr;margin-top:12px;border-top:1px solid #ddd;border-left:1px solid #ddd}.summary-grid>div{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}.summary-head{font-weight:700;background:#f5f5f5}@media(max-width:760px){.summary-grid{grid-template-columns:1fr 1fr}.summary-head{display:none}}
+
+
+
+
+
+/* Widen only the exercise content; keep Quarto's own page grid intact. */
+.ex,
+#summary {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.workspace,
+.workspace textarea,
+.workspace pre,
+.workspace .output {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: clip;
+}
+
+
+
+.version-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.version-box p{margin:.35rem 0 .65rem}.version-links{display:flex;flex-direction:column;gap:.45rem}.version-links a,.version-current{display:block}.version-current{color:#444}
+
+.student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
+.student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
+.expected-time{font-size:.9rem;color:#555;margin:.2rem 0 .8rem}
+button:disabled{opacity:.5;cursor:not-allowed}
+</style>
+
+```{=html}
+<div class="version-box">
+  <strong>Exercise versions</strong>
+  <p class="small">The same exercise set is available in three versions.</p>
+  <div class="version-links">
+    <span class="version-current"><strong>Classroom Version</strong> — you are using this version</span>
+    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/01-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the same exercises in Colab</a>
+    <a href="01-class-exercises-jupyter.ipynb" download><strong>Jupyter Version</strong> — download the same exercises for Jupyter Notebook/JupyterLab</a>
+  </div>
+</div>
+
+<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
+
+<div id="student-identification" class="student-id-box">
+  <label for="neptun-code"><strong>Neptun code</strong></label>
+  <div class="student-id-row">
+    <input id="neptun-code" type="text" maxlength="6" autocomplete="off"
+           placeholder="ABC123" aria-label="Neptun code">
+    <button id="save-neptun" type="button">Save</button>
+  </div>
+  <div id="neptun-message" class="small">
+    Enter your 6-character Neptun code before starting the exercises.
+  </div>
+</div>
+
+<div id="list"></div><div id="summary"></div>
+```
+
+<script>
+const COURSE_CONFIG = {
+  requireNeptun: true,
+  showExpectedTime: true,
+  expectedTimeMinutes: 10,
+  enableAI: false,
+  enableAIScoring: false,
+  enableExport: false,
+  enableImport: false,
+  enableTracking: true,
+  enableSubmission: false
+};
+
+
+const EX=[
+{id:"ex01",title:"Exercise 1",task:"Write a program that displays <code>This is my second Python program</code> in three ways: each word on a new line, each word in a separate column, and using <code>-</code> as the separator. Complete all three parts in the same code editor.",tests:[[[],"ok"]],need:["print"],match:"w1e1"},
+{id:"ex02",title:"Exercise 2",task:"Introduce yourself in both requested formats: first in one line using Name, Neptun-code and Age, then as a multi-line introduction headed by <strong>Introduction</strong>. Use your own data.",tests:[[[],"ok"]],need:["print"],match:"w1e2"},
+{id:"ex03",title:"Exercise 3",task:"Display the three requested results: <code>2*1000 + 2*10 + 1*3 = 2023</code>, solve <code>4x + 2 = 14</code>, and calculate the number of seconds in a week.",tests:[[[],"ok"]],need:["print"],match:"w1e3"},
+{id:"ex04",title:"Exercise 4",task:"Print the multiplication table of 7 from 1 to 10 and arrange the values in <strong>5 columns</strong>.",tests:[[[],"ok"]],need:["print"],match:"w1e4"},
+{id:"ex05",title:"Exercise 5",task:"Display the calendar for <strong>November 2023</strong> with Monday as the first day of the week.",tests:[[[],"ok"]],need:["print"],match:"w1e5"}];
+let pyodide=null, active=null, lastTick=Date.now();
+
+function key(id){return "pycourse_week01_"+id}
+function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"","time":0,"runs":0,"checks":0,"hints":0,"completed":false,"started":false}')}
+function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderSummary(){
+ let cells=EX.map(e=>{let s=state(e.id),status=s.completed?"✓ Completed":s.started?"In progress / paused":"Not started";return `<div>${e.title}</div><div>${status}</div><div>${fmt(s.time)}</div><div>${s.runs}</div><div>${s.checks}</div><div>${s.hints}</div>`}).join("");
+ let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 1 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
+}
+
+function validNeptun(v){return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase())}
+function getNeptun(){return (localStorage.getItem("pycourse_neptun")||"").trim().toUpperCase()}
+function setNeptunUI(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ if(!box)return;
+ const n=getNeptun(),ok=validNeptun(n); box.value=n;
+ msg.textContent=ok?`Neptun code saved: ${n}`:"Enter your 6-character Neptun code before starting the exercises.";
+ document.querySelectorAll("[id$='-start']").forEach(b=>b.disabled=COURSE_CONFIG.requireNeptun&&!ok);
+}
+function saveNeptun(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ const n=(box.value||"").trim().toUpperCase(); box.value=n;
+ if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return}
+ localStorage.setItem("pycourse_neptun",n); setNeptunUI();
+}
+
+function render(){
+ list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
+ <div class="head"><div><h2>${e.title}</h2>
+${COURSE_CONFIG.showExpectedTime ? `<div class="expected-time"><strong>Expected time:</strong> ${e.expectedTime || COURSE_CONFIG.expectedTimeMinutes} minutes</div>` : ""}
+<div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
+ <div class="workspace" id="${e.id}-ws">
+ <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
+ <p><strong>Your Python code</strong></p><textarea class="code" id="${e.id}-code" spellcheck="false">${esc(s.code)}</textarea>
+ <div class="controls"><button onclick="runEx('${e.id}')">▶ Run</button><button onclick="checkEx('${e.id}')">✓ Check my solution</button><button onclick="hintEx('${e.id}')">💡 Hint</button><button onclick="stopEx('${e.id}')">■ Stop</button></div>
+ <strong>Output</strong><pre id="${e.id}-out"></pre><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
+ renderSummary();
+}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+async function ensurePy(){if(!pyodide){document.title="Loading Python…";pyodide=await loadPyodide();document.title="Class Exercises 1 – Introduction to Programming and Python"}}
+async function startEx(id){
+ if(COURSE_CONFIG.requireNeptun&&!validNeptun(getNeptun())){
+   document.getElementById("neptun-message").textContent="Save a valid Neptun code before starting an exercise.";
+   document.getElementById("neptun-code").focus(); return;
+ }
+ if(active&&active!==id) stopEx(active);
+ let s=state(id);
+ document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id+"-ws").classList.add("active");
+ document.getElementById(id+"-code").value=s.code;
+ if(!s.completed){
+   active=id; s.started=true; save(id,s); lastTick=Date.now();
+ } else {
+   active=null; // review does not add to completion time
+ }
+ await ensurePy(); updateStatus(id);
+}
+function persistCode(id){let s=state(id),el=document.getElementById(id+"-code");if(el)s.code=el.value;save(id,s)}
+function stopEx(id){if(active===id){tick();persistCode(id);active=null} document.getElementById(id+"-ws").classList.remove("active");updateStatus(id)}
+function tick(){let now=Date.now();if(active&&!document.hidden){let s=state(active);s.time+=(now-lastTick)/1000;save(active,s);let el=document.getElementById(active+"-time");if(el)el.textContent=fmt(s.time)}lastTick=now;renderSummary()}
+setInterval(tick,1000);document.addEventListener("visibilitychange",()=>{tick();lastTick=Date.now()});
+window.addEventListener("beforeunload",()=>{tick();if(active)persistCode(active)});
+function updateStatus(id){
+ let s=state(id),el=document.getElementById(id+"-status"),btn=document.getElementById(id+"-start");
+ if(el)el.innerHTML=(s.completed?"✓ Completed":active===id?"In progress":s.started?"Paused":"Not started")+" · <span class='timer'>"+fmt(s.time)+"</span>";
+ if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
+ renderSummary();
+}
+async function execute(code,inputs){
+ await ensurePy();pyodide.globals.set("student_code",code);pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
+ let x=await pyodide.runPythonAsync(`
+import json,builtins,io,contextlib
+def _run(src, vals):
+    it=iter(json.loads(vals)); out=io.StringIO()
+    def inp(prompt=""):
+        try:
+            value=next(it)
+        except StopIteration:
+            raise EOFError("No more input values.")
+        if prompt:
+            print(prompt,end="")
+        print(value)
+        return value
+    old=builtins.input
+    try:
+        builtins.input=inp
+        ns={"__name__":"__main__"}
+        with contextlib.redirect_stdout(out),contextlib.redirect_stderr(out):
+            exec(compile(src,"<student_code>","exec"),ns,ns)
+        return json.dumps({"ok":True,"output":out.getvalue().strip()})
+    except Exception as e:return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
+    finally:builtins.input=old
+_run(student_code,student_inputs_json)
+`);return JSON.parse(String(x))
+}
+async function structure(code){
+ pyodide.globals.set("student_code",code);let x=await pyodide.runPythonAsync(`
+import ast,json
+def _st(src):
+ t=ast.parse(src)
+ return json.dumps({"input":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="input" for n in ast.walk(t)),"if":any(isinstance(n,ast.If) for n in ast.walk(t)),"comparison":any(isinstance(n,ast.Compare) for n in ast.walk(t)),"print":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="print" for n in ast.walk(t))})
+_st(student_code)
+`);return JSON.parse(String(x))
+}
+function inputPrompts(code){
+ // Extract simple input("prompt") / input('prompt') calls in source order.
+ const rx=/input\s*\(\s*(?:(["'])(.*?)\1)?\s*\)/g;
+ let a=[],m; while((m=rx.exec(code))!==null)a.push(m[2]||"Enter a value:");
+ return a;
+}
+async function runEx(id){
+ let s=state(id),code=document.getElementById(id+"-code").value;
+ s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
+ let prompts=inputPrompts(code),vals=[];
+ for(const p of prompts){let v=window.prompt(p);if(v===null)return;vals.push(v)}
+ let r=await execute(code,vals);
+ document.getElementById(id+"-out").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
+}
+function matches(e,out,expected){
+ let o=out.trim().toLowerCase(), compact=o.replace(/\s+/g,"");
+ if(e.match==="numeric"){
+   const nums=(out.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number);
+   return expected.every(v=>nums.some(n=>Math.abs(n-Number(v))<=0.02));
+ }
+ if(e.match==="w1e1") return ["this","is","my","second","python","program"].every(x=>o.includes(x)) && compact.includes("this-is-my-second-python-program");
+ if(e.match==="w1e2") return ["name","neptun","age","introduction"].every(x=>o.includes(x)) && out.includes("&");
+ if(e.match==="w1e3") return o.includes("2023") && compact.includes("x=3") && o.includes("604800");
+ if(e.match==="w1e4") return Array.from({length:10},(_,i)=>`${i+1}*7=${(i+1)*7}`).every(x=>compact.includes(x));
+ if(e.match==="w1e5") return o.includes("november 2023") && ["1","2","3","4","5","27","28","29","30"].every(x=>o.includes(x));
+ return o.includes(String(expected).toLowerCase())
+}
+async function checkEx(id){
+ let e=EX.find(x=>x.id===id),s=state(id),code=document.getElementById(id+"-code").value;s.code=code;s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
+ let panel=document.getElementById(id+"-panel");panel.innerHTML="Checking…";
+ try{
+   await ensurePy(); let st=await structure(code),missing=e.need.filter(n=>!st[n]);
+   let passed=0,rows=[];
+   for(let t of e.tests){let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code,inputs);if(!r.ok){panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='bad'>✗ Runtime</div><div>"+esc(r.error)+"</div>";return}let ok=matches(e,r.output,t[1]);if(ok)passed++;rows.push({inputs,exp:t[1],got:r.output,ok})}
+   let all=passed===e.tests.length&&missing.length===0;
+   panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='"+(missing.length?"bad":"ok")+"'>"+(missing.length?"✗":"✓")+" Expected structure</div><div class='"+(passed===e.tests.length?"ok":"bad")+"'>"+(passed===e.tests.length?"✓":"✗")+" Functional tests: "+passed+" / "+e.tests.length+"</div>"+rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → expected "+esc(Array.isArray(r.exp)?r.exp.join(" and "):String(r.exp))+(r.ok?"":" · got: "+esc(r.got||"(no output)"))+"</div>").join("");
+   if(all){
+   tick(); s=state(id); s.completed=true; s.code=code; save(id,s);
+   panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
+   if(active===id) active=null;
+   updateStatus(id);
+ }
+ }catch(err){panel.innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+}
+function hintEx(id){let s=state(id);s.hints=Math.min(s.hints+1,3);save(id,s);document.getElementById(id+"-hints").textContent=s.hints;let generic=["Read the task again and compare each requested output with your program.","Test your program with simple values and inspect the output carefully.","Check the expressions, conversions and print statements used in your solution."];document.getElementById(id+"-panel").innerHTML+="<div class='hint'><strong>Hint "+s.hints+":</strong> "+generic[s.hints-1]+"</div>"}
+render();
+document.getElementById("save-neptun")?.addEventListener("click",saveNeptun);
+document.getElementById("neptun-code")?.addEventListener("keydown",e=>{if(e.key==="Enter")saveNeptun()});
+document.getElementById("neptun-code")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6)});
+setNeptunUI();
+
+</script>

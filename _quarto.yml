@@ -4,11 +4,12 @@ project:
   execute-dir: project
   resources: 
     - assets/**
+    - exercises/*-jupyter.ipynb
   render:
     - index.qmd
     - lessons/01-introduction-to-programming-and-python.qmd
-    - exercises/01-class-exercises.ipynb
-    - exercises/02-class-exercises.ipynb
+    - exercises/01-class-exercises.qmd
+    - exercises/02-class-exercises.qmd
     - exercises/03-class-exercises.qmd
     # Uncomment pages below when they are ready to publish:
     - lessons/02-simple-data-types.qmd
@@ -41,12 +42,12 @@ website:
         contents:
           - href: lessons/01-introduction-to-programming-and-python.qmd
             text: "1. Introduction to Programming and Python"
-          - href: exercises/01-class-exercises.ipynb
+          - href: exercises/01-class-exercises.qmd
             text: "Class Exercises"
           # Uncomment lessons below when they are ready to publish:
           - href: lessons/02-simple-data-types.qmd
             text: "2. Working with Simple Data Types"
-          - href: exercises/02-class-exercises.ipynb
+          - href: exercises/02-class-exercises.qmd
             text: "Class Exercises"
           - href: lessons/03-conditional-statements.qmd
             text: "3. Conditional Statements in Python"
