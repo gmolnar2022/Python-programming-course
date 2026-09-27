@@ -221,7 +221,7 @@ Note
 #warmup-app button { padding:.45rem .8rem; }
 #warmup-panel { display:none; margin-top:1.2rem; }
 #warmup-meta { display:flex; gap:1.2rem; flex-wrap:wrap; margin:.6rem 0 1rem; }
-#warmup-task { padding:1rem; border:1px solid #d9d9d9; border-radius:.4rem; margin-bottom:1rem; }
+#warmup-task { padding:1rem; border:1px solid #d9d9d9; border-radius:.4rem; margin-bottom:1rem; }\n#warmup-task p { margin:.45rem 0; }\n#warmup-task ul { margin:.35rem 0 .75rem 1.25rem; }
 #code-editor { width:100%; min-height:330px; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:14px; padding:.8rem; }
 #program-output { min-height:90px; white-space:pre-wrap; padding:.8rem; border:1px solid #d9d9d9; border-radius:.4rem; background:#f7f7f7; }
 #warmup-message { font-weight:600; }
@@ -334,7 +334,7 @@ Note
   function showAssignment(data) {
     assignment = data;
     $("group-value").textContent = data.group;
-    $("warmup-task").textContent = data.task.text;
+    $("warmup-task").innerHTML = data.task.text;
     startButton.disabled = true;
     neptunInput.disabled = true;
     panel.style.display = "block";
