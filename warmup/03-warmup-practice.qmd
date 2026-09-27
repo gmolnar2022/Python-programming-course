@@ -185,6 +185,18 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
       const py = await ensurePyodide();
       py.setStdout({batched: (s) => { output.textContent += s + "\n"; }});
       py.setStderr({batched: (s) => { output.textContent += s + "\n"; }});
+
+      // Browser-backed stdin so Python input() works in Pyodide.
+      py.setStdin({
+        stdin: () => {
+          const value = window.prompt("Python input:");
+          if (value === null) {
+            throw new Error("Input cancelled.");
+          }
+          return value;
+        }
+      });
+
       runCount += 1;
       await py.runPythonAsync(editor.value);
     } catch (err) {
