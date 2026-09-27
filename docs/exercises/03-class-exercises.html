@@ -233,10 +233,28 @@ body {
 }
 
 
+
+.student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
+.student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
+.expected-time{font-size:.9rem;color:#555;margin:.2rem 0 .8rem}
+button:disabled{opacity:.5;cursor:not-allowed}
 </style>
 <div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
 <div id="list"></div><div id="summary"></div>
 <script>
+const COURSE_CONFIG = {
+  requireNeptun: true,
+  showExpectedTime: true,
+  expectedTimeMinutes: 10,
+  enableAI: false,
+  enableAIScoring: false,
+  enableExport: false,
+  enableImport: false,
+  enableTracking: true,
+  enableSubmission: false
+};
+
 
 const EX=[
 {id:"ex01",title:"Exercise 1",task:`Write a program that asks the user for a <strong>non-zero integer</strong> and checks whether it is <strong>positive or negative</strong>.`,tests:[[8,"positive"],[-3,"negative"]],need:["input","if","comparison","print"],match:"contains"},
@@ -256,6 +274,23 @@ function renderSummary(){
  let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
  document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 3 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
 }
+
+function validNeptun(v){return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase())}
+function getNeptun(){return (localStorage.getItem("pycourse_neptun")||"").trim().toUpperCase()}
+function setNeptunUI(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ if(!box)return;
+ const n=getNeptun(),ok=validNeptun(n); box.value=n;
+ msg.textContent=ok?`Neptun code saved: ${n}`:"Enter your 6-character Neptun code before starting the exercises.";
+ document.querySelectorAll("[id$='-start']").forEach(b=>b.disabled=COURSE_CONFIG.requireNeptun&&!ok);
+}
+function saveNeptun(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ const n=(box.value||"").trim().toUpperCase(); box.value=n;
+ if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return}
+ localStorage.setItem("pycourse_neptun",n); setNeptunUI();
+}
+
 function render(){
  list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
  <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
@@ -270,6 +305,10 @@ function render(){
 function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 async function ensurePy(){if(!pyodide){document.title="Loading Python…";pyodide=await loadPyodide();document.title="Class Exercises 3 – Conditional Statements in Python"}}
 async function startEx(id){
+ if(COURSE_CONFIG.requireNeptun&&!validNeptun(getNeptun())){
+   document.getElementById("neptun-message").textContent="Save a valid Neptun code before starting an exercise.";
+   document.getElementById("neptun-code").focus(); return;
+ }
  if(active&&active!==id) stopEx(active);
  let s=state(id);
  document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
@@ -376,6 +415,10 @@ ex05:["There are two requirements for passing.","Check both the overall percenta
 ex06:["Check the boundary conditions.","Pay special attention to 30, 10 and 0.","30 and 10 belong to Normal; 0 belongs to Cold."]
 };document.getElementById(id+"-panel").innerHTML+="<div class='hint'><strong>Hint "+s.hints+":</strong> "+hints[id][s.hints-1]+"</div>"}
 render();
+document.getElementById("save-neptun")?.addEventListener("click",saveNeptun);
+document.getElementById("neptun-code")?.addEventListener("keydown",e=>{if(e.key==="Enter")saveNeptun()});
+document.getElementById("neptun-code")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6)});
+setNeptunUI();
 
 </script>
 
