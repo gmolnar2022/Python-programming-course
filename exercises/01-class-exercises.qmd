@@ -75,7 +75,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <label for="neptun-code"><strong>Neptun code</strong></label>
   <div class="student-id-row">
     <input id="neptun-code" type="text" maxlength="6" autocomplete="off"
-           placeholder="ABC123" aria-label="Neptun code">
+           aria-label="Neptun code">
     <button id="save-neptun" type="button">Save</button>
   </div>
   <div id="neptun-message" class="small">
