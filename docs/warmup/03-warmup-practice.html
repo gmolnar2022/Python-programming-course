@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../warmup/03-practice-warmup.html">Warm-up test sample</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../warmup/03-warmup-practice.html">Warm-up test sample</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -163,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../warmup/03-practice-warmup.html" class="sidebar-item-text sidebar-link active">
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Warm-up test sample</span></a>
   </div>
 </li>
@@ -178,10 +178,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content column-page-right" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../warmup/03-practice-warmup.html">Warm-up test sample</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../warmup/03-warmup-practice.html">Warm-up test sample</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Practice Warm-up Test – Week 3</h1>
-<p class="subtitle lead">Prototype</p>
 </div>
 
 
@@ -198,290 +197,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
-<style>
-body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#222;line-height:1.5}
-.warmup{max-width:1000px;margin:auto}
-.box{border:1px solid #d8dee4;border-radius:10px;padding:18px 20px;margin:16px 0;background:#f8f9fa}
-.row{display:flex;gap:12px;align-items:end;flex-wrap:wrap}
-.field{display:flex;flex-direction:column;gap:5px}
-input,select{padding:9px 11px;border:1px solid #bbb;border-radius:6px;font:1rem system-ui}
-#neptun{width:150px;text-transform:uppercase;font-family:ui-monospace,monospace}
-button{padding:9px 14px;cursor:pointer;border:1px solid #aaa;border-radius:6px;background:#fff}
-button.primary{font-weight:650}
-button.danger{font-weight:650}
-button:disabled{opacity:.5;cursor:not-allowed}
-.timer{font:700 1.5rem ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
-.task{font-size:1.05rem}
-textarea.code{width:100%;height:300px;box-sizing:border-box;font:14px/1.5 Consolas,monospace;padding:12px;border:1px solid #aaa;border-radius:6px}
-pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;white-space:pre-wrap;min-height:42px}
-.small{font-size:.9rem;color:#666}
-.hidden{display:none}
-.success{border:1px solid #9ab89a;border-radius:10px;padding:20px;background:#f5faf5}
-.warning{border-left:4px solid #999;padding:8px 12px;background:#f7f7f7}
-.topline{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}
-</style>
-<div class="warmup">
-
-<div class="box">
-  <strong>Practice Warm-up Test</strong>
-  <p>This is a practice test and does not count towards your grade. You will receive one task from the pool assigned to your seminar group.</p>
-  <p class="small"><strong>Prototype:</strong> submission is stored only in this browser. The production version will submit to the course backend.</p>
+<section id="practice-warm-up-test" class="level2">
+<h2 class="anchored" data-anchor-id="practice-warm-up-test">Practice Warm-up Test</h2>
+<p>This is a practice test and does not count towards your grade.</p>
+<p>Enter your <strong>Neptun code</strong> and start the test. Your seminar group and task will be assigned automatically.</p>
+<div id="warmup-app">
+  <label for="neptun"><strong>Neptun code</strong></label>
+  <input id="neptun" maxlength="6" autocomplete="off">
+  <button id="start-warmup">Start Warm-up Test</button>
+  <p id="warmup-message"></p>
 </div>
-
-<div id="setup" class="box">
-  <div class="row">
-    <div class="field">
-      <label for="neptun"><strong>Neptun code</strong></label>
-      <input id="neptun" maxlength="6" autocomplete="off" aria-label="Neptun code">
-    </div>
-    <div class="field">
-      <label for="group"><strong>Seminar group</strong></label>
-      <select id="group">
-        <option value="">Select your group…</option>
-        <option value="group01">Seminar Group 1</option>
-        <option value="group02">Seminar Group 2</option>
-        <option value="group03">Seminar Group 3</option>
-      </select>
-    </div>
-    <button id="start" class="primary" type="button">Start Warm-up Test</button>
-  </div>
-  <div id="setup-msg" class="small" style="margin-top:10px">Enter your Neptun code and select your seminar group.</div>
-</div>
-
-<div id="test" class="hidden">
-  <div class="box">
-    <div class="topline">
-      <div><strong>Practice Warm-up Test – Week 3</strong><br>
-      <span id="identity" class="small"></span></div>
-      <div>Time remaining: <span id="timer" class="timer">10:00</span></div>
-    </div>
-  </div>
-
-  <div class="box">
-    <div class="small">Task variant: <span id="variant"></span></div>
-    <h2 class="anchored">Your task</h2>
-    <div id="task" class="task"></div>
-  </div>
-
-  <div class="box">
-    <label for="code"><strong>Your Python code</strong></label>
-    <textarea id="code" class="code" spellcheck="false"></textarea>
-    <div style="margin-top:10px">
-      <button id="run" type="button">▶ Run</button>
-      <button id="submit" class="primary" type="button">Submit</button>
-    </div>
-    <p><strong>Output</strong></p>
-    <pre id="output"></pre>
-    <div class="small">Runs: <span id="runs">0</span></div>
-  </div>
-</div>
-
-<div id="finished" class="hidden success">
-  <h2 id="finish-title" class="anchored">Submission successful.</h2>
-  <p id="finish-text">Your solution has been submitted successfully. Your result will be available by the next class at the latest.</p>
-  <div id="finish-meta" class="small"></div>
-</div>
-
-</div>
+<blockquote class="blockquote">
+<p>This prototype frontend is prepared for the backend architecture. Set <code>API_BASE</code> after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.</p>
+</blockquote>
 <script>
-const WARMUP_CONFIG = {
-  week: "03",
-  practice: true,
-  durationMinutes: 10
-};
+const API_BASE = ""; // e.g. Azure Function endpoint, configured after deployment
 
-// Prototype group names: replace these with the real seminar groups later.
-const GROUP_LABELS = {
-  group01: "Seminar Group 1",
-  group02: "Seminar Group 2",
-  group03: "Seminar Group 3"
-};
-
-// Six different but comparable tasks per group.
-// All use only Week 1–3 material: input, simple data types, calculations,
-// conditional statements and output.
-const WARMUP_POOLS = {
-  group01: [
-    {id:"w03_g01_a", text:`Ask for the <strong>price of a product</strong> and the <strong>discount percentage</strong>. Calculate the discounted price. If the discounted price is at least 20,000 HUF, print <code>High-value purchase</code>; otherwise print <code>Regular purchase</code>. Display the discounted price as well.`},
-    {id:"w03_g01_b", text:`Ask for a student's <strong>two test scores</strong> (0–100). Calculate the average. If the average is at least 60, print <code>Passed</code>; otherwise print <code>Failed</code>. Display the average too.`},
-    {id:"w03_g01_c", text:`Ask for the <strong>distance travelled in kilometres</strong> and the <strong>fuel used in litres</strong>. Calculate litres per 100 km. If consumption is at most 6.0, print <code>Economical</code>; otherwise print <code>High consumption</code>. Display the calculated consumption.`},
-    {id:"w03_g01_d", text:`Ask for the <strong>number of hours worked</strong> and the <strong>hourly wage</strong>. Calculate the wage. If the calculated wage is at least 100,000 HUF, print <code>Large payment</code>; otherwise print <code>Standard payment</code>. Display the wage.`},
-    {id:"w03_g01_e", text:`Ask for a temperature in <strong>degrees Celsius</strong>. Convert it to Fahrenheit using <code>F = C × 9 / 5 + 32</code>. If the Celsius temperature is below 0, print <code>Freezing</code>; otherwise print <code>Above freezing</code>. Display the Fahrenheit value.`},
-    {id:"w03_g01_f", text:`Ask for the <strong>length and width of a rectangle</strong>. Calculate its area. If the area is greater than 100, print <code>Large rectangle</code>; otherwise print <code>Small rectangle</code>. Display the area.`}
-  ],
-  group02: [
-    {id:"w03_g02_a", text:`Ask for the <strong>net price</strong> of a product and the <strong>VAT rate</strong> as a percentage. Calculate the gross price. If the gross price is greater than 50,000 HUF, print <code>Expensive</code>; otherwise print <code>Affordable</code>. Display the gross price.`},
-    {id:"w03_g02_b", text:`Ask for a person's <strong>height in metres</strong> and <strong>weight in kilograms</strong>. Calculate BMI as <code>weight / height²</code>. If BMI is below 25, print <code>Below 25</code>; otherwise print <code>25 or above</code>. Display the BMI.`},
-    {id:"w03_g02_c", text:`Ask for the <strong>amount of money in HUF</strong> and a <strong>HUF/EUR exchange rate</strong> (HUF for 1 EUR). Calculate the amount in EUR. If the result is at least 100 EUR, print <code>At least 100 EUR</code>; otherwise print <code>Less than 100 EUR</code>. Display the EUR amount.`},
-    {id:"w03_g02_d", text:`Ask for the <strong>base salary</strong> and a <strong>bonus percentage</strong>. Calculate the salary including the bonus. If the bonus amount itself is at least 50,000 HUF, print <code>High bonus</code>; otherwise print <code>Standard bonus</code>. Display the final salary.`},
-    {id:"w03_g02_e", text:`Ask for the <strong>number of items</strong> purchased and the <strong>unit price</strong>. Calculate the total price. If at least 10 items were purchased, apply a 10% discount. Display the final price and print whether a discount was applied.`},
-    {id:"w03_g02_f", text:`Ask for the <strong>radius of a circle</strong>. Use <code>3.14</code> for π and calculate the area. If the area is at least 50, print <code>Large circle</code>; otherwise print <code>Small circle</code>. Display the area.`}
-  ],
-  group03: [
-    {id:"w03_g03_a", text:`Ask for the <strong>original price</strong> and a <strong>price increase percentage</strong>. Calculate the new price. If the increase is more than 10%, print <code>Significant increase</code>; otherwise print <code>Small increase</code>. Display the new price.`},
-    {id:"w03_g03_b", text:`Ask for the <strong>number of pages in a book</strong> and the <strong>number of pages already read</strong>. Calculate the percentage completed. If at least 50% has been read, print <code>More than halfway</code>; otherwise print <code>Less than halfway</code>. Display the percentage.`},
-    {id:"w03_g03_c", text:`Ask for the <strong>length of a journey in kilometres</strong> and the <strong>travel time in hours</strong>. Calculate average speed. If the speed is greater than 90 km/h, print <code>Fast journey</code>; otherwise print <code>Normal journey</code>. Display the average speed.`},
-    {id:"w03_g03_d", text:`Ask for a student's <strong>three marks</strong>. Calculate the average. If every mark is at least 40 and the average is at least 50, print <code>Passed</code>; otherwise print <code>Failed</code>. Display the average.`},
-    {id:"w03_g03_e", text:`Ask for the <strong>monthly income</strong> and <strong>monthly expenses</strong>. Calculate the balance. If the balance is positive, print <code>Surplus</code>; otherwise print <code>No surplus</code>. Display the balance.`},
-    {id:"w03_g03_f", text:`Ask for the <strong>weight of a parcel in kilograms</strong> and the <strong>price per kilogram</strong>. Calculate the shipping cost. If the parcel weighs more than 5 kg, add a 1,500 HUF surcharge. Display the final shipping cost and whether the surcharge was added.`}
-  ]
-};
-
-const STORAGE_KEY = "pycourse_warmup_week03_prototype";
-let pyodide = null;
-let ticker = null;
-
-function validNeptun(v){ return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase()); }
-function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-function loadState(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"null")}catch{return null} }
-function saveState(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
-
-function hashString(str){
-  let h = 2166136261;
-  for(let i=0;i<str.length;i++){ h ^= str.charCodeAt(i); h = Math.imul(h,16777619); }
-  return h >>> 0;
-}
-function assignedTask(neptun, group){
-  const pool=WARMUP_POOLS[group];
-  const idx=hashString(neptun+"|"+WARMUP_CONFIG.week+"|"+group)%pool.length;
-  return pool[idx];
-}
-function formatRemaining(ms){
-  const sec=Math.max(0,Math.ceil(ms/1000));
-  return String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0");
-}
-
-async function ensurePy(){
-  if(!pyodide) pyodide=await loadPyodide();
-}
-function inputPrompts(code){
-  const rx=/input\s*\(\s*(?:(["'])(.*?)\1)?\s*\)/g;
-  let a=[],m; while((m=rx.exec(code))!==null)a.push(m[2]||"Enter a value:");
-  return a;
-}
-async function execute(code, inputs){
-  await ensurePy();
-  pyodide.globals.set("student_code",code);
-  pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
-  const x=await pyodide.runPythonAsync(`
-import json,builtins,io,contextlib
-def _run(src, vals):
-    it=iter(json.loads(vals)); out=io.StringIO()
-    def inp(prompt=""):
-        try: value=next(it)
-        except StopIteration: raise EOFError("No more input values.")
-        if prompt: print(prompt,end="")
-        print(value)
-        return value
-    old=builtins.input
-    try:
-        builtins.input=inp
-        ns={"__name__":"__main__"}
-        with contextlib.redirect_stdout(out),contextlib.redirect_stderr(out):
-            exec(compile(src,"<student_code>","exec"),ns,ns)
-        return json.dumps({"ok":True,"output":out.getvalue().strip()})
-    except Exception as e:
-        return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
-    finally: builtins.input=old
-_run(student_code,student_inputs_json)
-`);
-  return JSON.parse(String(x));
-}
-
-function showTest(s){
-  document.getElementById("setup").classList.add("hidden");
-  document.getElementById("finished").classList.add("hidden");
-  document.getElementById("test").classList.remove("hidden");
-  document.getElementById("identity").textContent=`${s.neptun} · ${GROUP_LABELS[s.group]}`;
-  document.getElementById("variant").textContent=s.variant;
-  document.getElementById("task").innerHTML=s.taskText;
-  document.getElementById("code").value=s.code||"";
-  document.getElementById("runs").textContent=s.runs||0;
-  startTicker();
-}
-function showFinished(s){
-  document.getElementById("setup").classList.add("hidden");
-  document.getElementById("test").classList.add("hidden");
-  document.getElementById("finished").classList.remove("hidden");
-  const auto=s.submissionType==="timeout";
-  document.getElementById("finish-title").textContent=auto
-    ?"Time is up. Your solution has been submitted automatically."
-    :"Submission successful.";
-  document.getElementById("finish-text").textContent=
-    "Your result will be available by the next class at the latest.";
-  document.getElementById("finish-meta").textContent=
-    `Prototype local submission · ${GROUP_LABELS[s.group]} · Variant ${s.variant} · ${new Date(s.submittedAt).toLocaleString()}`;
-}
-function startTicker(){
-  clearInterval(ticker);
-  updateTimer();
-  ticker=setInterval(updateTimer,250);
-}
-function updateTimer(){
-  const s=loadState(); if(!s||s.submitted)return;
-  const remaining=s.deadline-Date.now();
-  document.getElementById("timer").textContent=formatRemaining(remaining);
-  if(remaining<=0) submitTest("timeout");
-}
-function persistCode(){
-  const s=loadState(); if(!s||s.submitted)return;
-  s.code=document.getElementById("code").value;
-  saveState(s);
-}
-async function runCode(){
-  let s=loadState(); if(!s||s.submitted)return;
-  persistCode(); s=loadState();
-  const prompts=inputPrompts(s.code); let vals=[];
-  for(const p of prompts.length?prompts:["Enter input value:"]){
-    const v=window.prompt(p); if(v===null)return; vals.push(v);
+document.getElementById("start-warmup").addEventListener("click", async () => {
+  const n = document.getElementById("neptun").value.trim().toUpperCase();
+  const msg = document.getElementById("warmup-message");
+  if (!/^[A-Z0-9]{6}$/.test(n)) {
+    msg.textContent = "Please enter a valid 6-character Neptun code.";
+    return;
   }
-  s.runs=(s.runs||0)+1; saveState(s);
-  document.getElementById("runs").textContent=s.runs;
-  const r=await execute(s.code,vals);
-  document.getElementById("output").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error;
-}
-function submitTest(type="manual"){
-  let s=loadState(); if(!s||s.submitted)return;
-  if(document.getElementById("code")) s.code=document.getElementById("code").value;
-  s.submitted=true;
-  s.submissionType=type;
-  s.submittedAt=Date.now();
-  // PROTOTYPE ONLY: replace this local save with an authenticated backend call.
-  saveState(s);
-  clearInterval(ticker);
-  showFinished(s);
-}
-function startTest(){
-  const n=document.getElementById("neptun").value.trim().toUpperCase();
-  const g=document.getElementById("group").value;
-  const msg=document.getElementById("setup-msg");
-  if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return;}
-  if(!g){msg.textContent="Please select your seminar group.";return;}
-  const t=assignedTask(n,g), now=Date.now();
-  const s={
-    neptun:n, group:g, variant:t.id, taskText:t.text,
-    startedAt:now, deadline:now+WARMUP_CONFIG.durationMinutes*60*1000,
-    code:"", runs:0, submitted:false
-  };
-  saveState(s); showTest(s);
-}
-function restore(){
-  const s=loadState(); if(!s)return;
-  if(s.submitted){showFinished(s);return;}
-  if(Date.now()>=s.deadline){submitTest("timeout");return;}
-  showTest(s);
-}
-
-document.getElementById("start").addEventListener("click",startTest);
-document.getElementById("run").addEventListener("click",runCode);
-document.getElementById("submit").addEventListener("click",()=>submitTest("manual"));
-document.getElementById("code").addEventListener("input",persistCode);
-window.addEventListener("beforeunload",persistCode);
-restore();
+  if (!API_BASE) {
+    msg.textContent = "Prototype ready: backend endpoint has not been configured yet.";
+    return;
+  }
+  // Production call: POST only the Neptun code to /start.
+  // The backend returns only the student's assigned group/task/deadline.
+});
 </script>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,10 +1,21 @@
 [
   {
-    "objectID": "warmup/03-practice-warmup.html",
-    "href": "warmup/03-practice-warmup.html",
+    "objectID": "warmup/03-warmup-practice.html",
+    "href": "warmup/03-warmup-practice.html",
     "title": "Practice Warm-up Test – Week 3",
     "section": "",
-    "text": "Practice Warm-up Test\n  This is a practice test and does not count towards your grade. You will receive one task from the pool assigned to your seminar group.\n  Prototype: submission is stored only in this browser. The production version will submit to the course backend.\n\n\n\n  \n    \n      Neptun code\n      \n    \n    \n      Seminar group\n      \n        Select your group…\n        Seminar Group 1\n        Seminar Group 2\n        Seminar Group 3\n      \n    \n    Start Warm-up Test\n  \n  Enter your Neptun code and select your seminar group.\n\n\n\n  \n    \n      Practice Warm-up Test – Week 3\n      \n      Time remaining: 10:00\n    \n  \n\n  \n    Task variant: \n    Your task\n    \n  \n\n  \n    Your Python code\n    \n    \n      ▶ Run\n      Submit\n    \n    Output\n    \n    Runs: 0\n  \n\n\n\n  Submission successful.\n  Your solution has been submitted successfully. Your result will be available by the next class at the latest.",
+    "text": "This is a practice test and does not count towards your grade.\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n  Neptun code\n  \n  Start Warm-up Test\n  \n\n\nThis prototype frontend is prepared for the backend architecture. Set API_BASE after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.",
+    "crumbs": [
+      "Lessons",
+      "Warm-up test sample"
+    ]
+  },
+  {
+    "objectID": "warmup/03-warmup-practice.html#practice-warm-up-test",
+    "href": "warmup/03-warmup-practice.html#practice-warm-up-test",
+    "title": "Practice Warm-up Test – Week 3",
+    "section": "",
+    "text": "This is a practice test and does not count towards your grade.\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n  Neptun code\n  \n  Start Warm-up Test\n  \n\n\nThis prototype frontend is prepared for the backend architecture. Set API_BASE after the Azure Function has been deployed. The roster and task pools must never be copied into this QMD or the public GitHub repository.",
     "crumbs": [
       "Lessons",
       "Warm-up test sample"

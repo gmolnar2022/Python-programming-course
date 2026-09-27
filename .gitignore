@@ -4,3 +4,7 @@ Thumbs.db
 
 /.quarto/
 **/*.quarto_ipynb
+
+private-data/
+__pycache__/
+*.pyc

@@ -1,0 +1,43 @@
+---
+title: "Practice Warm-up Test – Week 3"
+toc: false
+page-layout: full
+---
+
+## Practice Warm-up Test
+
+This is a practice test and does not count towards your grade.
+
+Enter your **Neptun code** and start the test. Your seminar group and task will be assigned automatically.
+
+```{=html}
+<div id="warmup-app">
+  <label for="neptun"><strong>Neptun code</strong></label>
+  <input id="neptun" maxlength="6" autocomplete="off">
+  <button id="start-warmup">Start Warm-up Test</button>
+  <p id="warmup-message"></p>
+</div>
+```
+
+> This prototype frontend is prepared for the backend architecture. Set `API_BASE`
+> after the Azure Function has been deployed. The roster and task pools must never
+> be copied into this QMD or the public GitHub repository.
+
+<script>
+const API_BASE = ""; // e.g. Azure Function endpoint, configured after deployment
+
+document.getElementById("start-warmup").addEventListener("click", async () => {
+  const n = document.getElementById("neptun").value.trim().toUpperCase();
+  const msg = document.getElementById("warmup-message");
+  if (!/^[A-Z0-9]{6}$/.test(n)) {
+    msg.textContent = "Please enter a valid 6-character Neptun code.";
+    return;
+  }
+  if (!API_BASE) {
+    msg.textContent = "Prototype ready: backend endpoint has not been configured yet.";
+    return;
+  }
+  // Production call: POST only the Neptun code to /start.
+  // The backend returns only the student's assigned group/task/deadline.
+});
+</script>

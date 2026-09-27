@@ -14,7 +14,7 @@ project:
     # Uncomment pages below when they are ready to publish:
     - lessons/02-simple-data-types.qmd
     - lessons/03-conditional-statements.qmd
-    - warmup/03-practice-warmup.qmd
+    - warmup/03-warmup-practice.qmd
     # - lessons/04-loops.qmd
     # - lessons/05-complex-data-types-1.qmd
     # - lessons/06-basic-algorithms-1.qmd
@@ -54,7 +54,7 @@ website:
             text: "3. Conditional Statements in Python"
           - href: exercises/03-class-exercises.qmd
             text: "Class Exercises"
-          - href: warmup/03-practice-warmup.qmd
+          - href: warmup/03-warmup-practice.qmd
             text: "Warm-up test sample"  
           # - href: lessons/04-loops.qmd
           #   text: "4. Loops in Python"
