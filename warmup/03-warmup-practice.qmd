@@ -10,6 +10,8 @@ page-layout: full
 This is a **practice test** and does not count towards your grade.
 
 You have **10 minutes** from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.
+
+**Test window rule:** During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The **first detected switch** results in a warning. The **second detected switch** automatically submits your current solution and ends the test.
 :::
 
 Enter your **Neptun code** and start the test. Your seminar group and task will be assigned automatically.
@@ -28,6 +30,16 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
 #warmup-message { font-weight:600; }
 .timer-warning { font-weight:700; }
 .submitted-box { padding:1rem; border:1px solid #d9d9d9; border-radius:.4rem; }
+.rules-ack { margin:.8rem 0; }
+#warmup-warning-overlay {
+  display:none; position:fixed; inset:0; z-index:99999;
+  background:rgba(0,0,0,.55); align-items:center; justify-content:center; padding:1rem;
+}
+#warmup-warning-dialog {
+  max-width:560px; background:white; padding:1.4rem; border-radius:.5rem;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+#warmup-warning-dialog h3 { margin-top:0; }
 </style>
 
 <div id="warmup-app">
@@ -35,6 +47,14 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
     <div class="warmup-row">
       <label for="neptun"><strong>Neptun code</strong></label>
       <input id="neptun" maxlength="6" autocomplete="off">
+    </div>
+    <div class="rules-ack">
+      <label>
+        <input id="accept-rules" type="checkbox">
+        I have read and understood the test rules, including the window-switch rule.
+      </label>
+    </div>
+    <div class="warmup-row">
       <button id="start-warmup" type="button">Start Warm-up Test</button>
     </div>
     <p id="warmup-message"></p>
@@ -61,6 +81,15 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
     <pre id="program-output"></pre>
     <p id="submission-message"></p>
   </div>
+
+  <div id="warmup-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="warmup-warning-title">
+    <div id="warmup-warning-dialog">
+      <h3 id="warmup-warning-title">Warning – window switch detected</h3>
+      <p>You left the test window. This is your first warning.</p>
+      <p><strong>If you leave the test window again, your current solution will be submitted automatically and the test will end.</strong></p>
+      <button id="continue-test" type="button">Continue test</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js"></script>
@@ -76,6 +105,10 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
   let timerHandle = null;
   let submitting = false;
   let submitted = false;
+  let focusLossCount = 0;
+  let hiddenSince = null;
+  let visibilityCheckHandle = null;
+  const FOCUS_LOSS_THRESHOLD_MS = 1500;
 
   const $ = (id) => document.getElementById(id);
   const neptunInput = $("neptun");
@@ -88,6 +121,9 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
   const submitButton = $("submit-code");
   const runtimeStatus = $("runtime-status");
   const submissionMessage = $("submission-message");
+  const acceptRules = $("accept-rules");
+  const warningOverlay = $("warmup-warning-overlay");
+  const continueTestButton = $("continue-test");
 
   const savedNeptun = localStorage.getItem("pycourse_neptun");
   if (savedNeptun) neptunInput.value = savedNeptun;
@@ -138,6 +174,7 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
     $("warmup-task").innerHTML = data.task.text;
     startButton.disabled = true;
     neptunInput.disabled = true;
+    acceptRules.disabled = true;
     panel.style.display = "block";
     startTimer();
   }
@@ -151,6 +188,11 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
       return;
     }
 
+    if (!acceptRules.checked) {
+      startMessage.textContent = "Please confirm that you have read and understood the test rules.";
+      return;
+    }
+
     startButton.disabled = true;
     startMessage.textContent = "Starting...";
     try {
@@ -161,6 +203,64 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
     } catch (err) {
       startMessage.textContent = err.message;
       startButton.disabled = false;
+    }
+  });
+
+  function showFirstFocusWarning() {
+    editor.disabled = true;
+    runButton.disabled = true;
+    submitButton.disabled = true;
+    warningOverlay.style.display = "flex";
+  }
+
+  continueTestButton.addEventListener("click", () => {
+    warningOverlay.style.display = "none";
+    if (!submitted && !submitting) {
+      editor.disabled = false;
+      runButton.disabled = false;
+      submitButton.disabled = false;
+      editor.focus();
+    }
+  });
+
+  async function registerFocusLoss() {
+    if (!assignment || submitted || submitting) return;
+
+    focusLossCount += 1;
+
+    if (focusLossCount === 1) {
+      showFirstFocusWarning();
+      return;
+    }
+
+    // Second detected switch: submit immediately using the existing backend.
+    warningOverlay.style.display = "none";
+    await submitSolution("window_switch");
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (!assignment || submitted || submitting) return;
+
+    if (document.hidden) {
+      hiddenSince = Date.now();
+
+      clearTimeout(visibilityCheckHandle);
+      visibilityCheckHandle = setTimeout(() => {
+        if (
+          document.hidden &&
+          hiddenSince !== null &&
+          Date.now() - hiddenSince >= FOCUS_LOSS_THRESHOLD_MS
+        ) {
+          // Count the event while the page is hidden. This is important on the
+          // second switch so submission can start without waiting for return.
+          hiddenSince = null;
+          registerFocusLoss();
+        }
+      }, FOCUS_LOSS_THRESHOLD_MS);
+    } else {
+      clearTimeout(visibilityCheckHandle);
+      visibilityCheckHandle = null;
+      hiddenSince = null;
     }
   });
 
@@ -212,7 +312,10 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
     runButton.disabled = true;
     submitButton.disabled = true;
     editor.disabled = true;
-    submissionMessage.textContent = type === "timeout" ? "Time is up. Submitting..." : "Submitting...";
+    submissionMessage.textContent =
+      type === "timeout" ? "Time is up. Submitting..." :
+      type === "window_switch" ? "Second window switch detected. Submitting your current solution..." :
+      "Submitting...";
 
     try {
       const data = await postJson(`${API_BASE}/submitWarmup`, {
@@ -231,9 +334,16 @@ Enter your **Neptun code** and start the test. Your seminar group and task will 
       runtimeStatus.textContent = "";
 
       submissionMessage.className = "submitted-box";
-      submissionMessage.textContent = type === "timeout"
-        ? "Time is up. Your solution has been submitted automatically. Your result will be available by the next class at the latest."
-        : (data.message || "Submission successful. Your result will be available by the next class at the latest.");
+      if (type === "timeout") {
+        submissionMessage.textContent =
+          "Time is up. Your solution has been submitted automatically. Your result will be available by the next class at the latest.";
+      } else if (type === "window_switch") {
+        submissionMessage.textContent =
+          "Test ended. A second window switch was detected. According to the test rules, your current solution has been submitted automatically. Your result will be available by the next class at the latest.";
+      } else {
+        submissionMessage.textContent =
+          data.message || "Submission successful. Your result will be available by the next class at the latest.";
+      }
     } catch (err) {
       // Do not claim success until the backend confirms storage.
       editor.disabled = false;
