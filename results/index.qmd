@@ -1,0 +1,582 @@
+---
+title: "Test Result"
+toc: false
+page-layout: full
+---
+
+```{=html}
+<style>
+
+#result-app {
+  max-width: 900px;
+  margin: 1rem 0;
+}
+
+.result-card {
+  border: 1px solid #d9d9d9;
+  border-radius: .5rem;
+  padding: 1.2rem;
+  margin: 1rem 0;
+}
+
+.result-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.score-box {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid #d9d9d9;
+  border-radius: .4rem;
+}
+
+.score-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+.feedback-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f7f7f7;
+  border-radius: .4rem;
+}
+
+.task-card {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  border: 1px solid #d9d9d9;
+  border-radius: .5rem;
+}
+
+.task-card h3 {
+  margin-top: 0;
+}
+
+.solution-code {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  padding: 1rem;
+  background: #f7f7f7;
+  border: 1px solid #e1e1e1;
+  border-radius: .4rem;
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Consolas,
+    monospace;
+}
+
+.hidden-summary {
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.teacher-comment {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-left: 4px solid #777;
+  background: #f7f7f7;
+}
+
+.pending-note {
+  margin-top: .7rem;
+}
+
+</style>
+
+<div id="result-app">
+
+  <div id="loading">
+    Loading result...
+  </div>
+
+  <div
+    id="result-content"
+    style="display:none;">
+  </div>
+
+</div>
+
+<script>
+
+(() => {
+
+  const API_BASE =
+    "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+
+
+  const loading =
+    document.getElementById(
+      "loading"
+    );
+
+
+  const content =
+    document.getElementById(
+      "result-content"
+    );
+
+
+  /*
+   * Escape values before inserting them
+   * into HTML.
+   */
+
+  function escapeHtml(value) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+  }
+
+
+  /*
+   * Preserve line breaks in normal text.
+   */
+
+  function textWithBreaks(value) {
+
+    return escapeHtml(value)
+      .replaceAll(
+        "\n",
+        "<br>"
+      );
+  }
+
+
+  /*
+   * Task details shown after preliminary
+   * results become available.
+   */
+
+  function renderTasks(tasks) {
+
+    if (
+      !Array.isArray(tasks) ||
+      tasks.length === 0
+    ) {
+      return "";
+    }
+
+
+    return tasks
+      .map(task => {
+
+        const passed =
+          task.hidden_tests?.passed;
+
+        const total =
+          task.hidden_tests?.total;
+
+
+        let hiddenHtml = "";
+
+
+        if (
+          Number.isFinite(
+            Number(passed)
+          ) &&
+          Number.isFinite(
+            Number(total)
+          )
+        ) {
+
+          hiddenHtml = `
+            <div class="hidden-summary">
+              Hidden tests:
+              ${escapeHtml(passed)}
+              /
+              ${escapeHtml(total)}
+              passed
+            </div>
+          `;
+        }
+
+
+        let expectedOutputHtml = "";
+
+
+        if (task.expected_output) {
+
+          expectedOutputHtml = `
+            <p>
+              <strong>Expected output:</strong>
+              ${textWithBreaks(
+                task.expected_output
+              )}
+            </p>
+          `;
+        }
+
+
+        let feedbackHtml = "";
+
+
+        if (task.automated_feedback) {
+
+          feedbackHtml = `
+            <div class="feedback-box">
+
+              <p>
+                <strong>
+                  Automated feedback
+                </strong>
+              </p>
+
+              <p>
+                ${textWithBreaks(
+                  task.automated_feedback
+                )}
+              </p>
+
+            </div>
+          `;
+        }
+
+
+        return `
+          <div class="task-card">
+
+            <h3>
+              ${escapeHtml(
+                task.title ||
+                "Task"
+              )}
+            </h3>
+
+            <p>
+              ${textWithBreaks(
+                task.text
+              )}
+            </p>
+
+            ${expectedOutputHtml}
+
+            <p>
+              <strong>
+                Your solution
+              </strong>
+            </p>
+
+            <pre class="solution-code">${escapeHtml(
+              task.code || ""
+            )}</pre>
+
+            ${hiddenHtml}
+
+            ${feedbackHtml}
+
+          </div>
+        `;
+
+      })
+      .join("");
+  }
+
+
+  /*
+   * Pending result.
+   */
+
+  function renderPending(data) {
+
+    content.innerHTML = `
+      <div class="result-card">
+
+        <div class="result-status">
+          Submission received
+        </div>
+
+        <p>
+          ${escapeHtml(
+            data.message ||
+            "Your submission has been received."
+          )}
+        </p>
+
+        <p class="pending-note">
+          ${
+            escapeHtml(
+              data.preliminary_result_message ||
+              "Preliminary results are usually available within approximately 15 minutes."
+            )
+          }
+        </p>
+
+        <p class="pending-note">
+          ${
+            escapeHtml(
+              data.final_result_message ||
+              "Final results will normally be available within one week after instructor review."
+            )
+          }
+        </p>
+
+      </div>
+    `;
+  }
+
+
+  /*
+   * Preliminary automated result.
+   */
+
+  function renderPreliminary(data) {
+
+    content.innerHTML = `
+      <div class="result-card">
+
+        <div class="result-status">
+          Preliminary result
+        </div>
+
+        <div class="score-box">
+
+          <div>
+            Preliminary score
+          </div>
+
+          <div class="score-value">
+            ${escapeHtml(
+              data.preliminary_score
+            )}
+            /
+            ${escapeHtml(
+              data.max_score
+            )}
+          </div>
+
+        </div>
+
+        <p>
+          This is an automated preliminary result.
+          The instructor may change the final score
+          after reviewing your submission.
+        </p>
+
+      </div>
+
+      ${renderTasks(
+        data.tasks
+      )}
+    `;
+  }
+
+
+  /*
+   * Final instructor-reviewed result.
+   */
+
+  function renderFinal(data) {
+
+    let teacherComment = "";
+
+
+    if (data.teacher_comment) {
+
+      teacherComment = `
+        <div class="teacher-comment">
+
+          <p>
+            <strong>
+              Teacher comment
+            </strong>
+          </p>
+
+          <p>
+            ${textWithBreaks(
+              data.teacher_comment
+            )}
+          </p>
+
+        </div>
+      `;
+    }
+
+
+    
+
+
+    content.innerHTML = `
+      <div class="result-card">
+
+        <div class="result-status">
+          Final result
+        </div>
+
+        <div class="score-box">
+
+          <div>
+            Final score
+          </div>
+
+          <div class="score-value">
+            ${escapeHtml(
+              data.final_score
+            )}
+            /
+            ${escapeHtml(
+              data.max_score
+            )}
+          </div>
+
+        </div>
+
+        ${teacherComment}
+
+        
+      </div>
+
+      ${renderTasks(
+        data.tasks
+      )}
+    `;
+  }
+
+
+  /*
+   * Load result token from URL.
+   */
+
+  async function loadResult() {
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+
+    const token =
+      params.get(
+        "token"
+      );
+
+
+    if (!token) {
+
+      loading.textContent =
+        "Invalid result link.";
+
+      return;
+    }
+
+
+    try {
+
+      const response =
+        await fetch(
+          `${API_BASE}/getResult?token=${encodeURIComponent(
+            token
+          )}`
+        );
+
+
+      let data = {};
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch (_) {}
+
+
+      if (
+        !response.ok ||
+        data.success === false
+      ) {
+
+        throw new Error(
+          data.error ||
+          "Result could not be loaded."
+        );
+      }
+
+
+      loading.style.display =
+        "none";
+
+
+      content.style.display =
+        "block";
+
+
+      if (
+        data.result_status ===
+        "pending"
+      ) {
+
+        renderPending(data);
+
+        return;
+      }
+
+
+      if (
+        data.result_status ===
+        "preliminary"
+      ) {
+
+        renderPreliminary(data);
+
+        return;
+      }
+
+
+      if (
+        data.result_status ===
+        "final"
+      ) {
+
+        renderFinal(data);
+
+        return;
+      }
+
+
+      content.innerHTML = `
+        <div class="result-card">
+          Unknown result status.
+        </div>
+      `;
+
+
+    } catch (err) {
+
+      loading.textContent =
+        err.message ||
+        "Result could not be loaded.";
+    }
+  }
+
+
+  loadResult();
+
+})();
+
+</script>
+```
