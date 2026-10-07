@@ -1230,7 +1230,6 @@ Enter your **Neptun code** and the **classroom access code** displayed by your i
   ) {
 
     const resultUrl =
-      data.result_url ||
       buildResultUrl(
         data.result_token
       );
