@@ -1,0 +1,683 @@
+---
+title: "Week 4 – Loops in Python"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this week, you should be able to:
+
+- use `for` loops to repeat a block of code;
+- generate integer sequences with `range()`;
+- use `while` loops when repetition depends on a condition;
+- create nested loops;
+- understand and use `break`, `continue`, and `pass`;
+- emulate a post-test loop in Python;
+- generate random values with the `random` module;
+- treat strings as sequences of characters;
+- use basic string operators, indexing, slicing, and membership tests.
+
+::: {.callout-important}
+### Indentation matters
+
+Python uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.
+
+```python
+for i in range(3):
+    print(i)
+```
+
+Incorrect indentation changes the program structure or causes an error.
+:::
+
+## 1. Repetition and loops
+
+Programs often need to execute the same operation several times. Instead of writing the same statement repeatedly, we can use a **loop**.
+
+Two important loop types in Python are:
+
+- `for` – useful when we iterate over a sequence or a known range of values;
+- `while` – useful when repetition continues as long as a condition is true.
+
+## 2. The `for` loop
+
+A `for` loop executes a block of code repeatedly. A common form uses the `range()` function.
+
+```python
+for loop_variable in range(n):
+    statements
+```
+
+The first line is the **loop head**. The indented statements form the **loop body**.
+
+For example:
+
+```python
+for i in range(5):
+    print("Hello World")
+```
+
+The loop body is executed five times.
+
+The loop variable can also be used inside the loop:
+
+```python
+for i in range(3):
+    print(i)
+```
+
+Output:
+
+```text
+0
+1
+2
+```
+
+Notice that counting starts at `0`.
+
+If the loop variable is not needed, `_` can be used:
+
+```python
+for _ in range(5):
+    print("Hello")
+```
+
+## 3. The `range()` function
+
+The `range()` function generates a sequence of integers that can be used by a `for` loop.
+
+### `range(end)`
+
+```python
+for i in range(5):
+    print(i)
+```
+
+produces:
+
+```text
+0
+1
+2
+3
+4
+```
+
+The value `5` itself is **not included**.
+
+### `range(start, end)`
+
+A starting value can also be specified:
+
+```python
+for i in range(3, 6):
+    print(i)
+```
+
+Output:
+
+```text
+3
+4
+5
+```
+
+### `range(start, end, step)`
+
+The third argument specifies the difference between consecutive values:
+
+```python
+for i in range(1, 10, 2):
+    print(i)
+```
+
+Output:
+
+```text
+1
+3
+5
+7
+9
+```
+
+Therefore:
+
+```text
+range(start, end, step)
+```
+
+has three possible components:
+
+- `start` – starting value;
+- `end` – value just after the last generated value;
+- `step` – difference between consecutive values.
+
+::: {.callout-tip}
+### Remember
+
+The `end` value of `range()` is not included.
+
+For example, `range(1, 5)` generates `1, 2, 3, 4`.
+:::
+
+A negative step can be used for counting backwards:
+
+```python
+for i in range(5, 0, -1):
+    print(i)
+```
+
+Output:
+
+```text
+5
+4
+3
+2
+1
+```
+
+## 4. The `while` loop
+
+A `while` loop executes its body **as long as its condition is true**.
+
+```python
+while condition:
+    statements
+```
+
+Because the condition is checked before the loop body is executed, this is a **pre-test loop**.
+
+Example:
+
+```python
+i = 1
+
+while i < 5:
+    print(i)
+    i = i + 1
+```
+
+Output:
+
+```text
+1
+2
+3
+4
+```
+
+The variable `i` changes during every iteration. Eventually the condition becomes false and the loop stops.
+
+::: {.callout-warning}
+### Avoid accidental infinite loops
+
+A `while` loop must normally change something that affects its condition.
+
+This loop never terminates:
+
+```python
+i = 1
+
+while i < 5:
+    print(i)
+```
+
+because `i` never changes.
+:::
+
+A `while` loop can also be used when the number of repetitions depends on user input:
+
+```python
+n = int(input("Enter a positive whole number: "))
+
+i = 0
+
+while i < n:
+    i = i + 1
+
+    if n % i == 0:
+        print(i)
+```
+
+This example prints the divisors of `n`.
+
+## 5. Nested loops
+
+A loop can contain another loop. This is called a **nested loop**.
+
+The outside loop is the **outer loop**, and the loop inside it is the **inner loop**.
+
+```python
+for i in range(n):
+    statements
+
+    for j in range(m):
+        statements
+```
+
+Both `for` and `while` loops can be nested, and the two types can also be combined.
+
+Example:
+
+```python
+for i in range(1, 10):
+    print(f"divisors of {i}:", end=" ")
+
+    for j in range(1, i + 1):
+        if i % j == 0:
+            print(j, end=" ")
+
+    print("")
+```
+
+For every value of `i`, the inner loop checks possible divisors.
+
+::: {.callout-note}
+With nested loops, indentation shows which statements belong to the outer loop and which belong to the inner loop. Read the program one indentation level at a time.
+:::
+
+## 6. `break` and `continue`
+
+Python provides statements that can change the normal execution of a loop.
+
+### `break`
+
+The `break` statement immediately exits the current loop, regardless of the loop condition.
+
+```python
+i = 0
+
+while True:
+    i = i + 1
+    print(i)
+
+    if i == 5:
+        break
+```
+
+After `break`, execution continues with the first statement after the loop.
+
+### `continue`
+
+The `continue` statement skips the rest of the **current iteration** and moves to the next iteration.
+
+```python
+for i in range(1, 10):
+
+    if i % 2 == 1:
+        continue
+
+    print(i)
+```
+
+Output:
+
+```text
+2
+4
+6
+8
+```
+
+::: {.callout-warning}
+### Use `break` and `continue` carefully
+
+Although `break` and `continue` are valid Python statements, in this course we generally prefer loop conditions and program structures that make the control flow clear without them when a simple alternative exists.
+
+A related statement, `return`, will be introduced later when we study functions.
+:::
+
+## 7. The `pass` statement
+
+`pass` is a **null statement**: it performs no operation.
+
+It is useful as a placeholder when Python requires a statement but the program logic has not yet been implemented.
+
+```python
+n = int(input("Enter a positive whole number: "))
+
+if n > 0:
+    print("Thank you")
+else:
+    pass
+```
+
+It can also appear in a loop:
+
+```python
+n = 0
+
+while n < 100:
+    n = n + 1
+    pass
+```
+
+`pass` does **not** exit the loop and does **not** skip to the next iteration. It simply does nothing.
+
+## 8. Emulating a post-test loop
+
+Python does not have a built-in post-test loop. However, we can emulate one.
+
+A post-test structure is useful when the loop body must execute at least once before the termination condition is checked.
+
+One possible form is:
+
+```python
+while True:
+
+    n = int(
+        input(
+            "Enter a whole number between 1 and 100: "
+        )
+    )
+
+    if n >= 1 and n <= 100:
+        print("Thank you")
+        break
+```
+
+Another solution uses a logical variable:
+
+```python
+more = True
+
+while more:
+
+    n = int(
+        input(
+            "Enter a whole number between 1 and 100: "
+        )
+    )
+
+    if n >= 1 and n <= 100:
+        more = False
+        print("Thank you")
+```
+
+The second form avoids `break` and makes the loop condition explicit.
+
+## 9. Random numbers
+
+Programs often need values that are not known in advance. Python provides random-number functionality through the `random` module.
+
+First, the module must be imported:
+
+```python
+import random
+```
+
+### `random.random()`
+
+`random.random()` returns a floating-point value between `0` and `1`.
+
+```python
+import random
+
+x = random.random()
+print(f"{x:.4f}")
+```
+
+A possible result is:
+
+```text
+0.8384
+```
+
+The exact result can be different each time the program runs.
+
+### `random.randint(a, b)`
+
+`random.randint(a, b)` returns a random integer between `a` and `b`, **including both endpoints**.
+
+```python
+import random
+
+x = random.randint(1, 5)
+print(x)
+```
+
+A possible result is:
+
+```text
+3
+```
+
+### `random.randrange(start, end, step)`
+
+`random.randrange()` selects a random value from a range described in a similar way to `range()`.
+
+```python
+import random
+
+x = random.randrange(2, 8, 3)
+print(x)
+```
+
+Possible values are `2` and `5`. The `end` value is not included.
+
+::: {.callout-important}
+### Import rule for this course
+
+In this course, importing library modules is generally not allowed unless the task explicitly permits it.
+
+The **`random` module is an important exception** and may be used when random-number generation is required.
+
+Later in the course, you will also learn how to create and import your **own modules**.
+:::
+
+### Random numbers and loops
+
+Random numbers become especially useful when combined with loops. For example, we can simulate several dice rolls:
+
+```python
+import random
+
+for _ in range(5):
+    dice = random.randint(1, 6)
+    print(dice)
+```
+
+This pattern will be useful in later programming exercises.
+
+## 10. Strings as sequences of characters
+
+A `str` value can be interpreted as a **sequence of characters**.
+
+For example:
+
+```python
+name = "John White"
+```
+
+Every character has a position called an **index**. Indexing starts at `0`.
+
+```text
+Character: J  o  h  n     W  h  i  t  e
+Index:     0  1  2  3  4  5  6  7  8  9
+```
+
+Python also supports negative indexes:
+
+```text
+Index:   -10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+```
+
+Therefore:
+
+```python
+name = "John White"
+
+print(name[0])
+print(name[-1])
+```
+
+Output:
+
+```text
+J
+e
+```
+
+### Iterating over a string
+
+Because a string is a sequence, a `for` loop can process its characters one by one:
+
+```python
+name = "John"
+
+for character in name:
+    print(character)
+```
+
+Output:
+
+```text
+J
+o
+h
+n
+```
+
+This is an important connection between **loops** and **strings**.
+
+## 11. String slicing
+
+A substring can be selected with the slicing operator:
+
+```python
+string[start:end]
+```
+
+Example:
+
+```python
+name = "John White"
+
+first_six_chars = name[0:6]
+print(first_six_chars)
+```
+
+Output:
+
+```text
+John W
+```
+
+Negative indexes can also be used:
+
+```python
+name = "John White"
+
+last_two_chars = name[-2:]
+print(last_two_chars)
+```
+
+Output:
+
+```text
+te
+```
+
+A slice can also contain a step:
+
+```python
+string[start:end:step]
+```
+
+For example:
+
+```python
+text = "abcdef"
+
+print(text[0:6:2])
+```
+
+Output:
+
+```text
+ace
+```
+
+::: {.callout-warning}
+### Strings are immutable
+
+Individual characters of an existing string cannot be changed directly.
+
+This causes an error:
+
+```python
+s = "Hello"
+s[1] = "a"
+```
+
+If a different string is required, a new string must be created.
+:::
+
+## 12. String operators
+
+Several operators can be used with strings.
+
+| Operator | Meaning | Example | Result |
+|---|---|---|---|
+| `+` | Concatenation | `"John" + " " + "White"` | `"John White"` |
+| `*` | Repetition | `"John White " * 2` | `"John White John White "` |
+| `[]` | Indexing | `"John White"[2]` | `"h"` |
+| `[a:b]` | Slicing | `"John White"[2:5]` | `"hn "` |
+| `>` | Greater than | `"John" > "White"` | `False` |
+| `<` | Less than | `"apple" < "pear"` | `True` |
+| `==` | Equal | `"ite" == "White"` | `False` |
+| `!=` | Not equal | `"ite" != "White"` | `True` |
+| `in` | Membership | `"i" in "White"` | `True` |
+
+The slicing operator can also use a step:
+
+```python
+string[a:b:c]
+```
+
+where `c` is the step value.
+
+### Membership and loops
+
+The `in` operator can test whether a character or substring occurs in a string:
+
+```python
+text = "Python"
+
+if "y" in text:
+    print("Found")
+```
+
+A loop can also inspect every character:
+
+```python
+text = "Python"
+
+for character in text:
+    print(character)
+```
+
+These ideas will be used frequently in later text-processing tasks.
+
+## Summary
+
+This week introduced repetition and sequence processing in Python.
+
+You learned how to:
+
+- repeat statements with `for` and `while`;
+- generate sequences of integers with `range()`;
+- create nested loops;
+- influence loop execution with `break` and `continue`;
+- use `pass` as a placeholder;
+- emulate a post-test loop;
+- generate random values using the `random` module;
+- access and process characters in strings;
+- use string indexing, slicing, comparison, repetition, concatenation, and membership.
+
+The next practical exercises will combine these concepts with the variables, input/output, operators, and conditional statements introduced in the previous weeks.

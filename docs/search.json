@@ -1,5 +1,170 @@
 [
   {
+    "objectID": "lessons/04-loops.html",
+    "href": "lessons/04-loops.html",
+    "title": "Week 4 – Loops in Python",
+    "section": "",
+    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#learning-objectives",
+    "href": "lessons/04-loops.html#learning-objectives",
+    "title": "Week 4 – Loops in Python",
+    "section": "",
+    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#repetition-and-loops",
+    "href": "lessons/04-loops.html#repetition-and-loops",
+    "title": "Week 4 – Loops in Python",
+    "section": "1. Repetition and loops",
+    "text": "1. Repetition and loops\nPrograms often need to execute the same operation several times. Instead of writing the same statement repeatedly, we can use a loop.\nTwo important loop types in Python are:\n\nfor – useful when we iterate over a sequence or a known range of values;\nwhile – useful when repetition continues as long as a condition is true.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-for-loop",
+    "href": "lessons/04-loops.html#the-for-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "2. The for loop",
+    "text": "2. The for loop\nA for loop executes a block of code repeatedly. A common form uses the range() function.\nfor loop_variable in range(n):\n    statements\nThe first line is the loop head. The indented statements form the loop body.\nFor example:\nfor i in range(5):\n    print(\"Hello World\")\nThe loop body is executed five times.\nThe loop variable can also be used inside the loop:\nfor i in range(3):\n    print(i)\nOutput:\n0\n1\n2\nNotice that counting starts at 0.\nIf the loop variable is not needed, _ can be used:\nfor _ in range(5):\n    print(\"Hello\")",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-range-function",
+    "href": "lessons/04-loops.html#the-range-function",
+    "title": "Week 4 – Loops in Python",
+    "section": "3. The range() function",
+    "text": "3. The range() function\nThe range() function generates a sequence of integers that can be used by a for loop.\n\nrange(end)\nfor i in range(5):\n    print(i)\nproduces:\n0\n1\n2\n3\n4\nThe value 5 itself is not included.\n\n\nrange(start, end)\nA starting value can also be specified:\nfor i in range(3, 6):\n    print(i)\nOutput:\n3\n4\n5\n\n\nrange(start, end, step)\nThe third argument specifies the difference between consecutive values:\nfor i in range(1, 10, 2):\n    print(i)\nOutput:\n1\n3\n5\n7\n9\nTherefore:\nrange(start, end, step)\nhas three possible components:\n\nstart – starting value;\nend – value just after the last generated value;\nstep – difference between consecutive values.\n\n\n\n\n\n\n\nTipRemember\n\n\n\nThe end value of range() is not included.\nFor example, range(1, 5) generates 1, 2, 3, 4.\n\n\nA negative step can be used for counting backwards:\nfor i in range(5, 0, -1):\n    print(i)\nOutput:\n5\n4\n3\n2\n1",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-while-loop",
+    "href": "lessons/04-loops.html#the-while-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "4. The while loop",
+    "text": "4. The while loop\nA while loop executes its body as long as its condition is true.\nwhile condition:\n    statements\nBecause the condition is checked before the loop body is executed, this is a pre-test loop.\nExample:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\n    i = i + 1\nOutput:\n1\n2\n3\n4\nThe variable i changes during every iteration. Eventually the condition becomes false and the loop stops.\n\n\n\n\n\n\nWarningAvoid accidental infinite loops\n\n\n\nA while loop must normally change something that affects its condition.\nThis loop never terminates:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\nbecause i never changes.\n\n\nA while loop can also be used when the number of repetitions depends on user input:\nn = int(input(\"Enter a positive whole number: \"))\n\ni = 0\n\nwhile i &lt; n:\n    i = i + 1\n\n    if n % i == 0:\n        print(i)\nThis example prints the divisors of n.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#nested-loops",
+    "href": "lessons/04-loops.html#nested-loops",
+    "title": "Week 4 – Loops in Python",
+    "section": "5. Nested loops",
+    "text": "5. Nested loops\nA loop can contain another loop. This is called a nested loop.\nThe outside loop is the outer loop, and the loop inside it is the inner loop.\nfor i in range(n):\n    statements\n\n    for j in range(m):\n        statements\nBoth for and while loops can be nested, and the two types can also be combined.\nExample:\nfor i in range(1, 10):\n    print(f\"divisors of {i}:\", end=\" \")\n\n    for j in range(1, i + 1):\n        if i % j == 0:\n            print(j, end=\" \")\n\n    print(\"\")\nFor every value of i, the inner loop checks possible divisors.\n\n\n\n\n\n\nNote\n\n\n\nWith nested loops, indentation shows which statements belong to the outer loop and which belong to the inner loop. Read the program one indentation level at a time.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#break-and-continue",
+    "href": "lessons/04-loops.html#break-and-continue",
+    "title": "Week 4 – Loops in Python",
+    "section": "6. break and continue",
+    "text": "6. break and continue\nPython provides statements that can change the normal execution of a loop.\n\nbreak\nThe break statement immediately exits the current loop, regardless of the loop condition.\ni = 0\n\nwhile True:\n    i = i + 1\n    print(i)\n\n    if i == 5:\n        break\nAfter break, execution continues with the first statement after the loop.\n\n\ncontinue\nThe continue statement skips the rest of the current iteration and moves to the next iteration.\nfor i in range(1, 10):\n\n    if i % 2 == 1:\n        continue\n\n    print(i)\nOutput:\n2\n4\n6\n8\n\n\n\n\n\n\nWarningUse break and continue carefully\n\n\n\nAlthough break and continue are valid Python statements, in this course we generally prefer loop conditions and program structures that make the control flow clear without them when a simple alternative exists.\nA related statement, return, will be introduced later when we study functions.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-pass-statement",
+    "href": "lessons/04-loops.html#the-pass-statement",
+    "title": "Week 4 – Loops in Python",
+    "section": "7. The pass statement",
+    "text": "7. The pass statement\npass is a null statement: it performs no operation.\nIt is useful as a placeholder when Python requires a statement but the program logic has not yet been implemented.\nn = int(input(\"Enter a positive whole number: \"))\n\nif n &gt; 0:\n    print(\"Thank you\")\nelse:\n    pass\nIt can also appear in a loop:\nn = 0\n\nwhile n &lt; 100:\n    n = n + 1\n    pass\npass does not exit the loop and does not skip to the next iteration. It simply does nothing.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#emulating-a-post-test-loop",
+    "href": "lessons/04-loops.html#emulating-a-post-test-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "8. Emulating a post-test loop",
+    "text": "8. Emulating a post-test loop\nPython does not have a built-in post-test loop. However, we can emulate one.\nA post-test structure is useful when the loop body must execute at least once before the termination condition is checked.\nOne possible form is:\nwhile True:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        print(\"Thank you\")\n        break\nAnother solution uses a logical variable:\nmore = True\n\nwhile more:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        more = False\n        print(\"Thank you\")\nThe second form avoids break and makes the loop condition explicit.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#random-numbers",
+    "href": "lessons/04-loops.html#random-numbers",
+    "title": "Week 4 – Loops in Python",
+    "section": "9. Random numbers",
+    "text": "9. Random numbers\nPrograms often need values that are not known in advance. Python provides random-number functionality through the random module.\nFirst, the module must be imported:\nimport random\n\nrandom.random()\nrandom.random() returns a floating-point value between 0 and 1.\nimport random\n\nx = random.random()\nprint(f\"{x:.4f}\")\nA possible result is:\n0.8384\nThe exact result can be different each time the program runs.\n\n\nrandom.randint(a, b)\nrandom.randint(a, b) returns a random integer between a and b, including both endpoints.\nimport random\n\nx = random.randint(1, 5)\nprint(x)\nA possible result is:\n3\n\n\nrandom.randrange(start, end, step)\nrandom.randrange() selects a random value from a range described in a similar way to range().\nimport random\n\nx = random.randrange(2, 8, 3)\nprint(x)\nPossible values are 2 and 5. The end value is not included.\n\n\n\n\n\n\nImportantImport rule for this course\n\n\n\nIn this course, importing library modules is generally not allowed unless the task explicitly permits it.\nThe random module is an important exception and may be used when random-number generation is required.\nLater in the course, you will also learn how to create and import your own modules.\n\n\n\n\nRandom numbers and loops\nRandom numbers become especially useful when combined with loops. For example, we can simulate several dice rolls:\nimport random\n\nfor _ in range(5):\n    dice = random.randint(1, 6)\n    print(dice)\nThis pattern will be useful in later programming exercises.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#strings-as-sequences-of-characters",
+    "href": "lessons/04-loops.html#strings-as-sequences-of-characters",
+    "title": "Week 4 – Loops in Python",
+    "section": "10. Strings as sequences of characters",
+    "text": "10. Strings as sequences of characters\nA str value can be interpreted as a sequence of characters.\nFor example:\nname = \"John White\"\nEvery character has a position called an index. Indexing starts at 0.\nCharacter: J  o  h  n     W  h  i  t  e\nIndex:     0  1  2  3  4  5  6  7  8  9\nPython also supports negative indexes:\nIndex:   -10 -9 -8 -7 -6 -5 -4 -3 -2 -1\nTherefore:\nname = \"John White\"\n\nprint(name[0])\nprint(name[-1])\nOutput:\nJ\ne\n\nIterating over a string\nBecause a string is a sequence, a for loop can process its characters one by one:\nname = \"John\"\n\nfor character in name:\n    print(character)\nOutput:\nJ\no\nh\nn\nThis is an important connection between loops and strings.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#string-slicing",
+    "href": "lessons/04-loops.html#string-slicing",
+    "title": "Week 4 – Loops in Python",
+    "section": "11. String slicing",
+    "text": "11. String slicing\nA substring can be selected with the slicing operator:\nstring[start:end]\nExample:\nname = \"John White\"\n\nfirst_six_chars = name[0:6]\nprint(first_six_chars)\nOutput:\nJohn W\nNegative indexes can also be used:\nname = \"John White\"\n\nlast_two_chars = name[-2:]\nprint(last_two_chars)\nOutput:\nte\nA slice can also contain a step:\nstring[start:end:step]\nFor example:\ntext = \"abcdef\"\n\nprint(text[0:6:2])\nOutput:\nace\n\n\n\n\n\n\nWarningStrings are immutable\n\n\n\nIndividual characters of an existing string cannot be changed directly.\nThis causes an error:\ns = \"Hello\"\ns[1] = \"a\"\nIf a different string is required, a new string must be created.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#string-operators",
+    "href": "lessons/04-loops.html#string-operators",
+    "title": "Week 4 – Loops in Python",
+    "section": "12. String operators",
+    "text": "12. String operators\nSeveral operators can be used with strings.\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n+\nConcatenation\n\"John\" + \" \" + \"White\"\n\"John White\"\n\n\n*\nRepetition\n\"John White \" * 2\n\"John White John White \"\n\n\n[]\nIndexing\n\"John White\"[2]\n\"h\"\n\n\n[a:b]\nSlicing\n\"John White\"[2:5]\n\"hn \"\n\n\n&gt;\nGreater than\n\"John\" &gt; \"White\"\nFalse\n\n\n&lt;\nLess than\n\"apple\" &lt; \"pear\"\nTrue\n\n\n==\nEqual\n\"ite\" == \"White\"\nFalse\n\n\n!=\nNot equal\n\"ite\" != \"White\"\nTrue\n\n\nin\nMembership\n\"i\" in \"White\"\nTrue\n\n\n\nThe slicing operator can also use a step:\nstring[a:b:c]\nwhere c is the step value.\n\nMembership and loops\nThe in operator can test whether a character or substring occurs in a string:\ntext = \"Python\"\n\nif \"y\" in text:\n    print(\"Found\")\nA loop can also inspect every character:\ntext = \"Python\"\n\nfor character in text:\n    print(character)\nThese ideas will be used frequently in later text-processing tasks.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#summary",
+    "href": "lessons/04-loops.html#summary",
+    "title": "Week 4 – Loops in Python",
+    "section": "Summary",
+    "text": "Summary\nThis week introduced repetition and sequence processing in Python.\nYou learned how to:\n\nrepeat statements with for and while;\ngenerate sequences of integers with range();\ncreate nested loops;\ninfluence loop execution with break and continue;\nuse pass as a placeholder;\nemulate a post-test loop;\ngenerate random values using the random module;\naccess and process characters in strings;\nuse string indexing, slicing, comparison, repetition, concatenation, and membership.\n\nThe next practical exercises will combine these concepts with the variables, input/output, operators, and conditional statements introduced in the previous weeks.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
     "objectID": "warmup/03-warmup-practice.html",
     "href": "warmup/03-warmup-practice.html",
     "title": "Practice Warm-up Test – Week 3",
@@ -165,14 +330,55 @@
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html",
-    "href": "exercises/02-class-exercises.html",
-    "title": "Class Exercises 2",
+    "objectID": "exercises/03-class-exercises.html",
+    "href": "exercises/03-class-exercises.html",
+    "title": "Class Exercises 3",
     "section": "",
     "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
     "crumbs": [
       "Lessons",
       "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html",
+    "href": "exercises/01-class-exercises.html",
+    "title": "Class Exercises 1",
+    "section": "",
+    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
+    "crumbs": [
+      "Lessons",
+      "Class Exercises"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Course Materials",
+    "section": "Course structure",
+    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#programming-environment",
+    "href": "index.html#programming-environment",
+    "title": "Course Materials",
+    "section": "Programming environment",
+    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
+    "crumbs": [
+      "Home"
     ]
   },
   {
@@ -396,39 +602,9 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-structure",
-    "href": "index.html#course-structure",
-    "title": "Course Materials",
-    "section": "Course structure",
-    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#programming-environment",
-    "href": "index.html#programming-environment",
-    "title": "Course Materials",
-    "section": "Programming environment",
-    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "exercises/01-class-exercises.html",
-    "href": "exercises/01-class-exercises.html",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html",
+    "href": "exercises/02-class-exercises.html",
+    "title": "Class Exercises 2",
     "section": "",
     "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
     "crumbs": [
@@ -437,11 +613,11 @@
     ]
   },
   {
-    "objectID": "exercises/03-class-exercises.html",
-    "href": "exercises/03-class-exercises.html",
-    "title": "Class Exercises 3",
+    "objectID": "exercises/04-class-exercises.html",
+    "href": "exercises/04-class-exercises.html",
+    "title": "Class Exercises 4",
     "section": "",
-    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
+    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.\n  \n\n\nWeek 4: Exercises 1–7 are class exercises. The random module may be imported only in exercises that require random-number generation.\nProgramming rules: use the programming concepts covered so far and structured control flow. Do not use break, continue, or return to terminate or skip loop iterations. When a task should stop searching as soon as its result is known, express that condition directly in a while condition.\n I understand and accept these programming rules.\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Evaluate my work\n  Run an indicative evaluation of your current Week 4 solutions.\n  This evaluation is for feedback only and does not count toward your course grade.\n  Evaluate my work",
     "crumbs": [
       "Lessons",
       "Class Exercises"
@@ -610,6 +786,28 @@
     "crumbs": [
       "Lessons",
       "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "warmup/04-warmup.html",
+    "href": "warmup/04-warmup.html",
+    "title": "Warm-up Test – Week 4",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
+    "crumbs": [
+      "Lessons",
+      "Week 4 Warm-up Test"
+    ]
+  },
+  {
+    "objectID": "warmup/04-warmup.html#week-4-warm-up-test",
+    "href": "warmup/04-warmup.html#week-4-warm-up-test",
+    "title": "Warm-up Test – Week 4",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
+    "crumbs": [
+      "Lessons",
+      "Week 4 Warm-up Test"
     ]
   }
 ]

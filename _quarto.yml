@@ -11,11 +11,14 @@ project:
     - exercises/01-class-exercises.qmd
     - exercises/02-class-exercises.qmd
     - exercises/03-class-exercises.qmd
-    # Uncomment pages below when they are ready to publish:
+    - exercises/04-class-exercises.qmd
     - lessons/02-simple-data-types.qmd
     - lessons/03-conditional-statements.qmd
     - warmup/03-warmup-practice.qmd
-    # - lessons/04-loops.qmd
+    - warmup/04-warmup.qmd
+    - results/index.qmd
+    - teacher/index.qmd
+    - lessons/04-loops.qmd
     # - lessons/05-complex-data-types-1.qmd
     # - lessons/06-basic-algorithms-1.qmd
     # - lessons/07-basic-algorithms-2.qmd
@@ -56,8 +59,12 @@ website:
             text: "Class Exercises"
           - href: warmup/03-warmup-practice.qmd
             text: "Warm-up test sample"  
-          # - href: lessons/04-loops.qmd
-          #   text: "4. Loops in Python"
+          - href: lessons/04-loops.qmd
+            text: "4. Loops in Python"
+          - href: exercises/04-class-exercises.qmd
+            text: "Class Exercises"
+          - href: warmup/04-warmup.qmd
+            text: "Week 4 Warm-up Test"
           # - href: lessons/05-complex-data-types-1.qmd
           #   text: "5. Complex Data Types I"
           # - href: lessons/06-basic-algorithms-1.qmd

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Class Exercises 2 – Introduction to Data Science and Programming</title>
+<title>Class Exercises 4 – Introduction to Data Science and Programming</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,8 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../lessons/03-conditional-statements.html" rel="next">
-<link href="../lessons/02-simple-data-types.html" rel="prev">
+<link href="../warmup/04-warmup.html" rel="next">
+<link href="../lessons/04-loops.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/02-class-exercises.html">Class Exercises</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/04-class-exercises.html">Class Exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -146,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link active">
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
@@ -176,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
@@ -197,10 +197,10 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content column-page-right" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/02-class-exercises.html">Class Exercises</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../exercises/04-class-exercises.html">Class Exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Class Exercises 2</h1>
-<p class="subtitle lead">Working with Simple Data Types</p>
+<h1 class="title">Class Exercises 4</h1>
+<p class="subtitle lead">Loops in Python</p>
 </div>
 
 
@@ -261,7 +261,6 @@ body {
 
 .version-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
 .version-box p{margin:.35rem 0 .65rem}.version-links{display:flex;flex-direction:column;gap:.45rem}.version-links a,.version-current{display:block}.version-current{color:#444}
-
 .student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
 .student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
 .student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
@@ -273,17 +272,15 @@ button:disabled{opacity:.5;cursor:not-allowed}
   <p class="small">The same exercise set is available in three versions.</p>
   <div class="version-links">
     <span class="version-current"><strong>Classroom Version</strong> — you are using this version</span>
-    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/02-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the same exercises in Colab</a>
-    <a href="02-class-exercises-jupyter.ipynb" download=""><strong>Jupyter Version</strong> — download the same exercises for Jupyter Notebook/JupyterLab</a>
+    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/04-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the same exercises in Colab</a>
+    <a href="04-class-exercises-jupyter.ipynb" download=""><strong>Jupyter Version</strong> — download the same exercises for Jupyter Notebook/JupyterLab</a>
   </div>
 </div>
-
-<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
 
 <div id="student-identification" class="student-id-box">
   <label for="neptun-code"><strong>Neptun code</strong></label>
   <div class="student-id-row">
-    <input id="neptun-code" type="text" maxlength="6" autocomplete="off" aria-label="Neptun code">
+    <input id="neptun-code" type="text" maxlength="6" autocomplete="off" placeholder="ABC123" aria-label="Neptun code">
     <button id="save-neptun" type="button">Save</button>
   </div>
   <div id="neptun-message" class="small">
@@ -291,8 +288,21 @@ button:disabled{opacity:.5;cursor:not-allowed}
   </div>
 </div>
 
-<div id="list"></div><div id="summary"></div>
+<div class="summary"><strong>Week 4:</strong> Exercises 1–7 are class exercises. The <code>random</code> module may be imported only in exercises that require random-number generation.</div>
+<div class="summary"><strong>Programming rules:</strong> use the programming concepts covered so far and structured control flow. Do not use <code>break</code>, <code>continue</code>, or <code>return</code> to terminate or skip loop iterations. When a task should stop searching as soon as its result is known, express that condition directly in a <code>while</code> condition.</div>
+<div class="summary"><label><input type="checkbox" id="rules-accepted"> <strong>I understand and accept these programming rules.</strong></label></div>
+<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
+<div id="list"></div>
+<section class="ex" id="evaluation-box">
+  <h2 class="anchored">Evaluate my work</h2>
+  <p>Run an indicative evaluation of your current Week 4 solutions.</p>
+  <p class="small"><strong>This evaluation is for feedback only and does not count toward your course grade.</strong></p>
+  <button id="evaluate-work" onclick="evaluateWork()">Evaluate my work</button>
+  <div id="evaluation-result"></div>
+</section>
+<div id="summary" style="display:none"></div>
 <script>
+const PRACTICE_API_BASE = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
 const COURSE_CONFIG = {
   requireNeptun: true,
   showExpectedTime: true,
@@ -306,24 +316,49 @@ const COURSE_CONFIG = {
 };
 
 
+const WEEK04_POLICY = {
+  common: {
+    forbidden: ["list","tuple","set","dictionary","comprehensions","break","continue","return","unauthorized imports","Python shortcut functions","later method-based shortcuts"],
+    ai_instruction: "Use these rules as binding constraints. Do not override deterministic checker failures and do not recommend concepts not yet covered."
+  },
+  ex01: {required:["input","loop","print"], allowed_imports:[]},
+  ex02: {required:["loop","print"], allowed_imports:[], forbidden_extra:["sum"]},
+  ex03: {required:["while","if","print","random","condition-controlled early stopping"], allowed_imports:["random"], forbidden_extra:["for"]},
+  ex04: {required:["input","while","print"], allowed_imports:[], forbidden_extra:["for"], notes:["Do not store denominations in a collection."]},
+  ex05: {required:["input","while","if","print","random"], allowed_imports:["random"]},
+  ex06: {required:["input","print","string indexing/slicing"], allowed_imports:[]},
+  ex07: {required:["input","outer for","inner while","if","print","condition-controlled early stopping"], allowed_imports:[]}
+};
+function aiFeedbackContext(id, deterministicResult, code){
+  return {
+    week: 4, exercise: id,
+    task: EX.find(x=>x.id===id)?.task || "",
+    programming_rules: WEEK04_POLICY.common,
+    exercise_rules: WEEK04_POLICY[id],
+    deterministic_result: deterministicResult,
+    student_code: code,
+    instruction: WEEK04_POLICY.common.ai_instruction
+  };
+}
+
 const EX=[
-{id:"ex01",title:"Exercise 1",task:"Read two integers and display their <strong>sum, difference, product, quotient, remainder</strong>, the first number increased by 1, and the second number decreased by 1.",tests:[[["10", "3"], [13, 7, 30, 3.3333333333333335, 1, 11, 2]], [["20", "4"], [24, 16, 80, 5, 0, 21, 3]]],need:["input","print"],match:"numeric"},
-{id:"ex02",title:"Exercise 2",task:"Read the coefficients and solve the linear equation <code>a*x + b = 0</code>. You may assume that <code>a</code> is not zero.",tests:[[["2", "-8"], [4]], [["5", "10"], [-2]]],need:["input","print"],match:"numeric"},
-{id:"ex03",title:"Exercise 3",task:"Read three floating-point edge lengths and display the <strong>volume</strong> and <strong>surface area</strong> of a cuboid.",tests:[[["2", "3", "4"], [24, 52]], [["1.5", "2", "3"], [9, 27]]],need:["input","print"],match:"numeric"},
-{id:"ex04",title:"Exercise 4",task:"Read a laptop's <strong>net price</strong> and <strong>tax rate</strong>, then calculate and display the gross price.",tests:[[["100", "27"], [127]], [["800", "25"], [1000]]],need:["input","print"],match:"numeric"},
-{id:"ex05",title:"Exercise 5",task:"Read five grades one by one and display their <strong>average</strong>.",tests:[[["1", "2", "3", "4", "5"], [3]], [["5", "5", "4", "4", "3"], [4.2]]],need:["input","print"],match:"numeric"},
-{id:"ex06",title:"Exercise 6",task:"Read an initial amount and annual interest rate and calculate the amount after <strong>5 years</strong> using compound interest.",tests:[[["1000", "10"], [1610.51]], [["2000", "5"], [2552.56]]],need:["input","print"],match:"numeric"},
-{id:"ex07",title:"Exercise 7",task:"Convert an amount in US dollars to euros and Hungarian forints using <code>1 USD = 0.93 EUR</code> and <code>1 USD = 354.15 HUF</code>.",tests:[[["100"], [93, 35415]], [["50"], [46.5, 17707.5]]],need:["input","print"],match:"numeric"}];
+{id:"ex01",title:"Exercise 1",task:`Write a program that reads an integer <code>n</code> and displays the numbers from <code>1</code> to <code>n</code> and their square roots in two columns.<br><br><span class="small">Do not import a library for the square root; you can calculate it with exponentiation.</span>`,tests:[[["4"],["1 1","2 1.414","3 1.732","4 2"]],[["2"],["1 1","2 1.414"]]],need:["input","loop","print"],match:"rootpairs"},
+{id:"ex02",title:"Exercise 2",task:`Write a program that calculates and displays the <strong>sum of all odd numbers between 1 and 2023</strong>.`,tests:[[[],1024144]],need:["loop","print"],match:"contains"},
+{id:"ex03",title:"Exercise 3",task:`Write a program that generates a <strong>random integer between 1 and 1000</strong> and checks whether the number is prime.<br><br>Display the generated number and whether it is <strong>Prime</strong> or <strong>Not Prime</strong>. Use a loop to test possible divisors.<div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson04/exercise03-structogram.png" alt="Structogram for Exercise 03" style="max-width:430px;width:100%;height:auto"></div>`,tests:[],need:["loop","if","print","random"],match:"structure"},
+{id:"ex04",title:"Exercise 4",task:`Write a program that reads an amount of cash and converts it into denominations of <code>1000</code>, <code>100</code>, <code>10</code>, and <code>1</code>.<br><br>Use the <strong>fewest possible number of denominations</strong>. For each denomination, display the denomination and the number of pieces.<br><br><span class="small">Use a <code>while</code> loop. Do not store the denominations in a list, tuple, set, or dictionary.</span><div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson04/exercise04-structogram.png" alt="Structogram for Exercise 04" style="max-width:430px;width:100%;height:auto"></div>`,tests:[[["2345"],["1000","2","100","3","10","4","1","5"]],[["1000"],["1000","1"]]],need:["input","loop","print"],match:"allcontains"},
+{id:"ex05",title:"Exercise 5",task:`Write a number-guessing game. Generate a <strong>random integer between 1 and 200</strong>. The user has at most <strong>8 attempts</strong> to guess it.<br><br>After each incorrect guess, tell the user whether the guessed number is <strong>smaller</strong> or <strong>greater</strong> than the random number. If the guess is correct, display a congratulatory message; otherwise report that the attempts have run out.<div style="text-align:center;margin-top:14px"><img src="../assets/images/lesson04/exercise05-structogram.png" alt="Structogram for Exercise 05" style="max-width:620px;width:100%;height:auto"></div>`,tests:[],need:["input","loop","if","print","random"],match:"structure"},
+{id:"ex06",title:"Exercise 6",task:`Read the user's <strong>first name</strong> and <strong>last name</strong>.<br><br>First, display a monogram created by concatenating the <strong>first two letters of the first name</strong> and the <strong>last two letters of the last name</strong>. Then display the user's full name with <strong>all characters in reverse order</strong>.<br><br><span class="small">Example: <code>John White</code> → monogram <code>Jote</code>; reversed full name <code>etihW nhoJ</code>.</span>`,tests:[[["John","White"],["jo","te","etihw nhoj"]],[["Anna","Brown"],["an","wn","nworb anna"]]],need:["input","print"],match:"allcontains"},
+{id:"ex07",title:"Exercise 7",task:`Write a program that reads two integers <code>a</code> and <code>b</code>, where <code>a &lt; b</code>, and displays <strong>all prime numbers between a and b</strong>.<br><br>Use an outer loop to examine the interval and a condition-controlled <code>while</code> loop for the prime test.`,tests:[[["2","10"],["2","3","5","7"]],[["10","20"],["11","13","17","19"]]],need:["input","loop","if","print"],match:"allcontains"}];
 let pyodide=null, active=null, lastTick=Date.now();
 
-function key(id){return "pycourse_week02_"+id}
+function key(id){return "pycourse_week04_"+id}
 function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"","time":0,"runs":0,"checks":0,"hints":0,"completed":false,"started":false}')}
 function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
 function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 function renderSummary(){
  let cells=EX.map(e=>{let s=state(e.id),status=s.completed?"✓ Completed":s.started?"In progress / paused":"Not started";return `<div>${e.title}</div><div>${status}</div><div>${fmt(s.time)}</div><div>${s.runs}</div><div>${s.checks}</div><div>${s.hints}</div>`}).join("");
  let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
- document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 2 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 4 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
 }
 
 function validNeptun(v){return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase())}
@@ -340,13 +375,24 @@ function saveNeptun(){
  const n=(box.value||"").trim().toUpperCase(); box.value=n;
  if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return}
  localStorage.setItem("pycourse_neptun",n); setNeptunUI();
+
+// Code editor: TAB inserts four spaces and saves the source.
+document.addEventListener("keydown", e => {
+  const el=e.target;
+  if(!(el instanceof HTMLTextAreaElement) || !el.classList.contains("code") || e.key!=="Tab") return;
+  e.preventDefault();
+  const start=el.selectionStart, end=el.selectionEnd, indent="    ";
+  el.value=el.value.substring(0,start)+indent+el.value.substring(end);
+  el.selectionStart=el.selectionEnd=start+indent.length;
+  const id=el.id.replace(/-code$/,"");
+  if(id) persistCode(id);
+});
+
 }
 
 function render(){
  list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
- <div class="head"><div><h2>${e.title}</h2>
-${COURSE_CONFIG.showExpectedTime ? `<div class="expected-time"><strong>Expected time:</strong> ${e.expectedTime || COURSE_CONFIG.expectedTimeMinutes} minutes</div>` : ""}
-<div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
  <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
  <div class="workspace" id="${e.id}-ws">
  <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
@@ -356,8 +402,12 @@ ${COURSE_CONFIG.showExpectedTime ? `<div class="expected-time"><strong>Expected 
  renderSummary();
 }
 function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-async function ensurePy(){if(!pyodide){document.title="Loading Python…";pyodide=await loadPyodide();document.title="Class Exercises 2 – Working with Simple Data Types"}}
+async function ensurePy(){if(!pyodide){document.title="Loading Python…";pyodide=await loadPyodide();document.title="Class Exercises 4 – Loops in Python"}}
 async function startEx(id){
+ if(!document.getElementById("rules-accepted")?.checked){
+   alert("Please confirm that you understand and accept the programming rules before starting.");
+   return;
+ }
  if(COURSE_CONFIG.requireNeptun&&!validNeptun(getNeptun())){
    document.getElementById("neptun-message").textContent="Save a valid Neptun code before starting an exercise.";
    document.getElementById("neptun-code").focus(); return;
@@ -417,7 +467,37 @@ async function structure(code){
 import ast,json
 def _st(src):
  t=ast.parse(src)
- return json.dumps({"input":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="input" for n in ast.walk(t)),"if":any(isinstance(n,ast.If) for n in ast.walk(t)),"comparison":any(isinstance(n,ast.Compare) for n in ast.walk(t)),"print":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="print" for n in ast.walk(t))})
+ calls=[n for n in ast.walk(t) if isinstance(n,ast.Call)]
+ imports=[]
+ for n in ast.walk(t):
+  if isinstance(n,ast.Import): imports += [a.name for a in n.names]
+  elif isinstance(n,ast.ImportFrom) and n.module: imports.append(n.module)
+ fors=[n for n in ast.walk(t) if isinstance(n,ast.For)]
+ whiles=[n for n in ast.walk(t) if isinstance(n,ast.While)]
+ forbidden=[type(n).__name__.lower() for n in ast.walk(t) if isinstance(n,(ast.Break,ast.Continue,ast.Return))]
+ comprehensions=any(isinstance(n,(ast.ListComp,ast.SetComp,ast.DictComp,ast.GeneratorExp)) for n in ast.walk(t))
+ shortcut_names={"sum","min","max","any","all","sorted","enumerate","zip"}
+ shortcuts=[n.func.id for n in calls if isinstance(n.func,ast.Name) and n.func.id in shortcut_names]
+ methods=[n.func.attr for n in calls if isinstance(n.func,ast.Attribute) and not (isinstance(n.func.value,ast.Name) and n.func.value.id=="random")]
+ while_has_and=any(isinstance(n.test,ast.BoolOp) and isinstance(n.test.op,ast.And) for n in whiles)
+ return json.dumps({
+ "input":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="input" for n in ast.walk(t)),
+ "if":any(isinstance(n,ast.If) for n in ast.walk(t)),
+ "comparison":any(isinstance(n,ast.Compare) for n in ast.walk(t)),
+ "loop":bool(fors or whiles),
+ "for":bool(fors),"while":bool(whiles),"while_has_and":while_has_and,
+ "print":any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=="print" for n in ast.walk(t)),
+ "random":any(name=="random" for name in imports),
+ "imports":imports,"forbidden":forbidden,"comprehensions":comprehensions,
+ "shortcuts":shortcuts,"methods":methods,
+ "collections":{
+   "list":any(isinstance(n,ast.List) for n in ast.walk(t)),
+   "tuple":any(isinstance(n,ast.Tuple) for n in ast.walk(t)),
+   "set":any(isinstance(n,ast.Set) for n in ast.walk(t)),
+   "dict":any(isinstance(n,ast.Dict) for n in ast.walk(t)),
+   "constructors":[n.func.id for n in calls if isinstance(n.func,ast.Name) and n.func.id in {"list","tuple","set","dict"}]
+ }
+ })
 _st(student_code)
 `);return JSON.parse(String(x))
 }
@@ -435,37 +515,198 @@ async function runEx(id){
  let r=await execute(code,vals);
  document.getElementById(id+"-out").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
 }
-function matches(e,out,expected){
- let o=out.trim().toLowerCase(), compact=o.replace(/\s+/g,"");
- if(e.match==="numeric"){
-   const nums=(out.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number);
-   return expected.every(v=>nums.some(n=>Math.abs(n-Number(v))<=0.02));
+function numbersInLine(line){
+ return (line.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number)
+}
+function rootPairsMatch(out,inputs){
+ const n=Number(inputs[0]), lines=out.trim().split(/\r?\n/);
+ for(let i=1;i<=n;i++){
+   const root=Math.sqrt(i);
+   const ok=lines.some(line=>{
+     const nums=numbersInLine(line);
+     return nums.length>=2 && Math.abs(nums[0]-i)<1e-9 && Math.abs(nums[1]-root)<0.01;
+   });
+   if(!ok)return false;
  }
- if(e.match==="w1e1") return ["this","is","my","second","python","program"].every(x=>o.includes(x)) && compact.includes("this-is-my-second-python-program");
- if(e.match==="w1e2") return ["name","neptun","age","introduction"].every(x=>o.includes(x)) && out.includes("&");
- if(e.match==="w1e3") return o.includes("2023") && compact.includes("x=3") && o.includes("604800");
- if(e.match==="w1e4") return Array.from({length:10},(_,i)=>`${i+1}*7=${(i+1)*7}`).every(x=>compact.includes(x));
- if(e.match==="w1e5") return o.includes("november 2023") && ["1","2","3","4","5","27","28","29","30"].every(x=>o.includes(x));
+ return true;
+}
+function matches(e,out,expected,inputs=[]){
+ let o=out.trim().toLowerCase();
+ if(e.match==="structure") return false;
+ if(e.match==="rootpairs") return rootPairsMatch(out,inputs);
+ if(e.match==="allcontains"){
+   let vals=Array.isArray(expected)?expected:[expected];
+   return vals.every(v=>o.includes(String(v).toLowerCase()));
+ }
+ if(e.match==="quadratic"){if(Array.isArray(expected))return expected.every(v=>o.includes(v));return o.includes("no real")||o.includes("no solution")}
+ if(e.match==="ends")return o.endsWith(String(expected).toLowerCase());
  return o.includes(String(expected).toLowerCase())
 }
-async function checkEx(id){
- let e=EX.find(x=>x.id===id),s=state(id),code=document.getElementById(id+"-code").value;s.code=code;s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
- let panel=document.getElementById(id+"-panel");panel.innerHTML="Checking…";
- try{
-   await ensurePy(); let st=await structure(code),missing=e.need.filter(n=>!st[n]);
-   let passed=0,rows=[];
-   for(let t of e.tests){let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code,inputs);if(!r.ok){panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='bad'>✗ Runtime</div><div>"+esc(r.error)+"</div>";return}let ok=matches(e,r.output,t[1]);if(ok)passed++;rows.push({inputs,exp:t[1],got:r.output,ok})}
-   let all=passed===e.tests.length&&missing.length===0;
-   panel.innerHTML="<div class='ok'>✓ Syntax</div><div class='"+(missing.length?"bad":"ok")+"'>"+(missing.length?"✗":"✓")+" Expected structure</div><div class='"+(passed===e.tests.length?"ok":"bad")+"'>"+(passed===e.tests.length?"✓":"✗")+" Functional tests: "+passed+" / "+e.tests.length+"</div>"+rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → expected "+esc(Array.isArray(r.exp)?r.exp.join(" and "):String(r.exp))+(r.ok?"":" · got: "+esc(r.got||"(no output)"))+"</div>").join("");
-   if(all){
-   tick(); s=state(id); s.completed=true; s.code=code; save(id,s);
-   panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
-   if(active===id) active=null;
-   updateStatus(id);
+function algorithmicCheck(id,st){
+ const problems=[], policy=WEEK04_POLICY[id]||{}, cols=st.collections||{};
+ const usedCollections=[cols.list?"list":null,cols.tuple?"tuple":null,cols.set?"set":null,cols.dict?"dictionary":null,...(cols.constructors||[])].filter(Boolean);
+ if(usedCollections.length) problems.push("Complex data structures are not allowed in this exercise: "+[...new Set(usedCollections)].join(", ")+".");
+ if(st.forbidden?.length) problems.push("Use structured control flow: do not use break, continue, or return.");
+ if(st.comprehensions) problems.push("Do not use comprehensions in these exercises.");
+ if(st.shortcuts?.length) problems.push("Do not use Python shortcut functions such as "+st.shortcuts.join(", ")+".");
+ if(st.methods?.length) problems.push("Do not use later method-based shortcuts in this exercise.");
+ const allowedImports=policy.allowed_imports||[];
+ const badImports=(st.imports||[]).filter(x=>!allowedImports.includes(x));
+ if(badImports.length) problems.push("This exercise does not allow the imported module(s): "+badImports.join(", ")+".");
+ if((policy.required||[]).includes("random")&&!st.random) problems.push("This exercise requires the random module.");
+ if((policy.required||[]).includes("while")&&!st.while) problems.push("This task requires a condition-controlled while loop.");
+ if((policy.forbidden_extra||[]).includes("for")&&st.for) problems.push("Do not use a for loop in this exercise; use the required while loop.");
+ if(id==="ex03"&&!st.while_has_and) problems.push("The prime test must express early stopping directly in the while condition.");
+ if(id==="ex07"){
+   if(!st.for) problems.push("Use a for loop to examine the numbers in the interval.");
+   if(!st.while) problems.push("Use a condition-controlled while loop for the inner prime test.");
+   if(st.while&&!st.while_has_and) problems.push("The inner prime test must stop as soon as the result is known; express this in the while condition.");
  }
- }catch(err){panel.innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+ return problems;
 }
-function hintEx(id){let s=state(id);s.hints=Math.min(s.hints+1,3);save(id,s);document.getElementById(id+"-hints").textContent=s.hints;let generic=["Read the task again and compare each requested output with your program.","Test your program with simple values and inspect the output carefully.","Check the expressions, conversions and print statements used in your solution."];document.getElementById(id+"-panel").innerHTML+="<div class='hint'><strong>Hint "+s.hints+":</strong> "+generic[s.hints-1]+"</div>"}
+async function assessExercise(id,updateUI=true){
+ let e=EX.find(x=>x.id===id),s=state(id),el=document.getElementById(id+"-code"),code=el?el.value:s.code;
+ if(el){s.code=code;save(id,s)}
+ let result={id,syntax:false,structure:false,rules:false,functional:false,passed:0,total:e.tests.length,problems:[],missing:[],runtime:null};
+ // Empty and print-only placeholders are not meaningful solutions.
+ const normalizedCode=(code||"").trim();
+ const trivialPrint=/^print\s*\(\s*(?:(?:["'][^"']*["'])|\s*)\s*\)\s*;?\s*$/s.test(normalizedCode);
+ if(!normalizedCode || trivialPrint){
+   result.syntax=!!normalizedCode;
+   result.structure=false; result.rules=false; result.functional=false; result.passed=0;
+   result.problems=[!normalizedCode ? "No solution has been entered yet." : "A print-only placeholder does not solve this exercise."];
+   if(updateUI){const panel=document.getElementById(id+"-panel");if(panel)panel.innerHTML="<span class='bad'>✗ Not completed.</span><br>"+result.problems.map(esc).join("<br>");}
+   return result;
+ }
+
+ try{
+   await ensurePy(); let st=await structure(code); result.syntax=true;
+   result.missing=e.need.filter(n=>!st[n]); result.structure=result.missing.length===0;
+   result.problems=algorithmicCheck(id,st); result.rules=result.problems.length===0;
+   let rows=[],passed=0;
+   for(let t of e.tests){
+     let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code,inputs);
+     if(!r.ok){result.runtime=r.error;break}
+     let ok=matches(e,r.output,t[1],inputs);if(ok)passed++;
+     rows.push({inputs,exp:t[1],got:r.output,ok})
+   }
+   result.passed=passed;result.rows=rows;
+   result.functional=e.match==="structure" ? true : (passed===e.tests.length);
+   result.completed=result.syntax&&result.structure&&result.rules&&result.functional&&!result.runtime;
+   if(updateUI){
+     let panel=document.getElementById(id+"-panel");
+     panel.innerHTML="<div class='ok'>✓ Syntax</div>"+
+       "<div class='"+(result.structure?"ok":"bad")+"'>"+(result.structure?"✓":"✗")+" Expected structure</div>"+
+       "<div class='"+(result.rules?"ok":"bad")+"'>"+(result.rules?"✓":"✗")+" Algorithmic structure</div>"+
+       (result.problems.length?result.problems.map(p=>"<div class='bad'>• "+esc(p)+"</div>").join(""):"")+
+       (result.runtime?"<div class='bad'>✗ Runtime: "+esc(result.runtime)+"</div>":
+        "<div class='"+(result.functional?"ok":"bad")+"'>"+(result.functional?"✓":"✗")+" "+(e.match==="structure"?"Functional behaviour checked by structure":"Functional tests: "+passed+" / "+e.tests.length)+"</div>")+
+       rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → "+(r.ok?"passed":"output did not meet the task requirements · got: "+esc(r.got||"(no output)"))+"</div>").join("");
+     if(result.completed){
+       tick();s=state(id);s.completed=true;s.code=code;save(id,s);
+       panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
+       if(active===id)active=null;updateStatus(id);
+     }
+   }
+ }catch(err){result.runtime=String(err);if(updateUI)document.getElementById(id+"-panel").innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+ return result;
+}
+async function checkEx(id){
+ let s=state(id);s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
+ await assessExercise(id,true);
+}
+
+async function evaluateWork(){
+ tick();
+ const btn=document.getElementById("evaluate-work"),box=document.getElementById("evaluation-result");
+ btn.disabled=true;box.innerHTML="<p>Evaluating current solutions…</p>";
+ const results=[];
+ for(const e of EX){
+   const s=state(e.id);
+   if(!s.started && !s.code.trim()){results.push({id:e.id,attempted:false,completed:false});continue}
+   const r=await assessExercise(e.id,false);r.attempted=true;results.push(r);
+ }
+ const attempted=results.filter(r=>r.attempted), completed=results.filter(r=>r.completed);
+ const functional=attempted.filter(r=>r.functional).length, rules=attempted.filter(r=>r.rules&&r.structure).length;
+ let points=0;
+ for(const r of results){
+   if(!r.attempted)continue;
+   points += (r.functional?0.6:0)+(r.structure?0.2:0)+(r.rules?0.2:0);
+ }
+ const score=Math.round(100*points/EX.length);
+ const suggestions=[];
+ if(attempted.length<EX.length)suggestions.push("Continue with the exercises that have not been attempted yet.");
+ if(functional<attempted.length)suggestions.push("Review the task requirements for exercises whose functional tests do not pass.");
+ if(rules<attempted.length)suggestions.push("Review loop choice and structured control flow. Avoid break, continue, and return as loop-control shortcuts.");
+ if(results.some(r=>r.problems?.some(p=>p.includes("condition-controlled while"))))suggestions.push("For search-style tasks, use a while condition that stops the search as soon as the result is known.");
+ if(!suggestions.length)suggestions.push("Your current solutions satisfy the deterministic checks. Try explaining why each task uses for or while.");
+ const no=(Number(localStorage.getItem("pycourse_week04_evaluation_no")||"0")+1);
+ localStorage.setItem("pycourse_week04_evaluation_no",String(no));
+
+ const payload={
+   schema_version:"1.0",
+   week:"04",
+   neptun:getNeptun(),
+   evaluation_no:no,
+   evaluated_at:new Date().toISOString(),
+   indicative_score:score,
+   summary:{attempted:attempted.length,completed:completed.length,functional_passed:functional,rules_passed:rules,total:EX.length},
+   exercises:EX.map(e=>{
+     const s=state(e.id),r=results.find(x=>x.id===e.id)||{};
+     return {
+       exercise_id:e.id,
+       source_code:(document.getElementById(e.id+"-code")?.value ?? s.code ?? ""),
+       started:!!s.started,
+       active_time_seconds:Math.round(s.time||0),
+       run_count:s.runs||0,
+       check_count:s.checks||0,
+       hint_count:s.hints||0,
+       attempted:!!r.attempted,
+       completed:!!r.completed,
+       syntax:!!r.syntax,
+       structure:!!r.structure,
+       rules:!!r.rules,
+       functional:!!r.functional,
+       rule_violations:r.problems||[]
+     };
+   })
+ };
+
+ let uploadMessage="<span class='small'>Saving learning analytics to Azure…</span>";
+ box.innerHTML=`<div class="hint"><strong>Indicative evaluation: ${score}%</strong><br>
+ ${completed.length} / ${EX.length} exercises currently completed successfully.<br>
+ Functional correctness: ${functional} / ${attempted.length||0} attempted.<br>
+ Programming and algorithmic rules: ${rules} / ${attempted.length||0} attempted.<br>
+ <strong>This evaluation is for feedback only and does not count toward your course grade.</strong>
+ <br><br><strong>Suggestions</strong><ul>${suggestions.map(x=>"<li>"+esc(x)+"</li>").join("")}</ul>
+ <span class="small">Evaluation #${no}. You can improve your solutions and evaluate again.</span><br>
+ <span id="practice-upload-status">${uploadMessage}</span></div>`;
+ renderSummary();document.getElementById("summary").style.display="block";
+
+ try{
+   if(!validNeptun(payload.neptun)) throw new Error("A valid Neptun code is required.");
+   const resp=await fetch(PRACTICE_API_BASE+"/submitPractice",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify(payload)
+   });
+   const data=await resp.json().catch(()=>({}));
+   if(!resp.ok) throw new Error(data.error||("HTTP "+resp.status));
+   document.getElementById("practice-upload-status").innerHTML="✓ Learning analytics saved successfully.";
+ }catch(err){
+   document.getElementById("practice-upload-status").innerHTML="⚠ Evaluation completed locally, but the analytics upload failed: "+esc(String(err.message||err));
+ }
+ btn.disabled=false;
+}
+function hintEx(id){let s=state(id);s.hints=Math.min(s.hints+1,3);save(id,s);document.getElementById(id+"-hints").textContent=s.hints;let e=EX.find(x=>x.id===id);let hints={
+ex01:["Use a loop that visits every integer from 1 to n.","The square root of x can be calculated as x ** 0.5.","Print the number and its square root during each iteration."],
+ex02:["You need an accumulator variable for the sum.","A range can generate only odd numbers if its step is 2.","Start from 1 and repeatedly add the current odd value to the sum."],
+ex03:["A prime number greater than 1 has no divisor other than 1 and itself.","Generate n with the random module, then test possible divisors in a loop.","If you find a divisor before reaching n, the number is not prime."],
+ex04:["Start with denomination 1000 and repeatedly move to the next smaller denomination.","Integer division tells you how many pieces are needed; remainder gives the cash still to convert.","After processing a denomination, divide it by 10 to get 100, 10, and 1."],
+ex05:["Generate the target once before the guessing loop.","The loop must stop after at most 8 attempts or when the guess is correct.","After an incorrect guess, compare it with the target and tell the user to go higher or lower."],
+ex06:["Strings can be indexed and sliced.","Use the first two characters of the first name and the last two of the last name.","A slice with a step of -1 reverses a string."],
+ex07:["Use an outer loop to examine every number between a and b.","For each candidate, use another loop to check whether it has a divisor.","Print the candidate only if no divisor proves that it is composite."]
+};document.getElementById(id+"-panel").innerHTML+="<div class='hint'><strong>Hint "+s.hints+":</strong> "+hints[id][s.hints-1]+"</div>"}
 render();
 document.getElementById("save-neptun")?.addEventListener("click",saveNeptun);
 document.getElementById("neptun-code")?.addEventListener("keydown",e=>{if(e.key==="Enter")saveNeptun()});
@@ -884,13 +1125,13 @@ setNeptunUI();
   </script>
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="../lessons/02-simple-data-types.html" class="pagination-link" aria-label="2. Working with Simple Data Types">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2. Working with Simple Data Types</span>
+      <a href="../lessons/04-loops.html" class="pagination-link" aria-label="4. Loops in Python">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. Loops in Python</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../lessons/03-conditional-statements.html" class="pagination-link" aria-label="3. Conditional Statements in Python">
-        <span class="nav-page-text">3. Conditional Statements in Python</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../warmup/04-warmup.html" class="pagination-link" aria-label="Week 4 Warm-up Test">
+        <span class="nav-page-text">Week 4 Warm-up Test</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
