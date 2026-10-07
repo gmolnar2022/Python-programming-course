@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Teacher Dashboard – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      Introduction to Data Science and Programming
+      </li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introduction to Programming and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Working with Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Conditional Statements in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Loops in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4 Warm-up Test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Teacher Dashboard</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.teacher-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.teacher-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacher-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.teacher-field input,
+.teacher-field select {
+  min-width: 150px;
+  padding: 6px 8px;
+}
+
+.teacher-button {
+  padding: 7px 12px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  cursor: pointer;
+  background: white;
+}
+
+.teacher-button:hover {
+  background: #f3f3f3;
+}
+
+.teacher-button-primary {
+  background: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.teacher-button-primary:hover {
+  background: #0b5ed7;
+}
+
+.teacher-button-success {
+  background: #198754;
+  color: white;
+  border-color: #198754;
+}
+
+.teacher-button-success:hover {
+  background: #157347;
+}
+
+.teacher-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.review-button {
+  margin-top: 5px;
+  font-size: 0.82rem;
+}
+
+#loginBox {
+  max-width: 650px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#loginBox input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0 12px 0;
+}
+
+#dashboard {
+  display: none;
+}
+
+/* Classroom access panel */
+
+.session-panel {
+  border: 1px solid #d7d7d7;
+  border-radius: 9px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fafafa;
+}
+
+.session-panel-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.session-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+}
+
+.session-display {
+  display: none;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #198754;
+  border-radius: 8px;
+  background: white;
+}
+
+.session-display.open {
+  display: block;
+}
+
+.session-status {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.session-code {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  margin: 5px 0 8px 0;
+}
+
+.session-meta {
+  font-size: 0.9rem;
+}
+
+.session-countdown {
+  font-weight: 700;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.summary-card {
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 12px;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.summary-value {
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+#message {
+  margin: 12px 0;
+}
+
+.teacher-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.teacher-table th,
+.teacher-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.teacher-table th {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.teacher-table input[type="number"] {
+  width: 75px;
+}
+
+.teacher-table input[type="text"] {
+  min-width: 200px;
+  width: 100%;
+}
+
+.status-final {
+  font-weight: 600;
+}
+
+.status-needs_review {
+  font-weight: 600;
+}
+
+.small-muted {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.final-hint {
+  margin-top: 3px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Full-width review row */
+
+.review-row {
+  display: none;
+}
+
+.review-row.open {
+  display: table-row;
+}
+
+.review-row > td {
+  padding: 0 8px 18px 8px;
+  background: #fafafa;
+}
+
+.review-panel {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.review-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+.review-heading-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.review-section-title {
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.code-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.code-box pre {
+  margin: 0;
+  padding: 14px;
+  overflow-x: auto;
+  min-height: 120px;
+  max-height: 500px;
+  background: #f5f5f5;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-box code {
+  white-space: pre;
+}
+
+.review-info-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: white;
+}
+
+.hidden-test {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.hidden-test:last-child {
+  border-bottom: none;
+}
+
+.hidden-test-fail {
+  font-weight: 600;
+}
+
+.ai-feedback {
+  line-height: 1.45;
+}
+
+@media (max-width: 1000px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+<div id="loginBox">
+<section id="teacher-access" class="level2">
+<h2 class="anchored" data-anchor-id="teacher-access">Teacher access</h2>
+<p>Enter the Azure Function key for the teacher API.</p>
+<p>The key is kept only for this browser-tab session.</p>
+<p><input id="functionKey" type="password" autocomplete="off" placeholder="Function key"></p>
+<button id="loginButton" class="teacher-button teacher-button-primary">
+Open dashboard
+</button>
+<div id="loginMessage">
+
+</div>
+</section>
+</div>
+<div id="dashboard">
+<div class="session-panel">
+<div class="session-panel-title">
+<p>Classroom access</p>
+</div>
+<div class="session-controls">
+<div class="teacher-field">
+<p><label for="sessionGroupSelect">Default group</label> <select id="sessionGroupSelect"> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> </select></p>
+</div>
+<button id="openSessionButton" class="teacher-button teacher-button-primary">
+Open test
+</button>
+</div>
+<div id="sessionDisplay" class="session-display">
+<div id="sessionStatus" class="session-status">
+<p>Access open</p>
+</div>
+<div id="sessionCode" class="session-code">
+
+</div>
+<div class="session-meta">
+<p><span id="sessionLabel"></span> &nbsp; · &nbsp; Expires in <span id="sessionCountdown" class="session-countdown">–:–</span></p>
+</div>
+<div class="small-muted" style="margin-top:8px;">
+<p>Students enter this classroom code on the test page. The code is valid for starting the test only; each student’s 10-minute test period begins when Start test succeeds.</p>
+</div>
+</div>
+</div>
+<div class="teacher-toolbar">
+<div class="teacher-field">
+<p><label for="testSelect">Test</label> <select id="testSelect"> <option value="week04">Week 4 Warm-up</option> </select></p>
+</div>
+<div class="teacher-field">
+<p><label for="groupFilter">Group</label> <select id="groupFilter"> <option value="">All groups</option> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> </select></p>
+</div>
+<div class="teacher-field">
+<p><label for="statusFilter">Status</label> <select id="statusFilter"> <option value="">All</option> <option value="submitted">Submitted</option> <option value="preliminary">Preliminary</option> <option value="needs_review">Needs review</option> <option value="final">Final</option> </select></p>
+</div>
+<button id="refreshButton" class="teacher-button">
+Refresh
+</button>
+<button id="evaluateButton" class="teacher-button teacher-button-primary">
+Evaluate pending submissions
+</button>
+<button id="finalizeUnchangedButton" class="teacher-button teacher-button-success">
+Finalize unchanged results
+</button>
+<button id="logoutButton" class="teacher-button">
+Clear key
+</button>
+</div>
+<div id="summary" class="summary-grid">
+
+</div>
+<div id="message">
+
+</div>
+<div class="teacher-table-wrapper">
+<table class="teacher-table">
+<thead>
+<tr>
+<th>
+Group
+</th>
+<th>
+Neptun
+</th>
+<th>
+Task
+</th>
+<th>
+Preliminary
+</th>
+<th>
+Final
+</th>
+<th>
+Submission
+</th>
+<th>
+Status
+</th>
+<th>
+Teacher comment
+</th>
+<th>
+Action
+</th>
+</tr>
+</thead>
+<tbody id="resultsBody">
+</tbody>
+</table>
+</div>
+</div>
+<script>
+(() => {
+
+const API_BASE =
+  "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+
+let allRows = [];
+
+const loginBox =
+  document.getElementById("loginBox");
+
+const dashboard =
+  document.getElementById("dashboard");
+
+const functionKey =
+  document.getElementById("functionKey");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const resultsBody =
+  document.getElementById("resultsBody");
+
+const summary =
+  document.getElementById("summary");
+
+const message =
+  document.getElementById("message");
+
+const groupFilter =
+  document.getElementById("groupFilter");
+
+const statusFilter =
+  document.getElementById("statusFilter");
+
+const testSelect =
+  document.getElementById("testSelect");
+
+const sessionGroupSelect =
+  document.getElementById("sessionGroupSelect");
+
+const openSessionButton =
+  document.getElementById("openSessionButton");
+
+const sessionDisplay =
+  document.getElementById("sessionDisplay");
+
+const sessionStatus =
+  document.getElementById("sessionStatus");
+
+const sessionCode =
+  document.getElementById("sessionCode");
+
+const sessionLabel =
+  document.getElementById("sessionLabel");
+
+const sessionCountdown =
+  document.getElementById("sessionCountdown");
+
+let sessionTimer = null;
+let sessionExpiresAt = null;
+
+
+function getKey() {
+  return sessionStorage.getItem(
+    "teacher_function_key"
+  ) || "";
+}
+
+
+function setMessage(text, error = false) {
+  message.textContent = text;
+
+  message.style.color =
+    error ? "#b00020" : "";
+}
+
+
+function apiUrl(functionName) {
+  const key = getKey();
+
+  return (
+    `${API_BASE}/${functionName}` +
+    `?code=${encodeURIComponent(key)}`
+  );
+}
+
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+async function readJsonResponse(
+  response,
+  fallbackMessage
+) {
+  const text =
+    await response.text();
+
+  let data = {};
+
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(
+        `${fallbackMessage} ` +
+        `(HTTP ${response.status}: invalid response)`
+      );
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data.error ||
+      `${fallbackMessage} (HTTP ${response.status})`
+    );
+  }
+
+  return data;
+}
+
+
+/* -------------------------------------------------
+   Classroom access
+------------------------------------------------- */
+
+function stopSessionCountdown() {
+  if (sessionTimer) {
+    clearInterval(sessionTimer);
+    sessionTimer = null;
+  }
+}
+
+
+function updateSessionCountdown() {
+  if (!sessionExpiresAt) {
+    sessionCountdown.textContent = "--:--";
+    return;
+  }
+
+  const remaining =
+    Math.max(
+      0,
+      sessionExpiresAt.getTime() -
+      Date.now()
+    );
+
+  const totalSeconds =
+    Math.ceil(
+      remaining / 1000
+    );
+
+  const minutes =
+    Math.floor(
+      totalSeconds / 60
+    );
+
+  const seconds =
+    totalSeconds % 60;
+
+  sessionCountdown.textContent =
+    `${String(minutes).padStart(2, "0")}:` +
+    `${String(seconds).padStart(2, "0")}`;
+
+  if (remaining <= 0) {
+    stopSessionCountdown();
+
+    sessionStatus.textContent =
+      "Access expired";
+
+    sessionCode.textContent =
+      "------";
+  }
+}
+
+
+function showOpenedSession(data) {
+  sessionExpiresAt =
+    new Date(data.expires_at);
+
+  sessionCode.textContent =
+    data.access_code || "------";
+
+  sessionLabel.textContent =
+    `${data.test_id} · ${data.session_group}`;
+
+  sessionStatus.textContent =
+    "Access open";
+
+  sessionDisplay.classList.add("open");
+
+  stopSessionCountdown();
+  updateSessionCountdown();
+
+  sessionTimer =
+    setInterval(
+      updateSessionCountdown,
+      1000
+    );
+}
+
+
+async function openTestSession() {
+  const testId =
+    testSelect.value;
+
+  const sessionGroup =
+    sessionGroupSelect.value;
+
+  if (!sessionGroup) {
+    setMessage(
+      "Select a default group.",
+      true
+    );
+    return;
+  }
+
+  openSessionButton.disabled = true;
+
+  setMessage(
+    `Opening ${testId} for ${sessionGroup}...`
+  );
+
+  try {
+    const response =
+      await fetch(
+        apiUrl("openTestSession"),
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            test_id:
+              testId,
+
+            session_group:
+              sessionGroup,
+
+            access_minutes:
+              3
+          })
+        }
+      );
+
+    const data =
+      await readJsonResponse(
+        response,
+        "Test access could not be opened."
+      );
+
+    if (
+      !data.success ||
+      !data.access_code
+    ) {
+      throw new Error(
+        data.error ||
+        "Test access could not be opened."
+      );
+    }
+
+    showOpenedSession(data);
+
+    setMessage(
+      `${testId} opened for ${sessionGroup}. ` +
+      `Classroom code: ${data.access_code}`
+    );
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    openSessionButton.disabled = false;
+  }
+}
+
+
+/* -------------------------------------------------
+   Results
+------------------------------------------------- */
+
+async function loadResults() {
+  const testId =
+    testSelect.value;
+
+  setMessage(
+    "Loading results..."
+  );
+
+  const url =
+    apiUrl("teacherResults") +
+    `&test_id=${encodeURIComponent(testId)}`;
+
+  const response =
+    await fetch(url);
+
+  const data =
+    await readJsonResponse(
+      response,
+      "Could not load teacher results."
+    );
+
+  if (!data.success) {
+    throw new Error(
+      data.error ||
+      "Could not load teacher results."
+    );
+  }
+
+  allRows =
+    data.submissions || [];
+
+  renderRows();
+
+  setMessage(
+    `${allRows.length} submission(s) loaded.`
+  );
+}
+
+
+function filteredRows() {
+  const group =
+    groupFilter.value;
+
+  const status =
+    statusFilter.value;
+
+  return allRows.filter(row => {
+    if (
+      group &&
+      row.group !== group
+    ) {
+      return false;
+    }
+
+    if (
+      status &&
+      row.status !== status
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+
+function renderFilteredSummary(rows) {
+  const evaluated =
+    rows.filter(
+      row =>
+        row.preliminary_score !== null &&
+        Number.isFinite(
+          Number(row.preliminary_score)
+        )
+    );
+
+  const finalized =
+    rows.filter(
+      row =>
+        row.review_status === "final"
+    );
+
+  const needsReview =
+    rows.filter(
+      row =>
+        row.status === "needs_review"
+    );
+
+  const average =
+    evaluated.length
+      ? evaluated.reduce(
+          (sum, row) =>
+            sum +
+            Number(row.preliminary_score),
+          0
+        ) / evaluated.length
+      : null;
+
+  const cards = [
+    ["Submissions", rows.length],
+    ["Evaluated", evaluated.length],
+    ["Finalized", finalized.length],
+    ["Needs review", needsReview.length],
+    [
+      "Average",
+      average === null
+        ? "–"
+        : Math.round(average * 100) / 100
+    ]
+  ];
+
+  summary.innerHTML =
+    cards.map(
+      ([label, value]) => `
+        <div class="summary-card">
+          <div class="summary-label">
+            ${escapeHtml(label)}
+          </div>
+
+          <div class="summary-value">
+            ${escapeHtml(value)}
+          </div>
+        </div>
+      `
+    ).join("");
+}
+
+
+function hiddenTestsHtml(hiddenTests) {
+  if (
+    !hiddenTests ||
+    !Array.isArray(hiddenTests.results)
+  ) {
+    return `
+      <div class="small-muted">
+        No hidden-test details available.
+      </div>
+    `;
+  }
+
+  const passed =
+    Number(hiddenTests.passed || 0);
+
+  const total =
+    Number(
+      hiddenTests.total ||
+      hiddenTests.results.length
+    );
+
+  const tests =
+    hiddenTests.results.map(
+      (test, index) => {
+        const ok =
+          Boolean(test.passed);
+
+        let details = "";
+
+        if (test.timeout) {
+          details += `
+            <div class="small-muted">
+              Timeout
+            </div>
+          `;
+        }
+
+        if (test.error) {
+          details += `
+            <div class="small-muted">
+              ${escapeHtml(test.error)}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="
+            hidden-test
+            ${ok ? "" : "hidden-test-fail"}
+          ">
+            ${ok ? "✓" : "✗"}
+            ${escapeHtml(
+              test.name ||
+              `Test ${index + 1}`
+            )}
+
+            ${details}
+          </div>
+        `;
+      }
+    ).join("");
+
+  return `
+    <div class="small-muted"
+         style="margin-bottom:6px;">
+      ${passed}/${total} passed
+    </div>
+
+    ${tests}
+  `;
+}
+
+
+function reviewPanelHtml(row) {
+  const solutions =
+    Array.isArray(row.solutions)
+      ? row.solutions
+      : [];
+
+  if (!solutions.length) {
+    return `
+      <div class="review-panel">
+        <div class="small-muted">
+          No submitted source code is available.
+        </div>
+      </div>
+    `;
+  }
+
+  return solutions.map(
+    (solution, index) => {
+      const code =
+        solution.code || "";
+
+      const hiddenTests =
+        solution.hidden_tests || {};
+
+      const aiEvaluation =
+        solution.ai_evaluation || {};
+
+      const aiFeedback =
+        aiEvaluation.feedback ||
+        row.preliminary_feedback ||
+        "No AI feedback available.";
+
+      const taskId =
+        solution.task_id || "";
+
+      const heading =
+        solutions.length > 1
+          ? `Task ${index + 1}: ${taskId}`
+          : (
+              row.task_titles?.[0] ||
+              taskId ||
+              "Submitted solution"
+            );
+
+      return `
+        <div class="review-panel">
+
+          <div class="review-heading">
+
+            <div>
+              <div class="review-heading-title">
+                ${escapeHtml(heading)}
+              </div>
+
+              <div class="small-muted">
+                Student:
+                ${escapeHtml(row.neptun)}
+                &nbsp; · &nbsp;
+                Run count:
+                ${escapeHtml(
+                  solution.run_count ?? 0
+                )}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="review-grid">
+
+            <div>
+
+              <div class="review-section-title">
+                Student code
+              </div>
+
+              <div class="code-box">
+                <pre><code>${escapeHtml(code)}</code></pre>
+              </div>
+
+            </div>
+
+            <div>
+
+              <div class="review-section-title">
+                Hidden tests
+              </div>
+
+              <div class="review-info-box">
+                ${hiddenTestsHtml(hiddenTests)}
+              </div>
+
+              <div class="review-section-title">
+                AI feedback
+              </div>
+
+              <div class="
+                review-info-box
+                ai-feedback
+              ">
+                ${escapeHtml(aiFeedback)}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      `;
+    }
+  ).join("");
+}
+
+
+function renderRows() {
+  const rows =
+    filteredRows();
+
+  renderFilteredSummary(rows);
+
+  resultsBody.innerHTML = "";
+
+  if (!rows.length) {
+    resultsBody.innerHTML = `
+      <tr>
+        <td colspan="9">
+          No matching submissions.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  for (const row of rows) {
+    const tr =
+      document.createElement("tr");
+
+    const taskTitle =
+      Array.isArray(row.task_titles)
+        ? row.task_titles.join(", ")
+        : "";
+
+    const preliminary =
+      row.preliminary_score === null
+        ? "–"
+        : `${row.preliminary_score} / ${row.max_score}`;
+
+    const defaultFinal =
+      row.final_score !== null
+        ? row.final_score
+        : (
+            row.preliminary_score !== null
+              ? row.preliminary_score
+              : ""
+          );
+
+    const isFinal =
+      row.review_status === "final";
+
+    const actionLabel =
+      isFinal
+        ? "Update final result"
+        : "Save & finalize";
+
+    const finalHint =
+      isFinal
+        ? "Final score"
+        : (
+            row.preliminary_score !== null
+              ? "Suggested"
+              : ""
+          );
+
+    tr.innerHTML = `
+
+      <td>
+        ${escapeHtml(row.group || "–")}
+      </td>
+
+      <td>
+        <strong>
+          ${escapeHtml(row.neptun)}
+        </strong>
+      </td>
+
+      <td>
+
+        <strong>
+          ${escapeHtml(taskTitle)}
+        </strong>
+
+        <br>
+
+        <button
+          type="button"
+          class="teacher-button review-button">
+          Review details
+        </button>
+
+      </td>
+
+      <td>
+        ${escapeHtml(preliminary)}
+      </td>
+
+      <td>
+
+        <input
+          type="number"
+          min="0"
+          max="${escapeHtml(row.max_score ?? 10)}"
+          step="0.5"
+          value="${escapeHtml(defaultFinal)}"
+          class="final-score"
+        />
+
+        ${
+          finalHint
+            ? `
+              <div class="final-hint">
+                ${escapeHtml(finalHint)}
+              </div>
+            `
+            : ""
+        }
+
+      </td>
+
+      <td>
+        ${
+          row.submission_type === "window_switch"
+            ? '<strong title="Automatic submission caused by the window-switch rule">⚠ Window switch</strong>'
+            : row.submission_type === "timeout"
+              ? '<strong title="Automatic submission when the time limit expired">Timeout</strong>'
+              : escapeHtml(
+                  row.submission_type === "manual"
+                    ? "Manual"
+                    : (row.submission_type || "Manual")
+                )
+        }
+      </td>
+
+      <td class="status-${escapeHtml(row.status)}">
+        ${escapeHtml(row.status)}
+      </td>
+
+      <td>
+
+        <input
+          type="text"
+          class="teacher-comment"
+          value="${escapeHtml(
+            row.teacher_comment || ""
+          )}"
+          placeholder="Optional comment"
+        />
+
+      </td>
+
+      <td>
+
+        <button
+          class="teacher-button save-review">
+          ${escapeHtml(actionLabel)}
+        </button>
+
+        ${
+          isFinal
+            ? `
+              <div class="small-muted">
+                Finalized
+              </div>
+            `
+            : ""
+        }
+
+      </td>
+    `;
+
+    resultsBody.appendChild(tr);
+
+    const reviewTr =
+      document.createElement("tr");
+
+    reviewTr.className =
+      "review-row";
+
+    reviewTr.innerHTML = `
+      <td colspan="9">
+        ${reviewPanelHtml(row)}
+      </td>
+    `;
+
+    resultsBody.appendChild(reviewTr);
+
+    const reviewButton =
+      tr.querySelector(".review-button");
+
+    reviewButton.addEventListener(
+      "click",
+      () => {
+        const open =
+          reviewTr.classList.toggle("open");
+
+        reviewButton.textContent =
+          open
+            ? "Hide details"
+            : "Review details";
+      }
+    );
+
+    const saveButton =
+      tr.querySelector(".save-review");
+
+    saveButton.addEventListener(
+      "click",
+      async () => {
+        const scoreInput =
+          tr.querySelector(".final-score");
+
+        const commentInput =
+          tr.querySelector(".teacher-comment");
+
+        await saveReview(
+          row,
+          scoreInput.value,
+          commentInput.value,
+          saveButton
+        );
+      }
+    );
+  }
+}
+
+
+async function saveReviewRequest(
+  row,
+  score,
+  comment
+) {
+  const response =
+    await fetch(
+      apiUrl("saveReview"),
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          test_id:
+            testSelect.value,
+
+          submission_id:
+            row.submission_id,
+
+          final_score:
+            Number(score),
+
+          teacher_comment:
+            comment || "",
+
+          finalize:
+            true,
+
+          reviewed_by:
+            "instructor"
+        })
+      }
+    );
+
+  const data =
+    await readJsonResponse(
+      response,
+      `Review could not be saved for ${row.neptun}.`
+    );
+
+  if (!data.success) {
+    throw new Error(
+      data.error ||
+      `Review could not be saved for ${row.neptun}.`
+    );
+  }
+
+  return data;
+}
+
+
+async function saveReview(
+  row,
+  scoreValue,
+  comment,
+  button
+) {
+  const score =
+    Number(scoreValue);
+
+  if (!Number.isFinite(score)) {
+    setMessage(
+      `Invalid final score for ${row.neptun}.`,
+      true
+    );
+
+    return;
+  }
+
+  button.disabled = true;
+
+  setMessage(
+    `Saving review for ${row.neptun}...`
+  );
+
+  try {
+    await saveReviewRequest(
+      row,
+      score,
+      comment
+    );
+
+    setMessage(
+      `${row.neptun} finalized successfully.`
+    );
+
+    await loadResults();
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+function unchangedRows() {
+  return filteredRows().filter(
+    row => {
+      if (
+        row.review_status === "final"
+      ) {
+        return false;
+      }
+
+      if (
+        row.status === "needs_review"
+      ) {
+        return false;
+      }
+
+      if (
+        row.preliminary_score === null
+      ) {
+        return false;
+      }
+
+      if (
+        !Number.isFinite(
+          Number(row.preliminary_score)
+        )
+      ) {
+        return false;
+      }
+
+      return true;
+    }
+  );
+}
+
+
+async function finalizeUnchanged() {
+  const button =
+    document.getElementById(
+      "finalizeUnchangedButton"
+    );
+
+  const rows =
+    unchangedRows();
+
+  if (!rows.length) {
+    setMessage(
+      "No unchanged results are available for finalization."
+    );
+
+    return;
+  }
+
+  const groupText =
+    groupFilter.value
+      ? ` in ${groupFilter.value}`
+      : "";
+
+  const confirmed =
+    window.confirm(
+      `Finalize ${rows.length} unchanged result(s)${groupText}?\n\n` +
+      `Each preliminary score will become the final score.\n` +
+      `Teacher comments will remain empty.\n\n` +
+      `Final results can still be updated individually later.`
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+  button.disabled = true;
+
+  let completed = 0;
+
+  try {
+    for (const row of rows) {
+      setMessage(
+        `Finalizing ${completed + 1}/${rows.length}: ` +
+        `${row.neptun}...`
+      );
+
+      await saveReviewRequest(
+        row,
+        row.preliminary_score,
+        ""
+      );
+
+      completed++;
+    }
+
+    await loadResults();
+
+    setMessage(
+      `${completed} unchanged result(s) finalized successfully.`
+    );
+
+  } catch (error) {
+    await loadResults();
+
+    setMessage(
+      `${completed}/${rows.length} result(s) were finalized. ` +
+      `Processing stopped: ${error.message}`,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+async function evaluatePending() {
+  const button =
+    document.getElementById(
+      "evaluateButton"
+    );
+
+  button.disabled = true;
+
+  try {
+    let remaining = null;
+    let batch = 0;
+
+    do {
+      batch++;
+
+      setMessage(
+        `Evaluating batch ${batch}...`
+      );
+
+      const response =
+        await fetch(
+          apiUrl("evaluateTest"),
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              test_id:
+                testSelect.value
+            })
+          }
+        );
+
+      const data =
+        await readJsonResponse(
+          response,
+          "Evaluation failed."
+        );
+
+      if (
+        data.failed_this_batch > 0
+      ) {
+        throw new Error(
+          `Evaluation stopped: ` +
+          `${data.failed_this_batch} ` +
+          `submission(s) failed.`
+        );
+      }
+
+      remaining =
+        Number(data.remaining || 0);
+
+      setMessage(
+        remaining > 0
+          ? `${remaining} submission(s) remaining...`
+          : "Evaluation completed."
+      );
+
+    } while (remaining > 0);
+
+    await loadResults();
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+/* -------------------------------------------------
+   Login
+------------------------------------------------- */
+
+async function login() {
+  const key =
+    functionKey.value.trim();
+
+  if (!key) {
+    loginMessage.textContent =
+      "Enter the Function key.";
+
+    return;
+  }
+
+  sessionStorage.setItem(
+    "teacher_function_key",
+    key
+  );
+
+  loginMessage.textContent =
+    "Checking access...";
+
+  try {
+    await loadResults();
+
+    loginBox.style.display =
+      "none";
+
+    dashboard.style.display =
+      "block";
+
+  } catch (error) {
+    sessionStorage.removeItem(
+      "teacher_function_key"
+    );
+
+    loginMessage.textContent =
+      error.message;
+  }
+}
+
+
+/* -------------------------------------------------
+   Event listeners
+------------------------------------------------- */
+
+document
+  .getElementById("loginButton")
+  .addEventListener(
+    "click",
+    login
+  );
+
+
+functionKey.addEventListener(
+  "keydown",
+  event => {
+    if (event.key === "Enter") {
+      login();
+    }
+  }
+);
+
+
+openSessionButton.addEventListener(
+  "click",
+  openTestSession
+);
+
+
+document
+  .getElementById("refreshButton")
+  .addEventListener(
+    "click",
+    async () => {
+      try {
+        await loadResults();
+      } catch (error) {
+        setMessage(
+          error.message,
+          true
+        );
+      }
+    }
+  );
+
+
+document
+  .getElementById("evaluateButton")
+  .addEventListener(
+    "click",
+    evaluatePending
+  );
+
+
+document
+  .getElementById(
+    "finalizeUnchangedButton"
+  )
+  .addEventListener(
+    "click",
+    finalizeUnchanged
+  );
+
+
+document
+  .getElementById("logoutButton")
+  .addEventListener(
+    "click",
+    () => {
+      sessionStorage.removeItem(
+        "teacher_function_key"
+      );
+
+      location.reload();
+    }
+  );
+
+
+groupFilter.addEventListener(
+  "change",
+  renderRows
+);
+
+
+statusFilter.addEventListener(
+  "change",
+  renderRows
+);
+
+
+testSelect.addEventListener(
+  "change",
+  async () => {
+    stopSessionCountdown();
+
+    sessionExpiresAt = null;
+
+    sessionDisplay.classList.remove(
+      "open"
+    );
+
+    sessionCode.textContent = "";
+
+    try {
+      await loadResults();
+    } catch (error) {
+      setMessage(
+        error.message,
+        true
+      );
+    }
+  }
+);
+
+})();
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

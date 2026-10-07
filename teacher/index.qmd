@@ -1,0 +1,1780 @@
+---
+title: "Teacher Dashboard"
+page-layout: full
+toc: false
+---
+
+<style>
+.teacher-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+}
+
+.teacher-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.teacher-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.teacher-field input,
+.teacher-field select {
+  min-width: 150px;
+  padding: 6px 8px;
+}
+
+.teacher-button {
+  padding: 7px 12px;
+  border: 1px solid #777;
+  border-radius: 5px;
+  cursor: pointer;
+  background: white;
+}
+
+.teacher-button:hover {
+  background: #f3f3f3;
+}
+
+.teacher-button-primary {
+  background: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.teacher-button-primary:hover {
+  background: #0b5ed7;
+}
+
+.teacher-button-success {
+  background: #198754;
+  color: white;
+  border-color: #198754;
+}
+
+.teacher-button-success:hover {
+  background: #157347;
+}
+
+.teacher-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.review-button {
+  margin-top: 5px;
+  font-size: 0.82rem;
+}
+
+#loginBox {
+  max-width: 650px;
+  padding: 18px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+#loginBox input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0 12px 0;
+}
+
+#dashboard {
+  display: none;
+}
+
+/* Classroom access panel */
+
+.session-panel {
+  border: 1px solid #d7d7d7;
+  border-radius: 9px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: #fafafa;
+}
+
+.session-panel-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.session-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+}
+
+.session-display {
+  display: none;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #198754;
+  border-radius: 8px;
+  background: white;
+}
+
+.session-display.open {
+  display: block;
+}
+
+.session-status {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.session-code {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  margin: 5px 0 8px 0;
+}
+
+.session-meta {
+  font-size: 0.9rem;
+}
+
+.session-countdown {
+  font-weight: 700;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.summary-card {
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  padding: 12px;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.summary-value {
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+#message {
+  margin: 12px 0;
+}
+
+.teacher-table-wrapper {
+  overflow-x: auto;
+}
+
+.teacher-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.teacher-table th,
+.teacher-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: top;
+}
+
+.teacher-table th {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.teacher-table input[type="number"] {
+  width: 75px;
+}
+
+.teacher-table input[type="text"] {
+  min-width: 200px;
+  width: 100%;
+}
+
+.status-final {
+  font-weight: 600;
+}
+
+.status-needs_review {
+  font-weight: 600;
+}
+
+.small-muted {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.final-hint {
+  margin-top: 3px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Full-width review row */
+
+.review-row {
+  display: none;
+}
+
+.review-row.open {
+  display: table-row;
+}
+
+.review-row > td {
+  padding: 0 8px 18px 8px;
+  background: #fafafa;
+}
+
+.review-panel {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.review-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 14px;
+}
+
+.review-heading-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(280px, 2fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.review-section-title {
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.code-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.code-box pre {
+  margin: 0;
+  padding: 14px;
+  overflow-x: auto;
+  min-height: 120px;
+  max-height: 500px;
+  background: #f5f5f5;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-box code {
+  white-space: pre;
+}
+
+.review-info-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: white;
+}
+
+.hidden-test {
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.hidden-test:last-child {
+  border-bottom: none;
+}
+
+.hidden-test-fail {
+  font-weight: 600;
+}
+
+.ai-feedback {
+  line-height: 1.45;
+}
+
+@media (max-width: 1000px) {
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+
+<div id="loginBox">
+
+## Teacher access
+
+Enter the Azure Function key for the teacher API.
+
+The key is kept only for this browser-tab session.
+
+<input
+  id="functionKey"
+  type="password"
+  autocomplete="off"
+  placeholder="Function key"
+/>
+
+<button
+  id="loginButton"
+  class="teacher-button teacher-button-primary">
+  Open dashboard
+</button>
+
+<div id="loginMessage"></div>
+
+</div>
+
+<div id="dashboard">
+
+<div class="session-panel">
+
+<div class="session-panel-title">
+Classroom access
+</div>
+
+<div class="session-controls">
+
+<div class="teacher-field">
+<label for="sessionGroupSelect">Default group</label>
+<select id="sessionGroupSelect">
+<option value="G01">G01</option>
+<option value="G02">G02</option>
+<option value="G03">G03</option>
+<option value="G04">G04</option>
+<option value="G05">G05</option>
+<option value="G06">G06</option>
+</select>
+</div>
+
+<button
+  id="openSessionButton"
+  class="teacher-button teacher-button-primary">
+  Open test
+</button>
+
+</div>
+
+<div id="sessionDisplay" class="session-display">
+
+<div id="sessionStatus" class="session-status">
+Access open
+</div>
+
+<div id="sessionCode" class="session-code"></div>
+
+<div class="session-meta">
+<span id="sessionLabel"></span>
+&nbsp; · &nbsp;
+Expires in
+<span id="sessionCountdown" class="session-countdown">--:--</span>
+</div>
+
+<div class="small-muted" style="margin-top:8px;">
+Students enter this classroom code on the test page.
+The code is valid for starting the test only; each student's
+10-minute test period begins when Start test succeeds.
+</div>
+
+</div>
+
+</div>
+
+<div class="teacher-toolbar">
+
+<div class="teacher-field">
+<label for="testSelect">Test</label>
+<select id="testSelect">
+<option value="week04">Week 4 Warm-up</option>
+</select>
+</div>
+
+<div class="teacher-field">
+<label for="groupFilter">Group</label>
+<select id="groupFilter">
+<option value="">All groups</option>
+<option value="G01">G01</option>
+<option value="G02">G02</option>
+<option value="G03">G03</option>
+<option value="G04">G04</option>
+<option value="G05">G05</option>
+<option value="G06">G06</option>
+</select>
+</div>
+
+<div class="teacher-field">
+<label for="statusFilter">Status</label>
+<select id="statusFilter">
+<option value="">All</option>
+<option value="submitted">Submitted</option>
+<option value="preliminary">Preliminary</option>
+<option value="needs_review">Needs review</option>
+<option value="final">Final</option>
+</select>
+</div>
+
+<button id="refreshButton" class="teacher-button">
+Refresh
+</button>
+
+<button
+  id="evaluateButton"
+  class="teacher-button teacher-button-primary">
+  Evaluate pending submissions
+</button>
+
+<button
+  id="finalizeUnchangedButton"
+  class="teacher-button teacher-button-success">
+  Finalize unchanged results
+</button>
+
+<button id="logoutButton" class="teacher-button">
+Clear key
+</button>
+
+</div>
+
+<div id="summary" class="summary-grid"></div>
+
+<div id="message"></div>
+
+<div class="teacher-table-wrapper">
+
+<table class="teacher-table">
+
+<thead>
+<tr>
+<th>Group</th>
+<th>Neptun</th>
+<th>Task</th>
+<th>Preliminary</th>
+<th>Final</th>
+<th>Submission</th>
+<th>Status</th>
+<th>Teacher comment</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="resultsBody"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+(() => {
+
+const API_BASE =
+  "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+
+let allRows = [];
+
+const loginBox =
+  document.getElementById("loginBox");
+
+const dashboard =
+  document.getElementById("dashboard");
+
+const functionKey =
+  document.getElementById("functionKey");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const resultsBody =
+  document.getElementById("resultsBody");
+
+const summary =
+  document.getElementById("summary");
+
+const message =
+  document.getElementById("message");
+
+const groupFilter =
+  document.getElementById("groupFilter");
+
+const statusFilter =
+  document.getElementById("statusFilter");
+
+const testSelect =
+  document.getElementById("testSelect");
+
+const sessionGroupSelect =
+  document.getElementById("sessionGroupSelect");
+
+const openSessionButton =
+  document.getElementById("openSessionButton");
+
+const sessionDisplay =
+  document.getElementById("sessionDisplay");
+
+const sessionStatus =
+  document.getElementById("sessionStatus");
+
+const sessionCode =
+  document.getElementById("sessionCode");
+
+const sessionLabel =
+  document.getElementById("sessionLabel");
+
+const sessionCountdown =
+  document.getElementById("sessionCountdown");
+
+let sessionTimer = null;
+let sessionExpiresAt = null;
+
+
+function getKey() {
+  return sessionStorage.getItem(
+    "teacher_function_key"
+  ) || "";
+}
+
+
+function setMessage(text, error = false) {
+  message.textContent = text;
+
+  message.style.color =
+    error ? "#b00020" : "";
+}
+
+
+function apiUrl(functionName) {
+  const key = getKey();
+
+  return (
+    `${API_BASE}/${functionName}` +
+    `?code=${encodeURIComponent(key)}`
+  );
+}
+
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+async function readJsonResponse(
+  response,
+  fallbackMessage
+) {
+  const text =
+    await response.text();
+
+  let data = {};
+
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(
+        `${fallbackMessage} ` +
+        `(HTTP ${response.status}: invalid response)`
+      );
+    }
+  }
+
+  if (!response.ok) {
+    throw new Error(
+      data.error ||
+      `${fallbackMessage} (HTTP ${response.status})`
+    );
+  }
+
+  return data;
+}
+
+
+/* -------------------------------------------------
+   Classroom access
+------------------------------------------------- */
+
+function stopSessionCountdown() {
+  if (sessionTimer) {
+    clearInterval(sessionTimer);
+    sessionTimer = null;
+  }
+}
+
+
+function updateSessionCountdown() {
+  if (!sessionExpiresAt) {
+    sessionCountdown.textContent = "--:--";
+    return;
+  }
+
+  const remaining =
+    Math.max(
+      0,
+      sessionExpiresAt.getTime() -
+      Date.now()
+    );
+
+  const totalSeconds =
+    Math.ceil(
+      remaining / 1000
+    );
+
+  const minutes =
+    Math.floor(
+      totalSeconds / 60
+    );
+
+  const seconds =
+    totalSeconds % 60;
+
+  sessionCountdown.textContent =
+    `${String(minutes).padStart(2, "0")}:` +
+    `${String(seconds).padStart(2, "0")}`;
+
+  if (remaining <= 0) {
+    stopSessionCountdown();
+
+    sessionStatus.textContent =
+      "Access expired";
+
+    sessionCode.textContent =
+      "------";
+  }
+}
+
+
+function showOpenedSession(data) {
+  sessionExpiresAt =
+    new Date(data.expires_at);
+
+  sessionCode.textContent =
+    data.access_code || "------";
+
+  sessionLabel.textContent =
+    `${data.test_id} · ${data.session_group}`;
+
+  sessionStatus.textContent =
+    "Access open";
+
+  sessionDisplay.classList.add("open");
+
+  stopSessionCountdown();
+  updateSessionCountdown();
+
+  sessionTimer =
+    setInterval(
+      updateSessionCountdown,
+      1000
+    );
+}
+
+
+async function openTestSession() {
+  const testId =
+    testSelect.value;
+
+  const sessionGroup =
+    sessionGroupSelect.value;
+
+  if (!sessionGroup) {
+    setMessage(
+      "Select a default group.",
+      true
+    );
+    return;
+  }
+
+  openSessionButton.disabled = true;
+
+  setMessage(
+    `Opening ${testId} for ${sessionGroup}...`
+  );
+
+  try {
+    const response =
+      await fetch(
+        apiUrl("openTestSession"),
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            test_id:
+              testId,
+
+            session_group:
+              sessionGroup,
+
+            access_minutes:
+              3
+          })
+        }
+      );
+
+    const data =
+      await readJsonResponse(
+        response,
+        "Test access could not be opened."
+      );
+
+    if (
+      !data.success ||
+      !data.access_code
+    ) {
+      throw new Error(
+        data.error ||
+        "Test access could not be opened."
+      );
+    }
+
+    showOpenedSession(data);
+
+    setMessage(
+      `${testId} opened for ${sessionGroup}. ` +
+      `Classroom code: ${data.access_code}`
+    );
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    openSessionButton.disabled = false;
+  }
+}
+
+
+/* -------------------------------------------------
+   Results
+------------------------------------------------- */
+
+async function loadResults() {
+  const testId =
+    testSelect.value;
+
+  setMessage(
+    "Loading results..."
+  );
+
+  const url =
+    apiUrl("teacherResults") +
+    `&test_id=${encodeURIComponent(testId)}`;
+
+  const response =
+    await fetch(url);
+
+  const data =
+    await readJsonResponse(
+      response,
+      "Could not load teacher results."
+    );
+
+  if (!data.success) {
+    throw new Error(
+      data.error ||
+      "Could not load teacher results."
+    );
+  }
+
+  allRows =
+    data.submissions || [];
+
+  renderRows();
+
+  setMessage(
+    `${allRows.length} submission(s) loaded.`
+  );
+}
+
+
+function filteredRows() {
+  const group =
+    groupFilter.value;
+
+  const status =
+    statusFilter.value;
+
+  return allRows.filter(row => {
+    if (
+      group &&
+      row.group !== group
+    ) {
+      return false;
+    }
+
+    if (
+      status &&
+      row.status !== status
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+
+function renderFilteredSummary(rows) {
+  const evaluated =
+    rows.filter(
+      row =>
+        row.preliminary_score !== null &&
+        Number.isFinite(
+          Number(row.preliminary_score)
+        )
+    );
+
+  const finalized =
+    rows.filter(
+      row =>
+        row.review_status === "final"
+    );
+
+  const needsReview =
+    rows.filter(
+      row =>
+        row.status === "needs_review"
+    );
+
+  const average =
+    evaluated.length
+      ? evaluated.reduce(
+          (sum, row) =>
+            sum +
+            Number(row.preliminary_score),
+          0
+        ) / evaluated.length
+      : null;
+
+  const cards = [
+    ["Submissions", rows.length],
+    ["Evaluated", evaluated.length],
+    ["Finalized", finalized.length],
+    ["Needs review", needsReview.length],
+    [
+      "Average",
+      average === null
+        ? "–"
+        : Math.round(average * 100) / 100
+    ]
+  ];
+
+  summary.innerHTML =
+    cards.map(
+      ([label, value]) => `
+        <div class="summary-card">
+          <div class="summary-label">
+            ${escapeHtml(label)}
+          </div>
+
+          <div class="summary-value">
+            ${escapeHtml(value)}
+          </div>
+        </div>
+      `
+    ).join("");
+}
+
+
+function hiddenTestsHtml(hiddenTests) {
+  if (
+    !hiddenTests ||
+    !Array.isArray(hiddenTests.results)
+  ) {
+    return `
+      <div class="small-muted">
+        No hidden-test details available.
+      </div>
+    `;
+  }
+
+  const passed =
+    Number(hiddenTests.passed || 0);
+
+  const total =
+    Number(
+      hiddenTests.total ||
+      hiddenTests.results.length
+    );
+
+  const tests =
+    hiddenTests.results.map(
+      (test, index) => {
+        const ok =
+          Boolean(test.passed);
+
+        let details = "";
+
+        if (test.timeout) {
+          details += `
+            <div class="small-muted">
+              Timeout
+            </div>
+          `;
+        }
+
+        if (test.error) {
+          details += `
+            <div class="small-muted">
+              ${escapeHtml(test.error)}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="
+            hidden-test
+            ${ok ? "" : "hidden-test-fail"}
+          ">
+            ${ok ? "✓" : "✗"}
+            ${escapeHtml(
+              test.name ||
+              `Test ${index + 1}`
+            )}
+
+            ${details}
+          </div>
+        `;
+      }
+    ).join("");
+
+  return `
+    <div class="small-muted"
+         style="margin-bottom:6px;">
+      ${passed}/${total} passed
+    </div>
+
+    ${tests}
+  `;
+}
+
+
+function reviewPanelHtml(row) {
+  const solutions =
+    Array.isArray(row.solutions)
+      ? row.solutions
+      : [];
+
+  if (!solutions.length) {
+    return `
+      <div class="review-panel">
+        <div class="small-muted">
+          No submitted source code is available.
+        </div>
+      </div>
+    `;
+  }
+
+  return solutions.map(
+    (solution, index) => {
+      const code =
+        solution.code || "";
+
+      const hiddenTests =
+        solution.hidden_tests || {};
+
+      const aiEvaluation =
+        solution.ai_evaluation || {};
+
+      const aiFeedback =
+        aiEvaluation.feedback ||
+        row.preliminary_feedback ||
+        "No AI feedback available.";
+
+      const taskId =
+        solution.task_id || "";
+
+      const heading =
+        solutions.length > 1
+          ? `Task ${index + 1}: ${taskId}`
+          : (
+              row.task_titles?.[0] ||
+              taskId ||
+              "Submitted solution"
+            );
+
+      return `
+        <div class="review-panel">
+
+          <div class="review-heading">
+
+            <div>
+              <div class="review-heading-title">
+                ${escapeHtml(heading)}
+              </div>
+
+              <div class="small-muted">
+                Student:
+                ${escapeHtml(row.neptun)}
+                &nbsp; · &nbsp;
+                Run count:
+                ${escapeHtml(
+                  solution.run_count ?? 0
+                )}
+              </div>
+            </div>
+
+          </div>
+
+          <div class="review-grid">
+
+            <div>
+
+              <div class="review-section-title">
+                Student code
+              </div>
+
+              <div class="code-box">
+                <pre><code>${escapeHtml(code)}</code></pre>
+              </div>
+
+            </div>
+
+            <div>
+
+              <div class="review-section-title">
+                Hidden tests
+              </div>
+
+              <div class="review-info-box">
+                ${hiddenTestsHtml(hiddenTests)}
+              </div>
+
+              <div class="review-section-title">
+                AI feedback
+              </div>
+
+              <div class="
+                review-info-box
+                ai-feedback
+              ">
+                ${escapeHtml(aiFeedback)}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      `;
+    }
+  ).join("");
+}
+
+
+function renderRows() {
+  const rows =
+    filteredRows();
+
+  renderFilteredSummary(rows);
+
+  resultsBody.innerHTML = "";
+
+  if (!rows.length) {
+    resultsBody.innerHTML = `
+      <tr>
+        <td colspan="9">
+          No matching submissions.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  for (const row of rows) {
+    const tr =
+      document.createElement("tr");
+
+    const taskTitle =
+      Array.isArray(row.task_titles)
+        ? row.task_titles.join(", ")
+        : "";
+
+    const preliminary =
+      row.preliminary_score === null
+        ? "–"
+        : `${row.preliminary_score} / ${row.max_score}`;
+
+    const defaultFinal =
+      row.final_score !== null
+        ? row.final_score
+        : (
+            row.preliminary_score !== null
+              ? row.preliminary_score
+              : ""
+          );
+
+    const isFinal =
+      row.review_status === "final";
+
+    const actionLabel =
+      isFinal
+        ? "Update final result"
+        : "Save & finalize";
+
+    const finalHint =
+      isFinal
+        ? "Final score"
+        : (
+            row.preliminary_score !== null
+              ? "Suggested"
+              : ""
+          );
+
+    tr.innerHTML = `
+
+      <td>
+        ${escapeHtml(row.group || "–")}
+      </td>
+
+      <td>
+        <strong>
+          ${escapeHtml(row.neptun)}
+        </strong>
+      </td>
+
+      <td>
+
+        <strong>
+          ${escapeHtml(taskTitle)}
+        </strong>
+
+        <br>
+
+        <button
+          type="button"
+          class="teacher-button review-button">
+          Review details
+        </button>
+
+      </td>
+
+      <td>
+        ${escapeHtml(preliminary)}
+      </td>
+
+      <td>
+
+        <input
+          type="number"
+          min="0"
+          max="${escapeHtml(row.max_score ?? 10)}"
+          step="0.5"
+          value="${escapeHtml(defaultFinal)}"
+          class="final-score"
+        />
+
+        ${
+          finalHint
+            ? `
+              <div class="final-hint">
+                ${escapeHtml(finalHint)}
+              </div>
+            `
+            : ""
+        }
+
+      </td>
+
+      <td>
+        ${
+          row.submission_type === "window_switch"
+            ? '<strong title="Automatic submission caused by the window-switch rule">⚠ Window switch</strong>'
+            : row.submission_type === "timeout"
+              ? '<strong title="Automatic submission when the time limit expired">Timeout</strong>'
+              : escapeHtml(
+                  row.submission_type === "manual"
+                    ? "Manual"
+                    : (row.submission_type || "Manual")
+                )
+        }
+      </td>
+
+      <td class="status-${escapeHtml(row.status)}">
+        ${escapeHtml(row.status)}
+      </td>
+
+      <td>
+
+        <input
+          type="text"
+          class="teacher-comment"
+          value="${escapeHtml(
+            row.teacher_comment || ""
+          )}"
+          placeholder="Optional comment"
+        />
+
+      </td>
+
+      <td>
+
+        <button
+          class="teacher-button save-review">
+          ${escapeHtml(actionLabel)}
+        </button>
+
+        ${
+          isFinal
+            ? `
+              <div class="small-muted">
+                Finalized
+              </div>
+            `
+            : ""
+        }
+
+      </td>
+    `;
+
+    resultsBody.appendChild(tr);
+
+    const reviewTr =
+      document.createElement("tr");
+
+    reviewTr.className =
+      "review-row";
+
+    reviewTr.innerHTML = `
+      <td colspan="9">
+        ${reviewPanelHtml(row)}
+      </td>
+    `;
+
+    resultsBody.appendChild(reviewTr);
+
+    const reviewButton =
+      tr.querySelector(".review-button");
+
+    reviewButton.addEventListener(
+      "click",
+      () => {
+        const open =
+          reviewTr.classList.toggle("open");
+
+        reviewButton.textContent =
+          open
+            ? "Hide details"
+            : "Review details";
+      }
+    );
+
+    const saveButton =
+      tr.querySelector(".save-review");
+
+    saveButton.addEventListener(
+      "click",
+      async () => {
+        const scoreInput =
+          tr.querySelector(".final-score");
+
+        const commentInput =
+          tr.querySelector(".teacher-comment");
+
+        await saveReview(
+          row,
+          scoreInput.value,
+          commentInput.value,
+          saveButton
+        );
+      }
+    );
+  }
+}
+
+
+async function saveReviewRequest(
+  row,
+  score,
+  comment
+) {
+  const response =
+    await fetch(
+      apiUrl("saveReview"),
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type":
+            "application/json"
+        },
+
+        body: JSON.stringify({
+          test_id:
+            testSelect.value,
+
+          submission_id:
+            row.submission_id,
+
+          final_score:
+            Number(score),
+
+          teacher_comment:
+            comment || "",
+
+          finalize:
+            true,
+
+          reviewed_by:
+            "instructor"
+        })
+      }
+    );
+
+  const data =
+    await readJsonResponse(
+      response,
+      `Review could not be saved for ${row.neptun}.`
+    );
+
+  if (!data.success) {
+    throw new Error(
+      data.error ||
+      `Review could not be saved for ${row.neptun}.`
+    );
+  }
+
+  return data;
+}
+
+
+async function saveReview(
+  row,
+  scoreValue,
+  comment,
+  button
+) {
+  const score =
+    Number(scoreValue);
+
+  if (!Number.isFinite(score)) {
+    setMessage(
+      `Invalid final score for ${row.neptun}.`,
+      true
+    );
+
+    return;
+  }
+
+  button.disabled = true;
+
+  setMessage(
+    `Saving review for ${row.neptun}...`
+  );
+
+  try {
+    await saveReviewRequest(
+      row,
+      score,
+      comment
+    );
+
+    setMessage(
+      `${row.neptun} finalized successfully.`
+    );
+
+    await loadResults();
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+function unchangedRows() {
+  return filteredRows().filter(
+    row => {
+      if (
+        row.review_status === "final"
+      ) {
+        return false;
+      }
+
+      if (
+        row.status === "needs_review"
+      ) {
+        return false;
+      }
+
+      if (
+        row.preliminary_score === null
+      ) {
+        return false;
+      }
+
+      if (
+        !Number.isFinite(
+          Number(row.preliminary_score)
+        )
+      ) {
+        return false;
+      }
+
+      return true;
+    }
+  );
+}
+
+
+async function finalizeUnchanged() {
+  const button =
+    document.getElementById(
+      "finalizeUnchangedButton"
+    );
+
+  const rows =
+    unchangedRows();
+
+  if (!rows.length) {
+    setMessage(
+      "No unchanged results are available for finalization."
+    );
+
+    return;
+  }
+
+  const groupText =
+    groupFilter.value
+      ? ` in ${groupFilter.value}`
+      : "";
+
+  const confirmed =
+    window.confirm(
+      `Finalize ${rows.length} unchanged result(s)${groupText}?\n\n` +
+      `Each preliminary score will become the final score.\n` +
+      `Teacher comments will remain empty.\n\n` +
+      `Final results can still be updated individually later.`
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+  button.disabled = true;
+
+  let completed = 0;
+
+  try {
+    for (const row of rows) {
+      setMessage(
+        `Finalizing ${completed + 1}/${rows.length}: ` +
+        `${row.neptun}...`
+      );
+
+      await saveReviewRequest(
+        row,
+        row.preliminary_score,
+        ""
+      );
+
+      completed++;
+    }
+
+    await loadResults();
+
+    setMessage(
+      `${completed} unchanged result(s) finalized successfully.`
+    );
+
+  } catch (error) {
+    await loadResults();
+
+    setMessage(
+      `${completed}/${rows.length} result(s) were finalized. ` +
+      `Processing stopped: ${error.message}`,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+async function evaluatePending() {
+  const button =
+    document.getElementById(
+      "evaluateButton"
+    );
+
+  button.disabled = true;
+
+  try {
+    let remaining = null;
+    let batch = 0;
+
+    do {
+      batch++;
+
+      setMessage(
+        `Evaluating batch ${batch}...`
+      );
+
+      const response =
+        await fetch(
+          apiUrl("evaluateTest"),
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              test_id:
+                testSelect.value
+            })
+          }
+        );
+
+      const data =
+        await readJsonResponse(
+          response,
+          "Evaluation failed."
+        );
+
+      if (
+        data.failed_this_batch > 0
+      ) {
+        throw new Error(
+          `Evaluation stopped: ` +
+          `${data.failed_this_batch} ` +
+          `submission(s) failed.`
+        );
+      }
+
+      remaining =
+        Number(data.remaining || 0);
+
+      setMessage(
+        remaining > 0
+          ? `${remaining} submission(s) remaining...`
+          : "Evaluation completed."
+      );
+
+    } while (remaining > 0);
+
+    await loadResults();
+
+  } catch (error) {
+    setMessage(
+      error.message,
+      true
+    );
+
+  } finally {
+    button.disabled = false;
+  }
+}
+
+
+/* -------------------------------------------------
+   Login
+------------------------------------------------- */
+
+async function login() {
+  const key =
+    functionKey.value.trim();
+
+  if (!key) {
+    loginMessage.textContent =
+      "Enter the Function key.";
+
+    return;
+  }
+
+  sessionStorage.setItem(
+    "teacher_function_key",
+    key
+  );
+
+  loginMessage.textContent =
+    "Checking access...";
+
+  try {
+    await loadResults();
+
+    loginBox.style.display =
+      "none";
+
+    dashboard.style.display =
+      "block";
+
+  } catch (error) {
+    sessionStorage.removeItem(
+      "teacher_function_key"
+    );
+
+    loginMessage.textContent =
+      error.message;
+  }
+}
+
+
+/* -------------------------------------------------
+   Event listeners
+------------------------------------------------- */
+
+document
+  .getElementById("loginButton")
+  .addEventListener(
+    "click",
+    login
+  );
+
+
+functionKey.addEventListener(
+  "keydown",
+  event => {
+    if (event.key === "Enter") {
+      login();
+    }
+  }
+);
+
+
+openSessionButton.addEventListener(
+  "click",
+  openTestSession
+);
+
+
+document
+  .getElementById("refreshButton")
+  .addEventListener(
+    "click",
+    async () => {
+      try {
+        await loadResults();
+      } catch (error) {
+        setMessage(
+          error.message,
+          true
+        );
+      }
+    }
+  );
+
+
+document
+  .getElementById("evaluateButton")
+  .addEventListener(
+    "click",
+    evaluatePending
+  );
+
+
+document
+  .getElementById(
+    "finalizeUnchangedButton"
+  )
+  .addEventListener(
+    "click",
+    finalizeUnchanged
+  );
+
+
+document
+  .getElementById("logoutButton")
+  .addEventListener(
+    "click",
+    () => {
+      sessionStorage.removeItem(
+        "teacher_function_key"
+      );
+
+      location.reload();
+    }
+  );
+
+
+groupFilter.addEventListener(
+  "change",
+  renderRows
+);
+
+
+statusFilter.addEventListener(
+  "change",
+  renderRows
+);
+
+
+testSelect.addEventListener(
+  "change",
+  async () => {
+    stopSessionCountdown();
+
+    sessionExpiresAt = null;
+
+    sessionDisplay.classList.remove(
+      "open"
+    );
+
+    sessionCode.textContent = "";
+
+    try {
+      await loadResults();
+    } catch (error) {
+      setMessage(
+        error.message,
+        true
+      );
+    }
+  }
+);
+
+})();
+</script>
