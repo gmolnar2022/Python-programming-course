@@ -435,14 +435,23 @@ function updateStatus(id){
  if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
  renderSummary();
 }
-async function execute(code,inputs,interactive=false){
+async function execute(code,inputs,interactive=false,onOutput=null){
  await ensurePy();pyodide.globals.set("student_code",code);pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
  pyodide.globals.set("student_interactive",interactive);
  pyodide.globals.set("student_prompt",(message)=>window.prompt(message || "Enter a value:"));
+ pyodide.globals.set("student_output",(chunk)=>{if(onOutput)onOutput(String(chunk));});
  let x=await pyodide.runPythonAsync(`
 import json,builtins,io,contextlib
 def _run(src, vals):
     it=iter(json.loads(vals)); out=io.StringIO()
+    class LiveOutput(io.TextIOBase):
+        def write(self, text):
+            out.write(text)
+            student_output(text)
+            return len(text)
+        def flush(self):
+            pass
+    live=LiveOutput()
     def inp(prompt=""):
         if student_interactive:
             value=student_prompt(str(prompt))
@@ -461,7 +470,7 @@ def _run(src, vals):
     try:
         builtins.input=inp
         ns={"__name__":"__main__"}
-        with contextlib.redirect_stdout(out),contextlib.redirect_stderr(out):
+        with contextlib.redirect_stdout(live if student_interactive else out),contextlib.redirect_stderr(live if student_interactive else out):
             exec(compile(src,"<student_code>","exec"),ns,ns)
         return json.dumps({"ok":True,"output":out.getvalue().strip()})
     except Exception as e:return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
@@ -517,8 +526,10 @@ function inputPrompts(code){
 async function runEx(id){
  let s=state(id),code=document.getElementById(id+"-code").value;
  s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
- let r=await execute(code,[],true);
- document.getElementById(id+"-out").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
+ const output=document.getElementById(id+"-out");
+ output.textContent="";
+ let r=await execute(code,[],true,chunk=>{output.textContent+=chunk;output.scrollTop=output.scrollHeight});
+ output.textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
 }
 function numbersInLine(line){
  return (line.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number)
