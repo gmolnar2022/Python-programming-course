@@ -229,17 +229,24 @@ function updateStatus(id){
  if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
  renderSummary();
 }
-async function execute(code,inputs){
+async function execute(code,inputs,interactive=false){
  await ensurePy();pyodide.globals.set("student_code",code);pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
+ pyodide.globals.set("student_interactive",interactive);
+ pyodide.globals.set("student_prompt",(message)=>window.prompt(message || "Enter a value:"));
  let x=await pyodide.runPythonAsync(`
 import json,builtins,io,contextlib
 def _run(src, vals):
     it=iter(json.loads(vals)); out=io.StringIO()
     def inp(prompt=""):
-        try:
-            value=next(it)
-        except StopIteration:
-            raise EOFError("No more input values.")
+        if student_interactive:
+            value=student_prompt(str(prompt))
+            if value is None:
+                raise EOFError("Input cancelled.")
+        else:
+            try:
+                value=next(it)
+            except StopIteration:
+                raise EOFError("No more input values.")
         if prompt:
             print(prompt,end="")
         print(value)
@@ -304,9 +311,7 @@ function inputPrompts(code){
 async function runEx(id){
  let s=state(id),code=document.getElementById(id+"-code").value;
  s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
- let prompts=inputPrompts(code),vals=[];
- for(const p of prompts){let v=window.prompt(p);if(v===null)return;vals.push(v)}
- let r=await execute(code,vals);
+ let r=await execute(code,[],true);
  document.getElementById(id+"-out").textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
 }
 function numbersInLine(line){
