@@ -55,6 +55,8 @@ body {
 .student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
 .expected-time{font-size:.9rem;color:#555;margin:.2rem 0 .8rem}
 button:disabled{opacity:.5;cursor:not-allowed}
+.live-input{display:flex;gap:8px;align-items:center;margin:8px 0 12px;flex-wrap:wrap}
+.live-input input{flex:1;min-width:160px;padding:8px;border:1px solid #aaa;border-radius:5px}
 </style>
 
 ```{=html}
@@ -192,7 +194,7 @@ function render(){
  <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
  <p><strong>Your Python code</strong></p><textarea class="code" id="${e.id}-code" spellcheck="false">${esc(s.code)}</textarea>
  <div class="controls"><button onclick="runEx('${e.id}')">▶ Run</button><button onclick="checkEx('${e.id}')">✓ Check my solution</button><button onclick="hintEx('${e.id}')">💡 Hint</button><button onclick="stopEx('${e.id}')">■ Stop</button></div>
- <strong>Output</strong><pre id="${e.id}-out"></pre><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
+ <strong>Output</strong><pre id="${e.id}-out"></pre><div id="${e.id}-input" class="live-input" hidden></div><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
  renderSummary();
 }
 function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -229,17 +231,35 @@ function updateStatus(id){
  if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
  renderSummary();
 }
-async function execute(code,inputs,interactive=false,onOutput=null){
- await ensurePy();pyodide.globals.set("student_code",code);pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
+function requestLiveInput(id,message){
+ return new Promise((resolve)=>{
+   const area=document.getElementById(id+"-input");
+   const field=document.createElement("input");field.type="text";field.autocomplete="off";
+   field.setAttribute("aria-label",message||"Python input");
+   const label=document.createElement("span");label.textContent=message||"Input:";
+   const button=document.createElement("button");button.type="button";button.textContent="Enter";
+   area.replaceChildren(label,field,button);area.hidden=false;
+   let done=false;
+   const finish=(value)=>{if(done)return;done=true;area.hidden=true;area.replaceChildren();resolve(value)};
+   button.addEventListener("click",()=>finish(field.value));
+   field.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();finish(field.value)}});
+   // Yield to the browser to paint the output before focusing the input.
+   requestAnimationFrame(()=>field.focus());
+ });
+}
+async function execute(code,inputs,interactive=false,onOutput=null,exerciseId=null){
+ await ensurePy();
+ pyodide.globals.set("student_code",code);
+ pyodide.globals.set("student_inputs_json",JSON.stringify(inputs.map(String)));
  pyodide.globals.set("student_interactive",interactive);
- pyodide.globals.set("student_prompt",(message)=>window.prompt(message || "Enter a value:"));
  pyodide.globals.set("student_output",(chunk)=>{if(onOutput)onOutput(String(chunk));});
+ pyodide.globals.set("student_prompt_async",(message)=>requestLiveInput(exerciseId,String(message)));
  let x=await pyodide.runPythonAsync(`
-import json,builtins,io,contextlib
-def _run(src, vals):
+import json,builtins,io,contextlib,ast,inspect
+async def _run(src, vals):
     it=iter(json.loads(vals)); out=io.StringIO()
     class LiveOutput(io.TextIOBase):
-        def write(self, text):
+        def write(self,text):
             out.write(text)
             student_output(text)
             return len(text)
@@ -247,31 +267,46 @@ def _run(src, vals):
             pass
     live=LiveOutput()
     def inp(prompt=""):
-        if student_interactive:
-            value=student_prompt(str(prompt))
-            if value is None:
-                raise EOFError("Input cancelled.")
-        else:
-            try:
-                value=next(it)
-            except StopIteration:
-                raise EOFError("No more input values.")
-        if prompt:
-            print(prompt,end="")
+        try: value=next(it)
+        except StopIteration: raise EOFError("No more input values.")
+        if prompt: print(prompt,end="")
         print(value)
         return value
+    async def async_inp(prompt=""):
+        if prompt: print(prompt,end="",flush=True)
+        # Yield control so output is painted while waiting for the answer.
+        value=await student_prompt_async(str(prompt))
+        print(value,flush=True)
+        return value
+    class AsyncInput(ast.NodeTransformer):
+        def visit_Call(self,node):
+            self.generic_visit(node)
+            if isinstance(node.func,ast.Name) and node.func.id=="input":
+                node.func.id="async_inp"
+                return ast.copy_location(ast.Await(value=node),node)
+            return node
     old=builtins.input
     try:
         builtins.input=inp
-        ns={"__name__":"__main__"}
+        ns={"__name__":"__main__","async_inp":async_inp}
         with contextlib.redirect_stdout(live if student_interactive else out),contextlib.redirect_stderr(live if student_interactive else out):
-            exec(compile(src,"<student_code>","exec"),ns,ns)
+            if student_interactive:
+                tree=AsyncInput().visit(ast.parse(src,"<student_code>","exec"))
+                ast.fix_missing_locations(tree)
+                compiled=compile(tree,"<student_code>","exec",flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
+                result=eval(compiled,ns,ns)
+                if inspect.isawaitable(result): await result
+            else:
+                exec(compile(src,"<student_code>","exec"),ns,ns)
         return json.dumps({"ok":True,"output":out.getvalue().strip()})
-    except Exception as e:return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
-    finally:builtins.input=old
-_run(student_code,student_inputs_json)
-`);return JSON.parse(String(x))
+    except Exception as e:
+        return json.dumps({"ok":False,"output":out.getvalue().strip(),"error":type(e).__name__+": "+str(e)})
+    finally: builtins.input=old
+await _run(student_code,student_inputs_json)
+`);
+ return JSON.parse(String(x));
 }
+
 async function structure(code){
  pyodide.globals.set("student_code",code);let x=await pyodide.runPythonAsync(`
 import ast,json
@@ -322,7 +357,7 @@ async function runEx(id){
  s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
  const output=document.getElementById(id+"-out");
  output.textContent="";
- let r=await execute(code,[],true,chunk=>{output.textContent+=chunk;output.scrollTop=output.scrollHeight});
+ let r=await execute(code,[],true,chunk=>{output.textContent+=chunk;output.scrollTop=output.scrollHeight},id);
  output.textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error
 }
 function numbersInLine(line){
