@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Midterm Quiz 01 – Practice Test (Not Graded) – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../warmup/04-warmup.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../quizzes/midterm01-practice.html">Midterm 01 test sample</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introduction to Programming and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Working with Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Conditional Statements in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Loops in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4 Warm-up Test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Midterm 01 test sample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page-right" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../quizzes/midterm01-practice.html">Midterm 01 test sample</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Midterm Quiz 01 – Practice Test (Not Graded)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-right">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+#quiz-app{max-width:1040px;margin:auto}.question{border:1px solid #d7dde4;border-radius:10px;padding:16px 20px;margin:16px 0}.choice{display:block;margin:8px 0}.quiz-code{width:100%;min-height:200px;font:14px/1.5 Consolas,monospace;padding:12px;box-sizing:border-box}.quiz-out{white-space:pre-wrap;background:#f5f6f8;padding:12px;border-radius:6px;min-height:35px}.quiz-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.quiz-actions button,#quiz-app button{padding:7px 12px;cursor:pointer}.quiz-input{display:flex;gap:8px;margin:8px 0}.quiz-input[hidden]{display:none}.quiz-input input{min-width:160px;flex:1}.quiz-muted{color:#57606a}.quiz-warning{border-left:4px solid #bf8700;background:#fff8df;padding:12px}.quiz-result{background:#f5f6f8;padding:16px;border-radius:8px;margin:16px 0}#quiz-work[hidden],#quiz-intro[hidden]{display:none}.quiz-timer{font-weight:bold;font-variant-numeric:tabular-nums}.solution{white-space:pre-wrap;background:#f5f6f8;padding:12px;border-radius:6px}.quiz-code:disabled{opacity:.65}
+</style>
+<div id="quiz-app">
+<section id="quiz-intro">
+<p>
+<strong>13 questions · 22 points · 45 minutes</strong>
+</p>
+<div class="quiz-warning">
+<strong>PRACTICE TEST – NOT GRADED</strong>
+<p>
+This is a practice version of Midterm Quiz 01. Results are for self-assessment only and <strong>will not count toward your semester grade</strong>. The official quiz carries 10% of the semester grade.
+</p>
+</div>
+<div class="quiz-warning">
+<strong>Practice assessment rules</strong>
+<p>
+Work individually. Do not use AI assistants, external websites, search engines, notes, or another person’s solutions. You may use the tools and sample solutions provided on this test page; viewing a solution is recorded.
+</p>
+<p>
+Keep this browser tab active. The first detected tab/window switch triggers a warning; the second ends the attempt. Refreshing does not reset the timer. This is practice. Only Evaluate my work submits to Azure; unfinished answers are saved locally in this browser. Closing the page may lose your work.
+</p>
+<p>
+<strong>Private pilot:</strong> Submissions are saved to Azure and theory answers are scored. Python scoring is pending. AI feedback requires Azure OpenAI configuration. Do not publish for students.
+</p>
+</div>
+<p>
+<label>Neptun code <input id="quiz-neptun" maxlength="6" placeholder="ABC123" autocomplete="off"></label>
+</p>
+<p>
+<label><input type="checkbox" id="quiz-agree"> I have read and accept the test rules.</label>
+</p>
+<button id="quiz-start">
+Start practice test
+</button>
+<div id="quiz-resume-panel" hidden="" style="margin-top:12px">
+<p>
+<strong>Unfinished attempt detected.</strong> Your timer continues while the page is closed.
+</p>
+<button type="button" id="quiz-resume">
+Continue existing attempt
+</button>
+<p id="quiz-resume-msg" role="status">
+</p>
+</div>
+<p id="quiz-intro-msg" role="status">
+</p>
+</section>
+<section id="quiz-work" hidden="">
+<p>
+<strong>Neptun:</strong> <span id="quiz-student"></span> · <strong>Time remaining:</strong> <span id="quiz-timer" class="quiz-timer">45:00</span> · <span id="quiz-status"></span>
+</p>
+<div class="quiz-actions">
+<button type="button" id="quiz-new-attempt-top">
+Start new practice attempt (45 minutes)
+</button>
+<button type="button" id="quiz-exit">
+Exit practice test
+</button>
+</div>
+<div id="quiz-switch-warning" class="quiz-warning" hidden="">
+Warning: leaving this test again will end the current attempt.
+</div>
+<h2 class="anchored">
+Theory questions (10 points)
+</h2>
+<section class="question">
+<h3 class="anchored">
+Question 1 <small>(1 point)</small>
+</h3>
+<p>
+Data that has been organized and has meaning is referred to as …
+</p>
+<label class="choice"><input type="radio" name="q1" value="a"> Wisdom</label><label class="choice"><input type="radio" name="q1" value="b"> Knowledge</label><label class="choice"><input type="radio" name="q1" value="c"> Information</label><label class="choice"><input type="radio" name="q1" value="d"> Raw data</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 2 <small>(1 point)</small>
+</h3>
+<p>
+Which historical machine was designed to calculate polynomials but was not built in the inventor’s lifetime?
+</p>
+<label class="choice"><input type="radio" name="q2" value="a"> ENIAC</label><label class="choice"><input type="radio" name="q2" value="b"> Abacus</label><label class="choice"><input type="radio" name="q2" value="c"> Vannevar Bush’s Differential Analyzer</label><label class="choice"><input type="radio" name="q2" value="d"> Charles Babbage’s Difference Engine</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 3 <small>(1 point)</small>
+</h3>
+<p>
+Which of the following is an advantage of using pseudocode as an algorithmic description tool?
+</p>
+<label class="choice"><input type="radio" name="q3" value="a"> It is easy to understand and language-independent.</label><label class="choice"><input type="radio" name="q3" value="b"> It provides detailed information about all algorithm steps.</label><label class="choice"><input type="radio" name="q3" value="c"> It promotes language-specific syntax.</label><label class="choice"><input type="radio" name="q3" value="d"> It is executable on any machine.</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 4 <small>(1 point)</small>
+</h3>
+<p>
+What is a common disadvantage of using flowcharts as a tool for describing algorithms?
+</p>
+<label class="choice"><input type="radio" name="q4" value="a"> They are difficult to understand</label><label class="choice"><input type="radio" name="q4" value="b"> They may be time-consuming to create for complex algorithms.</label><label class="choice"><input type="radio" name="q4" value="c"> They are language-specific</label><label class="choice"><input type="radio" name="q4" value="d"> They are not visual representations</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 5 <small>(1 point)</small>
+</h3>
+<p>
+Which of the following is NOT a property of data types, according to the lecture?
+</p>
+<label class="choice"><input type="radio" name="q5" value="a"> Complexity</label><label class="choice"><input type="radio" name="q5" value="b"> Right to Access</label><label class="choice"><input type="radio" name="q5" value="c"> Identifier</label><label class="choice"><input type="radio" name="q5" value="d"> Scope</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 6 <small>(1 point)</small>
+</h3>
+<p>
+What does the range() function in Python return when used in a for loop?
+</p>
+<label class="choice"><input type="radio" name="q6" value="a"> A random number</label><label class="choice"><input type="radio" name="q6" value="b"> A string value</label><label class="choice"><input type="radio" name="q6" value="c"> A single number</label><label class="choice"><input type="radio" name="q6" value="d"> A sequence of numbers within a given range</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 7 <small>(1 point)</small>
+</h3>
+<p>
+Which statement is used to exit a loop immediately in Python, regardless of the loop condition?
+</p>
+<label class="choice"><input type="radio" name="q7" value="a"> continue</label><label class="choice"><input type="radio" name="q7" value="b"> break</label><label class="choice"><input type="radio" name="q7" value="c"> return</label><label class="choice"><input type="radio" name="q7" value="d"> pass</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 8 <small>(1 point)</small>
+</h3>
+<p>
+What is the role of the logical and operator in Python?
+</p>
+<label class="choice"><input type="radio" name="q8" value="a"> It returns False only if both operands are False.</label><label class="choice"><input type="radio" name="q8" value="b"> It returns True if at least one operand is True.</label><label class="choice"><input type="radio" name="q8" value="c"> It returns True if both operands are True.</label><label class="choice"><input type="radio" name="q8" value="d"> It returns False if both operands are True</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 9 <small>(1 point)</small>
+</h3>
+<p>
+Which of the following operators is used for floor division in Python?
+</p>
+<label class="choice"><input type="radio" name="q9" value="a"> //</label><label class="choice"><input type="radio" name="q9" value="b"> %</label><label class="choice"><input type="radio" name="q9" value="c"> /</label><label class="choice"><input type="radio" name="q9" value="d"> **</label>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 10 <small>(1 point)</small>
+</h3>
+<p>
+What type of programming language is Python?
+</p>
+<label class="choice"><input type="radio" name="q10" value="a"> Low-level programming language</label><label class="choice"><input type="radio" name="q10" value="b"> General-purpose, high-level programming language</label><label class="choice"><input type="radio" name="q10" value="c"> Scripting language only</label><label class="choice"><input type="radio" name="q10" value="d"> Assembly language</label>
+</section>
+<h2 class="anchored">
+Python exercises (12 points)
+</h2>
+<section class="question">
+<h3 class="anchored">
+Question 11 – Translate the algorithm into Python (4 points)
+</h3>
+<p>
+Translate the Euclidean algorithm shown in the flowchart into Python code. Read two positive integers and print their greatest common divisor. Your program must follow the remainder-based algorithm (<code>%</code>), rather than calling a built-in GCD function.
+</p>
+<img src="assets/euclidean-modulo.svg" alt="Flowchart: read a and b; while b is not zero compute r = a % b, a = b, b = r; then output a." style="display:block;width:min(100%,390px);height:auto;margin:16px auto">
+<p class="quiz-muted">
+Follow the flowchart steps. A correct result obtained with a different algorithm does not receive full marks.
+</p>
+<div id="py11">
+
+</div>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 12 – BMI calculator (4 points)
+</h3>
+<p>
+Write a program that calculates a person’s Body Mass Index (BMI) and determines their health status:
+</p>
+<p>
+If BMI is less than 18.5, print “Underweight”. If BMI is between 18.5 and 24.9, print “Normal weight”. If BMI is between 25 and 29.9, print “Overweight”. If BMI is 30 or greater, print “Obesity”.
+</p>
+<p>
+BMI = weight / height ** 2 (weight in kilograms, height in meters).
+</p>
+<div id="py12">
+
+</div>
+</section>
+<section class="question">
+<h3 class="anchored">
+Question 13 – Login attempts (4 points)
+</h3>
+<p>
+Write a Python program that checks whether a user enters the correct username and password. Allow up to 3 attempts. After 3 incorrect attempts, display a message indicating that no attempts remain.
+</p>
+<p class="quiz-muted">
+For this practice exercise, the valid username is <code>student</code> and the password is <code>python123</code>. Read the username and password on each attempt. Print <code>Login successful</code> for a valid login, or <code>No more attempts left</code> after three unsuccessful attempts.
+</p>
+<div id="py13">
+
+</div>
+</section>
+<section class="question">
+<h2 class="anchored">
+Evaluate my work
+</h2>
+<p>
+<strong>Practice only — not graded.</strong> Only Evaluate my work sends your answers to Azure. Unfinished attempts are stored locally in this browser. Theory questions are scored on the server; Python scoring is pending. AI feedback includes approximate Python scores (not an official grade) when configured on the server.
+</p>
+<button id="quiz-evaluate">
+Evaluate my work
+</button>
+<div id="quiz-summary">
+
+</div>
+<div id="quiz-after-submit" hidden="" style="margin-top:16px">
+<button type="button" id="quiz-new-attempt">
+Start new practice attempt (45 minutes)
+</button>
+<p class="quiz-muted">
+Submitted results remain saved in Azure. Unsubmitted attempts are discarded. Starting again creates a separate attempt.
+</p>
+</div>
+</section>
+</section>
+</div>
+<script>
+const QUIZ_KEY="midterm01-practice-prototype-v1";
+const SOLUTIONS={"11": "a = int(input(\"a: \"))\nb = int(input(\"b: \"))\nwhile b != 0:\n    r = a % b\n    a = b\n    b = r\nprint(a)", "12": "weight = float(input(\"Weight (kg): \"))\nheight = float(input(\"Height (m): \"))\nbmi = weight / height ** 2\nif bmi < 18.5:\n    print(\"Underweight\")\nelif bmi < 25:\n    print(\"Normal weight\")\nelif bmi < 30:\n    print(\"Overweight\")\nelse:\n    print(\"Obesity\")", "13": "correct_user = \"student\"\ncorrect_password = \"python123\"\nattempts = 0\nlogged_in = False\nwhile attempts < 3 and not logged_in:\n    user = input(\"Username: \")\n    password = input(\"Password: \")\n    attempts += 1\n    if user == correct_user and password == correct_password:\n        logged_in = True\n        print(\"Login successful\")\n    elif attempts == 3:\n        print(\"No more attempts left\")"};
+const QUIZ_API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api';
+const QUIZ_ID='midterm01-practice';
+async function quizApi(path,data){
+  const res=await fetch(QUIZ_API+'/'+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  const body=await res.json().catch(()=>({error:'Invalid server response'}));
+  if(!res.ok||!body.success)throw new Error(body.error||('HTTP '+res.status));
+  return body;
+}
+function quizResumeExisting(){
+ if(!quiz||quiz.submitted)return;
+ const msg=document.getElementById('quiz-resume-msg');
+ if(quiz.finished){msg.textContent='This attempt has ended. Start a new practice attempt.';return;}
+ document.getElementById('quiz-resume-panel').hidden=true;
+ quizRender();
+ if(Date.now()>=quiz.deadline)quizFinish('Time expired');
+ else {clearInterval(quizTimer);quizTimer=setInterval(quizTick,1000);}
+}
+function quizExit(){
+ if(!quiz||quiz.submitted||quiz.finished)return;
+ if(!confirm('Are you sure you want to leave the practice test?\n\nYour answers have not been submitted for evaluation. Leaving this attempt will discard your unfinished work.'))return;
+ quiz.finished=Date.now();quiz.finishReason='Student exited without submitting';
+ localStorage.removeItem(QUIZ_KEY);
+ clearInterval(quizTimer);quizTimer=null;
+ quiz=null;
+ window.location.reload();
+}
+function quizNotice(message){document.getElementById('quiz-summary').textContent=message;}
+function quizDisable(){document.querySelectorAll('#quiz-work input,#quiz-work textarea,#quiz-work button').forEach(e=>e.disabled=true);document.getElementById('quiz-new-attempt').disabled=false;document.getElementById('quiz-new-attempt-top').disabled=false;document.getElementById('quiz-after-submit').hidden=false;}
+async function quizSubmit(reason){
+  if(!quiz||quiz.submitted||quiz.submitting)return;
+  quizSave();quiz.submitting=true;quizSave();
+  quizNotice('Submitting to Azure… Please keep this page open.');
+  try{
+    const result=await quizApi('submitQuizPractice',{quizId:QUIZ_ID,neptun:quiz.neptun,attemptId:quiz.attemptId,sessionToken:quiz.sessionToken,answers:quiz.answers,code:quiz.code,viewed:quiz.viewed,checks:quiz.checks,switches:quiz.switches,finishReason:reason,clientSubmittedAt:new Date().toISOString()});
+    quiz.submitted=true;quiz.finished=Date.now();quiz.finishReason=reason;quiz.submitting=false;quiz.resultToken=result.resultToken;quizSave();clearInterval(quizTimer);quizDisable();quizSummary();
+  }catch(err){quiz.submitting=false;quizSave();quizNotice('Azure submission failed: '+String(err.message)+'. Please retry Evaluate my work.');}
+}
+async function quizFetchResult(){
+ if(!quiz?.resultToken)return;
+ try{const r=await quizApi('getQuizPracticeResult',{resultToken:quiz.resultToken});
+ const rows=Object.entries(r.theory.perQuestion).map(([q,v])=>'Question '+q+': '+(v===null?'Not graded':v?'Correct':'Incorrect')).join(' · ');
+ const box=document.getElementById('quiz-summary');box.replaceChildren();
+ const d=document.createElement('div');d.className='quiz-result';
+ const h=document.createElement('h3');h.textContent='PRACTICE TEST – NOT GRADED · Submission saved in Azure';d.appendChild(h);
+ for(const t of ['Theory: '+r.theory.score+'/'+r.theory.max+' points',rows,'Python: '+(r.ai?.status==='ready'&&Number.isFinite(r.ai?.estimatedScore)?r.ai.estimatedScore+'/12 points (AI estimate)':r.python.score===null?'pending server-side evaluation (12 points)':r.python.score+'/12 points'),'Estimated semester contribution (practice only): '+(r.ai?.status==='ready'&&Number.isFinite(r.ai?.estimatedScore)?((r.theory.score+r.ai.estimatedScore)/22*10).toFixed(2)+'/10 (AI estimate)':r.semesterContribution===null?'Pending evaluation':r.semesterContribution.toFixed(2)+'/10'),'This is not an official grade and does not count toward your semester result.','AI feedback: '+(r.ai.status==='ready'?'Available below':r.ai.status==='not_configured'?'Not configured on Azure':r.ai.status==='error'?'Temporarily unavailable':r.ai.status),'Attempt ID: '+r.attemptId]){const x=document.createElement('p');x.textContent=t;d.appendChild(x)}
+ box.appendChild(d);
+ if(r.ai?.status==='ready' && r.ai.feedback){
+   const section=document.createElement('section');section.className='quiz-result';
+   const title=document.createElement('h3');title.textContent='AI feedback (formative, not a grade)';section.appendChild(title);
+   const content=document.createElement('div');content.style.whiteSpace='pre-wrap';content.textContent=r.ai.feedback;section.appendChild(content);
+   if(r.ai.scores){const pts=document.createElement('p');pts.textContent='Approximate points: '+[11,12,13].map(q=>'Q'+q+': '+(r.ai.scores[q]??'?')+'/4').join(' · ');section.insertBefore(pts,content);}
+   box.appendChild(section);
+ }
+ }catch(e){quizNotice('Saved, but could not load result: '+e.message)}
+}
+let quizTimer=null,quizBusy=false;
+// Student Python always runs in a killable Web Worker, never on the UI thread.
+const QUIZ_RUN_TIMEOUT_MS=3000;
+const QUIZ_WORKER_URL=new URL('assets/quiz-python-worker.js',document.baseURI).href;
+let pythonWorker=null,workerJobs=new Map(),workerSeq=0;
+function resetPythonWorker(){
+ if(pythonWorker){pythonWorker.terminate();pythonWorker=null;}
+ for(const job of workerJobs.values()){clearTimeout(job.timer);job.reject(new Error('Execution timed out. Check your loop condition and variable updates.'));}
+ workerJobs.clear();
+ for(const i of [11,12,13]){const area=document.getElementById('py'+i+'-input');if(area){area.hidden=true;area.replaceChildren();}}
+}
+function getPythonWorker(){
+ if(pythonWorker)return pythonWorker;
+ pythonWorker=new Worker(QUIZ_WORKER_URL);
+ pythonWorker.onerror=e=>{resetPythonWorker();document.getElementById('quiz-status').textContent='Python worker error. Retry Run.';};
+ pythonWorker.onmessage=({data:m})=>{
+  const job=workerJobs.get(m.id);if(!job)return;
+  const stopTimer=()=>{clearTimeout(job.timer);job.timer=null;};
+  const startTimer=()=>{stopTimer();job.timer=setTimeout(()=>resetPythonWorker(),QUIZ_RUN_TIMEOUT_MS);};
+  if(m.type==='ready'){job.ready=true;startTimer();document.getElementById('quiz-status').textContent='Python ready';return;}
+  if(m.type==='output'){if(job.onOutput)job.onOutput(m.chunk);return;}
+  if(m.type==='prompt'){
+   stopTimer(); // Waiting for a human to type is not Python execution time.
+   requestLiveInput(job.exerciseId,m.prompt).then(value=>{
+    if(workerJobs.has(m.id)&&pythonWorker){startTimer();pythonWorker.postMessage({type:'input',id:m.id,value});}
+   });return;
+  }
+  if(m.type==='done'||m.type==='error'){
+   stopTimer();workerJobs.delete(m.id);
+   if(m.type==='done')job.resolve(m.result);else job.reject(new Error(m.error));
+  }
+ };
+ return pythonWorker;
+}
+function requestLiveInput(id,message){
+ return new Promise(resolve=>{
+  const area=document.getElementById(id+'-input');
+  const field=document.createElement('input');field.type='text';field.autocomplete='off';
+  field.setAttribute('aria-label',message||'Python input');
+  const label=document.createElement('span');label.textContent=message||'Input:';
+  const button=document.createElement('button');button.type='button';button.textContent='Enter';
+  area.replaceChildren(label,field,button);area.hidden=false;
+  let done=false;
+  const finish=value=>{if(done)return;done=true;area.hidden=true;area.replaceChildren();resolve(value)};
+  button.addEventListener('click',()=>finish(field.value));
+  field.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();finish(field.value)}});
+  requestAnimationFrame(()=>field.focus());
+ });
+}
+function workerTask(type,code,inputs=[],interactive=false,onOutput=null,exerciseId=null){
+ return new Promise((resolve,reject)=>{
+  let worker;try{worker=getPythonWorker();}catch(e){reject(e);return;}
+  const id=++workerSeq;
+  workerJobs.set(id,{resolve,reject,onOutput,exerciseId,timer:setTimeout(()=>resetPythonWorker(),30000),ready:false});
+  document.getElementById('quiz-status').textContent='Loading Python if needed…';
+  worker.postMessage({type,id,code,inputs,interactive});
+ });
+}
+async function execute(code,inputs,interactive=false,onOutput=null,exerciseId=null){
+ return workerTask('execute',code,inputs,interactive,onOutput,exerciseId);
+}
+async function quizGcdStructure(source){return workerTask('structure',source);}
+
+// Formative checks only. They are intentionally visible in the browser and
+// are NOT a secure substitute for server-side grading at final submission.
+const QUIZ_CHECK_CASES={
+  11:[
+    {inputs:['24','18'],expected:'6',label:'GCD of 24 and 18'},
+    {inputs:['17','13'],expected:'1',label:'Coprime numbers'},
+    {inputs:['9','9'],expected:'9',label:'Equal numbers'},
+    {inputs:['42','14'],expected:'14',label:'One number divides the other'}
+  ],
+  12:[
+    {inputs:['50','2'],expected:'Underweight',label:'Underweight category'},
+    {inputs:['72','1.8'],expected:'Normal weight',label:'Normal weight category'},
+    {inputs:['90','1.8'],expected:'Overweight',label:'Overweight category'},
+    {inputs:['100','1.7'],expected:'Obesity',label:'Obesity category'},
+    {inputs:['74','2'],expected:'Normal weight',label:'Boundary at BMI 18.5'},
+    {inputs:['100','2'],expected:'Overweight',label:'Boundary at BMI 25'},
+    {inputs:['120','2'],expected:'Obesity',label:'Boundary at BMI 30'}
+  ],
+  13:[
+    {inputs:['student','python123'],expected:'Login successful',label:'Correct on first attempt'},
+    {inputs:['wrong','bad','student','python123'],expected:'Login successful',label:'Correct on second attempt'},
+    {inputs:['wrong','bad','wrong','bad','student','python123'],expected:'Login successful',label:'Correct on third attempt'},
+    {inputs:['wrong','bad','wrong','bad','wrong','bad'],expected:'No more attempts left',label:'Three incorrect attempts'}
+  ]
+};
+function quizLastLine(output){return String(output||'').trim().split(/\r?\n/).map(x=>x.trim()).filter(Boolean).at(-1)||'';}
+async function quizCheckSolution(i){
+  if(!quiz||quiz.finished||quizBusy)return;
+  quizSave();
+  const feedback=document.getElementById('py'+i+'-feedback');
+  const source=(quiz.code[i]||'').trim();
+  if(!source){feedback.textContent='Enter Python code before checking your solution.';return;}
+  quizBusy=true;
+  feedback.textContent='Running '+QUIZ_CHECK_CASES[i].length+' practice checks…';
+  const results=[];
+  try{
+    for(const test of QUIZ_CHECK_CASES[i]){
+      const r=await execute(source,test.inputs,false);
+      const actual=quizLastLine(r.output);
+      const passed=r.ok&&actual===test.expected;
+      results.push({label:test.label,passed,error:r.ok?'':r.error});
+      // Stop early on errors: a missing input often indicates an unfinished algorithm.
+      if(!r.ok)break;
+    }
+    const structureOK=i!==11||await quizGcdStructure(source);
+    const passed=results.filter(r=>r.passed).length;
+    const total=QUIZ_CHECK_CASES[i].length;
+    const lines=[`Practice checks passed: ${passed}/${total}.`];
+    for(const r of results){
+      lines.push((r.passed?'✓ ':'✗ ')+r.label+(r.error?' — '+r.error:''));
+    }
+    if(i===11)lines.push(structureOK?'✓ Flowchart structure: loop and remainder operation detected.':'✗ Flowchart structure: use a loop with the % remainder operation and update a and b; do not call gcd().');
+    if(passed===total&&structureOK){lines.push('All visible practice checks passed. This is not a final grade.');}
+    else{lines.push('Review your conditions, loops, input handling and printed result.');}
+    feedback.textContent=lines.join('\n');
+    feedback.style.whiteSpace='pre-wrap';
+    quiz.checks=quiz.checks||{};
+    quiz.checks[i]={passed,total,structureOK,checkedAt:Date.now()};
+    quizSave();
+  }catch(err){feedback.textContent='Check could not complete: '+String(err);}
+  finally{quizBusy=false;}
+}
+
+function quizLoad(){try{return JSON.parse(localStorage.getItem(QUIZ_KEY)||"null")}catch{return null}}
+let quiz=quizLoad();
+function quizSave(){if(!quiz)return;for(const i of [11,12,13]){const e=document.getElementById('py'+i+'-code');if(e)quiz.code[i]=e.value;}for(let i=1;i<=10;i++){const e=document.querySelector('input[name=q'+i+']:checked');if(e)quiz.answers[i]=e.value;}quiz.lastEditedAt=Date.now();localStorage.setItem(QUIZ_KEY,JSON.stringify(quiz));}
+function quizRender(){document.getElementById('quiz-intro').hidden=true;document.getElementById('quiz-work').hidden=false;document.getElementById('quiz-student').textContent=quiz.neptun;for(let i=1;i<=10;i++){const a=quiz.answers[i];if(a){const e=document.querySelector('input[name=q'+i+'][value='+a+']');if(e)e.checked=true;}}for(const i of [11,12,13])document.getElementById('py'+i+'-code').value=quiz.code[i]||'';quizTick();}
+function quizFinish(reason){resetPythonWorker();if(!quiz||quiz.finished||quiz.submitted)return;quizSave();quiz.finished=Date.now();quiz.finishReason=reason;quizSave();clearInterval(quizTimer);quizTimer=null;document.getElementById('quiz-status').textContent='Attempt ended: '+reason;document.getElementById('quiz-evaluate').disabled=true;document.querySelectorAll('#quiz-work input,#quiz-work textarea,#quiz-work button').forEach(e=>e.disabled=true);document.getElementById('quiz-summary').textContent='This practice attempt has ended without submission. Start a new practice attempt to try again.';document.getElementById('quiz-after-submit').hidden=false;document.getElementById('quiz-new-attempt').disabled=false;}
+function quizTick(){if(!quiz)return;const left=Math.max(0,quiz.deadline-Date.now());document.getElementById('quiz-timer').textContent=String(Math.floor(left/60000)).padStart(2,'0')+':'+String(Math.floor(left%60000/1000)).padStart(2,'0');if(!left&&!quiz.finished)quizFinish('Time expired');}
+function quizFinishReasonRestore(){document.querySelectorAll('#quiz-work input,#quiz-work textarea,#quiz-work button').forEach(e=>e.disabled=true);document.getElementById('quiz-after-submit').hidden=false;document.getElementById('quiz-new-attempt').disabled=false;document.getElementById('quiz-summary').textContent='This practice attempt ended without submission. Start a new attempt.';}
+function quizSummary(){if(quiz.submitted){quizDisable();quizFetchResult();return;}quizNotice('Submission not confirmed. Please use Evaluate my work to retry.');}
+for(const i of [11,12,13]){document.getElementById('py'+i).innerHTML='<textarea class="quiz-code" id="py'+i+'-code" spellcheck="false" aria-label="Python code for question '+i+'"></textarea><div class="quiz-actions"><button type="button" id="py'+i+'-run">Run</button><button type="button" id="py'+i+'-check">Check my solution</button><button type="button" id="py'+i+'-solution">View solution</button></div><strong>Output</strong><pre class="quiz-out" id="py'+i+'-out"></pre><div class="quiz-input" id="py'+i+'-input" hidden></div><div id="py'+i+'-feedback" aria-live="polite"></div><pre class="solution" id="py'+i+'-sample" hidden></pre>';
+ document.getElementById('py'+i+'-run').onclick=async()=>{if(quizBusy||quiz.finished)return;quizBusy=true;quizSave();const out=document.getElementById('py'+i+'-out');out.textContent='';try{const r=await execute(quiz.code[i],[],true,chunk=>{out.textContent+=chunk;out.scrollTop=out.scrollHeight},'py'+i);out.textContent=r.ok?r.output:(r.output?r.output+'\n':'')+r.error;}catch(e){out.textContent=String(e)}finally{quizBusy=false}};
+ document.getElementById('py'+i+'-check').onclick=()=>quizCheckSolution(i);
+ document.getElementById('py'+i+'-solution').onclick=()=>{quiz.viewed[i]=true;quizSave();const p=document.getElementById('py'+i+'-sample');p.textContent=SOLUTIONS[i];p.hidden=!p.hidden};
+ document.getElementById('py'+i+'-code').addEventListener('input',quizSave);
+}
+document.getElementById('quiz-new-attempt').onclick=()=>{
+ resetPythonWorker();
+ if(!quiz||( !quiz.submitted && !quiz.finished))return;
+ // Keep the last result token for the student's own reference; do not change Azure data.
+ const historyKey=QUIZ_KEY+'-history';
+ let history=[];try{history=JSON.parse(localStorage.getItem(historyKey)||'[]')}catch{}
+ if(quiz.resultToken&&!history.some(x=>x.attemptId===quiz.attemptId)){
+   history.push({attemptId:quiz.attemptId,resultToken:quiz.resultToken,neptun:quiz.neptun,submittedAt:new Date(quiz.finished||Date.now()).toISOString()});
+   localStorage.setItem(historyKey,JSON.stringify(history));
+ }
+ clearInterval(quizTimer);quizTimer=null;
+ const previousNeptun=quiz.neptun;
+ quiz=null;localStorage.removeItem(QUIZ_KEY);
+ document.querySelectorAll('#quiz-work input,#quiz-work textarea,#quiz-work button').forEach(e=>e.disabled=false);
+ document.querySelectorAll('#quiz-work input[type=radio]').forEach(e=>e.checked=false);
+ for(const i of [11,12,13]){
+   document.getElementById('py'+i+'-code').value='';
+   document.getElementById('py'+i+'-out').textContent='';
+   document.getElementById('py'+i+'-feedback').textContent='';
+   document.getElementById('py'+i+'-sample').hidden=true;
+   document.getElementById('py'+i+'-input').hidden=true;
+ }
+ document.getElementById('quiz-summary').replaceChildren();
+ document.getElementById('quiz-after-submit').hidden=true;
+ document.getElementById('quiz-switch-warning').hidden=true;
+ document.getElementById('quiz-status').textContent='';
+ document.getElementById('quiz-timer').textContent='45:00';
+ document.getElementById('quiz-intro-msg').textContent='Your previous attempt was saved. Accept the rules to start a fresh 45-minute attempt.';
+ document.getElementById('quiz-neptun').value=previousNeptun;
+ document.getElementById('quiz-agree').checked=false;
+ document.getElementById('quiz-work').hidden=true;
+ document.getElementById('quiz-intro').hidden=false;
+ window.scrollTo({top:0,behavior:'instant'});
+};
+document.getElementById('quiz-new-attempt-top').onclick=()=>{
+ if(!quiz)return;
+ if(!quiz.submitted&&!quiz.finished){
+   if(!confirm('Start a new practice attempt?\n\nYour current answers will be discarded without evaluation. The new attempt will have a fresh 45-minute timer.'))return;
+   quiz.finished=Date.now();quiz.finishReason='Student restarted without submitting';
+   quizSave();
+ }
+ document.getElementById('quiz-new-attempt').click();
+};
+document.getElementById('quiz-resume').onclick=quizResumeExisting;
+document.getElementById('quiz-exit').onclick=()=>{resetPythonWorker();quizExit();};
+document.getElementById('quiz-start').onclick=async()=>{const n=document.getElementById('quiz-neptun').value.trim().toUpperCase();const msg=document.getElementById('quiz-intro-msg');if(!/^[A-Z0-9]{6}$/.test(n)||!document.getElementById('quiz-agree').checked){msg.textContent='Enter a valid 6-character Neptun code and accept the rules.';return;}const b=document.getElementById('quiz-start');b.disabled=true;msg.textContent='Validating Neptun and starting Azure session…';try{const r=await quizApi('startQuizPractice',{quizId:QUIZ_ID,neptun:n});quiz={neptun:n,attemptId:r.attemptId,sessionToken:r.sessionToken,started:Date.parse(r.startedAt),deadline:Date.parse(r.deadline),answers:{},code:{},viewed:{},checks:{},switches:0};quizSave();quizRender();quizTimer=setInterval(quizTick,1000)}catch(e){msg.textContent='Could not start: '+e.message}finally{b.disabled=false}};
+document.getElementById('quiz-evaluate').onclick=()=>{if(quizBusy)return;quizSubmit('Student submitted')};
+document.querySelectorAll('input[type=radio]').forEach(e=>e.addEventListener('change',quizSave));
+document.addEventListener('visibilitychange',()=>{if(!quiz||quiz.finished||document.getElementById('quiz-work').hidden)return;if(document.hidden){quiz.switches++;quizSave();if(quiz.switches>=2)quizFinish('Second tab/window switch');else document.getElementById('quiz-switch-warning').hidden=false;}});
+window.addEventListener('beforeunload',event=>{if(!quiz||quiz.submitted||quiz.finished)return;quizSave();event.preventDefault();event.returnValue='';});
+if(quiz){if(!quiz.attemptId){localStorage.removeItem(QUIZ_KEY);quiz=null;}else{quiz.submitting=false;if(quiz.submitted){quizRender();quizDisable();quizSummary()}else if(quiz.finished){quizRender();quizFinishReasonRestore()}else{document.getElementById('quiz-neptun').value=quiz.neptun;document.getElementById('quiz-resume-panel').hidden=false;document.getElementById('quiz-start').disabled=true;document.getElementById('quiz-intro-msg').textContent='Resume your unfinished attempt or complete it before starting another.';}}}
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation column-page-right">
+  <div class="nav-page nav-page-previous">
+      <a href="../warmup/04-warmup.html" class="pagination-link" aria-label="Week 4 Warm-up Test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Week 4 Warm-up Test</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

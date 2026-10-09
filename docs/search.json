@@ -1,391 +1,236 @@
 [
   {
-    "objectID": "lessons/04-loops.html",
-    "href": "lessons/04-loops.html",
-    "title": "Week 4 – Loops in Python",
+    "objectID": "quizzes/midterm01-practice.html",
+    "href": "quizzes/midterm01-practice.html",
+    "title": "Midterm Quiz 01 – Practice Test (Not Graded)",
     "section": "",
-    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "text": "13 questions · 22 points · 45 minutes\n\n\nPRACTICE TEST – NOT GRADED\n\nThis is a practice version of Midterm Quiz 01. Results are for self-assessment only and will not count toward your semester grade. The official quiz carries 10% of the semester grade.\n\n\n\nPractice assessment rules\n\nWork individually. Do not use AI assistants, external websites, search engines, notes, or another person’s solutions. You may use the tools and sample solutions provided on this test page; viewing a solution is recorded.\n\n\nKeep this browser tab active. The first detected tab/window switch triggers a warning; the second ends the attempt. Refreshing does not reset the timer. This is practice. Only Evaluate my work submits to Azure; unfinished answers are saved locally in this browser. Closing the page may lose your work.\n\n\nPrivate pilot: Submissions are saved to Azure and theory answers are scored. Python scoring is pending. AI feedback requires Azure OpenAI configuration. Do not publish for students.\n\n\n\nNeptun code \n\n\n I have read and accept the test rules.\n\n\nStart practice test\n\n\n\nUnfinished attempt detected. Your timer continues while the page is closed.\n\n\nContinue existing attempt\n\n\n\n\n\n\n\n\n\nNeptun:  · Time remaining: 45:00 · \n\n\n\nStart new practice attempt (45 minutes)\n\n\nExit practice test\n\n\n\nWarning: leaving this test again will end the current attempt.\n\n\nTheory questions (10 points)\n\n\n\nQuestion 1 (1 point)\n\n\nData that has been organized and has meaning is referred to as …\n\n Wisdom Knowledge Information Raw data\n\n\n\nQuestion 2 (1 point)\n\n\nWhich historical machine was designed to calculate polynomials but was not built in the inventor’s lifetime?\n\n ENIAC Abacus Vannevar Bush’s Differential Analyzer Charles Babbage’s Difference Engine\n\n\n\nQuestion 3 (1 point)\n\n\nWhich of the following is an advantage of using pseudocode as an algorithmic description tool?\n\n It is easy to understand and language-independent. It provides detailed information about all algorithm steps. It promotes language-specific syntax. It is executable on any machine.\n\n\n\nQuestion 4 (1 point)\n\n\nWhat is a common disadvantage of using flowcharts as a tool for describing algorithms?\n\n They are difficult to understand They may be time-consuming to create for complex algorithms. They are language-specific They are not visual representations\n\n\n\nQuestion 5 (1 point)\n\n\nWhich of the following is NOT a property of data types, according to the lecture?\n\n Complexity Right to Access Identifier Scope\n\n\n\nQuestion 6 (1 point)\n\n\nWhat does the range() function in Python return when used in a for loop?\n\n A random number A string value A single number A sequence of numbers within a given range\n\n\n\nQuestion 7 (1 point)\n\n\nWhich statement is used to exit a loop immediately in Python, regardless of the loop condition?\n\n continue break return pass\n\n\n\nQuestion 8 (1 point)\n\n\nWhat is the role of the logical and operator in Python?\n\n It returns False only if both operands are False. It returns True if at least one operand is True. It returns True if both operands are True. It returns False if both operands are True\n\n\n\nQuestion 9 (1 point)\n\n\nWhich of the following operators is used for floor division in Python?\n\n // % / **\n\n\n\nQuestion 10 (1 point)\n\n\nWhat type of programming language is Python?\n\n Low-level programming language General-purpose, high-level programming language Scripting language only Assembly language\n\n\nPython exercises (12 points)\n\n\n\nQuestion 11 – Translate the algorithm into Python (4 points)\n\n\nTranslate the Euclidean algorithm shown in the flowchart into Python code. Read two positive integers and print their greatest common divisor. Your program must follow the remainder-based algorithm (%), rather than calling a built-in GCD function.\n\n\n\nFollow the flowchart steps. A correct result obtained with a different algorithm does not receive full marks.\n\n\n\n\n\n\n\nQuestion 12 – BMI calculator (4 points)\n\n\nWrite a program that calculates a person’s Body Mass Index (BMI) and determines their health status:\n\n\nIf BMI is less than 18.5, print “Underweight”. If BMI is between 18.5 and 24.9, print “Normal weight”. If BMI is between 25 and 29.9, print “Overweight”. If BMI is 30 or greater, print “Obesity”.\n\n\nBMI = weight / height ** 2 (weight in kilograms, height in meters).\n\n\n\n\n\n\n\nQuestion 13 – Login attempts (4 points)\n\n\nWrite a Python program that checks whether a user enters the correct username and password. Allow up to 3 attempts. After 3 incorrect attempts, display a message indicating that no attempts remain.\n\n\nFor this practice exercise, the valid username is student and the password is python123. Read the username and password on each attempt. Print Login successful for a valid login, or No more attempts left after three unsuccessful attempts.\n\n\n\n\n\n\n\nEvaluate my work\n\n\nPractice only — not graded. Only Evaluate my work sends your answers to Azure. Unfinished attempts are stored locally in this browser. Theory questions are scored on the server; Python scoring is pending. AI feedback includes approximate Python scores (not an official grade) when configured on the server.\n\n\nEvaluate my work\n\n\n\n\n\n\nStart new practice attempt (45 minutes)\n\n\nSubmitted results remain saved in Azure. Unsubmitted attempts are discarded. Starting again creates a separate attempt.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "Midterm 01 test sample"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#learning-objectives",
-    "href": "lessons/04-loops.html#learning-objectives",
-    "title": "Week 4 – Loops in Python",
+    "objectID": "teacher/index.html",
+    "href": "teacher/index.html",
+    "title": "Teacher Dashboard",
     "section": "",
-    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+  },
+  {
+    "objectID": "teacher/index.html#teacher-access",
+    "href": "teacher/index.html#teacher-access",
+    "title": "Teacher Dashboard",
+    "section": "",
+    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+  },
+  {
+    "objectID": "warmup/04-warmup.html",
+    "href": "warmup/04-warmup.html",
+    "title": "Warm-up Test – Week 4",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "Week 4 Warm-up Test"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#repetition-and-loops",
-    "href": "lessons/04-loops.html#repetition-and-loops",
-    "title": "Week 4 – Loops in Python",
-    "section": "1. Repetition and loops",
-    "text": "1. Repetition and loops\nPrograms often need to execute the same operation several times. Instead of writing the same statement repeatedly, we can use a loop.\nTwo important loop types in Python are:\n\nfor – useful when we iterate over a sequence or a known range of values;\nwhile – useful when repetition continues as long as a condition is true.",
+    "objectID": "warmup/04-warmup.html#week-4-warm-up-test",
+    "href": "warmup/04-warmup.html#week-4-warm-up-test",
+    "title": "Warm-up Test – Week 4",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "Week 4 Warm-up Test"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#the-for-loop",
-    "href": "lessons/04-loops.html#the-for-loop",
-    "title": "Week 4 – Loops in Python",
-    "section": "2. The for loop",
-    "text": "2. The for loop\nA for loop executes a block of code repeatedly. A common form uses the range() function.\nfor loop_variable in range(n):\n    statements\nThe first line is the loop head. The indented statements form the loop body.\nFor example:\nfor i in range(5):\n    print(\"Hello World\")\nThe loop body is executed five times.\nThe loop variable can also be used inside the loop:\nfor i in range(3):\n    print(i)\nOutput:\n0\n1\n2\nNotice that counting starts at 0.\nIf the loop variable is not needed, _ can be used:\nfor _ in range(5):\n    print(\"Hello\")",
+    "objectID": "lessons/03-conditional-statements.html",
+    "href": "lessons/03-conditional-statements.html",
+    "title": "Conditional Statements in Python",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#the-range-function",
-    "href": "lessons/04-loops.html#the-range-function",
-    "title": "Week 4 – Loops in Python",
-    "section": "3. The range() function",
-    "text": "3. The range() function\nThe range() function generates a sequence of integers that can be used by a for loop.\n\nrange(end)\nfor i in range(5):\n    print(i)\nproduces:\n0\n1\n2\n3\n4\nThe value 5 itself is not included.\n\n\nrange(start, end)\nA starting value can also be specified:\nfor i in range(3, 6):\n    print(i)\nOutput:\n3\n4\n5\n\n\nrange(start, end, step)\nThe third argument specifies the difference between consecutive values:\nfor i in range(1, 10, 2):\n    print(i)\nOutput:\n1\n3\n5\n7\n9\nTherefore:\nrange(start, end, step)\nhas three possible components:\n\nstart – starting value;\nend – value just after the last generated value;\nstep – difference between consecutive values.\n\n\n\n\n\n\n\nTipRemember\n\n\n\nThe end value of range() is not included.\nFor example, range(1, 5) generates 1, 2, 3, 4.\n\n\nA negative step can be used for counting backwards:\nfor i in range(5, 0, -1):\n    print(i)\nOutput:\n5\n4\n3\n2\n1",
+    "objectID": "lessons/03-conditional-statements.html#learning-objectives",
+    "href": "lessons/03-conditional-statements.html#learning-objectives",
+    "title": "Conditional Statements in Python",
+    "section": "",
+    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#the-while-loop",
-    "href": "lessons/04-loops.html#the-while-loop",
-    "title": "Week 4 – Loops in Python",
-    "section": "4. The while loop",
-    "text": "4. The while loop\nA while loop executes its body as long as its condition is true.\nwhile condition:\n    statements\nBecause the condition is checked before the loop body is executed, this is a pre-test loop.\nExample:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\n    i = i + 1\nOutput:\n1\n2\n3\n4\nThe variable i changes during every iteration. Eventually the condition becomes false and the loop stops.\n\n\n\n\n\n\nWarningAvoid accidental infinite loops\n\n\n\nA while loop must normally change something that affects its condition.\nThis loop never terminates:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\nbecause i never changes.\n\n\nA while loop can also be used when the number of repetitions depends on user input:\nn = int(input(\"Enter a positive whole number: \"))\n\ni = 0\n\nwhile i &lt; n:\n    i = i + 1\n\n    if n % i == 0:\n        print(i)\nThis example prints the divisors of n.",
+    "objectID": "lessons/03-conditional-statements.html#logical-expressions",
+    "href": "lessons/03-conditional-statements.html#logical-expressions",
+    "title": "Conditional Statements in Python",
+    "section": "Logical expressions",
+    "text": "Logical expressions\nA logical expression is an expression that evaluates to a Boolean value: either True or False.\nFor example:\nx = 4\n\nprint(x == 4)\nprint(x &gt; 3)\nprint(x &lt; 5)\nOutput:\nTrue\nTrue\nTrue\nLogical expressions are particularly important when a program has to make a decision. A condition in an if statement is a logical expression.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#nested-loops",
-    "href": "lessons/04-loops.html#nested-loops",
-    "title": "Week 4 – Loops in Python",
-    "section": "5. Nested loops",
-    "text": "5. Nested loops\nA loop can contain another loop. This is called a nested loop.\nThe outside loop is the outer loop, and the loop inside it is the inner loop.\nfor i in range(n):\n    statements\n\n    for j in range(m):\n        statements\nBoth for and while loops can be nested, and the two types can also be combined.\nExample:\nfor i in range(1, 10):\n    print(f\"divisors of {i}:\", end=\" \")\n\n    for j in range(1, i + 1):\n        if i % j == 0:\n            print(j, end=\" \")\n\n    print(\"\")\nFor every value of i, the inner loop checks possible divisors.\n\n\n\n\n\n\nNote\n\n\n\nWith nested loops, indentation shows which statements belong to the outer loop and which belong to the inner loop. Read the program one indentation level at a time.",
+    "objectID": "lessons/03-conditional-statements.html#logical-operators",
+    "href": "lessons/03-conditional-statements.html#logical-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Logical operators",
+    "text": "Logical operators\nLogical operators operate on Boolean expressions and combine their results into a single Boolean value.\nPython provides three basic logical operators:\n\nnot – True if its operand is False, and False if its operand is True;\nand – True if and only if both operands are True;\nor – True if at least one operand is True.\n\n\nTruth table\n\n\n\nX\nY\nX and Y\nX or Y\nnot X\nnot Y\n\n\n\n\nTrue\nTrue\nTrue\nTrue\nFalse\nFalse\n\n\nTrue\nFalse\nFalse\nTrue\nFalse\nTrue\n\n\nFalse\nTrue\nFalse\nTrue\nTrue\nFalse\n\n\nFalse\nFalse\nFalse\nFalse\nTrue\nTrue\n\n\n\nExamples:\nx = 10\ny = 8\n\nprint(x == 10 and y == 8)\nprint(x == 10 or y == 20)\nprint(not (x == 10))\nOutput:\nTrue\nTrue\nFalse\nLogical operators can also be combined:\na = True\nb = False\nc = False\n\nr = (a and b) and (b or c)\nprint(r)",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#break-and-continue",
-    "href": "lessons/04-loops.html#break-and-continue",
-    "title": "Week 4 – Loops in Python",
-    "section": "6. break and continue",
-    "text": "6. break and continue\nPython provides statements that can change the normal execution of a loop.\n\nbreak\nThe break statement immediately exits the current loop, regardless of the loop condition.\ni = 0\n\nwhile True:\n    i = i + 1\n    print(i)\n\n    if i == 5:\n        break\nAfter break, execution continues with the first statement after the loop.\n\n\ncontinue\nThe continue statement skips the rest of the current iteration and moves to the next iteration.\nfor i in range(1, 10):\n\n    if i % 2 == 1:\n        continue\n\n    print(i)\nOutput:\n2\n4\n6\n8\n\n\n\n\n\n\nWarningUse break and continue carefully\n\n\n\nAlthough break and continue are valid Python statements, in this course we generally prefer loop conditions and program structures that make the control flow clear without them when a simple alternative exists.\nA related statement, return, will be introduced later when we study functions.",
+    "objectID": "lessons/03-conditional-statements.html#comparison-operators",
+    "href": "lessons/03-conditional-statements.html#comparison-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Comparison operators",
+    "text": "Comparison operators\nComparison operators compare two values or expressions. The result of a comparison is a Boolean value.\n\n\n\nOperator\nDescription\nExample\n\n\n\n\n&lt;\nLess than\nx &lt; 5\n\n\n&gt;\nGreater than\ny &gt; 3\n\n\n&lt;=\nLess than or equal to\nx + 5 &lt;= y\n\n\n&gt;=\nGreater than or equal to\ny &gt;= x - 2\n\n\n==\nEqual to\nx == 3\n\n\n!=\nNot equal to\nx != y\n\n\n\nFor example:\nx = 5\n\nprint(x &gt; 3)\nprint(x == 5)\nprint(x != 5)\n\n\n\n\n\n\nImportantAssignment or comparison?\n\n\n\nDo not confuse the assignment operator = with the equality comparison operator ==.\nx = 5       # assign the value 5 to x\nx == 5      # compare x with 5\nThe first statement changes the value associated with x. The second expression evaluates to True or False.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#the-pass-statement",
-    "href": "lessons/04-loops.html#the-pass-statement",
-    "title": "Week 4 – Loops in Python",
-    "section": "7. The pass statement",
-    "text": "7. The pass statement\npass is a null statement: it performs no operation.\nIt is useful as a placeholder when Python requires a statement but the program logic has not yet been implemented.\nn = int(input(\"Enter a positive whole number: \"))\n\nif n &gt; 0:\n    print(\"Thank you\")\nelse:\n    pass\nIt can also appear in a loop:\nn = 0\n\nwhile n &lt; 100:\n    n = n + 1\n    pass\npass does not exit the loop and does not skip to the next iteration. It simply does nothing.",
+    "objectID": "lessons/03-conditional-statements.html#assignment-operators",
+    "href": "lessons/03-conditional-statements.html#assignment-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Assignment operators",
+    "text": "Assignment operators\nAssignment operators are used to assign values to variables. Python also provides compound assignment operators, which combine an arithmetic operation with assignment.\n\n\n\nOperator\nExample\nMeaning\n\n\n\n\n=\nx = 10\nassign 10 to x\n\n\n+=\nx += 10\nx = x + 10\n\n\n-=\ny -= 5\ny = y - 5\n\n\n*=\nz *= 2\nz = z * 2\n\n\n/=\na /= 3\na = a / 3\n\n\n%=\nb %= 5\nb = b % 5\n\n\n//=\nc //= 5\nc = c // 5\n\n\n\nFor example:\nx = 10\nx += 5\nprint(x)\nOutput:\n15",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#emulating-a-post-test-loop",
-    "href": "lessons/04-loops.html#emulating-a-post-test-loop",
-    "title": "Week 4 – Loops in Python",
-    "section": "8. Emulating a post-test loop",
-    "text": "8. Emulating a post-test loop\nPython does not have a built-in post-test loop. However, we can emulate one.\nA post-test structure is useful when the loop body must execute at least once before the termination condition is checked.\nOne possible form is:\nwhile True:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        print(\"Thank you\")\n        break\nAnother solution uses a logical variable:\nmore = True\n\nwhile more:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        more = False\n        print(\"Thank you\")\nThe second form avoids break and makes the loop condition explicit.",
+    "objectID": "lessons/03-conditional-statements.html#precedence-of-operators",
+    "href": "lessons/03-conditional-statements.html#precedence-of-operators",
+    "title": "Conditional Statements in Python",
+    "section": "Precedence of operators",
+    "text": "Precedence of operators\nWhen an expression contains several operators, operator precedence determines which operation is evaluated first.\nThe following simplified precedence table contains the operators used in this course so far, from higher to lower precedence:\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n(), []\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n6\n&lt;, &gt;, ==, !=, &lt;=, &gt;=\n\n\n7\nnot\n\n\n8\nand\n\n\n9\nor\n\n\n\nFor example:\nx = 5\nresult = x &gt; 3 and x &lt; 10\nprint(result)\nThe comparisons are evaluated before the and operator.\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when you know the precedence rules, parentheses can make a complex logical expression easier to read:\nresult = (x &gt; 3) and (x &lt; 10)",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#random-numbers",
-    "href": "lessons/04-loops.html#random-numbers",
-    "title": "Week 4 – Loops in Python",
-    "section": "9. Random numbers",
-    "text": "9. Random numbers\nPrograms often need values that are not known in advance. Python provides random-number functionality through the random module.\nFirst, the module must be imported:\nimport random\n\nrandom.random()\nrandom.random() returns a floating-point value between 0 and 1.\nimport random\n\nx = random.random()\nprint(f\"{x:.4f}\")\nA possible result is:\n0.8384\nThe exact result can be different each time the program runs.\n\n\nrandom.randint(a, b)\nrandom.randint(a, b) returns a random integer between a and b, including both endpoints.\nimport random\n\nx = random.randint(1, 5)\nprint(x)\nA possible result is:\n3\n\n\nrandom.randrange(start, end, step)\nrandom.randrange() selects a random value from a range described in a similar way to range().\nimport random\n\nx = random.randrange(2, 8, 3)\nprint(x)\nPossible values are 2 and 5. The end value is not included.\n\n\n\n\n\n\nImportantImport rule for this course\n\n\n\nIn this course, importing library modules is generally not allowed unless the task explicitly permits it.\nThe random module is an important exception and may be used when random-number generation is required.\nLater in the course, you will also learn how to create and import your own modules.\n\n\n\n\nRandom numbers and loops\nRandom numbers become especially useful when combined with loops. For example, we can simulate several dice rolls:\nimport random\n\nfor _ in range(5):\n    dice = random.randint(1, 6)\n    print(dice)\nThis pattern will be useful in later programming exercises.",
+    "objectID": "lessons/03-conditional-statements.html#selection",
+    "href": "lessons/03-conditional-statements.html#selection",
+    "title": "Conditional Statements in Python",
+    "section": "Selection",
+    "text": "Selection\nSo far, our programs have mainly executed instructions one after another. This is called sequence.\nSelection allows a program to choose between different paths depending on a condition. The condition is a logical expression that evaluates to either True or False.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#strings-as-sequences-of-characters",
-    "href": "lessons/04-loops.html#strings-as-sequences-of-characters",
-    "title": "Week 4 – Loops in Python",
-    "section": "10. Strings as sequences of characters",
-    "text": "10. Strings as sequences of characters\nA str value can be interpreted as a sequence of characters.\nFor example:\nname = \"John White\"\nEvery character has a position called an index. Indexing starts at 0.\nCharacter: J  o  h  n     W  h  i  t  e\nIndex:     0  1  2  3  4  5  6  7  8  9\nPython also supports negative indexes:\nIndex:   -10 -9 -8 -7 -6 -5 -4 -3 -2 -1\nTherefore:\nname = \"John White\"\n\nprint(name[0])\nprint(name[-1])\nOutput:\nJ\ne\n\nIterating over a string\nBecause a string is a sequence, a for loop can process its characters one by one:\nname = \"John\"\n\nfor character in name:\n    print(character)\nOutput:\nJ\no\nh\nn\nThis is an important connection between loops and strings.",
+    "objectID": "lessons/03-conditional-statements.html#binary-selection-ifelse",
+    "href": "lessons/03-conditional-statements.html#binary-selection-ifelse",
+    "title": "Conditional Statements in Python",
+    "section": "Binary selection: if–else",
+    "text": "Binary selection: if–else\nBinary selection means that the program can follow one of two possible paths depending on a condition.\nThe general form is:\nif condition:\n    commands\nelse:\n    other_commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    print(f\"{x} is negative\")\nAnother example can be used to prevent an invalid division:\na = 10\nb = int(input(\"Enter a whole number: \"))\n\nif b == 0:\n    print(\"The division cannot be performed\")\nelse:\n    print(f\"The quotient of {a} and {b}: {a / b}\")\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to determine which statements belong to a branch.\nif x &gt; 0:\n    print(\"Positive\")\n    print(\"This line also belongs to the if branch\")\nStatements at the same indentation level belong to the same block.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#string-slicing",
-    "href": "lessons/04-loops.html#string-slicing",
-    "title": "Week 4 – Loops in Python",
-    "section": "11. String slicing",
-    "text": "11. String slicing\nA substring can be selected with the slicing operator:\nstring[start:end]\nExample:\nname = \"John White\"\n\nfirst_six_chars = name[0:6]\nprint(first_six_chars)\nOutput:\nJohn W\nNegative indexes can also be used:\nname = \"John White\"\n\nlast_two_chars = name[-2:]\nprint(last_two_chars)\nOutput:\nte\nA slice can also contain a step:\nstring[start:end:step]\nFor example:\ntext = \"abcdef\"\n\nprint(text[0:6:2])\nOutput:\nace\n\n\n\n\n\n\nWarningStrings are immutable\n\n\n\nIndividual characters of an existing string cannot be changed directly.\nThis causes an error:\ns = \"Hello\"\ns[1] = \"a\"\nIf a different string is required, a new string must be created.",
+    "objectID": "lessons/03-conditional-statements.html#unary-selection-if",
+    "href": "lessons/03-conditional-statements.html#unary-selection-if",
+    "title": "Conditional Statements in Python",
+    "section": "Unary selection: if",
+    "text": "Unary selection: if\nSometimes an action is required only when a condition is true. In this case, an else branch is not necessary.\nThis is unary selection:\nif condition:\n    commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x % 5 == 0:\n    print(f\"{x} can be divided by 5\")\nIf the condition is False, the indented statement is simply skipped and execution continues after the if statement.\nA unary selection can also be used when additional information is needed only in a particular case:\nfirst_name = input(\"First name: \")\nlast_name = input(\"Last name: \")\nanswer = input(\"Do you have a middle name? (yes/no): \")\n\nif answer == \"yes\":\n    middle_name = input(\"Middle name: \")\n    print(f\"Hello {first_name} {middle_name} {last_name}\")",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#string-operators",
-    "href": "lessons/04-loops.html#string-operators",
-    "title": "Week 4 – Loops in Python",
-    "section": "12. String operators",
-    "text": "12. String operators\nSeveral operators can be used with strings.\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n+\nConcatenation\n\"John\" + \" \" + \"White\"\n\"John White\"\n\n\n*\nRepetition\n\"John White \" * 2\n\"John White John White \"\n\n\n[]\nIndexing\n\"John White\"[2]\n\"h\"\n\n\n[a:b]\nSlicing\n\"John White\"[2:5]\n\"hn \"\n\n\n&gt;\nGreater than\n\"John\" &gt; \"White\"\nFalse\n\n\n&lt;\nLess than\n\"apple\" &lt; \"pear\"\nTrue\n\n\n==\nEqual\n\"ite\" == \"White\"\nFalse\n\n\n!=\nNot equal\n\"ite\" != \"White\"\nTrue\n\n\nin\nMembership\n\"i\" in \"White\"\nTrue\n\n\n\nThe slicing operator can also use a step:\nstring[a:b:c]\nwhere c is the step value.\n\nMembership and loops\nThe in operator can test whether a character or substring occurs in a string:\ntext = \"Python\"\n\nif \"y\" in text:\n    print(\"Found\")\nA loop can also inspect every character:\ntext = \"Python\"\n\nfor character in text:\n    print(character)\nThese ideas will be used frequently in later text-processing tasks.",
+    "objectID": "lessons/03-conditional-statements.html#nested-conditionals",
+    "href": "lessons/03-conditional-statements.html#nested-conditionals",
+    "title": "Conditional Statements in Python",
+    "section": "Nested conditionals",
+    "text": "Nested conditionals\nA conditional statement can be placed inside another conditional statement. This is called a nested conditional.\nGeneral form:\nif condition:\n    commands\nelse:\n    if condition2:\n        commands2\n    else:\n        other_commands\nFor example, we can distinguish between positive, zero, and negative numbers:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    if x == 0:\n        print(f\"{x} is zero\")\n    else:\n        print(f\"{x} is negative\")\nThe second if statement is evaluated only when the first condition is false.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "lessons/04-loops.html#summary",
-    "href": "lessons/04-loops.html#summary",
-    "title": "Week 4 – Loops in Python",
+    "objectID": "lessons/03-conditional-statements.html#chained-conditionals-elif",
+    "href": "lessons/03-conditional-statements.html#chained-conditionals-elif",
+    "title": "Conditional Statements in Python",
+    "section": "Chained conditionals: elif",
+    "text": "Chained conditionals: elif\nWhen several mutually exclusive conditions have to be checked, nested if statements can often be written more clearly using elif.\nelif combines else and if:\nif condition:\n    commands\nelif condition2:\n    commands2\nelse:\n    other_commands\nThe previous example can therefore be written as:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelif x == 0:\n    print(f\"{x} is zero\")\nelse:\n    print(f\"{x} is negative\")\nMore than one elif branch can be used:\nif condition1:\n    commands1\nelif condition2:\n    commands2\nelif condition3:\n    commands3\nelse:\n    other_commands\nPython checks the conditions from top to bottom. Once a true condition is found, its branch is executed and the remaining branches are skipped.",
+    "crumbs": [
+      "Lessons",
+      "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/03-conditional-statements.html#matchcase-statement",
+    "href": "lessons/03-conditional-statements.html#matchcase-statement",
+    "title": "Conditional Statements in Python",
+    "section": "match–case statement",
+    "text": "match–case statement\nStarting from Python 3.10, the match–case statement can be used to implement multi-way selection.\nIts general structure is:\nmatch parameter_value:\n    case value1:\n        commands1\n    case value2:\n        commands2\n    case value3:\n        commands3\n    case _:\n        other_commands\nThe special pattern _ acts as the default case.\nFor example:\ngrade = int(input(\"Enter your grade: \"))\n\nmatch grade:\n    case 1:\n        print(\"Failed\")\n    case 2:\n        print(\"Sufficient\")\n    case 3:\n        print(\"Average\")\n    case 4:\n        print(\"Good\")\n    case 5:\n        print(\"Excellent\")\n    case _:\n        print(\"You entered a wrong number\")\n\n\n\n\n\n\nNoteWhen is match–case useful?\n\n\n\nmatch–case can make code easier to read when one value is compared with several possible alternatives. The same type of problem can often also be solved with an if–elif–else chain.",
+    "crumbs": [
+      "Lessons",
+      "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/03-conditional-statements.html#conditional-expressions",
+    "href": "lessons/03-conditional-statements.html#conditional-expressions",
+    "title": "Conditional Statements in Python",
+    "section": "Conditional expressions",
+    "text": "Conditional expressions\nFor a very simple binary selection, Python provides a conditional expression, sometimes called the ternary operator.\nIts form is:\nresult_if_true if condition else result_if_false\nFor example:\nx = 5\nprint(\"Even\" if x % 2 == 0 else \"Odd\")\nOutput:\nOdd\n\n\n\n\n\n\nTipKeep it simple\n\n\n\nConditional expressions are useful for short, simple decisions. For more complex logic, a normal if–else statement is usually easier to read.",
+    "crumbs": [
+      "Lessons",
+      "3. Conditional Statements in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/03-conditional-statements.html#summary",
+    "href": "lessons/03-conditional-statements.html#summary",
+    "title": "Conditional Statements in Python",
     "section": "Summary",
-    "text": "Summary\nThis week introduced repetition and sequence processing in Python.\nYou learned how to:\n\nrepeat statements with for and while;\ngenerate sequences of integers with range();\ncreate nested loops;\ninfluence loop execution with break and continue;\nuse pass as a placeholder;\nemulate a post-test loop;\ngenerate random values using the random module;\naccess and process characters in strings;\nuse string indexing, slicing, comparison, repetition, concatenation, and membership.\n\nThe next practical exercises will combine these concepts with the variables, input/output, operators, and conditional statements introduced in the previous weeks.",
+    "text": "Summary\nIn this lesson, we introduced the selection control structure. A program can make decisions by evaluating logical expressions and executing different statements depending on their Boolean result.\nThe main Python constructs introduced were:\n\nlogical operators: not, and, or;\ncomparison operators such as &lt;, &gt;, ==, and !=;\nbinary selection with if–else;\nunary selection with if;\nnested conditionals;\nchained conditionals with elif;\nmulti-way selection with match–case;\nconditional expressions for simple two-way decisions.",
     "crumbs": [
       "Lessons",
-      "4. Loops in Python"
+      "3. Conditional Statements in Python"
     ]
   },
   {
-    "objectID": "results/index.html",
-    "href": "results/index.html",
-    "title": "Test Result",
+    "objectID": "exercises/04-class-exercises.html",
+    "href": "exercises/04-class-exercises.html",
+    "title": "Class Exercises 4",
     "section": "",
-    "text": "Loading result..."
-  },
-  {
-    "objectID": "warmup/03-warmup-practice.html",
-    "href": "warmup/03-warmup-practice.html",
-    "title": "Practice Warm-up Test – Week 3",
-    "section": "",
-    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n    \n    \n      \n        \n        I have read and understood the test rules, including the window-switch rule.\n      \n    \n    \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output\n    \n    \n  \n\n  \n    \n      \n      You left the test window. This is your first warning.\n      If you leave the test window again, your current solution will be submitted automatically and the test will end.\n      Continue test",
-    "crumbs": [
-      "Lessons",
-      "Warm-up test sample"
-    ]
-  },
-  {
-    "objectID": "warmup/03-warmup-practice.html#practice-warm-up-test",
-    "href": "warmup/03-warmup-practice.html#practice-warm-up-test",
-    "title": "Practice Warm-up Test – Week 3",
-    "section": "",
-    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n    \n    \n      \n        \n        I have read and understood the test rules, including the window-switch rule.\n      \n    \n    \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output\n    \n    \n  \n\n  \n    \n      \n      You left the test window. This is your first warning.\n      If you leave the test window again, your current solution will be submitted automatically and the test will end.\n      Continue test",
-    "crumbs": [
-      "Lessons",
-      "Warm-up test sample"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html",
-    "href": "lessons/02-simple-data-types.html",
-    "title": "Working with Simple Data Types",
-    "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#learning-objectives",
-    "href": "lessons/02-simple-data-types.html#learning-objectives",
-    "title": "Working with Simple Data Types",
-    "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#variables",
-    "href": "lessons/02-simple-data-types.html#variables",
-    "title": "Working with Simple Data Types",
-    "section": "Variables",
-    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\n\n\n\n\n\nNoteType hints\n\n\n\nPython also allows us to indicate the expected type of a variable using a type hint:\nage: int = 25\nheight: float = 1.82\nname: str = \"Anna\"\nis_student: bool = True\nA type hint provides information about the intended type, but Python does not enforce it:\nage: int = 25\nage = \"twenty-five\"   # Python allows this\nIn this course, we will normally create variables without type hints:\nage = 25\nWe will return to type hints later when working with functions.\n\n\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#simple-data-types",
-    "href": "lessons/02-simple-data-types.html#simple-data-types",
-    "title": "Working with Simple Data Types",
-    "section": "Simple data types",
-    "text": "Simple data types\nIn this lesson we use four basic Python data types:\n\n\n\nType\nMeaning\nExample\n\n\n\n\nint\ninteger number\n25\n\n\nfloat\nfloating-point number\n5.5\n\n\nstr\ntext (string)\n\"Hello\"\n\n\nbool\nBoolean value\nTrue, False\n\n\n\n\nCreating variables\n# int\nx = 25\n\n# float\ny = 5.5\n\n# str\ns = \"Hello\"\nt = \"World\"\n\n# bool\nb = True\nc = False\nPython does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#the-type-function",
-    "href": "lessons/02-simple-data-types.html#the-type-function",
-    "title": "Working with Simple Data Types",
-    "section": "The type() function",
-    "text": "The type() function\nThe type() function can be used to determine the type of a value or variable.\nx = 25\ny = 5.5\ns = \"Hello\"\nb = True\n\nprint(type(x))\nprint(type(y))\nprint(type(s))\nprint(type(b))\nOutput:\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'str'&gt;\n&lt;class 'bool'&gt;\nThe type can also change after reassignment:\na = 10\nprint(type(a))\n\na = \"apple\"\nprint(type(a))\n\na = 4.4\nprint(type(a))",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#constants",
-    "href": "lessons/02-simple-data-types.html#constants",
-    "title": "Working with Simple Data Types",
-    "section": "Constants",
-    "text": "Constants\nA constant is a value that is intended not to change while a program is running.\nPython has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:\n\nuse capital letters;\nseparate words with underscores.\n\nDEFAULT_TIMEOUT = 10\nMAX_NUMBER_OF_ATTEMPTS = 3\n\n\n\n\n\n\nImportantConvention, not enforcement\n\n\n\nPython does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.\n\n\nConstants are also often defined in separate modules and imported where they are needed.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#type-conversion",
-    "href": "lessons/02-simple-data-types.html#type-conversion",
-    "title": "Working with Simple Data Types",
-    "section": "Type conversion",
-    "text": "Type conversion\nSometimes a value must be converted from one data type to another. Python supports both explicit and implicit type conversion.\n\nExplicit type conversion\nExplicit type conversion, also called type casting, takes place when the programmer deliberately converts a value using a conversion function such as int(), float(), or str().\na = 5\nprint(type(a))\n\na = float(a)\nprint(type(a))\nb = 23\nprint(type(b))\n\nb = int(b)\nprint(type(b))\nc = 10\nprint(type(c))\n\nc = str(c)\nprint(type(c))\nA conversion is possible only if the value can meaningfully be converted to the requested type.\n\n\nImplicit type conversion\nImplicit type conversion takes place automatically when Python converts a value to another type during an operation.\na = 25\nc = 30.0\n\nx = c / a\n\nprint(type(a))\nprint(type(c))\nprint(type(x))\nHere a is an int, c is a float, and the result x is a float.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#printing-variable-values",
-    "href": "lessons/02-simple-data-types.html#printing-variable-values",
-    "title": "Working with Simple Data Types",
-    "section": "Printing variable values",
-    "text": "Printing variable values\nThe print() function can display literal text as well as the values stored in variables.\nx = 15\ny = 20\n\nprint(x)\nprint(y)\nSeveral values can be printed in the same statement:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name:\", name, \"Age:\", age, \"Is_student:\", is_student)",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#formatting-output",
-    "href": "lessons/02-simple-data-types.html#formatting-output",
-    "title": "Working with Simple Data Types",
-    "section": "Formatting output",
-    "text": "Formatting output\n\nString formatting: format() and f-strings\nPython also provides the older format() method for inserting values into strings. You may encounter it in existing Python code, but in this course we will use f-strings for formatted output.\n\n\nf-strings\nAn f-string is a string prefixed with f. Variable names and expressions can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nMultiple values can be included in the same f-string:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nExpressions can also be evaluated directly inside an f-string:\nx = 5\ny = 4\nprint(f\"{x} * {y} = {x * y}\")\nValues can be formatted using a format specification. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipIn this course\n\n\n\nUse f-strings when you need to combine text, variable values, or expressions in formatted output. The format() method is mentioned only so that you can recognize it in existing Python code.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#reading-user-input",
-    "href": "lessons/02-simple-data-types.html#reading-user-input",
-    "title": "Working with Simple Data Types",
-    "section": "Reading user input",
-    "text": "Reading user input\nThe input() function allows the user to enter a value while a program is running.\nIts optional parameter is displayed as a prompt before the input:\nx = input(\"Name: \")\nprint(x)\nprint(type(x))\n\n\n\n\n\n\nWarninginput() returns a string\n\n\n\nThe value returned by input() is always a str. If a numeric value is required, explicit type conversion is usually necessary.\n\n\nFor example:\nx = input(\"Age: \")\nprint(x)\nprint(type(x))\n\ny = int(input(\"Age: \"))\nprint(y)\nprint(type(y))\nA Boolean value can also be produced by comparing the entered text:\nanswer = input(\"Are you a student? (yes or no) \")\nis_student = answer == \"yes\"\nprint(is_student)",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#arithmetic-operators",
-    "href": "lessons/02-simple-data-types.html#arithmetic-operators",
-    "title": "Working with Simple Data Types",
-    "section": "Arithmetic operators",
-    "text": "Arithmetic operators\nPython provides the following basic arithmetic operators:\n\n\n\nOperator\nDescription\nExample\nResult\n\n\n\n\n+\naddition\n10 + 5\n15\n\n\n-\nsubtraction\n20 - 7\n13\n\n\n*\nmultiplication\n4 * 6\n24\n\n\n/\ndivision\n12 / 5\n2.4\n\n\n//\nfloor division\n12 // 5\n2\n\n\n%\nremainder (modulo)\n12 % 5\n2\n\n\n**\nexponentiation\n2 ** 5\n32\n\n\n\n\n\n\n\n\n\nNoteDivision and floor division\n\n\n\n/ performs division and produces a floating-point result. // performs floor division: the result is rounded down to the next smaller whole number.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#arithmetic-expressions",
-    "href": "lessons/02-simple-data-types.html#arithmetic-expressions",
-    "title": "Working with Simple Data Types",
-    "section": "Arithmetic expressions",
-    "text": "Arithmetic expressions\nAn arithmetic expression is a combination of numeric values, arithmetic operators, and optionally parentheses.\nx = 3 + 2 * 5\nprint(x)\nThe result is 13, because multiplication has higher precedence than addition.\nWhen several operators occur in an expression, operator precedence determines the order of evaluation.\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n()\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n\nExamples:\nx = 3 + 2 * 5\nprint(x)\ny = 2 ** 4 + 3\nprint(y)\nParentheses can be used to make the intended order explicit:\nz = (-5 + 16 ** 0.5) / (2 * 0.5)\nprint(z)\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "lessons/02-simple-data-types.html#summary",
-    "href": "lessons/02-simple-data-types.html#summary",
-    "title": "Working with Simple Data Types",
-    "section": "Summary",
-    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print() and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
-    "crumbs": [
-      "Lessons",
-      "2. Working with Simple Data Types"
-    ]
-  },
-  {
-    "objectID": "exercises/03-class-exercises.html",
-    "href": "exercises/03-class-exercises.html",
-    "title": "Class Exercises 3",
-    "section": "",
-    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
+    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.\n  \n\n\nWeek 4: Exercises 1–7 are class exercises. The random module may be imported only in exercises that require random-number generation.\nProgramming rules: use the programming concepts covered so far and structured control flow. Do not use break, continue, or return to terminate or skip loop iterations. When a task should stop searching as soon as its result is known, express that condition directly in a while condition.\n I understand and accept these programming rules.\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Evaluate my work\n  Run an indicative evaluation of your current Week 4 solutions.\n  This evaluation is for feedback only and does not count toward your course grade.\n  Evaluate my work",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "exercises/01-class-exercises.html",
-    "href": "exercises/01-class-exercises.html",
-    "title": "Class Exercises 1",
+    "objectID": "exercises/02-class-exercises.html",
+    "href": "exercises/02-class-exercises.html",
+    "title": "Class Exercises 2",
     "section": "",
     "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
     "crumbs": [
       "Lessons",
       "Class Exercises"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Course Materials",
-    "section": "",
-    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#course-structure",
-    "href": "index.html#course-structure",
-    "title": "Course Materials",
-    "section": "Course structure",
-    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#programming-environment",
-    "href": "index.html#programming-environment",
-    "title": "Course Materials",
-    "section": "Programming environment",
-    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
-    "crumbs": [
-      "Home"
     ]
   },
   {
@@ -609,9 +454,39 @@
     ]
   },
   {
-    "objectID": "exercises/02-class-exercises.html",
-    "href": "exercises/02-class-exercises.html",
-    "title": "Class Exercises 2",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Course Materials",
+    "section": "",
+    "text": "Welcome to the online materials for Introduction to Data Science and Programming.\nThe primary goal of this course is to develop programming skills, problem-solving techniques, and algorithmic thinking. Python is the programming language used as the practical environment for learning these concepts.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Course Materials",
+    "section": "Course structure",
+    "text": "Course structure\nThe course consists of 12 teaching weeks. Each lesson will gradually contain:\n\nconcise theoretical notes;\nworked examples;\npractical exercises;\nadditional practice tasks;\nsolutions released when appropriate.\n\nAssessment materials and preparation tasks for the two midterm tests and the final test will be added during the semester.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#programming-environment",
+    "href": "index.html#programming-environment",
+    "title": "Course Materials",
+    "section": "Programming environment",
+    "text": "Programming environment\nThe main programming environment for the course is planned to be Google Colab. It allows Python notebooks to be created and executed directly in a web browser.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "exercises/01-class-exercises.html",
+    "href": "exercises/01-class-exercises.html",
+    "title": "Class Exercises 1",
     "section": "",
     "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
     "crumbs": [
@@ -620,215 +495,351 @@
     ]
   },
   {
-    "objectID": "exercises/04-class-exercises.html",
-    "href": "exercises/04-class-exercises.html",
-    "title": "Class Exercises 4",
+    "objectID": "exercises/03-class-exercises.html",
+    "href": "exercises/03-class-exercises.html",
+    "title": "Class Exercises 3",
     "section": "",
-    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.\n  \n\n\nWeek 4: Exercises 1–7 are class exercises. The random module may be imported only in exercises that require random-number generation.\nProgramming rules: use the programming concepts covered so far and structured control flow. Do not use break, continue, or return to terminate or skip loop iterations. When a task should stop searching as soon as its result is known, express that condition directly in a while condition.\n I understand and accept these programming rules.\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Evaluate my work\n  Run an indicative evaluation of your current Week 4 solutions.\n  This evaluation is for feedback only and does not count toward your course grade.\n  Evaluate my work",
+    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the same exercises in Colab\n    Jupyter Version — download the same exercises for Jupyter Notebook/JupyterLab\n  \n\n\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.",
     "crumbs": [
       "Lessons",
       "Class Exercises"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html",
-    "href": "lessons/03-conditional-statements.html",
-    "title": "Conditional Statements in Python",
+    "objectID": "lessons/02-simple-data-types.html",
+    "href": "lessons/02-simple-data-types.html",
+    "title": "Working with Simple Data Types",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#learning-objectives",
-    "href": "lessons/03-conditional-statements.html#learning-objectives",
-    "title": "Conditional Statements in Python",
+    "objectID": "lessons/02-simple-data-types.html#learning-objectives",
+    "href": "lessons/02-simple-data-types.html#learning-objectives",
+    "title": "Working with Simple Data Types",
     "section": "",
-    "text": "After completing this lesson, you should be able to:\n\ncreate logical expressions that evaluate to True or False;\nuse the logical operators not, and, and or;\ncompare values using comparison operators;\ndistinguish between comparison and assignment operators;\napply compound assignment operators;\nunderstand the basic precedence of arithmetic, comparison, and logical operators;\nimplement binary and unary selection using if, else, and elif;\nuse nested and chained conditionals;\nimplement multi-way selection using match–case;\nuse a conditional expression for simple binary selection.",
+    "text": "After completing this lesson, you should be able to:\n\ncreate variables containing integer, floating-point, Boolean, and string values;\nfollow Python’s basic variable naming rules;\nuse the type() function to inspect the type of a value;\nunderstand the convention used for constants in Python;\ndistinguish between implicit and explicit type conversion;\ndisplay variable values using print() and f-strings;\nuse raw strings when backslashes should be treated literally;\nread values from the user with input();\nuse arithmetic operators and evaluate arithmetic expressions.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#logical-expressions",
-    "href": "lessons/03-conditional-statements.html#logical-expressions",
-    "title": "Conditional Statements in Python",
-    "section": "Logical expressions",
-    "text": "Logical expressions\nA logical expression is an expression that evaluates to a Boolean value: either True or False.\nFor example:\nx = 4\n\nprint(x == 4)\nprint(x &gt; 3)\nprint(x &lt; 5)\nOutput:\nTrue\nTrue\nTrue\nLogical expressions are particularly important when a program has to make a decision. A condition in an if statement is a logical expression.",
+    "objectID": "lessons/02-simple-data-types.html#variables",
+    "href": "lessons/02-simple-data-types.html#variables",
+    "title": "Working with Simple Data Types",
+    "section": "Variables",
+    "text": "Variables\nA variable is a name associated with a value stored in memory. The value can belong to any data type and can change while the program is running.\nA new variable can be created with an assignment statement:\nvariable_name = value\nFor example:\nage = 25\nname = \"Joe\"\n\n\n\n\n\n\nNoteType hints\n\n\n\nPython also allows us to indicate the expected type of a variable using a type hint:\nage: int = 25\nheight: float = 1.82\nname: str = \"Anna\"\nis_student: bool = True\nA type hint provides information about the intended type, but Python does not enforce it:\nage: int = 25\nage = \"twenty-five\"   # Python allows this\nIn this course, we will normally create variables without type hints:\nage = 25\nWe will return to type hints later when working with functions.\n\n\n\nVariable naming rules\nPython variable names:\n\nmust begin with a letter or an underscore (_);\nmay contain letters, digits, and underscores;\ncannot contain spaces;\nare case-sensitive;\ncannot be Python keywords.\n\nFor example, age, student_age, and _counter are valid names, while 2age and student age are not.\n\n\n\n\n\n\nNoteDynamic typing\n\n\n\nIn Python, the type belongs to the value associated with a variable. A variable can therefore refer to values of different types at different points in a program.\n\n\nx = 10\nprint(type(x))\n\nx = \"apple\"\nprint(type(x))\n\nx = 4.4\nprint(type(x))",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#logical-operators",
-    "href": "lessons/03-conditional-statements.html#logical-operators",
-    "title": "Conditional Statements in Python",
-    "section": "Logical operators",
-    "text": "Logical operators\nLogical operators operate on Boolean expressions and combine their results into a single Boolean value.\nPython provides three basic logical operators:\n\nnot – True if its operand is False, and False if its operand is True;\nand – True if and only if both operands are True;\nor – True if at least one operand is True.\n\n\nTruth table\n\n\n\nX\nY\nX and Y\nX or Y\nnot X\nnot Y\n\n\n\n\nTrue\nTrue\nTrue\nTrue\nFalse\nFalse\n\n\nTrue\nFalse\nFalse\nTrue\nFalse\nTrue\n\n\nFalse\nTrue\nFalse\nTrue\nTrue\nFalse\n\n\nFalse\nFalse\nFalse\nFalse\nTrue\nTrue\n\n\n\nExamples:\nx = 10\ny = 8\n\nprint(x == 10 and y == 8)\nprint(x == 10 or y == 20)\nprint(not (x == 10))\nOutput:\nTrue\nTrue\nFalse\nLogical operators can also be combined:\na = True\nb = False\nc = False\n\nr = (a and b) and (b or c)\nprint(r)",
+    "objectID": "lessons/02-simple-data-types.html#simple-data-types",
+    "href": "lessons/02-simple-data-types.html#simple-data-types",
+    "title": "Working with Simple Data Types",
+    "section": "Simple data types",
+    "text": "Simple data types\nIn this lesson we use four basic Python data types:\n\n\n\nType\nMeaning\nExample\n\n\n\n\nint\ninteger number\n25\n\n\nfloat\nfloating-point number\n5.5\n\n\nstr\ntext (string)\n\"Hello\"\n\n\nbool\nBoolean value\nTrue, False\n\n\n\n\nCreating variables\n# int\nx = 25\n\n# float\ny = 5.5\n\n# str\ns = \"Hello\"\nt = \"World\"\n\n# bool\nb = True\nc = False\nPython does not require the type of a variable to be declared explicitly. The type is determined from the assigned value.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#comparison-operators",
-    "href": "lessons/03-conditional-statements.html#comparison-operators",
-    "title": "Conditional Statements in Python",
-    "section": "Comparison operators",
-    "text": "Comparison operators\nComparison operators compare two values or expressions. The result of a comparison is a Boolean value.\n\n\n\nOperator\nDescription\nExample\n\n\n\n\n&lt;\nLess than\nx &lt; 5\n\n\n&gt;\nGreater than\ny &gt; 3\n\n\n&lt;=\nLess than or equal to\nx + 5 &lt;= y\n\n\n&gt;=\nGreater than or equal to\ny &gt;= x - 2\n\n\n==\nEqual to\nx == 3\n\n\n!=\nNot equal to\nx != y\n\n\n\nFor example:\nx = 5\n\nprint(x &gt; 3)\nprint(x == 5)\nprint(x != 5)\n\n\n\n\n\n\nImportantAssignment or comparison?\n\n\n\nDo not confuse the assignment operator = with the equality comparison operator ==.\nx = 5       # assign the value 5 to x\nx == 5      # compare x with 5\nThe first statement changes the value associated with x. The second expression evaluates to True or False.",
+    "objectID": "lessons/02-simple-data-types.html#the-type-function",
+    "href": "lessons/02-simple-data-types.html#the-type-function",
+    "title": "Working with Simple Data Types",
+    "section": "The type() function",
+    "text": "The type() function\nThe type() function can be used to determine the type of a value or variable.\nx = 25\ny = 5.5\ns = \"Hello\"\nb = True\n\nprint(type(x))\nprint(type(y))\nprint(type(s))\nprint(type(b))\nOutput:\n&lt;class 'int'&gt;\n&lt;class 'float'&gt;\n&lt;class 'str'&gt;\n&lt;class 'bool'&gt;\nThe type can also change after reassignment:\na = 10\nprint(type(a))\n\na = \"apple\"\nprint(type(a))\n\na = 4.4\nprint(type(a))",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#assignment-operators",
-    "href": "lessons/03-conditional-statements.html#assignment-operators",
-    "title": "Conditional Statements in Python",
-    "section": "Assignment operators",
-    "text": "Assignment operators\nAssignment operators are used to assign values to variables. Python also provides compound assignment operators, which combine an arithmetic operation with assignment.\n\n\n\nOperator\nExample\nMeaning\n\n\n\n\n=\nx = 10\nassign 10 to x\n\n\n+=\nx += 10\nx = x + 10\n\n\n-=\ny -= 5\ny = y - 5\n\n\n*=\nz *= 2\nz = z * 2\n\n\n/=\na /= 3\na = a / 3\n\n\n%=\nb %= 5\nb = b % 5\n\n\n//=\nc //= 5\nc = c // 5\n\n\n\nFor example:\nx = 10\nx += 5\nprint(x)\nOutput:\n15",
+    "objectID": "lessons/02-simple-data-types.html#constants",
+    "href": "lessons/02-simple-data-types.html#constants",
+    "title": "Working with Simple Data Types",
+    "section": "Constants",
+    "text": "Constants\nA constant is a value that is intended not to change while a program is running.\nPython has no dedicated syntax that prevents a variable from being changed. Instead, programmers use a naming convention to indicate that a value should be treated as a constant:\n\nuse capital letters;\nseparate words with underscores.\n\nDEFAULT_TIMEOUT = 10\nMAX_NUMBER_OF_ATTEMPTS = 3\n\n\n\n\n\n\nImportantConvention, not enforcement\n\n\n\nPython does not prevent these values from being reassigned. Uppercase names communicate to other programmers that the value is intended to remain constant.\n\n\nConstants are also often defined in separate modules and imported where they are needed.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#precedence-of-operators",
-    "href": "lessons/03-conditional-statements.html#precedence-of-operators",
-    "title": "Conditional Statements in Python",
-    "section": "Precedence of operators",
-    "text": "Precedence of operators\nWhen an expression contains several operators, operator precedence determines which operation is evaluated first.\nThe following simplified precedence table contains the operators used in this course so far, from higher to lower precedence:\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n(), []\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n6\n&lt;, &gt;, ==, !=, &lt;=, &gt;=\n\n\n7\nnot\n\n\n8\nand\n\n\n9\nor\n\n\n\nFor example:\nx = 5\nresult = x &gt; 3 and x &lt; 10\nprint(result)\nThe comparisons are evaluated before the and operator.\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when you know the precedence rules, parentheses can make a complex logical expression easier to read:\nresult = (x &gt; 3) and (x &lt; 10)",
+    "objectID": "lessons/02-simple-data-types.html#type-conversion",
+    "href": "lessons/02-simple-data-types.html#type-conversion",
+    "title": "Working with Simple Data Types",
+    "section": "Type conversion",
+    "text": "Type conversion\nSometimes a value must be converted from one data type to another. Python supports both explicit and implicit type conversion.\n\nExplicit type conversion\nExplicit type conversion, also called type casting, takes place when the programmer deliberately converts a value using a conversion function such as int(), float(), or str().\na = 5\nprint(type(a))\n\na = float(a)\nprint(type(a))\nb = 23\nprint(type(b))\n\nb = int(b)\nprint(type(b))\nc = 10\nprint(type(c))\n\nc = str(c)\nprint(type(c))\nA conversion is possible only if the value can meaningfully be converted to the requested type.\n\n\nImplicit type conversion\nImplicit type conversion takes place automatically when Python converts a value to another type during an operation.\na = 25\nc = 30.0\n\nx = c / a\n\nprint(type(a))\nprint(type(c))\nprint(type(x))\nHere a is an int, c is a float, and the result x is a float.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#selection",
-    "href": "lessons/03-conditional-statements.html#selection",
-    "title": "Conditional Statements in Python",
-    "section": "Selection",
-    "text": "Selection\nSo far, our programs have mainly executed instructions one after another. This is called sequence.\nSelection allows a program to choose between different paths depending on a condition. The condition is a logical expression that evaluates to either True or False.",
+    "objectID": "lessons/02-simple-data-types.html#printing-variable-values",
+    "href": "lessons/02-simple-data-types.html#printing-variable-values",
+    "title": "Working with Simple Data Types",
+    "section": "Printing variable values",
+    "text": "Printing variable values\nThe print() function can display literal text as well as the values stored in variables.\nx = 15\ny = 20\n\nprint(x)\nprint(y)\nSeveral values can be printed in the same statement:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(\"Name:\", name, \"Age:\", age, \"Is_student:\", is_student)",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#binary-selection-ifelse",
-    "href": "lessons/03-conditional-statements.html#binary-selection-ifelse",
-    "title": "Conditional Statements in Python",
-    "section": "Binary selection: if–else",
-    "text": "Binary selection: if–else\nBinary selection means that the program can follow one of two possible paths depending on a condition.\nThe general form is:\nif condition:\n    commands\nelse:\n    other_commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    print(f\"{x} is negative\")\nAnother example can be used to prevent an invalid division:\na = 10\nb = int(input(\"Enter a whole number: \"))\n\nif b == 0:\n    print(\"The division cannot be performed\")\nelse:\n    print(f\"The quotient of {a} and {b}: {a / b}\")\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to determine which statements belong to a branch.\nif x &gt; 0:\n    print(\"Positive\")\n    print(\"This line also belongs to the if branch\")\nStatements at the same indentation level belong to the same block.",
+    "objectID": "lessons/02-simple-data-types.html#formatting-output",
+    "href": "lessons/02-simple-data-types.html#formatting-output",
+    "title": "Working with Simple Data Types",
+    "section": "Formatting output",
+    "text": "Formatting output\n\nString formatting: format() and f-strings\nPython also provides the older format() method for inserting values into strings. You may encounter it in existing Python code, but in this course we will use f-strings for formatted output.\n\n\nf-strings\nAn f-string is a string prefixed with f. Variable names and expressions can be placed directly inside {}.\nlanguage = \"Python\"\nprint(f\"{language} is our programming language\")\nMultiple values can be included in the same f-string:\nname = \"Joe\"\nage = 50\nis_student = True\n\nprint(f\"Name: {name}, Age: {age}, Is_student: {is_student}\")\nExpressions can also be evaluated directly inside an f-string:\nx = 5\ny = 4\nprint(f\"{x} * {y} = {x * y}\")\nValues can be formatted using a format specification. For example, .3f displays a floating-point value with three digits after the decimal point:\nresult = 5 * 5.25\nprint(f\"5 * 5.25 is {result:.3f}\")\n\n\n\n\n\n\nTipIn this course\n\n\n\nUse f-strings when you need to combine text, variable values, or expressions in formatted output. The format() method is mentioned only so that you can recognize it in existing Python code.\n\n\n\n\nRaw strings (r-strings)\nA raw string is prefixed with r. Backslashes inside the string are then treated as literal characters instead of introducing escape sequences.\npath = r\"c:\\users\\public\"\nprint(path)\nCompare the following strings:\nprint(\"Today\\nis\\nWednesday\")\nprint(r\"Today\\nis\\nWednesday\")\nThe first string interprets \\n as a newline. The raw string displays the backslash and the letter n literally.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#unary-selection-if",
-    "href": "lessons/03-conditional-statements.html#unary-selection-if",
-    "title": "Conditional Statements in Python",
-    "section": "Unary selection: if",
-    "text": "Unary selection: if\nSometimes an action is required only when a condition is true. In this case, an else branch is not necessary.\nThis is unary selection:\nif condition:\n    commands\nFor example:\nx = int(input(\"Give me a whole number other than zero: \"))\n\nif x % 5 == 0:\n    print(f\"{x} can be divided by 5\")\nIf the condition is False, the indented statement is simply skipped and execution continues after the if statement.\nA unary selection can also be used when additional information is needed only in a particular case:\nfirst_name = input(\"First name: \")\nlast_name = input(\"Last name: \")\nanswer = input(\"Do you have a middle name? (yes/no): \")\n\nif answer == \"yes\":\n    middle_name = input(\"Middle name: \")\n    print(f\"Hello {first_name} {middle_name} {last_name}\")",
+    "objectID": "lessons/02-simple-data-types.html#reading-user-input",
+    "href": "lessons/02-simple-data-types.html#reading-user-input",
+    "title": "Working with Simple Data Types",
+    "section": "Reading user input",
+    "text": "Reading user input\nThe input() function allows the user to enter a value while a program is running.\nIts optional parameter is displayed as a prompt before the input:\nx = input(\"Name: \")\nprint(x)\nprint(type(x))\n\n\n\n\n\n\nWarninginput() returns a string\n\n\n\nThe value returned by input() is always a str. If a numeric value is required, explicit type conversion is usually necessary.\n\n\nFor example:\nx = input(\"Age: \")\nprint(x)\nprint(type(x))\n\ny = int(input(\"Age: \"))\nprint(y)\nprint(type(y))\nA Boolean value can also be produced by comparing the entered text:\nanswer = input(\"Are you a student? (yes or no) \")\nis_student = answer == \"yes\"\nprint(is_student)",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#nested-conditionals",
-    "href": "lessons/03-conditional-statements.html#nested-conditionals",
-    "title": "Conditional Statements in Python",
-    "section": "Nested conditionals",
-    "text": "Nested conditionals\nA conditional statement can be placed inside another conditional statement. This is called a nested conditional.\nGeneral form:\nif condition:\n    commands\nelse:\n    if condition2:\n        commands2\n    else:\n        other_commands\nFor example, we can distinguish between positive, zero, and negative numbers:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelse:\n    if x == 0:\n        print(f\"{x} is zero\")\n    else:\n        print(f\"{x} is negative\")\nThe second if statement is evaluated only when the first condition is false.",
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "href": "lessons/02-simple-data-types.html#arithmetic-operators",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic operators",
+    "text": "Arithmetic operators\nPython provides the following basic arithmetic operators:\n\n\n\nOperator\nDescription\nExample\nResult\n\n\n\n\n+\naddition\n10 + 5\n15\n\n\n-\nsubtraction\n20 - 7\n13\n\n\n*\nmultiplication\n4 * 6\n24\n\n\n/\ndivision\n12 / 5\n2.4\n\n\n//\nfloor division\n12 // 5\n2\n\n\n%\nremainder (modulo)\n12 % 5\n2\n\n\n**\nexponentiation\n2 ** 5\n32\n\n\n\n\n\n\n\n\n\nNoteDivision and floor division\n\n\n\n/ performs division and produces a floating-point result. // performs floor division: the result is rounded down to the next smaller whole number.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#chained-conditionals-elif",
-    "href": "lessons/03-conditional-statements.html#chained-conditionals-elif",
-    "title": "Conditional Statements in Python",
-    "section": "Chained conditionals: elif",
-    "text": "Chained conditionals: elif\nWhen several mutually exclusive conditions have to be checked, nested if statements can often be written more clearly using elif.\nelif combines else and if:\nif condition:\n    commands\nelif condition2:\n    commands2\nelse:\n    other_commands\nThe previous example can therefore be written as:\nx = int(input(\"Enter a whole number: \"))\n\nif x &gt; 0:\n    print(f\"{x} is positive\")\nelif x == 0:\n    print(f\"{x} is zero\")\nelse:\n    print(f\"{x} is negative\")\nMore than one elif branch can be used:\nif condition1:\n    commands1\nelif condition2:\n    commands2\nelif condition3:\n    commands3\nelse:\n    other_commands\nPython checks the conditions from top to bottom. Once a true condition is found, its branch is executed and the remaining branches are skipped.",
+    "objectID": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "href": "lessons/02-simple-data-types.html#arithmetic-expressions",
+    "title": "Working with Simple Data Types",
+    "section": "Arithmetic expressions",
+    "text": "Arithmetic expressions\nAn arithmetic expression is a combination of numeric values, arithmetic operators, and optionally parentheses.\nx = 3 + 2 * 5\nprint(x)\nThe result is 13, because multiplication has higher precedence than addition.\nWhen several operators occur in an expression, operator precedence determines the order of evaluation.\n\n\n\nPrecedence\nOperators\n\n\n\n\n1\n()\n\n\n2\n**\n\n\n3\nunary +, unary -\n\n\n4\n*, /, //, %\n\n\n5\n+, -\n\n\n\nExamples:\nx = 3 + 2 * 5\nprint(x)\ny = 2 ** 4 + 3\nprint(y)\nParentheses can be used to make the intended order explicit:\nz = (-5 + 16 ** 0.5) / (2 * 0.5)\nprint(z)\n\n\n\n\n\n\nTipUse parentheses for clarity\n\n\n\nEven when parentheses are not strictly required, they can make a complex expression easier to read and reduce mistakes.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "lessons/03-conditional-statements.html#matchcase-statement",
-    "href": "lessons/03-conditional-statements.html#matchcase-statement",
-    "title": "Conditional Statements in Python",
-    "section": "match–case statement",
-    "text": "match–case statement\nStarting from Python 3.10, the match–case statement can be used to implement multi-way selection.\nIts general structure is:\nmatch parameter_value:\n    case value1:\n        commands1\n    case value2:\n        commands2\n    case value3:\n        commands3\n    case _:\n        other_commands\nThe special pattern _ acts as the default case.\nFor example:\ngrade = int(input(\"Enter your grade: \"))\n\nmatch grade:\n    case 1:\n        print(\"Failed\")\n    case 2:\n        print(\"Sufficient\")\n    case 3:\n        print(\"Average\")\n    case 4:\n        print(\"Good\")\n    case 5:\n        print(\"Excellent\")\n    case _:\n        print(\"You entered a wrong number\")\n\n\n\n\n\n\nNoteWhen is match–case useful?\n\n\n\nmatch–case can make code easier to read when one value is compared with several possible alternatives. The same type of problem can often also be solved with an if–elif–else chain.",
-    "crumbs": [
-      "Lessons",
-      "3. Conditional Statements in Python"
-    ]
-  },
-  {
-    "objectID": "lessons/03-conditional-statements.html#conditional-expressions",
-    "href": "lessons/03-conditional-statements.html#conditional-expressions",
-    "title": "Conditional Statements in Python",
-    "section": "Conditional expressions",
-    "text": "Conditional expressions\nFor a very simple binary selection, Python provides a conditional expression, sometimes called the ternary operator.\nIts form is:\nresult_if_true if condition else result_if_false\nFor example:\nx = 5\nprint(\"Even\" if x % 2 == 0 else \"Odd\")\nOutput:\nOdd\n\n\n\n\n\n\nTipKeep it simple\n\n\n\nConditional expressions are useful for short, simple decisions. For more complex logic, a normal if–else statement is usually easier to read.",
-    "crumbs": [
-      "Lessons",
-      "3. Conditional Statements in Python"
-    ]
-  },
-  {
-    "objectID": "lessons/03-conditional-statements.html#summary",
-    "href": "lessons/03-conditional-statements.html#summary",
-    "title": "Conditional Statements in Python",
+    "objectID": "lessons/02-simple-data-types.html#summary",
+    "href": "lessons/02-simple-data-types.html#summary",
+    "title": "Working with Simple Data Types",
     "section": "Summary",
-    "text": "Summary\nIn this lesson, we introduced the selection control structure. A program can make decisions by evaluating logical expressions and executing different statements depending on their Boolean result.\nThe main Python constructs introduced were:\n\nlogical operators: not, and, or;\ncomparison operators such as &lt;, &gt;, ==, and !=;\nbinary selection with if–else;\nunary selection with if;\nnested conditionals;\nchained conditionals with elif;\nmulti-way selection with match–case;\nconditional expressions for simple two-way decisions.",
+    "text": "Summary\nIn this lesson, you learned how to:\n\ncreate and reassign variables;\nwork with int, float, str, and bool values;\ninspect types with type();\nuse Python’s convention for constants;\nperform explicit and implicit type conversion;\ndisplay values using print() and f-strings;\nuse raw strings;\nread input with input() and convert it when necessary;\nuse arithmetic operators and understand operator precedence.",
     "crumbs": [
       "Lessons",
-      "3. Conditional Statements in Python"
+      "2. Working with Simple Data Types"
     ]
   },
   {
-    "objectID": "warmup/04-warmup.html",
-    "href": "warmup/04-warmup.html",
-    "title": "Warm-up Test – Week 4",
+    "objectID": "warmup/03-warmup-practice.html",
+    "href": "warmup/03-warmup-practice.html",
+    "title": "Practice Warm-up Test – Week 3",
     "section": "",
-    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
+    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n    \n    \n      \n        \n        I have read and understood the test rules, including the window-switch rule.\n      \n    \n    \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output\n    \n    \n  \n\n  \n    \n      \n      You left the test window. This is your first warning.\n      If you leave the test window again, your current solution will be submitted automatically and the test will end.\n      Continue test",
     "crumbs": [
       "Lessons",
-      "Week 4 Warm-up Test"
+      "Warm-up test sample"
     ]
   },
   {
-    "objectID": "warmup/04-warmup.html#week-4-warm-up-test",
-    "href": "warmup/04-warmup.html#week-4-warm-up-test",
-    "title": "Warm-up Test – Week 4",
+    "objectID": "warmup/03-warmup-practice.html#practice-warm-up-test",
+    "href": "warmup/03-warmup-practice.html#practice-warm-up-test",
+    "title": "Practice Warm-up Test – Week 3",
     "section": "",
-    "text": "Note\n\n\n\nThis is a graded warm-up test.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and that I have read and understood the test rules, including the window-switch rule.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n\n      \n        You left the test window. This is your first warning.\n      \n\n      \n        \n          If you leave the test window again, your current solution will be submitted automatically and the test will end.\n        \n      \n\n      \n        Continue test",
+    "text": "Note\n\n\n\nThis is a practice test and does not count towards your grade.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected switch results in a warning. The second detected switch automatically submits your current solution and ends the test.\n\n\nEnter your Neptun code and start the test. Your seminar group and task will be assigned automatically.\n\n\n\n  \n    \n      Neptun code\n      \n    \n    \n      \n        \n        I have read and understood the test rules, including the window-switch rule.\n      \n    \n    \n      Start Warm-up Test\n    \n    \n  \n\n  \n    \n      Group: \n      Time remaining: 10:00\n    \n\n    \n\n    Your Python solution\n    \n\n    \n      Run\n      Submit\n      \n    \n\n    Program output\n    \n    \n  \n\n  \n    \n      \n      You left the test window. This is your first warning.\n      If you leave the test window again, your current solution will be submitted automatically and the test will end.\n      Continue test",
     "crumbs": [
       "Lessons",
-      "Week 4 Warm-up Test"
+      "Warm-up test sample"
     ]
   },
   {
-    "objectID": "teacher/index.html",
-    "href": "teacher/index.html",
-    "title": "Teacher Dashboard",
+    "objectID": "results/index.html",
+    "href": "results/index.html",
+    "title": "Test Result",
     "section": "",
-    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+    "text": "Loading result..."
   },
   {
-    "objectID": "teacher/index.html#teacher-access",
-    "href": "teacher/index.html#teacher-access",
-    "title": "Teacher Dashboard",
+    "objectID": "lessons/04-loops.html",
+    "href": "lessons/04-loops.html",
+    "title": "Week 4 – Loops in Python",
     "section": "",
-    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#learning-objectives",
+    "href": "lessons/04-loops.html#learning-objectives",
+    "title": "Week 4 – Loops in Python",
+    "section": "",
+    "text": "By the end of this week, you should be able to:\n\nuse for loops to repeat a block of code;\ngenerate integer sequences with range();\nuse while loops when repetition depends on a condition;\ncreate nested loops;\nunderstand and use break, continue, and pass;\nemulate a post-test loop in Python;\ngenerate random values with the random module;\ntreat strings as sequences of characters;\nuse basic string operators, indexing, slicing, and membership tests.\n\n\n\n\n\n\n\nImportantIndentation matters\n\n\n\nPython uses indentation to define the body of a loop. Statements that belong to the loop must be indented consistently.\nfor i in range(3):\n    print(i)\nIncorrect indentation changes the program structure or causes an error.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#repetition-and-loops",
+    "href": "lessons/04-loops.html#repetition-and-loops",
+    "title": "Week 4 – Loops in Python",
+    "section": "1. Repetition and loops",
+    "text": "1. Repetition and loops\nPrograms often need to execute the same operation several times. Instead of writing the same statement repeatedly, we can use a loop.\nTwo important loop types in Python are:\n\nfor – useful when we iterate over a sequence or a known range of values;\nwhile – useful when repetition continues as long as a condition is true.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-for-loop",
+    "href": "lessons/04-loops.html#the-for-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "2. The for loop",
+    "text": "2. The for loop\nA for loop executes a block of code repeatedly. A common form uses the range() function.\nfor loop_variable in range(n):\n    statements\nThe first line is the loop head. The indented statements form the loop body.\nFor example:\nfor i in range(5):\n    print(\"Hello World\")\nThe loop body is executed five times.\nThe loop variable can also be used inside the loop:\nfor i in range(3):\n    print(i)\nOutput:\n0\n1\n2\nNotice that counting starts at 0.\nIf the loop variable is not needed, _ can be used:\nfor _ in range(5):\n    print(\"Hello\")",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-range-function",
+    "href": "lessons/04-loops.html#the-range-function",
+    "title": "Week 4 – Loops in Python",
+    "section": "3. The range() function",
+    "text": "3. The range() function\nThe range() function generates a sequence of integers that can be used by a for loop.\n\nrange(end)\nfor i in range(5):\n    print(i)\nproduces:\n0\n1\n2\n3\n4\nThe value 5 itself is not included.\n\n\nrange(start, end)\nA starting value can also be specified:\nfor i in range(3, 6):\n    print(i)\nOutput:\n3\n4\n5\n\n\nrange(start, end, step)\nThe third argument specifies the difference between consecutive values:\nfor i in range(1, 10, 2):\n    print(i)\nOutput:\n1\n3\n5\n7\n9\nTherefore:\nrange(start, end, step)\nhas three possible components:\n\nstart – starting value;\nend – value just after the last generated value;\nstep – difference between consecutive values.\n\n\n\n\n\n\n\nTipRemember\n\n\n\nThe end value of range() is not included.\nFor example, range(1, 5) generates 1, 2, 3, 4.\n\n\nA negative step can be used for counting backwards:\nfor i in range(5, 0, -1):\n    print(i)\nOutput:\n5\n4\n3\n2\n1",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-while-loop",
+    "href": "lessons/04-loops.html#the-while-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "4. The while loop",
+    "text": "4. The while loop\nA while loop executes its body as long as its condition is true.\nwhile condition:\n    statements\nBecause the condition is checked before the loop body is executed, this is a pre-test loop.\nExample:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\n    i = i + 1\nOutput:\n1\n2\n3\n4\nThe variable i changes during every iteration. Eventually the condition becomes false and the loop stops.\n\n\n\n\n\n\nWarningAvoid accidental infinite loops\n\n\n\nA while loop must normally change something that affects its condition.\nThis loop never terminates:\ni = 1\n\nwhile i &lt; 5:\n    print(i)\nbecause i never changes.\n\n\nA while loop can also be used when the number of repetitions depends on user input:\nn = int(input(\"Enter a positive whole number: \"))\n\ni = 0\n\nwhile i &lt; n:\n    i = i + 1\n\n    if n % i == 0:\n        print(i)\nThis example prints the divisors of n.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#nested-loops",
+    "href": "lessons/04-loops.html#nested-loops",
+    "title": "Week 4 – Loops in Python",
+    "section": "5. Nested loops",
+    "text": "5. Nested loops\nA loop can contain another loop. This is called a nested loop.\nThe outside loop is the outer loop, and the loop inside it is the inner loop.\nfor i in range(n):\n    statements\n\n    for j in range(m):\n        statements\nBoth for and while loops can be nested, and the two types can also be combined.\nExample:\nfor i in range(1, 10):\n    print(f\"divisors of {i}:\", end=\" \")\n\n    for j in range(1, i + 1):\n        if i % j == 0:\n            print(j, end=\" \")\n\n    print(\"\")\nFor every value of i, the inner loop checks possible divisors.\n\n\n\n\n\n\nNote\n\n\n\nWith nested loops, indentation shows which statements belong to the outer loop and which belong to the inner loop. Read the program one indentation level at a time.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#break-and-continue",
+    "href": "lessons/04-loops.html#break-and-continue",
+    "title": "Week 4 – Loops in Python",
+    "section": "6. break and continue",
+    "text": "6. break and continue\nPython provides statements that can change the normal execution of a loop.\n\nbreak\nThe break statement immediately exits the current loop, regardless of the loop condition.\ni = 0\n\nwhile True:\n    i = i + 1\n    print(i)\n\n    if i == 5:\n        break\nAfter break, execution continues with the first statement after the loop.\n\n\ncontinue\nThe continue statement skips the rest of the current iteration and moves to the next iteration.\nfor i in range(1, 10):\n\n    if i % 2 == 1:\n        continue\n\n    print(i)\nOutput:\n2\n4\n6\n8\n\n\n\n\n\n\nWarningUse break and continue carefully\n\n\n\nAlthough break and continue are valid Python statements, in this course we generally prefer loop conditions and program structures that make the control flow clear without them when a simple alternative exists.\nA related statement, return, will be introduced later when we study functions.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#the-pass-statement",
+    "href": "lessons/04-loops.html#the-pass-statement",
+    "title": "Week 4 – Loops in Python",
+    "section": "7. The pass statement",
+    "text": "7. The pass statement\npass is a null statement: it performs no operation.\nIt is useful as a placeholder when Python requires a statement but the program logic has not yet been implemented.\nn = int(input(\"Enter a positive whole number: \"))\n\nif n &gt; 0:\n    print(\"Thank you\")\nelse:\n    pass\nIt can also appear in a loop:\nn = 0\n\nwhile n &lt; 100:\n    n = n + 1\n    pass\npass does not exit the loop and does not skip to the next iteration. It simply does nothing.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#emulating-a-post-test-loop",
+    "href": "lessons/04-loops.html#emulating-a-post-test-loop",
+    "title": "Week 4 – Loops in Python",
+    "section": "8. Emulating a post-test loop",
+    "text": "8. Emulating a post-test loop\nPython does not have a built-in post-test loop. However, we can emulate one.\nA post-test structure is useful when the loop body must execute at least once before the termination condition is checked.\nOne possible form is:\nwhile True:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        print(\"Thank you\")\n        break\nAnother solution uses a logical variable:\nmore = True\n\nwhile more:\n\n    n = int(\n        input(\n            \"Enter a whole number between 1 and 100: \"\n        )\n    )\n\n    if n &gt;= 1 and n &lt;= 100:\n        more = False\n        print(\"Thank you\")\nThe second form avoids break and makes the loop condition explicit.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#random-numbers",
+    "href": "lessons/04-loops.html#random-numbers",
+    "title": "Week 4 – Loops in Python",
+    "section": "9. Random numbers",
+    "text": "9. Random numbers\nPrograms often need values that are not known in advance. Python provides random-number functionality through the random module.\nFirst, the module must be imported:\nimport random\n\nrandom.random()\nrandom.random() returns a floating-point value between 0 and 1.\nimport random\n\nx = random.random()\nprint(f\"{x:.4f}\")\nA possible result is:\n0.8384\nThe exact result can be different each time the program runs.\n\n\nrandom.randint(a, b)\nrandom.randint(a, b) returns a random integer between a and b, including both endpoints.\nimport random\n\nx = random.randint(1, 5)\nprint(x)\nA possible result is:\n3\n\n\nrandom.randrange(start, end, step)\nrandom.randrange() selects a random value from a range described in a similar way to range().\nimport random\n\nx = random.randrange(2, 8, 3)\nprint(x)\nPossible values are 2 and 5. The end value is not included.\n\n\n\n\n\n\nImportantImport rule for this course\n\n\n\nIn this course, importing library modules is generally not allowed unless the task explicitly permits it.\nThe random module is an important exception and may be used when random-number generation is required.\nLater in the course, you will also learn how to create and import your own modules.\n\n\n\n\nRandom numbers and loops\nRandom numbers become especially useful when combined with loops. For example, we can simulate several dice rolls:\nimport random\n\nfor _ in range(5):\n    dice = random.randint(1, 6)\n    print(dice)\nThis pattern will be useful in later programming exercises.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#strings-as-sequences-of-characters",
+    "href": "lessons/04-loops.html#strings-as-sequences-of-characters",
+    "title": "Week 4 – Loops in Python",
+    "section": "10. Strings as sequences of characters",
+    "text": "10. Strings as sequences of characters\nA str value can be interpreted as a sequence of characters.\nFor example:\nname = \"John White\"\nEvery character has a position called an index. Indexing starts at 0.\nCharacter: J  o  h  n     W  h  i  t  e\nIndex:     0  1  2  3  4  5  6  7  8  9\nPython also supports negative indexes:\nIndex:   -10 -9 -8 -7 -6 -5 -4 -3 -2 -1\nTherefore:\nname = \"John White\"\n\nprint(name[0])\nprint(name[-1])\nOutput:\nJ\ne\n\nIterating over a string\nBecause a string is a sequence, a for loop can process its characters one by one:\nname = \"John\"\n\nfor character in name:\n    print(character)\nOutput:\nJ\no\nh\nn\nThis is an important connection between loops and strings.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#string-slicing",
+    "href": "lessons/04-loops.html#string-slicing",
+    "title": "Week 4 – Loops in Python",
+    "section": "11. String slicing",
+    "text": "11. String slicing\nA substring can be selected with the slicing operator:\nstring[start:end]\nExample:\nname = \"John White\"\n\nfirst_six_chars = name[0:6]\nprint(first_six_chars)\nOutput:\nJohn W\nNegative indexes can also be used:\nname = \"John White\"\n\nlast_two_chars = name[-2:]\nprint(last_two_chars)\nOutput:\nte\nA slice can also contain a step:\nstring[start:end:step]\nFor example:\ntext = \"abcdef\"\n\nprint(text[0:6:2])\nOutput:\nace\n\n\n\n\n\n\nWarningStrings are immutable\n\n\n\nIndividual characters of an existing string cannot be changed directly.\nThis causes an error:\ns = \"Hello\"\ns[1] = \"a\"\nIf a different string is required, a new string must be created.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#string-operators",
+    "href": "lessons/04-loops.html#string-operators",
+    "title": "Week 4 – Loops in Python",
+    "section": "12. String operators",
+    "text": "12. String operators\nSeveral operators can be used with strings.\n\n\n\nOperator\nMeaning\nExample\nResult\n\n\n\n\n+\nConcatenation\n\"John\" + \" \" + \"White\"\n\"John White\"\n\n\n*\nRepetition\n\"John White \" * 2\n\"John White John White \"\n\n\n[]\nIndexing\n\"John White\"[2]\n\"h\"\n\n\n[a:b]\nSlicing\n\"John White\"[2:5]\n\"hn \"\n\n\n&gt;\nGreater than\n\"John\" &gt; \"White\"\nFalse\n\n\n&lt;\nLess than\n\"apple\" &lt; \"pear\"\nTrue\n\n\n==\nEqual\n\"ite\" == \"White\"\nFalse\n\n\n!=\nNot equal\n\"ite\" != \"White\"\nTrue\n\n\nin\nMembership\n\"i\" in \"White\"\nTrue\n\n\n\nThe slicing operator can also use a step:\nstring[a:b:c]\nwhere c is the step value.\n\nMembership and loops\nThe in operator can test whether a character or substring occurs in a string:\ntext = \"Python\"\n\nif \"y\" in text:\n    print(\"Found\")\nA loop can also inspect every character:\ntext = \"Python\"\n\nfor character in text:\n    print(character)\nThese ideas will be used frequently in later text-processing tasks.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
+  },
+  {
+    "objectID": "lessons/04-loops.html#summary",
+    "href": "lessons/04-loops.html#summary",
+    "title": "Week 4 – Loops in Python",
+    "section": "Summary",
+    "text": "Summary\nThis week introduced repetition and sequence processing in Python.\nYou learned how to:\n\nrepeat statements with for and while;\ngenerate sequences of integers with range();\ncreate nested loops;\ninfluence loop execution with break and continue;\nuse pass as a placeholder;\nemulate a post-test loop;\ngenerate random values using the random module;\naccess and process characters in strings;\nuse string indexing, slicing, comparison, repetition, concatenation, and membership.\n\nThe next practical exercises will combine these concepts with the variables, input/output, operators, and conditional statements introduced in the previous weeks.",
+    "crumbs": [
+      "Lessons",
+      "4. Loops in Python"
+    ]
   }
 ]
