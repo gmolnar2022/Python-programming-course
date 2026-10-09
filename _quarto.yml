@@ -19,7 +19,7 @@ project:
     - results/index.qmd
     - teacher/index.qmd
     - lessons/04-loops.qmd
-    - quizzes/*.qmd
+    - quizzes/midterm01-practice.qmd
     # - lessons/05-complex-data-types-1.qmd
     # - lessons/06-basic-algorithms-1.qmd
     # - lessons/07-basic-algorithms-2.qmd
@@ -60,13 +60,14 @@ website:
             text: "Class Exercises"
           - href: warmup/03-warmup-practice.qmd
             text: "Warm-up test sample"  
-          - href: lessons/04-loops.qmd 
+          - href: lessons/04-loops.qmd
             text: "4. Loops in Python"
           - href: exercises/04-class-exercises.qmd
             text: "Class Exercises"
           - href: warmup/04-warmup.qmd
             text: "Week 4 Warm-up Test"
-          
+          - href: quizzes\midterm01-practice.qmd  
+            text: "Midterm 01 test sample"
           # - href: lessons/05-complex-data-types-1.qmd
           #   text: "5. Complex Data Types I"
           # - href: lessons/06-basic-algorithms-1.qmd
