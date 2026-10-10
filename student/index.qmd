@@ -1,0 +1,99 @@
+---
+title: "Student Dashboard"
+page-layout: full
+toc: false
+---
+
+```{=html}
+<style>
+#student-progress{max-width:1100px;margin:auto;color:#233044}.sd-login,.sd-note,.sd-card{border:1px solid #dce3eb;border-radius:12px;padding:18px;background:#fff}.sd-login{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:#f6f8fb}.sd-login label{display:flex;flex-direction:column;gap:6px;font-weight:600}.sd-login input{padding:10px;border:1px solid #abb9cb;border-radius:6px;text-transform:uppercase;width:160px;font-family:monospace}.sd-button{padding:10px 16px;border:0;border-radius:6px;background:#215b9a;color:white;cursor:pointer}.sd-button:disabled{opacity:.6;cursor:wait}.sd-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.sd-card strong{display:block;font-size:1.65rem;margin:6px 0}.sd-muted{color:#657389;font-size:.9rem}.sd-note{background:#f6f8fb;margin:16px 0}.sd-table-wrap{overflow-x:auto}.sd-table{width:100%;border-collapse:collapse}.sd-table td,.sd-table th{text-align:left;padding:13px 10px;border-bottom:1px solid #dce3eb;vertical-align:top}.sd-table th{font-size:.9rem;color:#657389}.sd-badge{display:inline-block;padding:3px 8px;border-radius:12px;font-size:.8rem;background:#edf0f5;color:#657389}.sd-final{background:#e3f3ea;color:#22663d}.sd-best{background:#e6effa;color:#215b9a}.sd-meter{width:100%;height:12px;margin:10px 0;accent-color:#215b9a}#sd-message{margin:12px 0}#sd-results[hidden]{display:none}@media(max-width:700px){.sd-cards{grid-template-columns:1fr}.sd-table td,.sd-table th{padding:10px 6px}}
+.sd-details{margin-top:10px;min-width:240px}.sd-details summary{cursor:pointer;color:#215b9a;font-weight:600}.sd-details section{padding:12px 0;border-bottom:1px solid #dce3eb}.sd-details pre{max-width:600px;max-height:380px;overflow:auto;background:#f6f8fb;padding:12px;white-space:pre;font-size:.85rem}.sd-feedback,.sd-task{white-space:pre-wrap}.sd-ai-note{font-size:.85rem;color:#657389;margin-top:12px}</style>
+<div id="student-progress">
+<p>Your finalized results remain available throughout the semester. Enter your Neptun code and password to view them for 5 minutes. Contact your instructor if you need a new password.</p>
+<div class="sd-login">
+<label for="sd-neptun">Neptun code<input id="sd-neptun" maxlength="6" placeholder="ABC123" autocomplete="off"></label>
+<label for="sd-password">Password<input id="sd-password" type="password" maxlength="128" autocomplete="off" style="text-transform:none;width:220px"></label>
+<button id="sd-open" class="sd-button">Show my progress</button>
+<button id="sd-clear" class="sd-button">Clear</button>
+</div>
+<div id="sd-message" role="status" aria-live="polite"></div>
+<section id="sd-results" hidden>
+<p id="sd-access-time" role="status" aria-live="off"></p>
+<h2 id="sd-heading"></h2>
+<div class="sd-cards">
+<div class="sd-card">Finalized assessments<strong id="sd-completed"></strong><span class="sd-muted">12 places across the semester</span></div>
+<div class="sd-card">Semester points earned so far<strong id="sd-points"></strong><span class="sd-muted">Provisional until the required results are available</span><progress class="sd-meter" id="sd-meter" max="100" value="0"></progress></div>
+<div class="sd-card">Warmups completed<strong id="sd-warmups"></strong><span class="sd-muted">The best 3 of 8 count toward 15%</span></div>
+</div>
+<div class="sd-note" id="sd-calculation"></div>
+<div class="sd-table-wrap"><table class="sd-table"><thead><tr><th>Assessment</th><th>Score</th><th>Result</th><th>Status</th><th>Instructor feedback</th><th>Updated</th></tr></thead><tbody id="sd-body"></tbody></table></div>
+<p class="sd-muted">Weights: best 3 warmups 15% · Quiz 1 10% · Quiz 2 10% · End-term test 35% · Project 30%. Only instructor-finalized results are shown. A missing result means “not available”, not a completed zero-point assessment.</p>
+</section>
+</div>
+```
+
+<script>
+(()=>{
+const API_BASE="https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+const el=id=>document.getElementById(id),escape=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const number=x=>Number(x).toLocaleString('en-GB',{maximumFractionDigits:2});let generation=0,viewToken=null,viewDeadline=0,wallDeadline=0,accessTimer=null,lastCheck=0,checking=false;
+function clearAccess(message=''){
+ generation++;viewToken=null;viewDeadline=0;wallDeadline=0;clearInterval(accessTimer);accessTimer=null;
+ el('sd-password').value='';el('sd-results').hidden=true;el('sd-body').innerHTML='';el('sd-heading').textContent='';
+ for(const id of ['sd-completed','sd-points','sd-warmups','sd-calculation','sd-access-time'])el(id).textContent='';
+ el('sd-meter').value=0;el('sd-message').textContent=message;el('sd-open').disabled=false;
+}
+async function accessTick(){
+ if(!viewToken)return;
+ const left=Math.ceil(Math.min(viewDeadline-performance.now(),wallDeadline-Date.now())/1000);
+ if(left<=0){clearAccess('Viewing time expired. Enter your password to view your progress again.');return;}
+ el('sd-access-time').textContent=`Viewing time remaining: ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;
+ if(checking||Date.now()-lastCheck<30000)return;
+ const token=viewToken,version=generation;checking=true;lastCheck=Date.now();
+ try{const r=await fetch(API_BASE+'/studentProgressSession',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token}),cache:'no-store'});
+ if(version===generation&&(!r.ok))clearAccess('Access ended. Enter your password again.');
+ }catch(e){if(version===generation)clearAccess('Access could not be verified. Please try again.');}
+ finally{checking=false;}
+}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)accessTick()});
+window.addEventListener('pageshow',()=>{if(viewToken)accessTick()});
+window.addEventListener('pagehide',()=>clearAccess());
+el('sd-neptun').value=sessionStorage.getItem('student_dashboard_neptun')||'';
+el('sd-neptun').addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6)});
+function details(r){
+ const d=r?.details;if(!d)return '';
+ const tasks=(d.solutions||[]).map(t=>`<section><strong>${escape(t.title||t.task_id)}</strong>${t.text?`<p class="sd-task">${escape(t.text)}</p>`:''}${t.expected_output?`<p class="sd-task"><strong>Expected output:</strong> ${escape(t.expected_output)}</p>`:''}<p>Submitted code</p><pre><code>${escape(t.code||'No code submitted.')}</code></pre>${t.ai_score!==null&&t.ai_score!==undefined?`<p class="sd-muted">AI preliminary score: ${escape(t.ai_score)}${t.ai_max_score!==null&&t.ai_max_score!==undefined?' / '+escape(t.ai_max_score):''}</p>`:''}${t.ai_feedback?`<p class="sd-feedback">${escape(t.ai_feedback)}</p>`:''}</section>`).join('');
+ return `<details class="sd-details"><summary>View submission and feedback</summary><p class="sd-ai-note">AI feedback is a preliminary assessment. The finalized score and instructor comment above are authoritative.</p>${tasks}${d.ai_feedback&&!(d.solutions||[]).some(t=>t.ai_feedback)?`<p><strong>AI overall feedback</strong></p><p class="sd-feedback">${escape(d.ai_feedback)}</p>`:!(d.solutions||[]).some(t=>t.ai_feedback)?'<p class="sd-muted">No AI feedback available.</p>':''}</details>`;
+}
+async function load(){
+ const password=el('sd-password').value;clearAccess();
+ const current=++generation,neptun=el('sd-neptun').value.trim().toUpperCase();
+ el('sd-results').hidden=true;
+ if(!/^[A-Z0-9]{6}$/.test(neptun)){el('sd-message').textContent='Enter a valid 6-character Neptun code.';return}
+ if(!password){el('sd-message').textContent='Enter your dashboard password.';return;}
+ el('sd-open').disabled=true;el('sd-message').textContent='Loading finalized results…';
+ try{
+  const response=await fetch(API_BASE+'/studentProgress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({neptun,password}),cache:'no-store'});
+  const data=await response.json();if(current!==generation)return;
+  if(!response.ok||!data.success)throw Error(data.error||'Progress could not be loaded.');
+  const remaining=Date.parse(data.access?.expires_at)-Date.parse(data.access?.server_time);
+  if(!data.access?.token||!Number.isFinite(remaining)||remaining<=0)throw Error('Viewing time expired. Try again.');
+  viewToken=data.access.token;viewDeadline=performance.now()+Math.min(remaining,300000);wallDeadline=Date.now()+Math.min(remaining,300000);lastCheck=Date.now();
+  accessTimer=setInterval(accessTick,1000);accessTick();
+  sessionStorage.setItem('student_dashboard_neptun',neptun);const s=data.summary;
+  el('sd-heading').textContent='Semester progress · '+neptun;
+  el('sd-completed').textContent=s.finalized_count+' / '+s.total_count;
+  el('sd-points').textContent=number(s.earned_semester_points)+' / 100';el('sd-meter').value=s.earned_semester_points;
+  el('sd-warmups').textContent=s.warmup_completed+' / 8';
+  el('sd-calculation').textContent=`Warmup contribution: ${number(s.warmup_contribution)} / 15 semester points. ${s.warmup_counted} of the 3 counted places currently have results.`+(s.warmup_observed_average===null?'':` Available counted warmup average: ${number(s.warmup_observed_average)}%.`)+(s.is_final?' All required result components are available.':' This is progress so far, not a final semester grade. Missing warmup places contribute no points yet.');
+  el('sd-body').innerHTML=data.assessments.map(a=>{
+   const r=a.result;return `<tr><td><strong>${escape(a.label)}</strong>${a.counted_in_best_three?'<br><span class="sd-badge sd-best">Best 3</span>':''}</td><td>${r?number(r.score)+' / '+number(r.max_score):'—'}</td><td>${r?number(r.percent)+'%':'—'}</td><td><span class="sd-badge ${r?'sd-final':''}">${r?'Finalized':'Not available yet'}</span></td><td>${r?escape(r.teacher_comment||'—')+details(r):'—'}</td><td>${r?.published_at?escape(new Date(r.published_at).toLocaleString()):'—'}</td></tr>`;
+  }).join('');
+  el('sd-results').hidden=false;el('sd-message').textContent=s.finalized_count?'Current finalized results loaded.':'No finalized results are available yet. Your assessment places are shown below.';
+ }catch(e){if(current===generation)clearAccess(e.message)}
+ finally{if(current===generation)el('sd-open').disabled=false}
+}
+el('sd-open').addEventListener('click',load);el('sd-neptun').addEventListener('keydown',e=>{if(e.key==='Enter')load()});el('sd-password').addEventListener('keydown',e=>{if(e.key==='Enter')load()});
+el('sd-clear').addEventListener('click',()=>{clearAccess();sessionStorage.removeItem('student_dashboard_neptun');el('sd-neptun').value='';});
+})();
+</script>

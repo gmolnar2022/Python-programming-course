@@ -117,6 +117,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Home</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../student/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My Progress</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -190,6 +196,18 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Midterm 01 test sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05-complex-data-types-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Complex Data Types I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/05-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
       </ul>
@@ -594,7 +612,7 @@ Open test
 </div>
 <div class="teacher-toolbar">
 <div class="teacher-field">
-<p><label for="testSelect">Test</label> <select id="testSelect"> <option value="week04">Week 4 Warm-up</option> </select></p>
+<p><label for="testSelect">Test</label> <select id="testSelect"> <option value="week04">Warmup 1 — Week 4</option> <option value="week05">Warmup 2 — Week 5</option> <option value="week06">Warmup 3 — Week 6</option> <option value="week07">Warmup 4 — Week 7</option> <option value="week08">Warmup 5 — Week 8</option> <option value="week09">Warmup 6 — Week 9</option> <option value="week10">Warmup 7 — Week 10</option> <option value="week11">Warmup 8 — Week 11</option> <option value="midterm01">Quiz 1</option> <option value="midterm02">Quiz 2</option> <option value="midterm01-practice">Quiz 1 — practice</option> </select></p>
 </div>
 <div class="teacher-field">
 <p><label for="groupFilter">Group</label> <select id="groupFilter"> <option value="">All groups</option> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> </select></p>
@@ -611,10 +629,55 @@ Evaluate pending submissions
 <button id="finalizeUnchangedButton" class="teacher-button teacher-button-success">
 Finalize unchanged results
 </button>
+<details id="passwordPanel" style="flex-basis:100%;padding:14px;border:1px solid #dce3eb;border-radius:8px;margin-top:12px">
+<summary>
+<strong>Student dashboard passwords</strong>
+</summary>
+<p>
+Create a first password or replace a forgotten password. Each student receives a separate email at the address in the private roster.
+</p>
+<label>Group <input id="passwordGroup" value="G01" maxlength="40" style="width:100px"></label> <button id="passwordLoad" class="teacher-button" type="button">Load students / refresh email status</button> <button id="passwordInitial" class="teacher-button" type="button">Send initial passwords</button>
+<p id="passwordMessage" role="status">
+</p>
+<p class="teacher-muted">
+Initial passwords are sent only to students without a password. Reset replaces the old password immediately. Queued means accepted for processing; Sent means the email service reports successful sending, not confirmed inbox delivery. For Failed, use Reset to issue and send a new password.
+</p>
+<div style="overflow:auto">
+<table class="teacher-table">
+<thead>
+<tr>
+<th>
+Neptun
+</th>
+<th>
+Name
+</th>
+<th>
+Email
+</th>
+<th>
+Password
+</th>
+<th>
+Email status
+</th>
+<th>
+Action
+</th>
+</tr>
+</thead>
+<tbody id="passwordBody">
+</tbody>
+</table>
+</div>
+</details>
 <button id="logoutButton" class="teacher-button">
 Clear key
 </button>
 </div>
+<p class="small-muted">
+Finalized results appear on the Student Dashboard. Corrections and resit scores can be saved again using Update final result. The latest approved result is used for each assessment.
+</p>
 <div id="summary" class="summary-grid">
 
 </div>
@@ -666,6 +729,14 @@ const API_BASE =
   "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
 
 let allRows = [];
+const assessmentSlots = [
+ ...Array.from({length:8},(_,i)=>({id:`warmup${i+1}`,label:`Warmup ${i+1}`})),
+ {id:'quiz1',label:'Quiz 1'},{id:'quiz2',label:'Quiz 2'},
+ {id:'final',label:'End-term test'},{id:'project',label:'Project'}
+];
+function isPracticeQuiz(){return testSelect.value==='midterm01-practice'}
+function updateTestControls(){openSessionButton.disabled=isPracticeQuiz();}
+
 
 const loginBox =
   document.getElementById("loginBox");
@@ -962,7 +1033,7 @@ async function loadResults() {
   );
 
   const url =
-    apiUrl("teacherResults") +
+    apiUrl(isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
     `&test_id=${encodeURIComponent(testId)}`;
 
   const response =
@@ -983,6 +1054,7 @@ async function loadResults() {
 
   allRows =
     data.submissions || [];
+  updateTestControls();
 
   renderRows();
 
@@ -1170,7 +1242,8 @@ function reviewPanelHtml(row) {
     `;
   }
 
-  return solutions.map(
+  const theory = row.theory ? `<div class="review-panel"><strong>Theory: ${escapeHtml(row.theory.score)} / ${escapeHtml(row.theory.max)}</strong><p>${Object.entries(row.theory.perQuestion||{}).map(([id,ok])=>`Q${escapeHtml(id)}: ${ok?'✓':'✗'} (answer: ${escapeHtml(row.answers?.[id]||'—')})`).join(' · ')}</p></div>` : '';
+  return theory + solutions.map(
     (solution, index) => {
       const code =
         solution.code || "";
@@ -1336,7 +1409,7 @@ function renderRows() {
       <td>
         <strong>
           ${escapeHtml(row.neptun)}
-        </strong>
+        </strong><div class="small-muted">${escapeHtml(row.submitted_at?new Date(row.submitted_at).toLocaleString():"")}</div>
       </td>
 
       <td>
@@ -1401,7 +1474,10 @@ function renderRows() {
       </td>
 
       <td>
-
+        <label class="small-muted">Semester assessment</label>
+        <select class="assessment-slot">${assessmentSlots.filter(a=>!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
+        <label class="small-muted"><input type="checkbox" class="counts-grade" ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
+        <div class="small-muted">${isPracticeQuiz()?'Practice attempt: enable inclusion only after an explicit grading decision.':''}</div>
         <input
           type="text"
           class="teacher-comment"
@@ -1481,7 +1557,9 @@ function renderRows() {
           row,
           scoreInput.value,
           commentInput.value,
-          saveButton
+          saveButton,
+          tr.querySelector(".assessment-slot").value,
+          tr.querySelector(".counts-grade").checked
         );
       }
     );
@@ -1492,11 +1570,13 @@ function renderRows() {
 async function saveReviewRequest(
   row,
   score,
-  comment
+  comment,
+  slot = row.assessment_slot,
+  counts = row.counts_toward_grade !== false
 ) {
   const response =
     await fetch(
-      apiUrl("saveReview"),
+      apiUrl(isPracticeQuiz()?"saveQuizReview":"saveReview"),
       {
         method: "POST",
 
@@ -1506,8 +1586,11 @@ async function saveReviewRequest(
         },
 
         body: JSON.stringify({
+          expected_revision: row.revision,
+          assessment_slot: slot,
+          counts_toward_grade: counts,
           test_id:
-            testSelect.value,
+            row.test_id || testSelect.value,
 
           submission_id:
             row.submission_id,
@@ -1548,12 +1631,14 @@ async function saveReview(
   row,
   scoreValue,
   comment,
-  button
+  button,
+  slot,
+  counts
 ) {
   const score =
     Number(scoreValue);
 
-  if (!Number.isFinite(score)) {
+  if (String(scoreValue).trim()==="" || !Number.isFinite(score) || score<0 || score>Number(row.max_score)) {
     setMessage(
       `Invalid final score for ${row.neptun}.`,
       true
@@ -1572,11 +1657,13 @@ async function saveReview(
     await saveReviewRequest(
       row,
       score,
-      comment
+      comment,
+      slot,
+      counts
     );
 
     setMessage(
-      `${row.neptun} finalized successfully.`
+      `${row.neptun} finalized successfully. ${counts===false?"Excluded from the semester result.":"Student Dashboard updated."}`
     );
 
     await loadResults();
@@ -1594,8 +1681,18 @@ async function saveReview(
 
 
 function unchangedRows() {
+  const displayed = Array.from(resultsBody.querySelectorAll('tr')).filter(tr=>tr.querySelector('.final-score'));
+  const changed = new Set();
+  filteredRows().forEach((row,i)=>{
+    const tr=displayed[i];if(!tr)return;
+    if(tr.querySelector('.final-score').value!==String(row.preliminary_score??'') ||
+       tr.querySelector('.teacher-comment').value!==(row.teacher_comment||'') ||
+       tr.querySelector('.assessment-slot').value!==row.assessment_slot ||
+       tr.querySelector('.counts-grade').checked!==(row.counts_toward_grade!==false)) changed.add(row.submission_id);
+  });
   return filteredRows().filter(
     row => {
+      if(changed.has(row.submission_id))return false;
       if (
         row.review_status === "final"
       ) {
@@ -1724,7 +1821,7 @@ async function evaluatePending() {
 
       const response =
         await fetch(
-          apiUrl("evaluateTest"),
+          apiUrl(isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
           {
             method: "POST",
 
@@ -1936,6 +2033,54 @@ testSelect.addEventListener(
     }
   }
 );
+
+// Password tools use the same teacher function key as assessment administration.
+let passwordRows=[],passwordBusy=false;
+const pwEl=id=>document.getElementById(id);
+async function passwordApi(method,body){
+ if(!getKey())throw Error('Enter your teacher key first.');
+ const group=pwEl('passwordGroup').value.trim();
+ const url=apiUrl('teacherStudentPasswords')+(method==='GET'?'&group='+encodeURIComponent(group):'');
+ const r=await fetch(url,{method,headers:method==='POST'?{'Content-Type':'application/json'}:undefined,body:method==='POST'?JSON.stringify(body):undefined,cache:'no-store'});
+ const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||'Password operation failed.');return d;
+}
+function passwordRender(){
+ pwEl('passwordBody').innerHTML=passwordRows.map(row=>`<tr><td>${escapeHtml(row.neptun)}</td><td>${escapeHtml(row.name)}</td><td>${escapeHtml(row.email)}</td><td>${row.has_password?'Created':'Not created'}</td><td>${escapeHtml(row.email_status)}</td><td><button class="teacher-button" type="button" data-password-neptun="${escapeHtml(row.neptun)}" ${passwordBusy?'disabled':''}>${row.has_password?'Reset password & email':'Create password & email'}</button></td></tr>`).join('');
+ pwEl('passwordLoad').disabled=passwordBusy;pwEl('passwordInitial').disabled=passwordBusy;
+}
+async function passwordLoad(){
+ if(passwordBusy)return;passwordBusy=true;passwordRender();pwEl('passwordMessage').textContent='Loading students…';
+ try{const d=await passwordApi('GET');passwordRows=d.students;pwEl('passwordMessage').textContent=`${passwordRows.length} students loaded.`+(d.email_configured?'':' Email sending is not configured yet.');}
+ catch(e){pwEl('passwordMessage').textContent=e.message;}
+ finally{passwordBusy=false;passwordRender();}
+}
+async function passwordSend(neptun,initialOnly=false){
+ const d=await passwordApi('POST',{neptun,initial_only:initialOnly});
+ const row=passwordRows.find(r=>r.neptun===neptun);if(row&&!d.status.startsWith('Skipped')){row.has_password=true;row.email_status=d.status;}
+ return d;
+}
+pwEl('passwordLoad').addEventListener('click',passwordLoad);
+pwEl('passwordBody').addEventListener('click',async e=>{
+ const button=e.target.closest('button[data-password-neptun]');if(!button||passwordBusy)return;
+ const neptun=button.dataset.passwordNeptun;
+ const row=passwordRows.find(r=>r.neptun===neptun);
+ if(!window.confirm(`${row?.has_password?'Replace the current password':'Create a password'} for ${neptun} and email it to ${row?.email}?`))return;
+ passwordBusy=true;passwordRender();pwEl('passwordMessage').textContent='Sending…';
+ try{const d=await passwordSend(neptun);pwEl('passwordMessage').textContent=`${neptun}: ${d.status}. ${d.error||''}`;}
+ catch(e){pwEl('passwordMessage').textContent=e.message;}
+ finally{passwordBusy=false;passwordRender();}
+});
+pwEl('passwordInitial').addEventListener('click',async()=>{
+ if(passwordBusy)return;
+ const rows=passwordRows.filter(r=>!r.has_password);
+ if(!rows.length){pwEl('passwordMessage').textContent='Load the group first. No students without passwords are currently listed.';return;}
+ if(!window.confirm(`Create and email ${rows.length} initial passwords for the loaded group? Existing passwords will be preserved.`))return;
+ passwordBusy=true;passwordRender();const results=[];
+ try{for(const row of rows){pwEl('passwordMessage').textContent=`Processing ${results.length+1} / ${rows.length}…`;
+ try{const d=await passwordSend(row.neptun,true);results.push(`${row.neptun}: ${d.status}`);}catch(e){results.push(`${row.neptun}: ${e.message}`);}passwordRender();}
+ pwEl('passwordMessage').textContent=results.join(' · ');
+ }finally{passwordBusy=false;passwordRender();}
+});
 
 })();
 </script>

@@ -1,0 +1,582 @@
+---
+title: "Week 5 – Compound Data Types in Python I"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this week, you should be able to:
+
+- explain the difference between a **sequence** and a more general **iterable**;
+- use indexing, slicing, iteration, concatenation, repetition, and membership tests;
+- apply common string methods;
+- create, access, and modify lists, including two-dimensional lists;
+- use list comprehensions to construct lists;
+- distinguish mutable lists from immutable tuples;
+- create sets and apply basic set operations;
+- store and retrieve key–value pairs using dictionaries;
+- use dictionary comprehensions and convert between collection types.
+
+::: {.callout-note}
+### Connection to Week 4
+
+Last week, we used loops to process strings character by character. This week, we extend the same ideas to lists, tuples, sets, and dictionaries.
+:::
+
+## 1. Sequences and iterable objects
+
+A **sequence** is an ordered collection of elements. Its elements can be accessed by their positions, and we can iterate over them.
+
+Common Python sequence types include:
+
+| Type | Example | Mutable? |
+|---|---|---|
+| String (`str`) | `"Hello World"` | No |
+| List (`list`) | `[1, 3, 4, 5, "Hello"]` | Yes |
+| Tuple (`tuple`) | `("one", "two", "three", 4)` | No |
+
+An **iterable** is any object whose elements can be processed one by one in a loop. All three sequence types above are iterable. **Sets and dictionaries are also iterable, but they are not sequences.**
+
+```python
+items = [10, 20, 30]
+
+for item in items:
+    print(item)
+```
+
+## 2. Common features of sequences
+
+### Indexing and slicing
+
+Indexes start at `0`, and the last positive index is `len(sequence) - 1`. Negative indexes count backwards.
+
+```python
+numbers = [10, 20, 30, 40, 50]
+
+print(numbers[0])    # 10
+print(numbers[-1])   # 50
+print(numbers[1:4])  # [20, 30, 40]
+```
+
+A slice uses the familiar form `sequence[start:end:step]`. The `end` position is excluded.
+
+### Iteration
+
+```python
+colors = ["red", "green", "blue"]
+
+for color in colors:
+    print(color)
+```
+
+### Concatenation and repetition
+
+```python
+print([1, 2] + [3, 4])  # [1, 2, 3, 4]
+print(["A"] * 3)        # ['A', 'A', 'A']
+```
+
+### Membership and length
+
+```python
+numbers = [2, 4, 6, 8]
+
+print(4 in numbers)  # True
+print(5 in numbers)  # False
+print(len(numbers))  # 4
+```
+
+::: {.callout-important}
+### Order and mutability are different concepts
+
+A collection can be **ordered** without being **mutable**. For example, strings and tuples preserve element order, but their elements cannot be replaced in place.
+:::
+
+## 3. Useful functions for sequences and iterables
+
+| Function or method | Purpose | Example | Result |
+|---|---|---|---|
+| `len()` | Number of elements | `len((1, 4, 7))` | `3` |
+| `min()` | Smallest comparable element | `min([4, 1, -3])` | `-3` |
+| `max()` | Largest comparable element | `max([4, 1, -3])` | `4` |
+| `sum()` | Sum of numeric elements | `sum([4, 1, -3])` | `2` |
+| `.count()` | Occurrences in a sequence | `"hello world".count("o")` | `2` |
+| `sorted()` | New sorted list | `sorted([1, 4, -2])` | `[-2, 1, 4]` |
+| `reversed()` | Reverse iterator | `list(reversed([1, 2, 3]))` | `[3, 2, 1]` |
+| `enumerate()` | Index–value pairs | `list(enumerate([3, 4]))` | `[(0, 3), (1, 4)]` |
+
+`min()` and `max()` require comparable values. `sum()` is intended for numeric values. Some methods, such as `.count()`, belong to particular sequence types rather than every iterable.
+
+### Using `enumerate()` in a loop
+
+```python
+values = [3, 4]
+
+for index, value in enumerate(values):
+    print(index, value)
+```
+
+Output:
+
+```text
+0 3
+1 4
+```
+
+::: {.callout-tip}
+### `sorted()` versus `.sort()`
+
+`sorted(items)` creates a **new list**. The list method `items.sort()` modifies the original list. We will return to list methods later in this chapter.
+:::
+
+## 4. Strings as sequences
+
+A string (`str`) is an ordered sequence of characters. We can iterate using either indexes or the characters themselves.
+
+### Iteration by index
+
+```python
+text = "Hello World"
+
+for i in range(len(text)):
+    print(text[i], end="")
+```
+
+### Direct iteration
+
+```python
+text = "Hello World"
+
+for character in text:
+    print(character, end="")
+```
+
+Both examples print `Hello World`.
+
+### Common string methods
+
+For the following examples, assume `s = "Hello World"`.
+
+| Method | Meaning | Example | Result |
+|---|---|---|---|
+| `.lower()` | Convert to lowercase | `s.lower()` | `"hello world"` |
+| `.upper()` | Convert to uppercase | `s.upper()` | `"HELLO WORLD"` |
+| `.find()` | Find substring index | `s.find("lo")` | `3` |
+| `.replace()` | Replace substring | `s.replace("World", "Everyone")` | `"Hello Everyone"` |
+| `.strip()` | Remove leading/trailing whitespace | `" Hello World ".strip()` | `"Hello World"` |
+| `.join()` | Join strings with separator | `"-".join(["a", "b", "c"])` | `"a-b-c"` |
+| `.isdigit()` | Test whether characters are digits | `s.isdigit()` | `False` |
+| `.isalpha()` | Test whether characters are alphabetic | `s.isalpha()` | `False` |
+
+::: {.callout-warning}
+### String methods do not change the original string
+
+Strings are immutable. Methods such as `.lower()` and `.replace()` return a **new** string.
+
+```python
+text = "Hello"
+text.lower()
+print(text)          # Hello
+
+text = text.lower()
+print(text)          # hello
+```
+
+`"Hello World".isalpha()` is `False` because the string contains a space.
+:::
+
+## 5. Lists
+
+A **list** is an ordered, mutable collection of Python values. Its elements can have different types, and lists are written using square brackets.
+
+```python
+numbers = [1, 2, 3, 4]
+values = ["1", "2", 3, 4.4]
+mixed = ["hello", "world", 2023, ["one", "two"]]
+
+print(numbers)
+print(values[2:4])
+print(mixed[1])
+```
+
+Output:
+
+```text
+[1, 2, 3, 4]
+[3, 4.4]
+world
+```
+
+A list of values of the same type can be used similarly to an array.
+
+### Modifying list elements
+
+```python
+scores = [70, 80, 90]
+scores[1] = 85
+print(scores)  # [70, 85, 90]
+```
+
+Unlike strings and tuples, lists are **mutable**.
+
+## 6. Two-dimensional lists
+
+A two-dimensional list is a **list of lists**. It can represent a table, grid, or matrix.
+
+```python
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+print(matrix[0][1])  # 2
+print(matrix[0])     # [1, 2, 3]
+print(matrix[0:1])   # [[1, 2, 3]]
+
+matrix[1][1] = 10
+print(matrix)
+```
+
+The first index identifies the **row**; the second identifies the **column**.
+
+::: {.callout-tip}
+### Reading `matrix[row][column]`
+
+For `matrix[1][2]`, Python first selects the second row (`matrix[1]`) and then its third element (`[2]`). Both indexes start at zero.
+:::
+
+## 7. List comprehensions
+
+A **list comprehension** is a concise way to create a list from an iterable.
+
+Basic syntax:
+
+```python
+new_list = [expression for item in iterable if condition]
+```
+
+The `if condition` part is optional.
+
+```python
+squares = [x ** 2 for x in range(10)]
+odds = [x for x in range(10) if x % 2 == 1]
+
+words = ["apple", "banana", "cherry"]
+upper_words = [word.upper() for word in words]
+
+print(squares)
+print(odds)
+print(upper_words)
+```
+
+Output:
+
+```text
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+[1, 3, 5, 7, 9]
+['APPLE', 'BANANA', 'CHERRY']
+```
+
+::: {.callout-note}
+### The same idea with a regular loop
+
+```python
+squares = []
+
+for x in range(10):
+    squares.append(x ** 2)
+```
+
+This creates the same list as `[x ** 2 for x in range(10)]`. Both approaches are valid; the loop may be easier to understand when you are learning the concept.
+:::
+
+## 8. Common list methods
+
+Assume each example starts with a fresh list `items = [1, 2, 3]`.
+
+| Method | Purpose | Example | List afterwards |
+|---|---|---|---|
+| `.append(item)` | Add at the end | `items.append(4)` | `[1, 2, 3, 4]` |
+| `.insert(index, item)` | Insert at position | `items.insert(1, 4)` | `[1, 4, 2, 3]` |
+| `.remove(item)` | Remove first matching value | `items.remove(2)` | `[1, 3]` |
+| `.pop(index)` | Remove and return indexed element | `items.pop(0)` | `[2, 3]` |
+| `.index(item)` | Find position of value | `items.index(3)` | `2` (returned index) |
+| `.count(item)` | Count occurrences | `items.count(2)` | `1` (returned count) |
+| `.clear()` | Remove all elements | `items.clear()` | `[]` |
+| `.copy()` | Make a shallow copy | `other = items.copy()` | `other == [1, 2, 3]` |
+| `.reverse()` | Reverse in place | `items.reverse()` | `[3, 2, 1]` |
+
+`.pop()` without an argument removes and returns the last element.
+
+```python
+items = [10, 20, 30]
+removed = items.pop()
+
+print(removed)  # 30
+print(items)    # [10, 20]
+```
+
+::: {.callout-warning}
+### Mutating methods and return values
+
+Methods such as `.append()`, `.remove()`, `.reverse()`, and `.sort()` modify the list in place. Do not assume they return the modified list.
+:::
+
+## 9. Tuples
+
+A **tuple** is an ordered, immutable collection. Tuples are often written with parentheses.
+
+```python
+coordinates = (4, 22, 11)
+words = ("hello", "world", 2023)
+
+print(coordinates[1])  # 22
+print(words[1:2])      # ('world',)
+```
+
+A tuple is useful when the collection should remain unchanged, for example coordinates or fixed settings.
+
+Unlike lists, tuples do not have methods such as `.append()`, `.pop()`, or `.clear()`.
+
+::: {.callout-note}
+### One-element tuples
+
+A one-element tuple requires a trailing comma:
+
+```python
+single = ("hello",)
+not_a_tuple = ("hello")
+```
+
+The first value is a tuple; the second is a string.
+:::
+
+## 10. Sets
+
+A **set** is an unordered collection of **unique** elements. Sets are mutable, but their elements cannot be accessed by numeric indexes.
+
+```python
+s = {3, 2, 4}
+s2 = {3, 5}
+s3 = {1, 4, 7}
+
+s.add(8)
+s.add(3)  # No duplicate is created
+
+print(3 in s)  # True
+```
+
+Set elements must be hashable (for example, numbers, strings, or suitable tuples).
+
+### Set operations
+
+```python
+a = {2, 3, 4}
+b = {3, 5}
+
+print(a.union(b))         # {2, 3, 4, 5}
+print(a.intersection(b))  # {3}
+print(a.difference(b))    # {2, 4}
+```
+
+The order in which set elements are displayed is not guaranteed.
+
+### Common set methods
+
+| Method | Meaning | Example |
+|---|---|---|
+| `.add(item)` | Add an element | `s.add(5)` |
+| `.discard(item)` | Remove if present | `s.discard(3)` |
+| `.pop()` | Remove and return an arbitrary element | `s.pop()` |
+| `.clear()` | Remove all elements | `s.clear()` |
+| `.difference(other)` | Elements in the first set only | `s.difference({3, 5})` |
+| `.union(other)` | Elements from either set | `s.union({3, 5})` |
+| `.intersection(other)` | Elements in both sets | `s.intersection({3, 5})` |
+
+::: {.callout-important}
+### Empty set versus empty dictionary
+
+```python
+empty_set = set()
+empty_dictionary = {}
+```
+
+`{}` creates an empty **dictionary**, not an empty set.
+:::
+
+## 11. Dictionaries
+
+A **dictionary** (`dict`) stores **key–value pairs**. Keys must be unique and hashable; values can have different types. Dictionaries are mutable and support efficient lookup by key.
+
+```python
+person = {
+    "name": "John",
+    "age": 30,
+    "city": "New York"
+}
+
+print(person.values())
+print(person.keys())
+print(person.get("name"))
+print(person["name"])
+
+person["job"] = "Teacher"
+person["age"] = 35
+
+print(person)
+```
+
+A dictionary can represent a **record-like structure**, with field names as keys and field contents as values.
+
+::: {.callout-note}
+### Dictionary order
+
+Modern Python dictionaries preserve **insertion order**. However, unlike sequences, they are accessed primarily through **keys**, not integer positions. Dictionaries do not support sequence slicing.
+:::
+
+### Common dictionary methods
+
+Assume `d = {"name": "John", "age": 30}`.
+
+| Method | Meaning | Example |
+|---|---|---|
+| `.copy()` | Make a shallow copy | `other = d.copy()` |
+| `.pop(key)` | Remove key and return its value | `age = d.pop("age")` |
+| `.clear()` | Remove all entries | `d.clear()` |
+| `.get(key)` | Get a value (or `None` if missing) | `d.get("age")` |
+| `.values()` | View of values | `d.values()` |
+| `.keys()` | View of keys | `d.keys()` |
+| `.items()` | View of key–value pairs | `d.items()` |
+
+The `.keys()` and `.values()` methods return **view objects**, not lists. You can convert them to lists if needed.
+
+```python
+person = {"name": "John", "age": 30}
+
+for key, value in person.items():
+    print(key, value)
+```
+
+::: {.callout-tip}
+### `d[key]` versus `d.get(key)`
+
+`d[key]` raises `KeyError` if the key does not exist. `d.get(key)` returns `None` by default when the key is missing.
+:::
+
+## 12. Dictionary comprehensions
+
+A **dictionary comprehension** builds a dictionary from an iterable.
+
+Basic syntax:
+
+```python
+new_dict = {key_expression: value_expression for item in iterable if condition}
+```
+
+The condition is optional.
+
+```python
+keys = ["a", "b", "c", "d", "e"]
+values = [1, 2, 3, 4, 5]
+
+my_dict = {k: v for k, v in zip(keys, values)}
+squares = {x: x ** 2 for x in range(5)}
+odd_squares = {x: x ** 2 for x in range(5) if x % 2 == 1}
+
+print(my_dict)
+print(squares)
+print(odd_squares)
+```
+
+Output:
+
+```text
+{'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
+{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+{1: 1, 3: 9}
+```
+
+`zip()` pairs elements from two iterables. If the inputs have different lengths, it stops when the shorter input is exhausted.
+
+## 13. Converting between collection types
+
+The constructor functions `list()`, `tuple()`, `set()`, and `dict()` can create or convert collections.
+
+### Converting lists, tuples, and sets
+
+```python
+my_list = [1, 2, 3, 4, 5]
+my_tuple = (3, 4, 5)
+
+print(tuple(my_list))
+print(list(my_tuple))
+print(set(my_list))
+```
+
+Converting to a set removes duplicates and does not preserve a guaranteed display order.
+
+```python
+numbers = [1, 2, 2, 3, 3]
+unique_numbers = set(numbers)
+print(unique_numbers)  # {1, 2, 3} (order not guaranteed)
+```
+
+### Converting dictionary keys and values
+
+```python
+person = {"name": "James", "country": "UK"}
+
+print(list(person.keys()))
+print(list(person.values()))
+print(tuple(person.keys()))
+print(set(person.keys()))
+```
+
+By default, iterating over a dictionary produces its **keys**.
+
+### Creating dictionaries from pairs
+
+```python
+pairs = [("a", 1), ("b", 2)]
+print(dict(pairs))  # {'a': 1, 'b': 2}
+
+keys = ["a", "b", "c"]
+values = [1, 2, 3]
+print(dict(zip(keys, values)))
+```
+
+::: {.callout-warning}
+### Not every conversion is possible
+
+`dict()` expects key–value pairs (or a mapping), not an arbitrary list of numbers. For example, `dict([1, 2, 3])` raises an error.
+:::
+
+## 14. Choosing a collection type
+
+| Type | Ordered? | Mutable? | Duplicates? | Typical use |
+|---|---|---|---|---|
+| `str` | Yes | No | Yes | Text |
+| `list` | Yes | Yes | Yes | Changeable sequence of values |
+| `tuple` | Yes | No | Yes | Fixed collection or coordinates |
+| `set` | No | Yes | No | Unique values, membership and set operations |
+| `dict` | Insertion order preserved | Yes | Keys: no | Key–value lookup, record-like data |
+
+## Summary
+
+This week introduced the most important built-in compound data types in Python.
+
+You learned how to:
+
+- use common sequence operations and iterable functions;
+- work with strings and their methods;
+- create and modify lists, including two-dimensional lists;
+- build lists and dictionaries using comprehensions;
+- distinguish immutable tuples from mutable lists;
+- work with unique values and set operations;
+- access, update, and iterate over dictionaries;
+- convert between collection types when appropriate.
+
+In the practical exercises, you will combine these data structures with the loops and conditions learned in previous weeks.
