@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Midterm Quiz 01 – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../exercises/05-class-exercises.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../quizzes/midterm01.html">Quiz 1 — official test</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../student/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My Progress</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lessons</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1. Introduction to Programming and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Working with Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3. Conditional Statements in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4. Loops in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4 Warm-up Test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Midterm 01 test sample</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05-complex-data-types-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5. Complex Data Types I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/05-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quiz 1 — official test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/01-introduction-to-programming-and-python.html">Lessons</a></li><li class="breadcrumb-item"><a href="../quizzes/midterm01.html">Quiz 1 — official test</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Midterm Quiz 01</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+#official-quiz{max-width:1000px;margin:auto}#official-quiz [hidden]{display:none!important}.quiz-question{border:1px solid #d7dde4;border-radius:10px;padding:20px;margin:16px 0}.quiz-question label{display:block;margin:10px 0}.quiz-code{box-sizing:border-box;width:100%;min-height:220px;padding:12px;font:14px/1.5 Consolas,monospace}.quiz-output{white-space:pre-wrap;background:#f5f6f8;padding:12px;min-height:40px}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.quiz-note{background:#fff8df;padding:14px;border-left:4px solid #bf8700}.quiz-sticky{position:sticky;top:0;background:white;padding:12px;border-bottom:1px solid #ddd;z-index:10}#official-quiz button{padding:8px 14px;cursor:pointer}#quiz-status{white-space:pre-wrap}#quiz-feedback{white-space:pre-wrap;background:#f5f6f8;padding:16px}#quiz-timer{font-weight:bold;font-variant-numeric:tabular-nums}
+</style>
+<div id="official-quiz">
+<div id="quiz-intro">
+<p><strong>10 theory questions + 3 Python tasks · 25 points · 45 minutes · one attempt</strong></p>
+<p>This is the official Quiz 1. The approved result contributes 10% to your semester grade.</p>
+<div class="quiz-note">Start only when instructed by your teacher. Enter your Neptun code and the classroom code displayed by the teacher. The classroom code is different from your Student Dashboard password. Refreshing or leaving this page does not stop the timer or create a new attempt. At the deadline, the last draft saved on the server is submitted automatically.</div>
+<p><label>Neptun code <input id="quiz-neptun" maxlength="6" autocomplete="off"></label></p>
+<p><label>Classroom code <input id="quiz-access" maxlength="6" autocomplete="off"></label></p>
+<button type="button" id="quiz-start">Start quiz</button>
+<button type="button" id="quiz-resume" hidden="">Resume saved attempt</button>
+</div>
+<p id="quiz-status" role="status" aria-live="polite"></p>
+<div id="quiz-work" hidden="">
+<div class="quiz-sticky">Time remaining: <span id="quiz-timer">45:00</span> · <span id="quiz-save-status">Draft saved</span></div>
+<p id="quiz-rules" class="quiz-note"></p>
+<div id="quiz-questions"></div>
+<button type="button" id="quiz-submit">Submit quiz</button>
+<p>Submit ends your attempt. Before submitting, check your answers and the output requirements. Run executes your code locally; it does not award points.</p>
+</div>
+<div id="quiz-result" hidden=""><h2 class="anchored">Submission saved</h2><p id="quiz-points"></p><p>Python points and AI feedback are preliminary estimates. The teacher reviews and approves the final result, which will appear on your <a href="../student/">Student Dashboard</a>.</p><div id="quiz-feedback"></div><button type="button" id="quiz-refresh-result">Refresh feedback</button></div>
+</div>
+<script>
+(() => {
+'use strict';
+const API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api';
+const KEY='python-course-official-midterm01-v1';
+const $=id=>document.getElementById(id);
+let attempt=null,local=null,offset=0,busy=false,dirty=false,saveChain=Promise.resolve(),editVersion=0,poll=null;
+let worker=null,workerTimer=null,runId=0,running=null;
+const notice=t=>{$('quiz-status').textContent=t};
+function remember(){try{localStorage.setItem(KEY,JSON.stringify({attempt,local}))}catch{notice('Browser storage is unavailable. Keep this page open to retain your attempt credentials.')}}
+function identity(){return {quizId:'midterm01',neptun:attempt.neptun,attemptId:attempt.attemptId,sessionToken:attempt.sessionToken}}
+async function api(route,data){const r=await fetch(API+'/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),cache:'no-store'});let x;try{x=await r.json()}catch{throw Error('Invalid server response. Please retry.')}if(!r.ok||!x.success){const e=Error(x.error||'Request failed');e.status=r.status;throw e}return x}
+function node(tag,text,parent){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(parent)parent.append(e);return e}
+function capture(){const answers={},code={};for(let i=1;i<=10;i++){const e=document.querySelector(`input[name="official-q${i}"]:checked`);if(e)answers[i]=e.value}for(const i of [11,12,13])code[i]=$('official-code'+i)?.value||'';local={answers,code,editedAt:Date.now()+offset};return local}
+function changed(){editVersion++;dirty=true;capture();remember();$('quiz-save-status').textContent='Changes waiting to save';clearTimeout(changed.timer);changed.timer=setTimeout(()=>saveDraft().catch(e=>notice('Draft sync failed: '+e.message)),500)}
+function saveDraft(){saveChain=saveChain.catch(()=>{}).then(async()=>{if(!dirty||attempt?.state!=='active')return;const v=editVersion,payload={...identity(),...capture(),draftRevision:attempt.draftRevision};const x=await api('saveQuizOfficialDraft',payload);attempt.draftRevision=x.draftRevision;attempt.savedAt=x.savedAt;dirty=v!==editVersion;remember();$('quiz-save-status').textContent=dirty?'Changes waiting to save':'Saved '+new Date(x.savedAt).toLocaleTimeString();if(!dirty)notice('')});return saveChain}
+function fill(draft){for(const [i,v] of Object.entries(draft.answers||{})){const e=document.querySelector(`input[name="official-q${i}"][value="${v}"]`);if(e)e.checked=true}for(const i of [11,12,13])$('official-code'+i).value=draft.code?.[i]||''}
+function render(x){$('quiz-intro').hidden=true;$('quiz-work').hidden=false;$('quiz-result').hidden=true;$('quiz-rules').textContent=x.questions.rules;const root=$('quiz-questions');root.replaceChildren();node('h2','Theory (10 points)',root);for(const q of x.questions.theory){const box=node('section',null,root);box.className='quiz-question';node('h3',`Question ${q.id} (1 point)`,box);node('p',q.text,box);q.choices.forEach((text,i)=>{const label=node('label',null,box),input=node('input',null,label);input.type='radio';input.name='official-q'+q.id;input.value='abcd'[i];label.append(document.createTextNode(' '+text));input.addEventListener('change',changed)})}node('h2',`Python (${x.questions.python.reduce((sum,q)=>sum+q.max,0)} points)`,root);for(const q of x.questions.python){const box=node('section',null,root);box.className='quiz-question';node('h3',`Question ${q.id} — ${q.title} (${q.max} points)`,box);const text=node('p',q.text,box);text.style.whiteSpace='pre-wrap';if(q.image){const img=node('img',null,box);img.src=q.image;img.alt='Flowchart for '+q.title;img.style.maxWidth='100%';img.style.maxHeight='1000px'}if(q.structogram){const details=node('details',null,box);node('summary','Equivalent structogram',details);const img=node('img',null,details);img.src=q.structogram;img.alt='Structogram for '+q.title;img.style.maxWidth='100%'}node('strong','Example input (one value per line)',box);node('pre',q.example.inputs.join('\n'),box);node('strong','One acceptable result display (equivalent labels are accepted)',box);node('pre',q.example.output||'(no output)',box);const code=node('textarea',null,box);code.id='official-code'+q.id;code.className='quiz-code';code.spellcheck=false;code.setAttribute('aria-label','Python code for question '+q.id);code.addEventListener('input',changed);const actions=node('div',null,box);actions.className='quiz-actions';const run=node('button','Run',actions);run.type='button';run.className='quiz-run';run.addEventListener('click',()=>runPython(q.id));const stop=node('button','Stop',actions);stop.type='button';stop.addEventListener('click',()=>stopPython('Execution stopped.'));const output=node('pre','',box);output.id='official-output'+q.id;output.className='quiz-output';const inputs=node('div',null,box);inputs.id='official-input'+q.id;inputs.hidden=true}fill(x.draft||{answers:{},code:{}});tick()}
+function result(x){stopPython();attempt.state='submitted';local=null;remember();$('quiz-intro').hidden=true;$('quiz-work').hidden=true;$('quiz-result').hidden=false;const maximum=x.max_score||22,pythonMax=maximum-(x.theory?.max||10);$('quiz-points').textContent=`Theory: ${x.theory?.score??'?'} / ${x.theory?.max||10}. Python: ${x.python?x.python.score+' / '+x.python.max+' (AI estimate)':'pending evaluation ('+pythonMax+' points)'}.`+(x.python?` Total preliminary result: ${x.theory.score+x.python.score} / ${maximum} = ${((x.theory.score+x.python.score)/maximum*10).toFixed(2)} / 10.`:'');$('quiz-feedback').textContent=x.ai?.feedback||(['error','not_configured'].includes(x.ai?.status)?'AI feedback is temporarily unavailable. Your submission is saved; the teacher can evaluate it.':'AI evaluation pending. This page checks for feedback every 20 seconds.');if(!poll)poll=setInterval(()=>refresh().catch(e=>notice(e.message)),20000);if(x.ai?.status==='ready'){clearInterval(poll);poll=null}}
+async function refresh(){const x=await api('loadQuizOfficial',identity());offset=Date.parse(x.serverNow)-Date.now();if(x.state==='submitted')result(x);return x}
+async function resume(){if(busy)return;busy=true;try{const x=await refresh();if(x.state==='active'){const pending=local;attempt={...attempt,...x};render(x);if(pending&&pending.editedAt>Date.parse(x.savedAt||x.startedAt)){fill(pending);changed()}remember();notice('Resumed. The original deadline still applies.')}}catch(e){notice(e.message)}finally{busy=false}}
+async function start(){if(busy)return;busy=true;$('quiz-start').disabled=true;try{const x=await api('startQuizOfficial',{quizId:'midterm01',neptun:$('quiz-neptun').value.trim().toUpperCase(),accessCode:$('quiz-access').value.trim().toUpperCase()});attempt={...x};offset=Date.parse(x.serverNow)-Date.now();local=x.draft;remember();render(x);notice('Quiz started. Drafts are saved automatically.')}catch(e){notice(e.message)}finally{busy=false;$('quiz-start').disabled=false}}
+async function submit(expired=false){if(busy||attempt?.state!=='active')return;if(!expired&&!confirm('Submit your quiz? You cannot edit your answers after submission.'))return;busy=true;$('quiz-submit').disabled=true;stopPython();notice('Submitting… Keep this page open.');try{if(!expired)await saveDraft();const x=await api('submitQuizOfficial',{...identity(),...capture()});result(x);notice('Submission saved.')}catch(e){notice('Submission could not be confirmed: '+e.message+'. Retry Submit or Resume.')}finally{busy=false;$('quiz-submit').disabled=false}}
+function tick(){if(attempt?.state!=='active')return;const ms=Date.parse(attempt.deadline)-Date.now()-offset,s=Math.max(0,Math.ceil(ms/1000));$('quiz-timer').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(ms<=0){document.querySelectorAll('#quiz-work input,#quiz-work textarea,.quiz-run').forEach(e=>e.disabled=true);submit(true)}}
+function stopPython(message){if(worker)worker.terminate();worker=null;clearTimeout(workerTimer);if(running){$('official-input'+running.q).hidden=true;if(message)$('official-output'+running.q).textContent+= '\n'+message}running=null;document.querySelectorAll('.quiz-run').forEach(e=>e.disabled=attempt?.state!=='active')}
+function armTimeout(ms){clearTimeout(workerTimer);workerTimer=setTimeout(()=>stopPython('Execution timed out. Check your loop condition and variable updates.'),ms)}
+function runPython(q){if(running)return;const out=$('official-output'+q);out.textContent='Loading Python…';try{worker=new Worker(new URL('assets/quiz-python-worker.js',document.baseURI));running={q,id:++runId};document.querySelectorAll('.quiz-run').forEach(e=>e.disabled=true);armTimeout(45000);worker.onerror=()=>stopPython('Python could not be loaded. Retry Run.');worker.onmessage=({data:m})=>{if(!running||m.id!==running.id)return;if(m.type==='ready'){out.textContent='';armTimeout(3000)}else if(m.type==='output'){if(out.textContent.length<100000)out.textContent+=m.chunk;else stopPython('Output limit reached.')}else if(m.type==='prompt'){clearTimeout(workerTimer);const panel=$('official-input'+q);panel.replaceChildren();panel.hidden=false;const label=node('label',m.prompt||'Enter an input value:',panel),field=node('input',null,label),send=node('button','Send input',panel);send.type='button';const go=()=>{if(!running)return;worker.postMessage({type:'input',id:running.id,value:field.value});panel.hidden=true;armTimeout(3000)};send.onclick=go;field.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go()}};field.focus()}else if(m.type==='done'){if(!m.result.ok)out.textContent+='\n'+m.result.error;stopPython()}else if(m.type==='error')stopPython(m.error)};worker.postMessage({type:'execute',id:running.id,code:$('official-code'+q).value,interactive:true})}catch(e){stopPython(e.message)}}
+$('quiz-start').onclick=start;$('quiz-resume').onclick=resume;$('quiz-submit').onclick=()=>submit(false);$('quiz-refresh-result').onclick=()=>refresh().catch(e=>notice(e.message));
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved?.attempt?.sessionToken){attempt=saved.attempt;local=saved.local;$('quiz-resume').hidden=false;$('quiz-start').disabled=true;$('quiz-neptun').value=attempt.neptun;notice('An attempt is saved in this browser. Click Resume saved attempt.')}}catch{}
+setInterval(tick,1000);setInterval(()=>{if(dirty)saveDraft().catch(e=>notice('Draft sync failed: '+e.message))},10000);
+window.addEventListener('beforeunload',e=>{if(attempt?.state==='active'){capture();remember();if(dirty){e.preventDefault();e.returnValue=''}}});
+})();
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../exercises/05-class-exercises.html" class="pagination-link" aria-label="Class Exercises">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Class Exercises</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

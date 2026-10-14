@@ -377,14 +377,16 @@ Classroom access
 <option value="G04">G04</option>
 <option value="G05">G05</option>
 <option value="G06">G06</option>
+<option value="G07">G07 — instructor testing</option>
 </select>
 </div>
 
 <button
   id="openSessionButton"
   class="teacher-button teacher-button-primary">
-  Open test
+  Open warmup
 </button>
+<button id="openQuizButton" class="teacher-button teacher-button-primary" disabled>Open quiz</button>
 
 </div>
 
@@ -406,7 +408,7 @@ Expires in
 <div class="small-muted" style="margin-top:8px;">
 Students enter this classroom code on the test page.
 The code is valid for starting the test only; each student's
-10-minute test period begins when Start test succeeds.
+test period begins when Start succeeds (warmup: 10 minutes; Quiz 1: 45 minutes).
 </div>
 
 </div>
@@ -442,6 +444,7 @@ The code is valid for starting the test only; each student's
 <option value="G04">G04</option>
 <option value="G05">G05</option>
 <option value="G06">G06</option>
+<option value="G07">G07 — instructor testing</option>
 </select>
 </div>
 
@@ -532,7 +535,8 @@ const assessmentSlots = [
  {id:'final',label:'End-term test'},{id:'project',label:'Project'}
 ];
 function isPracticeQuiz(){return testSelect.value==='midterm01-practice'}
-function updateTestControls(){openSessionButton.disabled=isPracticeQuiz();}
+function isOfficialQuiz(){return testSelect.value==='midterm01'}
+function updateTestControls(){openSessionButton.disabled=!/^week\d{2}$/.test(testSelect.value);document.getElementById('openQuizButton').disabled=!isOfficialQuiz();document.getElementById('evaluateButton').disabled=testSelect.value==='midterm02';document.getElementById('finalizeUnchangedButton').disabled=testSelect.value==='midterm02';}
 
 
 const loginBox =
@@ -752,6 +756,7 @@ async function openTestSession() {
   }
 
   openSessionButton.disabled = true;
+  document.getElementById("openQuizButton").disabled = true;
 
   setMessage(
     `Opening ${testId} for ${sessionGroup}...`
@@ -760,7 +765,7 @@ async function openTestSession() {
   try {
     const response =
       await fetch(
-        apiUrl("openTestSession"),
+        apiUrl(isOfficialQuiz()?"openQuizSession":"openTestSession"),
         {
           method: "POST",
 
@@ -812,7 +817,7 @@ async function openTestSession() {
     );
 
   } finally {
-    openSessionButton.disabled = false;
+    updateTestControls();
   }
 }
 
@@ -822,6 +827,7 @@ async function openTestSession() {
 ------------------------------------------------- */
 
 async function loadResults() {
+  if(testSelect.value==='midterm02'){allRows=[];renderRows();updateTestControls();setMessage('Quiz 2 is listed for semester planning; its official test is not configured yet.');return;}
   const testId =
     testSelect.value;
 
@@ -830,7 +836,7 @@ async function loadResults() {
   );
 
   const url =
-    apiUrl(isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
+    apiUrl(isOfficialQuiz()?"teacherOfficialQuizResults":isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
     `&test_id=${encodeURIComponent(testId)}`;
 
   const response =
@@ -1071,11 +1077,14 @@ function reviewPanelHtml(row) {
       return `
         <div class="review-panel">
 
+          ${solution.text?`<p style="white-space:pre-wrap">${escapeHtml(solution.text)}</p>`:''}
+          ${solution.image&&/^data:image\/(svg\+xml|png);base64,/.test(solution.image)?`<img src="${escapeHtml(solution.image)}" alt="Task diagram" style="max-width:100%;max-height:800px">`:''}
+          ${solution.max_score?`<p class="small-muted">Task maximum: ${escapeHtml(solution.max_score)} points</p>`:''}
           <div class="review-heading">
 
             <div>
               <div class="review-heading-title">
-                ${escapeHtml(heading)}
+                ${escapeHtml(solution.title||heading)}
               </div>
 
               <div class="small-muted">
@@ -1272,8 +1281,8 @@ function renderRows() {
 
       <td>
         <label class="small-muted">Semester assessment</label>
-        <select class="assessment-slot">${assessmentSlots.filter(a=>!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
-        <label class="small-muted"><input type="checkbox" class="counts-grade" ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
+        <select class="assessment-slot">${assessmentSlots.filter(a=>isOfficialQuiz()?a.id==='quiz1':!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
+        <label class="small-muted"><input type="checkbox" class="counts-grade" ${isOfficialQuiz()?'disabled':''} ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
         <div class="small-muted">${isPracticeQuiz()?'Practice attempt: enable inclusion only after an explicit grading decision.':''}</div>
         <input
           type="text"
@@ -1373,7 +1382,7 @@ async function saveReviewRequest(
 ) {
   const response =
     await fetch(
-      apiUrl(isPracticeQuiz()?"saveQuizReview":"saveReview"),
+      apiUrl(row.test_id==='midterm01'?"saveOfficialQuizReview":row.test_id==='midterm01-practice'?"saveQuizReview":"saveReview"),
       {
         method: "POST",
 
@@ -1618,7 +1627,7 @@ async function evaluatePending() {
 
       const response =
         await fetch(
-          apiUrl(isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
+          apiUrl(isOfficialQuiz()?"evaluateOfficialQuiz":isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
           {
             method: "POST",
 
@@ -1739,6 +1748,8 @@ functionKey.addEventListener(
   }
 );
 
+
+document.getElementById('openQuizButton').addEventListener('click',openTestSession);
 
 openSessionButton.addEventListener(
   "click",

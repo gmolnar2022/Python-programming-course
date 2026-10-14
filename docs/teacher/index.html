@@ -210,6 +210,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1 — official test</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -589,10 +595,13 @@ Open dashboard
 </div>
 <div class="session-controls">
 <div class="teacher-field">
-<p><label for="sessionGroupSelect">Default group</label> <select id="sessionGroupSelect"> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> </select></p>
+<p><label for="sessionGroupSelect">Default group</label> <select id="sessionGroupSelect"> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> <option value="G07">G07 — instructor testing</option> </select></p>
 </div>
 <button id="openSessionButton" class="teacher-button teacher-button-primary">
-Open test
+Open warmup
+</button>
+<button id="openQuizButton" class="teacher-button teacher-button-primary" disabled="">
+Open quiz
 </button>
 </div>
 <div id="sessionDisplay" class="session-display">
@@ -606,7 +615,7 @@ Open test
 <p><span id="sessionLabel"></span> &nbsp; · &nbsp; Expires in <span id="sessionCountdown" class="session-countdown">–:–</span></p>
 </div>
 <div class="small-muted" style="margin-top:8px;">
-<p>Students enter this classroom code on the test page. The code is valid for starting the test only; each student’s 10-minute test period begins when Start test succeeds.</p>
+<p>Students enter this classroom code on the test page. The code is valid for starting the test only; each student’s test period begins when Start succeeds (warmup: 10 minutes; Quiz 1: 45 minutes).</p>
 </div>
 </div>
 </div>
@@ -615,7 +624,7 @@ Open test
 <p><label for="testSelect">Test</label> <select id="testSelect"> <option value="week04">Warmup 1 — Week 4</option> <option value="week05">Warmup 2 — Week 5</option> <option value="week06">Warmup 3 — Week 6</option> <option value="week07">Warmup 4 — Week 7</option> <option value="week08">Warmup 5 — Week 8</option> <option value="week09">Warmup 6 — Week 9</option> <option value="week10">Warmup 7 — Week 10</option> <option value="week11">Warmup 8 — Week 11</option> <option value="midterm01">Quiz 1</option> <option value="midterm02">Quiz 2</option> <option value="midterm01-practice">Quiz 1 — practice</option> </select></p>
 </div>
 <div class="teacher-field">
-<p><label for="groupFilter">Group</label> <select id="groupFilter"> <option value="">All groups</option> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> </select></p>
+<p><label for="groupFilter">Group</label> <select id="groupFilter"> <option value="">All groups</option> <option value="G01">G01</option> <option value="G02">G02</option> <option value="G03">G03</option> <option value="G04">G04</option> <option value="G05">G05</option> <option value="G06">G06</option> <option value="G07">G07 — instructor testing</option> </select></p>
 </div>
 <div class="teacher-field">
 <p><label for="statusFilter">Status</label> <select id="statusFilter"> <option value="">All</option> <option value="submitted">Submitted</option> <option value="preliminary">Preliminary</option> <option value="needs_review">Needs review</option> <option value="final">Final</option> </select></p>
@@ -735,7 +744,8 @@ const assessmentSlots = [
  {id:'final',label:'End-term test'},{id:'project',label:'Project'}
 ];
 function isPracticeQuiz(){return testSelect.value==='midterm01-practice'}
-function updateTestControls(){openSessionButton.disabled=isPracticeQuiz();}
+function isOfficialQuiz(){return testSelect.value==='midterm01'}
+function updateTestControls(){openSessionButton.disabled=!/^week\d{2}$/.test(testSelect.value);document.getElementById('openQuizButton').disabled=!isOfficialQuiz();document.getElementById('evaluateButton').disabled=testSelect.value==='midterm02';document.getElementById('finalizeUnchangedButton').disabled=testSelect.value==='midterm02';}
 
 
 const loginBox =
@@ -955,6 +965,7 @@ async function openTestSession() {
   }
 
   openSessionButton.disabled = true;
+  document.getElementById("openQuizButton").disabled = true;
 
   setMessage(
     `Opening ${testId} for ${sessionGroup}...`
@@ -963,7 +974,7 @@ async function openTestSession() {
   try {
     const response =
       await fetch(
-        apiUrl("openTestSession"),
+        apiUrl(isOfficialQuiz()?"openQuizSession":"openTestSession"),
         {
           method: "POST",
 
@@ -1015,7 +1026,7 @@ async function openTestSession() {
     );
 
   } finally {
-    openSessionButton.disabled = false;
+    updateTestControls();
   }
 }
 
@@ -1025,6 +1036,7 @@ async function openTestSession() {
 ------------------------------------------------- */
 
 async function loadResults() {
+  if(testSelect.value==='midterm02'){allRows=[];renderRows();updateTestControls();setMessage('Quiz 2 is listed for semester planning; its official test is not configured yet.');return;}
   const testId =
     testSelect.value;
 
@@ -1033,7 +1045,7 @@ async function loadResults() {
   );
 
   const url =
-    apiUrl(isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
+    apiUrl(isOfficialQuiz()?"teacherOfficialQuizResults":isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
     `&test_id=${encodeURIComponent(testId)}`;
 
   const response =
@@ -1274,11 +1286,14 @@ function reviewPanelHtml(row) {
       return `
         <div class="review-panel">
 
+          ${solution.text?`<p style="white-space:pre-wrap">${escapeHtml(solution.text)}</p>`:''}
+          ${solution.image&&/^data:image\/(svg\+xml|png);base64,/.test(solution.image)?`<img src="${escapeHtml(solution.image)}" alt="Task diagram" style="max-width:100%;max-height:800px">`:''}
+          ${solution.max_score?`<p class="small-muted">Task maximum: ${escapeHtml(solution.max_score)} points</p>`:''}
           <div class="review-heading">
 
             <div>
               <div class="review-heading-title">
-                ${escapeHtml(heading)}
+                ${escapeHtml(solution.title||heading)}
               </div>
 
               <div class="small-muted">
@@ -1475,8 +1490,8 @@ function renderRows() {
 
       <td>
         <label class="small-muted">Semester assessment</label>
-        <select class="assessment-slot">${assessmentSlots.filter(a=>!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
-        <label class="small-muted"><input type="checkbox" class="counts-grade" ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
+        <select class="assessment-slot">${assessmentSlots.filter(a=>isOfficialQuiz()?a.id==='quiz1':!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
+        <label class="small-muted"><input type="checkbox" class="counts-grade" ${isOfficialQuiz()?'disabled':''} ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
         <div class="small-muted">${isPracticeQuiz()?'Practice attempt: enable inclusion only after an explicit grading decision.':''}</div>
         <input
           type="text"
@@ -1576,7 +1591,7 @@ async function saveReviewRequest(
 ) {
   const response =
     await fetch(
-      apiUrl(isPracticeQuiz()?"saveQuizReview":"saveReview"),
+      apiUrl(row.test_id==='midterm01'?"saveOfficialQuizReview":row.test_id==='midterm01-practice'?"saveQuizReview":"saveReview"),
       {
         method: "POST",
 
@@ -1821,7 +1836,7 @@ async function evaluatePending() {
 
       const response =
         await fetch(
-          apiUrl(isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
+          apiUrl(isOfficialQuiz()?"evaluateOfficialQuiz":isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
           {
             method: "POST",
 
@@ -1942,6 +1957,8 @@ functionKey.addEventListener(
   }
 );
 
+
+document.getElementById('openQuizButton').addEventListener('click',openTestSession);
 
 openSessionButton.addEventListener(
   "click",

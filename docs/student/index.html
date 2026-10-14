@@ -210,6 +210,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Class Exercises</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1 — official test</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -335,7 +341,7 @@ async function load(){
   el('sd-warmups').textContent=s.warmup_completed+' / 8';
   el('sd-calculation').textContent=`Warmup contribution: ${number(s.warmup_contribution)} / 15 semester points. ${s.warmup_counted} of the 3 counted places currently have results.`+(s.warmup_observed_average===null?'':` Available counted warmup average: ${number(s.warmup_observed_average)}%.`)+(s.is_final?' All required result components are available.':' This is progress so far, not a final semester grade. Missing warmup places contribute no points yet.');
   el('sd-body').innerHTML=data.assessments.map(a=>{
-   const r=a.result;return `<tr><td><strong>${escape(a.label)}</strong>${a.counted_in_best_three?'<br><span class="sd-badge sd-best">Best 3</span>':''}</td><td>${r?number(r.score)+' / '+number(r.max_score):'—'}</td><td>${r?number(r.percent)+'%':'—'}</td><td><span class="sd-badge ${r?'sd-final':''}">${r?'Finalized':'Not available yet'}</span></td><td>${r?escape(r.teacher_comment||'—')+details(r):'—'}</td><td>${r?.published_at?escape(new Date(r.published_at).toLocaleString()):'—'}</td></tr>`;
+   const r=a.result;return `<tr><td><strong>${escape(a.label)}</strong>${a.counted_in_best_three?'<br><span class="sd-badge sd-best">Best 3</span>':''}</td><td>${r?number(r.score)+' / '+number(r.max_score)+(a.kind==='quiz'?'<br><span class="sd-muted">'+number(r.score/r.max_score*10)+' / 10</span>':''):'—'}</td><td>${r?number(r.percent)+'%':'—'}</td><td><span class="sd-badge ${r?'sd-final':''}">${r?'Finalized':'Not available yet'}</span></td><td>${r?escape(r.teacher_comment||'—')+details(r):'—'}</td><td>${r?.published_at?escape(new Date(r.published_at).toLocaleString()):'—'}</td></tr>`;
   }).join('');
   el('sd-results').hidden=false;el('sd-message').textContent=s.finalized_count?'Current finalized results loaded.':'No finalized results are available yet. Your assessment places are shown below.';
  }catch(e){if(current===generation)clearAccess(e.message)}

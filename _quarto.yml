@@ -2,11 +2,11 @@ project:
   type: website
   output-dir: docs
   execute-dir: project
-  resources:
-    - exercises/*-colab.ipynb
-    - quizzes/assets/**
-    - exercises/assets/**
+  resources: 
     - assets/**
+    - exercises/assets/**
+    - quizzes/assets/**
+    - exercises/*-colab.ipynb
     - exercises/*-jupyter.ipynb
   render:
     - index.qmd
@@ -24,6 +24,7 @@ project:
     - lessons/04-loops.qmd
     - lessons/05-complex-data-types-1.qmd
     - quizzes/midterm01-practice.qmd
+    - quizzes/midterm01.qmd
     - exercises/05-class-exercises.qmd
     - student/index.qmd
     # - lessons/06-basic-algorithms-1.qmd
@@ -79,6 +80,8 @@ website:
             text: "5. Complex Data Types I"
           - href: exercises/05-class-exercises.qmd
             text: "Class Exercises"
+          - href: quizzes/midterm01.qmd
+            text: "Quiz 1 — official test"
 
           # - href: lessons/06-basic-algorithms-1.qmd
           #   text: "6. Basic Algorithms I"

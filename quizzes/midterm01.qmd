@@ -1,0 +1,67 @@
+---
+title: "Midterm Quiz 01"
+format:
+  html:
+    toc: false
+execute:
+  echo: false
+---
+
+```{=html}
+<style>
+#official-quiz{max-width:1000px;margin:auto}#official-quiz [hidden]{display:none!important}.quiz-question{border:1px solid #d7dde4;border-radius:10px;padding:20px;margin:16px 0}.quiz-question label{display:block;margin:10px 0}.quiz-code{box-sizing:border-box;width:100%;min-height:220px;padding:12px;font:14px/1.5 Consolas,monospace}.quiz-output{white-space:pre-wrap;background:#f5f6f8;padding:12px;min-height:40px}.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.quiz-note{background:#fff8df;padding:14px;border-left:4px solid #bf8700}.quiz-sticky{position:sticky;top:0;background:white;padding:12px;border-bottom:1px solid #ddd;z-index:10}#official-quiz button{padding:8px 14px;cursor:pointer}#quiz-status{white-space:pre-wrap}#quiz-feedback{white-space:pre-wrap;background:#f5f6f8;padding:16px}#quiz-timer{font-weight:bold;font-variant-numeric:tabular-nums}
+</style>
+<div id="official-quiz">
+<div id="quiz-intro">
+<p><strong>10 theory questions + 3 Python tasks · 25 points · 45 minutes · one attempt</strong></p>
+<p>This is the official Quiz 1. The approved result contributes 10% to your semester grade.</p>
+<div class="quiz-note">Start only when instructed by your teacher. Enter your Neptun code and the classroom code displayed by the teacher. The classroom code is different from your Student Dashboard password. Refreshing or leaving this page does not stop the timer or create a new attempt. At the deadline, the last draft saved on the server is submitted automatically.</div>
+<p><label>Neptun code <input id="quiz-neptun" maxlength="6" autocomplete="off"></label></p>
+<p><label>Classroom code <input id="quiz-access" maxlength="6" autocomplete="off"></label></p>
+<button type="button" id="quiz-start">Start quiz</button>
+<button type="button" id="quiz-resume" hidden>Resume saved attempt</button>
+</div>
+<p id="quiz-status" role="status" aria-live="polite"></p>
+<div id="quiz-work" hidden>
+<div class="quiz-sticky">Time remaining: <span id="quiz-timer">45:00</span> · <span id="quiz-save-status">Draft saved</span></div>
+<p id="quiz-rules" class="quiz-note"></p>
+<div id="quiz-questions"></div>
+<button type="button" id="quiz-submit">Submit quiz</button>
+<p>Submit ends your attempt. Before submitting, check your answers and the output requirements. Run executes your code locally; it does not award points.</p>
+</div>
+<div id="quiz-result" hidden><h2>Submission saved</h2><p id="quiz-points"></p><p>Python points and AI feedback are preliminary estimates. The teacher reviews and approves the final result, which will appear on your <a href="../student/">Student Dashboard</a>.</p><div id="quiz-feedback"></div><button type="button" id="quiz-refresh-result">Refresh feedback</button></div>
+</div>
+<script>
+(() => {
+'use strict';
+const API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api';
+const KEY='python-course-official-midterm01-v1';
+const $=id=>document.getElementById(id);
+let attempt=null,local=null,offset=0,busy=false,dirty=false,saveChain=Promise.resolve(),editVersion=0,poll=null;
+let worker=null,workerTimer=null,runId=0,running=null;
+const notice=t=>{$('quiz-status').textContent=t};
+function remember(){try{localStorage.setItem(KEY,JSON.stringify({attempt,local}))}catch{notice('Browser storage is unavailable. Keep this page open to retain your attempt credentials.')}}
+function identity(){return {quizId:'midterm01',neptun:attempt.neptun,attemptId:attempt.attemptId,sessionToken:attempt.sessionToken}}
+async function api(route,data){const r=await fetch(API+'/'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),cache:'no-store'});let x;try{x=await r.json()}catch{throw Error('Invalid server response. Please retry.')}if(!r.ok||!x.success){const e=Error(x.error||'Request failed');e.status=r.status;throw e}return x}
+function node(tag,text,parent){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(parent)parent.append(e);return e}
+function capture(){const answers={},code={};for(let i=1;i<=10;i++){const e=document.querySelector(`input[name="official-q${i}"]:checked`);if(e)answers[i]=e.value}for(const i of [11,12,13])code[i]=$('official-code'+i)?.value||'';local={answers,code,editedAt:Date.now()+offset};return local}
+function changed(){editVersion++;dirty=true;capture();remember();$('quiz-save-status').textContent='Changes waiting to save';clearTimeout(changed.timer);changed.timer=setTimeout(()=>saveDraft().catch(e=>notice('Draft sync failed: '+e.message)),500)}
+function saveDraft(){saveChain=saveChain.catch(()=>{}).then(async()=>{if(!dirty||attempt?.state!=='active')return;const v=editVersion,payload={...identity(),...capture(),draftRevision:attempt.draftRevision};const x=await api('saveQuizOfficialDraft',payload);attempt.draftRevision=x.draftRevision;attempt.savedAt=x.savedAt;dirty=v!==editVersion;remember();$('quiz-save-status').textContent=dirty?'Changes waiting to save':'Saved '+new Date(x.savedAt).toLocaleTimeString();if(!dirty)notice('')});return saveChain}
+function fill(draft){for(const [i,v] of Object.entries(draft.answers||{})){const e=document.querySelector(`input[name="official-q${i}"][value="${v}"]`);if(e)e.checked=true}for(const i of [11,12,13])$('official-code'+i).value=draft.code?.[i]||''}
+function render(x){$('quiz-intro').hidden=true;$('quiz-work').hidden=false;$('quiz-result').hidden=true;$('quiz-rules').textContent=x.questions.rules;const root=$('quiz-questions');root.replaceChildren();node('h2','Theory (10 points)',root);for(const q of x.questions.theory){const box=node('section',null,root);box.className='quiz-question';node('h3',`Question ${q.id} (1 point)`,box);node('p',q.text,box);q.choices.forEach((text,i)=>{const label=node('label',null,box),input=node('input',null,label);input.type='radio';input.name='official-q'+q.id;input.value='abcd'[i];label.append(document.createTextNode(' '+text));input.addEventListener('change',changed)})}node('h2',`Python (${x.questions.python.reduce((sum,q)=>sum+q.max,0)} points)`,root);for(const q of x.questions.python){const box=node('section',null,root);box.className='quiz-question';node('h3',`Question ${q.id} — ${q.title} (${q.max} points)`,box);const text=node('p',q.text,box);text.style.whiteSpace='pre-wrap';if(q.image){const img=node('img',null,box);img.src=q.image;img.alt='Flowchart for '+q.title;img.style.maxWidth='100%';img.style.maxHeight='1000px'}if(q.structogram){const details=node('details',null,box);node('summary','Equivalent structogram',details);const img=node('img',null,details);img.src=q.structogram;img.alt='Structogram for '+q.title;img.style.maxWidth='100%'}node('strong','Example input (one value per line)',box);node('pre',q.example.inputs.join('\n'),box);node('strong','One acceptable result display (equivalent labels are accepted)',box);node('pre',q.example.output||'(no output)',box);const code=node('textarea',null,box);code.id='official-code'+q.id;code.className='quiz-code';code.spellcheck=false;code.setAttribute('aria-label','Python code for question '+q.id);code.addEventListener('input',changed);const actions=node('div',null,box);actions.className='quiz-actions';const run=node('button','Run',actions);run.type='button';run.className='quiz-run';run.addEventListener('click',()=>runPython(q.id));const stop=node('button','Stop',actions);stop.type='button';stop.addEventListener('click',()=>stopPython('Execution stopped.'));const output=node('pre','',box);output.id='official-output'+q.id;output.className='quiz-output';const inputs=node('div',null,box);inputs.id='official-input'+q.id;inputs.hidden=true}fill(x.draft||{answers:{},code:{}});tick()}
+function result(x){stopPython();attempt.state='submitted';local=null;remember();$('quiz-intro').hidden=true;$('quiz-work').hidden=true;$('quiz-result').hidden=false;const maximum=x.max_score||22,pythonMax=maximum-(x.theory?.max||10);$('quiz-points').textContent=`Theory: ${x.theory?.score??'?'} / ${x.theory?.max||10}. Python: ${x.python?x.python.score+' / '+x.python.max+' (AI estimate)':'pending evaluation ('+pythonMax+' points)'}.`+(x.python?` Total preliminary result: ${x.theory.score+x.python.score} / ${maximum} = ${((x.theory.score+x.python.score)/maximum*10).toFixed(2)} / 10.`:'');$('quiz-feedback').textContent=x.ai?.feedback||(['error','not_configured'].includes(x.ai?.status)?'AI feedback is temporarily unavailable. Your submission is saved; the teacher can evaluate it.':'AI evaluation pending. This page checks for feedback every 20 seconds.');if(!poll)poll=setInterval(()=>refresh().catch(e=>notice(e.message)),20000);if(x.ai?.status==='ready'){clearInterval(poll);poll=null}}
+async function refresh(){const x=await api('loadQuizOfficial',identity());offset=Date.parse(x.serverNow)-Date.now();if(x.state==='submitted')result(x);return x}
+async function resume(){if(busy)return;busy=true;try{const x=await refresh();if(x.state==='active'){const pending=local;attempt={...attempt,...x};render(x);if(pending&&pending.editedAt>Date.parse(x.savedAt||x.startedAt)){fill(pending);changed()}remember();notice('Resumed. The original deadline still applies.')}}catch(e){notice(e.message)}finally{busy=false}}
+async function start(){if(busy)return;busy=true;$('quiz-start').disabled=true;try{const x=await api('startQuizOfficial',{quizId:'midterm01',neptun:$('quiz-neptun').value.trim().toUpperCase(),accessCode:$('quiz-access').value.trim().toUpperCase()});attempt={...x};offset=Date.parse(x.serverNow)-Date.now();local=x.draft;remember();render(x);notice('Quiz started. Drafts are saved automatically.')}catch(e){notice(e.message)}finally{busy=false;$('quiz-start').disabled=false}}
+async function submit(expired=false){if(busy||attempt?.state!=='active')return;if(!expired&&!confirm('Submit your quiz? You cannot edit your answers after submission.'))return;busy=true;$('quiz-submit').disabled=true;stopPython();notice('Submitting… Keep this page open.');try{if(!expired)await saveDraft();const x=await api('submitQuizOfficial',{...identity(),...capture()});result(x);notice('Submission saved.')}catch(e){notice('Submission could not be confirmed: '+e.message+'. Retry Submit or Resume.')}finally{busy=false;$('quiz-submit').disabled=false}}
+function tick(){if(attempt?.state!=='active')return;const ms=Date.parse(attempt.deadline)-Date.now()-offset,s=Math.max(0,Math.ceil(ms/1000));$('quiz-timer').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');if(ms<=0){document.querySelectorAll('#quiz-work input,#quiz-work textarea,.quiz-run').forEach(e=>e.disabled=true);submit(true)}}
+function stopPython(message){if(worker)worker.terminate();worker=null;clearTimeout(workerTimer);if(running){$('official-input'+running.q).hidden=true;if(message)$('official-output'+running.q).textContent+= '\n'+message}running=null;document.querySelectorAll('.quiz-run').forEach(e=>e.disabled=attempt?.state!=='active')}
+function armTimeout(ms){clearTimeout(workerTimer);workerTimer=setTimeout(()=>stopPython('Execution timed out. Check your loop condition and variable updates.'),ms)}
+function runPython(q){if(running)return;const out=$('official-output'+q);out.textContent='Loading Python…';try{worker=new Worker(new URL('assets/quiz-python-worker.js',document.baseURI));running={q,id:++runId};document.querySelectorAll('.quiz-run').forEach(e=>e.disabled=true);armTimeout(45000);worker.onerror=()=>stopPython('Python could not be loaded. Retry Run.');worker.onmessage=({data:m})=>{if(!running||m.id!==running.id)return;if(m.type==='ready'){out.textContent='';armTimeout(3000)}else if(m.type==='output'){if(out.textContent.length<100000)out.textContent+=m.chunk;else stopPython('Output limit reached.')}else if(m.type==='prompt'){clearTimeout(workerTimer);const panel=$('official-input'+q);panel.replaceChildren();panel.hidden=false;const label=node('label',m.prompt||'Enter an input value:',panel),field=node('input',null,label),send=node('button','Send input',panel);send.type='button';const go=()=>{if(!running)return;worker.postMessage({type:'input',id:running.id,value:field.value});panel.hidden=true;armTimeout(3000)};send.onclick=go;field.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go()}};field.focus()}else if(m.type==='done'){if(!m.result.ok)out.textContent+='\n'+m.result.error;stopPython()}else if(m.type==='error')stopPython(m.error)};worker.postMessage({type:'execute',id:running.id,code:$('official-code'+q).value,interactive:true})}catch(e){stopPython(e.message)}}
+$('quiz-start').onclick=start;$('quiz-resume').onclick=resume;$('quiz-submit').onclick=()=>submit(false);$('quiz-refresh-result').onclick=()=>refresh().catch(e=>notice(e.message));
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved?.attempt?.sessionToken){attempt=saved.attempt;local=saved.local;$('quiz-resume').hidden=false;$('quiz-start').disabled=true;$('quiz-neptun').value=attempt.neptun;notice('An attempt is saved in this browser. Click Resume saved attempt.')}}catch{}
+setInterval(tick,1000);setInterval(()=>{if(dirty)saveDraft().catch(e=>notice('Draft sync failed: '+e.message))},10000);
+window.addEventListener('beforeunload',e=>{if(attempt?.state==='active'){capture();remember();if(dirty){e.preventDefault();e.returnValue=''}}});
+})();
+</script>
+```
