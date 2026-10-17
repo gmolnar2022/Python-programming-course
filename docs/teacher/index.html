@@ -1266,6 +1266,12 @@ function reviewPanelHtml(row) {
       const aiEvaluation =
         solution.ai_evaluation || {};
 
+      const aiScore = aiEvaluation.score;
+      const aiMaximum = aiEvaluation.max_score ?? solution.max_score;
+      const aiScoreHtml = typeof aiScore === "number" && Number.isFinite(aiScore)
+        ? `<p><strong>AI preliminary score: ${escapeHtml(aiScore)}${typeof aiMaximum === "number" && Number.isFinite(aiMaximum) ? ` / ${escapeHtml(aiMaximum)}` : ""} points</strong></p>`
+        : '<p class="small-muted">AI preliminary score: not available.</p>';
+
       const aiFeedback =
         aiEvaluation.feedback ||
         row.preliminary_feedback ||
@@ -1341,6 +1347,7 @@ function reviewPanelHtml(row) {
                 review-info-box
                 ai-feedback
               ">
+                ${aiScoreHtml}
                 ${escapeHtml(aiFeedback)}
               </div>
 
