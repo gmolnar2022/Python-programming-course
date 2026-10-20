@@ -1,0 +1,518 @@
+---
+title: "Class Exercises 6"
+subtitle: "Basic Algorithms I"
+toc: false
+page-layout: full
+---
+
+<style>
+
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#222;line-height:1.5}
+h1{margin-bottom:0}.sub{color:#666;margin-bottom:26px}.ex{border:1px solid #ddd;border-radius:9px;padding:18px 20px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.status{font-size:.9rem;padding:5px 9px;background:#f4f4f4;border-radius:5px;white-space:nowrap}.controls button{padding:8px 13px;margin:8px 7px 8px 0;cursor:pointer}
+.workspace{display:none;border-top:1px solid #ddd;margin-top:14px;padding-top:14px}.workspace.active{display:block}
+textarea.code{width:100%;height:220px;box-sizing:border-box;font:14px/1.5 Consolas,monospace;padding:12px;border:1px solid #aaa;border-radius:6px}
+textarea.stdin{width:100%;height:58px;box-sizing:border-box;font:14px Consolas,monospace;padding:8px}
+pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;white-space:pre-wrap;min-height:34px}
+.checkpanel{border:1px solid #ddd;border-radius:6px;padding:10px;margin-top:8px}.ok{font-weight:600}.bad{font-weight:600}.small{font-size:.9rem;color:#666}
+.timer{font-variant-numeric:tabular-nums}.hint{background:#f6f6f6;padding:9px;border-radius:5px;margin-top:8px}
+.summary{background:#f7f7f7;padding:12px 15px;border-radius:7px;margin:18px 0}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
+
+.summary-grid{display:grid;grid-template-columns:1.5fr 1.4fr .9fr .55fr .65fr .55fr;margin-top:12px;border-top:1px solid #ddd;border-left:1px solid #ddd}.summary-grid>div{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}.summary-head{font-weight:700;background:#f5f5f5}@media(max-width:760px){.summary-grid{grid-template-columns:1fr 1fr}.summary-head{display:none}}
+
+
+
+
+
+/* Widen only the exercise content; keep Quarto's own page grid intact. */
+.ex,
+#summary {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.workspace,
+.workspace textarea,
+.workspace pre,
+.workspace .output {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: clip;
+}
+
+
+
+.version-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.version-box p{margin:.35rem 0 .65rem}.version-links{display:flex;flex-direction:column;gap:.45rem}.version-links a,.version-current{display:block}.version-current{color:#444}
+.student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
+.student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
+.expected-time{font-size:.9rem;color:#555;margin:.2rem 0 .8rem}
+button:disabled{opacity:.5;cursor:not-allowed}
+.live-input[hidden]{display:none}
+.live-input{display:flex;gap:8px;align-items:center;margin:8px 0 12px;flex-wrap:wrap}
+.live-input input{flex:1;min-width:160px;padding:8px;border:1px solid #aaa;border-radius:5px}
+</style>
+
+```{=html}
+<div class="version-box">
+  <strong>Exercise versions</strong>
+  <p class="small">The same exercise set is available in three versions.</p>
+  <div class="version-links">
+    <span class="version-current"><strong>Classroom Version</strong> — you are using this version</span>
+    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/06-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the same exercises in Colab</a>
+    <a href="06-class-exercises-jupyter.ipynb" download><strong>Jupyter Version</strong> — download the same exercises for Jupyter Notebook/JupyterLab</a>
+  </div>
+</div>
+
+
+<div id="student-identification" class="student-id-box">
+  <label for="neptun-code"><strong>Neptun code</strong></label>
+  <div class="student-id-row">
+    <input id="neptun-code" type="text" maxlength="6" autocomplete="off"
+           placeholder="ABC123" aria-label="Neptun code">
+    <button id="save-neptun" type="button">Save</button>
+  </div>
+  <div id="neptun-message" class="small">
+    Enter your 6-character Neptun code before starting the exercises.
+  </div>
+</div>
+
+<div class="summary"><strong>Programming rules:</strong> use explicit loops and conditions to implement the named algorithms. Avoid comprehensions and shortcut functions such as <code>sum()</code>, <code>max()</code>, <code>any()</code>, <code>index()</code> and <code>count()</code>. Use <code>random</code> only where requested. Meaningful input prompts and output labels are welcome. Do not use <code>break</code>, <code>continue</code>, or <code>return</code> to terminate or skip loop iterations. When a task should stop searching as soon as its result is known, express that condition directly in a <code>while</code> condition.</div>
+<div class="summary"><label><input type="checkbox" id="rules-accepted"> <strong>I understand and accept these programming rules.</strong></label></div>
+<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
+<div id="list"></div>
+<section class="ex" id="evaluation-box">
+  <h2>Evaluate my work</h2>
+  <p>Run an indicative evaluation of your current Week 6 solutions.</p>
+  <p class="small"><strong>This evaluation is for feedback only and does not count toward your course grade.</strong></p>
+  <button id="evaluate-work" onclick="evaluateWork()">Evaluate my work</button>
+  <div id="evaluation-result"></div>
+</section>
+<div id="summary" style="display:none"></div>
+```
+
+<script>
+const PRACTICE_API_BASE = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+const COURSE_CONFIG = {
+  requireNeptun: true,
+  showExpectedTime: true,
+  expectedTimeMinutes: 10,
+  enableAI: true,
+  enableAIScoring: true,
+  enableExport: false,
+  enableImport: false,
+  enableTracking: true,
+  enableSubmission: false
+};
+
+
+const EX=[{"id": "ex01", "title": "Exercise 1 – Heights – decision (10 minutes)", "description": "There are 10 students in a class. Read their heights in centimetres and store them in a list. Use the decision algorithm to determine whether at least one student is taller than 185 cm. Print a labelled True/False result. Stop the search as soon as a match is found; 185 cm itself does not qualify.", "task": "<p>There are 10 students in a class. Read their heights in centimetres and store them in a list. Use the decision algorithm to determine whether at least one student is taller than 185 cm. Print a labelled True/False result. Stop the search as soon as a match is found; 185 cm itself does not qualify.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>heights ← empty list\nREPEAT 10 TIMES:\n    READ height\n    APPEND height TO heights\ni ← 0\nWHILE i &lt; LENGTH(heights) AND heights[i] &lt;= 185:\n    i ← i + 1\nexists ← (i &lt; LENGTH(heights))\nDISPLAY a label and exists</pre></details>", "starter": "heights = []\n# Read the 10 heights and append them to the list.\n# Then apply the decision algorithm.\n", "pseudocode": "heights ← empty list\nREPEAT 10 TIMES:\n    READ height\n    APPEND height TO heights\ni ← 0\nWHILE i < LENGTH(heights) AND heights[i] <= 185:\n    i ← i + 1\nexists ← (i < LENGTH(heights))\nDISPLAY a label and exists", "tests": [[["170", "180", "165", "185", "175", "182", "179", "168", "184", "181"], null], [["190", "170", "180", "165", "185", "175", "182", "179", "168", "184"], null], [["170", "180", "165", "185", "175", "182", "179", "168", "184", "186"], null]], "need": ["input", "loop", "while", "while_has_and", "print"], "match": "week6", "hint": "Use a while condition that checks the index first and stops when a height is above 185."}, {"id": "ex02", "title": "Exercise 2 – Weekly temperature – summarization (10 minutes)", "description": "Generate the average temperature for each of the seven days of a week as a random floating-point number in the interval [10.0, 25.0). Store the seven values in a tuple. Display the tuple and the weekly average. Use the summarization algorithm with an explicit loop, not sum(). For generation, random.random() * 15 + 10 gives the required interval; you may build a list first, then convert it with tuple(). Print the average on the final output line, optionally with a label; rounding to two decimal places is sufficient.", "task": "<p>Generate the average temperature for each of the seven days of a week as a random floating-point number in the interval [10.0, 25.0). Store the seven values in a tuple. Display the tuple and the weekly average. Use the summarization algorithm with an explicit loop, not sum(). For generation, random.random() * 15 + 10 gives the required interval; you may build a list first, then convert it with tuple(). Print the average on the final output line, optionally with a label; rounding to two decimal places is sufficient.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>values ← empty list\nREPEAT 7 TIMES:\n    APPEND random real number from [10.0, 25.0) TO values\ntemperatures ← TUPLE(values)\ntotal ← 0\nFOR each temperature IN temperatures:\n    total ← total + temperature\naverage ← total / 7\nDISPLAY temperatures\nDISPLAY a label and average</pre></details>", "starter": "import random\n\ntemperatures = []\n# Generate seven values, then convert the list to a tuple.\n# Compute their average using an accumulator.\n", "pseudocode": "values ← empty list\nREPEAT 7 TIMES:\n    APPEND random real number from [10.0, 25.0) TO values\ntemperatures ← TUPLE(values)\ntotal ← 0\nFOR each temperature IN temperatures:\n    total ← total + temperature\naverage ← total / 7\nDISPLAY temperatures\nDISPLAY a label and average", "tests": [[[], null]], "need": ["random", "loop", "print"], "match": "week6", "hint": "Initialize total before the loop. Add each temperature, then divide the total by 7."}, {"id": "ex03", "title": "Exercise 3 – Divisors and prime numbers – counting (10 minutes)", "description": "Ask for a positive integer n. Use the counting algorithm to count its positive divisors, including 1 and n. Display the divisor count on one line and a labelled prime/not-prime message on the final line (for example, \"This is a prime number.\" or \"This is not a prime number.\"). A number is prime exactly when it has two positive divisors; 1 is not prime.", "task": "<p>Ask for a positive integer n. Use the counting algorithm to count its positive divisors, including 1 and n. Display the divisor count on one line and a labelled prime/not-prime message on the final line (for example, &quot;This is a prime number.&quot; or &quot;This is not a prime number.&quot;). A number is prime exactly when it has two positive divisors; 1 is not prime.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>READ n\ncount ← 0\nFOR divisor FROM 1 TO n:\n    IF n MOD divisor = 0:\n        count ← count + 1\nDISPLAY a label and count\nIF count = 2:\n    DISPLAY &quot;This is a prime number.&quot;\nELSE:\n    DISPLAY &quot;This is not a prime number.&quot;</pre></details>", "starter": "n = int(input(\"Enter a positive integer: \"))\n# Count divisors, then decide whether n is prime.\n", "pseudocode": "READ n\ncount ← 0\nFOR divisor FROM 1 TO n:\n    IF n MOD divisor = 0:\n        count ← count + 1\nDISPLAY a label and count\nIF count = 2:\n    DISPLAY \"This is a prime number.\"\nELSE:\n    DISPLAY \"This is not a prime number.\"", "tests": [[["1"], null], [["2"], null], [["12"], null], [["17"], null]], "need": ["input", "loop", "if", "print"], "match": "week6", "hint": "A divisor leaves remainder 0. Increment the count by 1, not by the divisor value."}, {"id": "ex04", "title": "Exercise 4 – First heads – selection (10 minutes)", "description": "Generate a random integer n between 10 and 100 inclusive. Generate n fair coin tosses and store them in a list, using \"heads\" and \"tails\" as the values. Assume that the sequence contains at least one heads. To guarantee this in your generated data, regenerate the sequence if it contains no heads; do not change individual tosses after generation. Use the selection algorithm to find the first heads. Display the list, then the toss number on the final line, optionally with a label. Tosses are numbered from 1, so the reported number is the index plus 1.", "task": "<p>Generate a random integer n between 10 and 100 inclusive. Generate n fair coin tosses and store them in a list, using &quot;heads&quot; and &quot;tails&quot; as the values. Assume that the sequence contains at least one heads. To guarantee this in your generated data, regenerate the sequence if it contains no heads; do not change individual tosses after generation. Use the selection algorithm to find the first heads. Display the list, then the toss number on the final line, optionally with a label. Tosses are numbered from 1, so the reported number is the index plus 1.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>n ← random integer between 10 and 100\nGENERATE n independent fair tosses INTO tosses\nWHILE tosses contains no &quot;heads&quot;:\n    GENERATE a new sequence of n independent fair tosses INTO tosses\ni ← 0\nWHILE tosses[i] != &quot;heads&quot;:\n    i ← i + 1\nDISPLAY tosses\nDISPLAY a label and (i + 1)</pre></details>", "starter": "import random\n\nn = random.randint(10, 100)\ntosses = []\n# Generate a sequence containing at least one heads.\n# Apply the selection algorithm to find the first heads.\n", "pseudocode": "n ← random integer between 10 and 100\nGENERATE n independent fair tosses INTO tosses\nWHILE tosses contains no \"heads\":\n    GENERATE a new sequence of n independent fair tosses INTO tosses\ni ← 0\nWHILE tosses[i] != \"heads\":\n    i ← i + 1\nDISPLAY tosses\nDISPLAY a label and (i + 1)", "tests": [[[], null]], "need": ["random", "loop", "while", "print"], "match": "week6", "hint": "Generate each toss with equal probability. The selection loop can rely on the guaranteed heads; report i + 1."}, {"id": "ex05", "title": "Exercise 5 – Find Peter – linear search (10 minutes)", "description": "Ask for a positive integer n, then read n first names and store them in a list. Use linear search to find the first exact occurrence of \"Peter\". Print its zero-based index on the final line, optionally with a label. If Peter is absent, print -1. Stop searching at the first match. Names are case-sensitive: \"peter\" does not match \"Peter\".", "task": "<p>Ask for a positive integer n, then read n first names and store them in a list. Use linear search to find the first exact occurrence of &quot;Peter&quot;. Print its zero-based index on the final line, optionally with a label. If Peter is absent, print -1. Stop searching at the first match. Names are case-sensitive: &quot;peter&quot; does not match &quot;Peter&quot;.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>READ n\nnames ← empty list\nREPEAT n TIMES:\n    READ name\n    APPEND name TO names\ni ← 0\nWHILE i &lt; LENGTH(names) AND names[i] != &quot;Peter&quot;:\n    i ← i + 1\nIF i &lt; LENGTH(names):\n    index ← i\nELSE:\n    index ← -1\nDISPLAY a label and index</pre></details>", "starter": "n = int(input(\"Number of names: \"))\nnames = []\n# Read the names, then apply linear search.\n", "pseudocode": "READ n\nnames ← empty list\nREPEAT n TIMES:\n    READ name\n    APPEND name TO names\ni ← 0\nWHILE i < LENGTH(names) AND names[i] != \"Peter\":\n    i ← i + 1\nIF i < LENGTH(names):\n    index ← i\nELSE:\n    index ← -1\nDISPLAY a label and index", "tests": [[["3", "Anna", "Peter", "Ben"], null], [["2", "Peter", "Peter"], null], [["3", "Anna", "Ben", "Peter"], null], [["3", "Anna", "peter", "Ben"], null], [["1", "Peter"], null]], "need": ["input", "loop", "while", "while_has_and", "print"], "match": "week6", "hint": "Check i < len(names) before reading names[i]. Use -1 as a not-found marker, not as an index for reading the list."}, {"id": "ex06", "title": "Exercise 6 – Largest random number – maximum selection (10 minutes)", "description": "Generate 15 random integers between 1000 and 2023 inclusive and store them in a list. Repeated numbers are allowed. Use the maximum selection algorithm to find the largest value, without max() or sorting. Display the list, then its largest value on the final line, optionally with a label. You may also display the maximum index before that final line.", "task": "<p>Generate 15 random integers between 1000 and 2023 inclusive and store them in a list. Repeated numbers are allowed. Use the maximum selection algorithm to find the largest value, without max() or sorting. Display the list, then its largest value on the final line, optionally with a label. You may also display the maximum index before that final line.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>numbers ← empty list\nREPEAT 15 TIMES:\n    APPEND random integer between 1000 and 2023 TO numbers\nmax_index ← 0\nFOR i FROM 1 TO LENGTH(numbers) - 1:\n    IF numbers[i] &gt; numbers[max_index]:\n        max_index ← i\nDISPLAY numbers\nDISPLAY a label and numbers[max_index]</pre></details>", "starter": "import random\n\nnumbers = []\n# Generate 15 values and apply maximum selection.\n", "pseudocode": "numbers ← empty list\nREPEAT 15 TIMES:\n    APPEND random integer between 1000 and 2023 TO numbers\nmax_index ← 0\nFOR i FROM 1 TO LENGTH(numbers) - 1:\n    IF numbers[i] > numbers[max_index]:\n        max_index ← i\nDISPLAY numbers\nDISPLAY a label and numbers[max_index]", "tests": [[[], null]], "need": ["random", "loop", "if", "print"], "match": "week6", "hint": "Keep the index of the largest value found so far. Initialize it to 0 and compare the remaining elements."}, {"id": "ex07", "title": "Exercise 7 – First perfect number in an interval (15 minutes)", "description": "A positive integer is perfect if it equals the sum of its positive divisors smaller than itself. For example, 6 = 1 + 2 + 3. Randomly generate an inclusive interval: choose the lower bound between 1 and 50, then choose the upper bound between that lower bound and 1000. Display both bounds together on one line (lower first, upper second). Find the first perfect number in the interval by checking candidates in increasing order. Stop the outer search as soon as one is found. Display the result on the final line, optionally with a label; if there is no match, display \"There is no perfect number in this range\". Use explicit divisor summation and a condition-controlled while search. This is Exercise 7 of the class exercise set.", "task": "<p>A positive integer is perfect if it equals the sum of its positive divisors smaller than itself. For example, 6 = 1 + 2 + 3. Randomly generate an inclusive interval: choose the lower bound between 1 and 50, then choose the upper bound between that lower bound and 1000. Display both bounds together on one line (lower first, upper second). Find the first perfect number in the interval by checking candidates in increasing order. Stop the outer search as soon as one is found. Display the result on the final line, optionally with a label; if there is no match, display &quot;There is no perfect number in this range&quot;. Use explicit divisor summation and a condition-controlled while search. This is Exercise 7 of the class exercise set.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>GENERATE lower and upper\nDISPLAY lower and upper on one line\ncandidate ← lower\nfound ← False\nWHILE candidate &lt;= upper AND NOT found:\n    divisor_total ← 0\n    FOR divisor FROM 1 TO candidate - 1:\n        IF candidate MOD divisor = 0:\n            divisor_total ← divisor_total + divisor\n    IF divisor_total = candidate:\n        found ← True\n    ELSE:\n        candidate ← candidate + 1\nIF found:\n    DISPLAY a label and candidate\nELSE:\n    DISPLAY &quot;There is no perfect number in this range&quot;</pre></details>", "starter": "import random\n\nlower = random.randint(1, 50)\nupper = random.randint(lower, 1000)\nprint(\"Interval:\", lower, upper)\n# Search for the first perfect number in the interval.\n", "pseudocode": "GENERATE lower and upper\nDISPLAY lower and upper on one line\ncandidate ← lower\nfound ← False\nWHILE candidate <= upper AND NOT found:\n    divisor_total ← 0\n    FOR divisor FROM 1 TO candidate - 1:\n        IF candidate MOD divisor = 0:\n            divisor_total ← divisor_total + divisor\n    IF divisor_total = candidate:\n        found ← True\n    ELSE:\n        candidate ← candidate + 1\nIF found:\n    DISPLAY a label and candidate\nELSE:\n    DISPLAY \"There is no perfect number in this range\"", "tests": [[[], null]], "need": ["random", "loop", "while", "while_has_and", "if", "print"], "match": "week6", "hint": "Reset the divisor total for every candidate. Exclude the candidate itself; stop the outer while using a found flag."}];
+let active=null, lastTick=Date.now();
+
+function key(id){return "pycourse_week06_"+id}
+function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"","time":0,"runs":0,"checks":0,"hints":0,"completed":false,"started":false}')}
+function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderSummary(){
+ let cells=EX.map(e=>{let s=state(e.id),status=s.completed?"✓ Completed":s.started?"In progress / paused":"Not started";return `<div>${e.title}</div><div>${status}</div><div>${fmt(s.time)}</div><div>${s.runs}</div><div>${s.checks}</div><div>${s.hints}</div>`}).join("");
+ let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 6 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
+}
+
+function validNeptun(v){return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase())}
+function getNeptun(){return (localStorage.getItem("pycourse_neptun")||"").trim().toUpperCase()}
+function setNeptunUI(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ if(!box)return;
+ const n=getNeptun(),ok=validNeptun(n); box.value=n;
+ msg.textContent=ok?`Neptun code saved: ${n}`:"Enter your 6-character Neptun code before starting the exercises.";
+ document.querySelectorAll("[id$='-start']").forEach(b=>b.disabled=COURSE_CONFIG.requireNeptun&&!ok);
+}
+function saveNeptun(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ const n=(box.value||"").trim().toUpperCase(); box.value=n;
+ if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return}
+ localStorage.setItem("pycourse_neptun",n); setNeptunUI();
+
+
+}
+
+function render(){
+ list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
+ <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
+ <div class="workspace" id="${e.id}-ws">
+ <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
+ <p><strong>Your Python code</strong></p><textarea class="code" id="${e.id}-code" spellcheck="false">${esc((s.code||e.starter))}</textarea>
+ <div class="controls"><button onclick="runEx('${e.id}')">▶ Run</button><button onclick="checkEx('${e.id}')">✓ Check my solution</button><button onclick="hintEx('${e.id}')">💡 Hint</button><button onclick="stopEx('${e.id}')">■ Stop</button></div>
+ <strong>Output</strong><pre id="${e.id}-out"></pre><div id="${e.id}-input" class="live-input" hidden></div><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
+ renderSummary();
+}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+// Student Python always runs in a killable Web Worker, never on the UI thread.
+const WEEK06_RUN_TIMEOUT_MS=3000;
+const WEEK06_WORKER_URL=new URL('assets/week06-python-worker.js',document.baseURI).href;
+let pythonWorker=null,workerJobs=new Map(),workerSeq=0;
+function resetPythonWorker(reason="Execution timed out. Check your loop condition and variable updates."){
+ if(pythonWorker){pythonWorker.terminate();pythonWorker=null;}
+ for(const job of workerJobs.values()){clearTimeout(job.timer);job.reject(new Error(reason));}
+ workerJobs.clear();
+ for(const e of EX){const area=document.getElementById(e.id+'-input');if(area){area.hidden=true;area.replaceChildren();}}
+}
+function getPythonWorker(){
+ if(pythonWorker)return pythonWorker;
+ pythonWorker=new Worker(WEEK06_WORKER_URL);
+ pythonWorker.onerror=e=>{resetPythonWorker("Python worker error: "+(e.message||"Unable to load worker. Retry Run."));};
+ pythonWorker.onmessage=({data:m})=>{
+  const job=workerJobs.get(m.id);if(!job)return;
+  const stopTimer=()=>{clearTimeout(job.timer);job.timer=null;};
+  const startTimer=()=>{stopTimer();job.timer=setTimeout(()=>resetPythonWorker(),WEEK06_RUN_TIMEOUT_MS);};
+  if(m.type==='ready'){job.ready=true;startTimer();return;}
+  if(m.type==='output'){if(job.onOutput)job.onOutput(m.chunk);return;}
+  if(m.type==='prompt'){
+   stopTimer(); // Waiting for a human to type is not Python execution time.
+   requestLiveInput(job.exerciseId,m.prompt).then(value=>{
+    if(workerJobs.has(m.id)&&pythonWorker){startTimer();pythonWorker.postMessage({type:'input',id:m.id,value});}
+   });return;
+  }
+  if(m.type==='done'||m.type==='error'){
+   stopTimer();workerJobs.delete(m.id);
+   if(m.type==='done')job.resolve(m.result);else job.reject(new Error(m.error));
+  }
+ };
+ return pythonWorker;
+}
+function workerTask(type,code,inputs=[],interactive=false,onOutput=null,exerciseId=null){
+ return new Promise((resolve,reject)=>{
+  if(workerJobs.size){reject(new Error('Python is busy. Finish the current run or press Stop.'));return;}
+  let worker;try{worker=getPythonWorker();}catch(e){reject(e);return;}
+  const id=++workerSeq;
+  workerJobs.set(id,{resolve,reject,onOutput,exerciseId,timer:setTimeout(()=>resetPythonWorker('Python runtime did not load within 45 seconds.'),45000),ready:false});
+  worker.postMessage({type,id,code,inputs,interactive,exerciseId});
+ });
+}
+async function execute(code,inputs,interactive=false,onOutput=null,exerciseId=null){
+ return workerTask('execute',code,inputs,interactive,onOutput,exerciseId);
+}
+async function ensurePy(){getPythonWorker();}
+async function startEx(id){
+ if(workerJobs.size && active!==id) resetPythonWorker("Run cancelled when switching exercises.");
+ if(!document.getElementById("rules-accepted")?.checked){
+   alert("Please confirm that you understand and accept the programming rules before starting.");
+   return;
+ }
+ if(COURSE_CONFIG.requireNeptun&&!validNeptun(getNeptun())){
+   document.getElementById("neptun-message").textContent="Save a valid Neptun code before starting an exercise.";
+   document.getElementById("neptun-code").focus(); return;
+ }
+ if(active&&active!==id) stopEx(active);
+ let s=state(id);
+ document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id+"-ws").classList.add("active");
+ document.getElementById(id+"-code").value=s.code || EX.find(e=>e.id===id).starter;
+ if(!s.completed){
+   active=id; s.started=true; save(id,s); lastTick=Date.now();
+ } else {
+   active=null; // review does not add to completion time
+ }
+ await ensurePy(); updateStatus(id);
+}
+function persistCode(id){let s=state(id),el=document.getElementById(id+"-code");if(el)s.code=el.value;save(id,s)}
+function stopEx(id){if(workerJobs.size)resetPythonWorker("Run cancelled with Stop.");if(active===id){tick();persistCode(id);active=null} document.getElementById(id+"-ws").classList.remove("active");updateStatus(id)}
+function tick(){let now=Date.now();if(active&&!document.hidden){let s=state(active);s.time+=(now-lastTick)/1000;save(active,s);let el=document.getElementById(active+"-time");if(el)el.textContent=fmt(s.time)}lastTick=now;renderSummary()}
+setInterval(tick,1000);document.addEventListener("visibilitychange",()=>{tick();lastTick=Date.now()});
+window.addEventListener("beforeunload",()=>{tick();if(active)persistCode(active)});
+function updateStatus(id){
+ let s=state(id),el=document.getElementById(id+"-status"),btn=document.getElementById(id+"-start");
+ if(el)el.innerHTML=(s.completed?"✓ Completed":active===id?"In progress":s.started?"Paused":"Not started")+" · <span class='timer'>"+fmt(s.time)+"</span>";
+ if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
+ renderSummary();
+}
+function requestLiveInput(id,message){
+ return new Promise((resolve)=>{
+   const area=document.getElementById(id+"-input");
+   const field=document.createElement("input");field.type="text";field.autocomplete="off";
+   field.setAttribute("aria-label",message||"Python input");
+   const label=document.createElement("span");label.textContent=message||"Input:";
+   const button=document.createElement("button");button.type="button";button.textContent="Enter";
+   area.replaceChildren(label,field,button);area.hidden=false;
+   let done=false;
+   const finish=(value)=>{if(done)return;done=true;area.hidden=true;area.replaceChildren();resolve(value)};
+   button.addEventListener("click",()=>finish(field.value));
+   field.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();finish(field.value)}});
+   // Yield to the browser to paint the output before focusing the input.
+   requestAnimationFrame(()=>field.focus());
+ });
+}
+async function structure(code){return workerTask('structure',code);}
+function inputPrompts(code){
+ // Extract simple input("prompt") / input('prompt') calls in source order.
+ const rx=/input\s*\(\s*(?:(["'])(.*?)\1)?\s*\)/g;
+ let a=[],m; while((m=rx.exec(code))!==null)a.push(m[2]||"Enter a value:");
+ return a;
+}
+async function runEx(id){
+ let s=state(id),code=document.getElementById(id+"-code").value;
+ s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
+ const output=document.getElementById(id+"-out");
+ output.textContent="";
+ try{
+ const r=await execute(code,[],true,chunk=>{output.textContent+=chunk;output.scrollTop=output.scrollHeight},id);
+ output.textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error;
+ }catch(err){output.textContent+="\n"+String(err.message||err)}
+}
+function numbersInLine(line){
+ return (line.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number)
+}
+function rootPairsMatch(out,inputs){
+ const n=Number(inputs[0]), lines=out.trim().split(/\r?\n/);
+ for(let i=1;i<=n;i++){
+   const root=Math.sqrt(i);
+   const ok=lines.some(line=>{
+     const nums=numbersInLine(line);
+     return nums.length>=2 && Math.abs(nums[0]-i)<1e-9 && Math.abs(nums[1]-root)<0.01;
+   });
+   if(!ok)return false;
+ }
+ return true;
+}
+function matches(e,out,expected,inputs=[]){
+ let o=out.trim().toLowerCase();
+ if(e.match==="structure") return false;
+ if(e.match==="rootpairs") return rootPairsMatch(out,inputs);
+ if(e.match==="allcontains"){
+   let vals=Array.isArray(expected)?expected:[expected];
+   return vals.every(v=>o.includes(String(v).toLowerCase()));
+ }
+ if(e.match==="quadratic"){if(Array.isArray(expected))return expected.every(v=>o.includes(v));return o.includes("no real")||o.includes("no solution")}
+ if(e.match==="ends")return o.endsWith(String(expected).toLowerCase());
+ return o.includes(String(expected).toLowerCase())
+}
+function algorithmicCheck(id,st){
+ const problems=[];
+ if(st.forbidden?.length)problems.push("Do not use break, continue or return as loop-control shortcuts.");
+ if(st.comprehensions)problems.push("Use explicit loops rather than comprehensions.");
+ if(st.shortcuts?.length)problems.push("Avoid shortcut functions: "+st.shortcuts.join(", "));
+ const allowed=["ex02","ex04","ex06","ex07"].includes(id)?["random"]:[];
+ if(st.imports.some(x=>!allowed.includes(x)))problems.push("Only random is permitted, and only in Exercises 2, 4, 6 and 7.");
+ if(st.methods.some(x=>["index","count","sort","find"].includes(x)))problems.push("Implement the algorithm explicitly; do not use index(), count(), sort() or find().");
+ if(id==="ex05"&&st.membership)problems.push("Use element-by-element linear search, not a membership test for Peter.");
+ if(id==="ex02"&&!st.collections.tuple&&!st.collections.constructors.includes("tuple"))problems.push("Store the seven temperatures in a tuple.");
+ return problems;
+}
+async function week6Match(id,out,inputs){return workerTask('match',out,inputs,false,null,id);}
+async function assessExercise(id,updateUI=true){
+ let e=EX.find(x=>x.id===id),s=state(id),el=document.getElementById(id+"-code"),code=el?el.value:s.code;
+ if(el){s.code=code;save(id,s)}
+ let result={id,syntax:false,structure:false,rules:false,functional:false,passed:0,total:e.tests.length,problems:[],missing:[],runtime:null};
+ // Empty and print-only placeholders are not meaningful solutions.
+ const normalizedCode=(code||"").trim();
+ const trivialPrint=/^print\s*\(\s*(?:(?:["'][^"']*["'])|\s*)\s*\)\s*;?\s*$/s.test(normalizedCode);
+ if(!normalizedCode || trivialPrint){
+   result.syntax=!!normalizedCode;
+   result.structure=false; result.rules=false; result.functional=false; result.passed=0;
+   result.problems=[!normalizedCode ? "No solution has been entered yet." : "A print-only placeholder does not solve this exercise."];
+   if(updateUI){const panel=document.getElementById(id+"-panel");if(panel)panel.innerHTML="<span class='bad'>✗ Not completed.</span><br>"+result.problems.map(esc).join("<br>");}
+   return result;
+ }
+
+ try{
+   await ensurePy(); let st=await structure(code); result.syntax=true;
+   result.missing=e.need.filter(n=>!st[n]); result.structure=result.missing.length===0;
+   result.problems=algorithmicCheck(id,st); result.rules=result.problems.length===0;
+   let rows=[],passed=0;
+   for(let t of e.tests){
+     let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code,inputs);
+     if(!r.ok){result.runtime=r.error;break}
+     let ok=await week6Match(id,r.output,inputs);if(ok)passed++;
+     rows.push({inputs,exp:t[1],got:r.output,ok})
+   }
+   result.passed=passed;result.rows=rows;
+   result.functional=e.match==="structure" ? true : (passed===e.tests.length);
+   result.completed=result.syntax&&result.structure&&result.rules&&result.functional&&!result.runtime;
+   if(updateUI){
+     let panel=document.getElementById(id+"-panel");
+     panel.innerHTML="<div class='ok'>✓ Syntax</div>"+
+       "<div class='"+(result.structure?"ok":"bad")+"'>"+(result.structure?"✓":"✗")+" Expected structure</div>"+
+       "<div class='"+(result.rules?"ok":"bad")+"'>"+(result.rules?"✓":"✗")+" Algorithmic structure</div>"+
+       (result.problems.length?result.problems.map(p=>"<div class='bad'>• "+esc(p)+"</div>").join(""):"")+
+       (result.runtime?"<div class='bad'>✗ Runtime: "+esc(result.runtime)+"</div>":
+        "<div class='"+(result.functional?"ok":"bad")+"'>"+(result.functional?"✓":"✗")+" "+(e.match==="structure"?"Functional behaviour checked by structure":"Functional tests: "+passed+" / "+e.tests.length)+"</div>")+
+       rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → "+(r.ok?"passed":"output did not meet the task requirements · got: "+esc(r.got||"(no output)"))+"</div>").join("");
+     if(result.completed){
+       tick();s=state(id);s.completed=true;s.code=code;save(id,s);
+       panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
+       if(active===id)active=null;updateStatus(id);
+     }
+   }
+ }catch(err){result.runtime=String(err);if(updateUI)document.getElementById(id+"-panel").innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+ return result;
+}
+async function checkEx(id){
+ let s=state(id);s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
+ await assessExercise(id,true);
+}
+
+let practiceEvaluation=null;
+function practiceFeedbackPanel(){return `<div class="checkpanel" id="practice-feedback-panel">
+ <h3>Optional feedback</h3>
+ <p>AI feedback and its estimated percentage are separate from the local checks. Both are learning feedback, not official grades. The AI estimate uses equal weight across all seven exercises; unattempted tasks count as zero.</p>
+ <button type="button" id="practice-ai-button" onclick="requestPracticeAI()">Request AI feedback &amp; estimated score</button>
+ <div id="practice-ai-result" role="status"></div>
+ <hr><button type="button" onclick="showPracticeEmail()">Email my evaluation</button>
+ <p class="small">Your dashboard password is required to send this evaluation to your registered email address.</p>
+ <div id="practice-email-form" hidden>
+   <label for="practice-email-password">Dashboard password</label>
+   <input id="practice-email-password" type="password" autocomplete="current-password" maxlength="128">
+   <button type="button" id="practice-email-send" onclick="sendPracticeEmail()">Send evaluation</button>
+ </div>
+ <div id="practice-email-result" role="status"></div>
+ </div>`;}
+function currentPracticeSnapshot(){
+ const ev=practiceEvaluation;
+ if(!ev)throw new Error('Run Evaluate my work first.');
+ if(getNeptun()!==ev.neptun||EX.some(e=>(document.getElementById(e.id+'-code')?.value ?? state(e.id).code ?? '')!==ev.codes[e.id]))throw new Error('Your code or Neptun code has changed. Run Evaluate my work again before requesting AI feedback or email.');
+ return ev;
+}
+async function practiceRequest(ev,action,password){
+ const response=await fetch(PRACTICE_API_BASE+'/practiceFeedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({evaluation_id:ev.evaluation_id,feedback_token:ev.feedback_token,neptun:ev.neptun,action,...(action==='email'?{password}: {})})});
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw new Error(data.error||`Request failed (HTTP ${response.status}).`);
+ return data;
+}
+async function requestPracticeAI(){
+ const button=document.getElementById('practice-ai-button'),box=document.getElementById('practice-ai-result');
+ let ev;
+ try{
+   ev=currentPracticeSnapshot();button.disabled=true;
+   box.textContent='Preparing AI feedback. This may take about a minute…';
+   const data=await practiceRequest(ev,'ai');
+   if(practiceEvaluation!==ev)return;
+   const stale=EX.some(e=>(document.getElementById(e.id+'-code')?.value ?? state(e.id).code ?? '')!==ev.codes[e.id]);
+   box.innerHTML=`<h4>Estimated AI score: ${Number(data.ai.estimated_percent)}%</h4><p class="small">Indicative estimate, not an official grade. Based on the saved evaluation snapshot.${stale?' Your code has since changed; evaluate again for updated feedback.':''}</p>`+data.ai.exercises.map(e=>`<div class="hint"><strong>${esc(e.title)}: ${Number(e.percent)}%</strong><p>${esc(e.feedback).replace(/\n/g,'<br>')}</p></div>`).join('');
+ }catch(error){if(!ev||practiceEvaluation===ev)box.textContent=error.message||'AI feedback is unavailable. The local evaluation remains available.';}
+ finally{button.disabled=false;}
+}
+function showPracticeEmail(){
+ const box=document.getElementById('practice-email-result');
+ try{currentPracticeSnapshot();document.getElementById('practice-email-form').hidden=false;document.getElementById('practice-email-password').focus();box.textContent='The saved local evaluation and any completed AI feedback will be sent. No new AI evaluation is started.';}
+ catch(error){box.textContent=error.message;}
+}
+async function sendPracticeEmail(){
+ const button=document.getElementById('practice-email-send'),box=document.getElementById('practice-email-result'),field=document.getElementById('practice-email-password');
+ let ev;
+ try{ev=currentPracticeSnapshot();if(!field.value)throw new Error('Enter your dashboard password.');button.disabled=true;box.textContent='Verifying your password and sending the evaluation…';
+   const password=field.value;field.value='';
+   const data=await practiceRequest(ev,'email',password);
+   if(practiceEvaluation!==ev)return;
+   box.textContent=data.cached?'This evaluation has already been emailed.':'The email service confirmed sending the evaluation to your registered address.';
+   document.getElementById('practice-email-form').hidden=true;
+ }catch(error){if(!ev||practiceEvaluation===ev)box.textContent=error.message||'Email could not be confirmed.';}
+ finally{field.value='';button.disabled=false;}
+}
+
+async function evaluateWork(){
+ practiceEvaluation=null;
+ tick();
+ const snapshotCodes=Object.fromEntries(EX.map(e=>[e.id,document.getElementById(e.id+"-code")?.value ?? state(e.id).code ?? ""]));
+
+ const btn=document.getElementById("evaluate-work"),box=document.getElementById("evaluation-result");
+ btn.disabled=true;box.innerHTML="<p>Evaluating current solutions…</p>";
+ const results=[];
+ for(const e of EX){
+   const s=state(e.id);
+   if(!s.started && !s.code.trim()){results.push({id:e.id,attempted:false,completed:false});continue}
+   const r=await assessExercise(e.id,false);r.attempted=true;results.push(r);
+ }
+ const attempted=results.filter(r=>r.attempted), completed=results.filter(r=>r.completed);
+ const functional=attempted.filter(r=>r.functional).length, rules=attempted.filter(r=>r.rules&&r.structure).length;
+ let points=0;
+ for(const r of results){
+   if(!r.attempted)continue;
+   points += (r.functional?0.6:0)+(r.structure?0.2:0)+(r.rules?0.2:0);
+ }
+ const score=Math.round(100*points/EX.length);
+ const suggestions=[];
+ if(attempted.length<EX.length)suggestions.push("Continue with the exercises that have not been attempted yet.");
+ if(functional<attempted.length)suggestions.push("Review the task requirements for exercises whose functional tests do not pass.");
+ if(rules<attempted.length)suggestions.push("Review loop choice and structured control flow. Avoid break, continue, and return as loop-control shortcuts.");
+ if(results.some(r=>r.problems?.some(p=>p.includes("condition-controlled while"))))suggestions.push("For search-style tasks, use a while condition that stops the search as soon as the result is known.");
+ if(!suggestions.length)suggestions.push("Your current solutions satisfy the deterministic checks. Try explaining the loop condition and result of each algorithm.");
+ const no=(Number(localStorage.getItem("pycourse_week06_evaluation_no")||"0")+1);
+ localStorage.setItem("pycourse_week06_evaluation_no",String(no));
+
+ if(EX.some(e=>(document.getElementById(e.id+"-code")?.value ?? state(e.id).code ?? "")!==snapshotCodes[e.id])){box.textContent="Your code changed during evaluation. Run Evaluate my work again.";btn.disabled=false;return;}
+ const payload={
+   schema_version:"1.0",
+   week:"06",
+   neptun:getNeptun(),
+   evaluation_no:no,
+   evaluated_at:new Date().toISOString(),
+   indicative_score:score,
+   summary:{attempted:attempted.length,completed:completed.length,functional_passed:functional,rules_passed:rules,total:EX.length},
+   exercises:EX.map(e=>{
+     const s=state(e.id),r=results.find(x=>x.id===e.id)||{};
+     return {
+       exercise_id:e.id,
+       source_code:snapshotCodes[e.id],
+       started:!!s.started,
+       active_time_seconds:Math.round(s.time||0),
+       run_count:s.runs||0,
+       check_count:s.checks||0,
+       hint_count:s.hints||0,
+       attempted:!!r.attempted,
+       completed:!!r.completed,
+       syntax:!!r.syntax,
+       structure:!!r.structure,
+       rules:!!r.rules,
+       functional:!!r.functional,
+       rule_violations:r.problems||[]
+     };
+   })
+ };
+
+ let uploadMessage="<span class='small'>Saving learning analytics to Azure…</span>";
+ box.innerHTML=`<div class="hint"><strong>Indicative evaluation: ${score}%</strong><br>
+ ${completed.length} / ${EX.length} exercises currently completed successfully.<br>
+ Functional correctness: ${functional} / ${attempted.length||0} attempted.<br>
+ Programming and algorithmic rules: ${rules} / ${attempted.length||0} attempted.<br>
+ <strong>This evaluation is for feedback only and does not count toward your course grade.</strong>
+ <br><br><strong>Suggestions</strong><ul>${suggestions.map(x=>"<li>"+esc(x)+"</li>").join("")}</ul>
+ <span class="small">Evaluation #${no}. You can improve your solutions and evaluate again.</span><br>
+ <span id="practice-upload-status">${uploadMessage}</span></div>`;
+ renderSummary();document.getElementById("summary").style.display="block";
+
+ try{
+   if(!validNeptun(payload.neptun)) throw new Error("A valid Neptun code is required.");
+   const resp=await fetch(PRACTICE_API_BASE+"/submitPractice",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify(payload)
+   });
+   const data=await resp.json().catch(()=>({}));
+   if(!resp.ok) throw new Error(data.error||("HTTP "+resp.status));
+   document.getElementById("practice-upload-status").innerHTML="✓ Learning analytics saved successfully.";
+   if(data.evaluation_id && data.feedback_token){
+     practiceEvaluation={evaluation_id:data.evaluation_id,feedback_token:data.feedback_token,neptun:payload.neptun,codes:snapshotCodes};
+     document.getElementById('evaluation-result').insertAdjacentHTML('beforeend',practiceFeedbackPanel());
+   }
+ }catch(err){
+   document.getElementById("practice-upload-status").innerHTML="⚠ Evaluation completed locally, but the analytics upload failed: "+esc(String(err.message||err));
+ }
+ btn.disabled=false;
+}
+function hintEx(id){let s=state(id);s.hints++;save(id,s);document.getElementById(id+"-hints").textContent=s.hints;document.getElementById(id+"-panel").innerHTML+="<div class='hint'>"+esc(EX.find(e=>e.id===id).hint)+"</div>"}
+render();
+document.addEventListener("input",e=>{if(e.target.matches("textarea.code")){const id=e.target.id.replace(/-code$/,"");let s=state(id);s.code=e.target.value;s.completed=false;save(id,s);updateStatus(id)}});
+document.addEventListener("keydown",e=>{if(e.target.matches("textarea.code")&&e.key==="Tab"){e.preventDefault();const el=e.target,a=el.selectionStart,b=el.selectionEnd;el.setRangeText("    ",a,b,"end");el.dispatchEvent(new Event("input",{bubbles:true}))}});
+document.getElementById("save-neptun")?.addEventListener("click",saveNeptun);
+document.getElementById("neptun-code")?.addEventListener("keydown",e=>{if(e.key==="Enter")saveNeptun()});
+document.getElementById("neptun-code")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6)});
+setNeptunUI();
+
+</script>

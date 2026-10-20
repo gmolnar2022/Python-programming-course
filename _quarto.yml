@@ -2,7 +2,8 @@ project:
   type: website
   output-dir: docs
   execute-dir: project
-  resources: 
+  resources:
+    - warmup/assets/**
     - assets/**
     - exercises/assets/**
     - quizzes/assets/**
@@ -27,7 +28,9 @@ project:
     - quizzes/midterm01.qmd
     - exercises/05-class-exercises.qmd
     - student/index.qmd
-    # - lessons/06-basic-algorithms-1.qmd
+    - lessons/06-basic-algorithms-1.qmd
+    - exercises/06-class-exercises.qmd
+    - warmup/06-warmup.qmd
     # - lessons/07-basic-algorithms-2.qmd
     # - lessons/08-functions.qmd
     # - lessons/09-complex-data-types-2.qmd
@@ -46,57 +49,84 @@ website:
   page-navigation: true
   sidebar:
     style: "docked"
+    collapse-level: 1
     contents:
       - href: index.qmd
         text: Home
       - href: student/index.qmd
         text: "My Progress"
-      - section: "Lessons"
+      - section: "Week 01"
         contents:
           - href: lessons/01-introduction-to-programming-and-python.qmd
-            text: "1. Introduction to Programming and Python"
+            text: "Theory: Introduction and Python"
           - href: exercises/01-class-exercises.qmd
-            text: "Class Exercises"
-          # Uncomment lessons below when they are ready to publish:
+            text: "Class exercises"
+      - section: "Week 02"
+        contents:
           - href: lessons/02-simple-data-types.qmd
-            text: "2. Working with Simple Data Types"
+            text: "Theory: Simple Data Types"
           - href: exercises/02-class-exercises.qmd
-            text: "Class Exercises"
+            text: "Class exercises"
+      - section: "Week 03"
+        contents:
           - href: lessons/03-conditional-statements.qmd
-            text: "3. Conditional Statements in Python"
+            text: "Theory: Conditional Statements"
           - href: exercises/03-class-exercises.qmd
-            text: "Class Exercises"
+            text: "Class exercises"
           - href: warmup/03-warmup-practice.qmd
-            text: "Warm-up test sample"  
+            text: "Warm-up test sample"
+      - section: "Week 04"
+        contents:
           - href: lessons/04-loops.qmd
-            text: "4. Loops in Python"
+            text: "Theory: Loops"
           - href: exercises/04-class-exercises.qmd
-            text: "Class Exercises"
+            text: "Class exercises"
           - href: warmup/04-warmup.qmd
-            text: "Week 4 Warm-up Test"
-          - href: quizzes/midterm01-practice.qmd  
-            text: "Midterm 01 test sample"
+            text: "Warm-up test"
+          - href: quizzes/midterm01-practice.qmd
+            text: "Quiz 1: Practice test"
+      - section: "Week 05"
+        contents:
           - href: lessons/05-complex-data-types-1.qmd
-            text: "5. Complex Data Types I"
+            text: "Theory: Complex Data Types I"
           - href: exercises/05-class-exercises.qmd
-            text: "Class Exercises"
+            text: "Class exercises"
           - href: quizzes/midterm01.qmd
-            text: "Quiz 1 — official test"
-
-          # - href: lessons/06-basic-algorithms-1.qmd
-          #   text: "6. Basic Algorithms I"
-          # - href: lessons/07-basic-algorithms-2.qmd
-          #   text: "7. Basic Algorithms II"
-          # - href: lessons/08-functions.qmd
-          #   text: "8. Procedures and Functions"
-          # - href: lessons/09-complex-data-types-2.qmd
-          #   text: "9. Complex Data Types II"
-          # - href: lessons/10-oop.qmd
-          #   text: "10. Object-Oriented Programming"
-          # - href: lessons/11-complex-problem.qmd
-          #   text: "11. Solving a Complex Problem"
-          # - href: lessons/12-review.qmd
-          #   text: "12. Review and Integrated Problem Solving"
+            text: "Quiz 1: Official test"
+      - section: "Week 06"
+        contents:
+          - href: lessons/06-basic-algorithms-1.qmd
+            text: "Theory: Basic Algorithms I"
+          - href: exercises/06-class-exercises.qmd
+            text: "Class exercises"
+          - href: warmup/06-warmup.qmd
+            text: "Warm-up test"
+      # Add each future week only when its material is ready to publish.
+      # Also uncomment its QMD in project.render above.
+      # - section: "Week 07"
+      #   contents:
+      #     - href: lessons/07-basic-algorithms-2.qmd
+      #       text: "Theory: Basic Algorithms II"
+      # - section: "Week 08"
+      #   contents:
+      #     - href: lessons/08-functions.qmd
+      #       text: "Theory: Procedures and Functions"
+      # - section: "Week 09"
+      #   contents:
+      #     - href: lessons/09-complex-data-types-2.qmd
+      #       text: "Theory: Complex Data Types II"
+      # - section: "Week 10"
+      #   contents:
+      #     - href: lessons/10-oop.qmd
+      #       text: "Theory: Object-Oriented Programming"
+      # - section: "Week 11"
+      #   contents:
+      #     - href: lessons/11-complex-problem.qmd
+      #       text: "Theory: Solving a Complex Problem"
+      # - section: "Week 12"
+      #   contents:
+      #     - href: lessons/12-review.qmd
+      #       text: "Theory: Review and Integrated Problem Solving"
       # Uncomment the Assessment section when assessment materials are published:
       # - section: "Assessment"
       #   contents:

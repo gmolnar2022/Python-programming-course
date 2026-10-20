@@ -1,0 +1,343 @@
+---
+title: "Week 6 – Basic Algorithms I"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this week, you should be able to:
+
+- choose a basic algorithm for processing a sequence;
+- decide whether an element with a given property exists;
+- calculate a sum and count elements that satisfy a condition;
+- find the first matching element when its existence is guaranteed;
+- perform a linear search when a match may not exist;
+- find the index and value of the largest element;
+- translate pseudocode into Python using explicit loops and conditions.
+
+::: {.callout-note}
+### Connection to Week 5
+
+We use lists as the main data structure. The algorithms below need only indexing, `len()`, variables, loops, and conditions. Their purpose is to make the processing steps visible, so the examples use explicit loops rather than shortcuts such as `sum()`, `max()`, or comprehensions.
+:::
+
+## 1. Common notation and indexing
+
+A **sequence** contains elements in a defined order. An algorithm processes these elements to answer a question.
+
+| Symbol | Meaning | Python example |
+|---|---|---|
+| `x` | The sequence | `[3, 1, 2, 8, 4]` |
+| `N` | The number of elements | `N = len(x)` |
+| `i` | The current index | `i = 0` |
+| `x[i]` | The element at index `i` | `x[0]` is `3` |
+| `P(x[i])` | A property tested on the current element | `x[i] == 0` |
+
+For example, if the property is “the element is positive”, then `P(x[i])` means `x[i] > 0`.
+
+::: {.callout-important}
+### Indexes start at 0
+
+The original slides use 1-based pseudocode and 0-based Python examples. Here, **both pseudocode and Python use 0-based indexing**: valid indexes are `0` to `N - 1`.
+
+An **index** and an everyday **position** are different: index `3` means the fourth element. Unless stated otherwise, the algorithms below return indexes.
+:::
+
+```python
+x = [3, 1, 2, 8, 4]
+N = len(x)
+
+print("Number of elements:", N)
+print("First element:", x[0])
+print("Last element:", x[N - 1])
+```
+
+```text
+Number of elements: 5
+First element: 3
+Last element: 4
+```
+
+## 2. Decision
+
+**Question:** Is there an element with property `P` in the sequence?
+
+The result is a Boolean value: `True` if at least one matching element exists, otherwise `False`.
+
+### Algorithm / pseudocode
+
+```text
+i = 0
+WHILE i < N AND NOT P(x[i])
+    i = i + 1
+END WHILE
+exists = (i < N)
+```
+
+We move past elements that do not satisfy the property. The loop stops when we find a match or reach the end of the sequence.
+
+### Python example: does the list contain zero?
+
+```python
+x = [3, 1, 2, 8, 4]
+N = len(x)
+i = 0
+
+while i < N and x[i] != 0:
+    i = i + 1
+
+exists = (i < N)
+print("Contains zero:", exists)
+```
+
+```text
+Contains zero: False
+```
+
+::: {.callout-warning}
+### Check the index before accessing the element
+
+Write `i < N` **before** `x[i] != 0`. Python evaluates `and` from left to right and skips the second condition if the first is false. This prevents access to `x[N]`, which is outside the list.
+
+For an empty list, the loop does not run and `exists` is `False`.
+:::
+
+## 3. Summarization
+
+**Question:** What is the sum of the elements in the sequence?
+
+We use an **accumulator**: a variable that stores the running total. Start it at `0`, then add each element exactly once.
+
+### Algorithm / pseudocode
+
+```text
+total = 0
+FOR i FROM 0 TO N - 1
+    total = total + x[i]
+END FOR
+```
+
+### Python example: sum of the elements
+
+```python
+x = [3, 1, 2, 8, 4]
+N = len(x)
+total = 0
+
+for i in range(N):
+    total = total + x[i]
+
+print("Sum of the elements:", total)
+```
+
+```text
+Sum of the elements: 18
+```
+
+The values of `total` after processing each element are `3`, `4`, `6`, `14`, and `18`.
+
+We use the name `total` instead of `sum` to avoid hiding Python's built-in `sum()` function. For an empty list, the total remains `0`.
+
+## 4. Counting
+
+**Question:** How many elements with property `P` are there in the sequence?
+
+Unlike summarization, counting adds **one** for each matching element, not the value of the element.
+
+### Algorithm / pseudocode
+
+```text
+count = 0
+FOR i FROM 0 TO N - 1
+    IF P(x[i])
+        count = count + 1
+    END IF
+END FOR
+```
+
+### Python example: count positive numbers
+
+```python
+x = [3, -1, 0, 8, 4]
+N = len(x)
+count = 0
+
+for i in range(N):
+    if x[i] > 0:
+        count = count + 1
+
+print("Number of positive elements:", count)
+```
+
+```text
+Number of positive elements: 3
+```
+
+The matching elements are `3`, `8`, and `4`. Zero is not positive. If no elements match, including when the list is empty, the result is `0`.
+
+## 5. Selection of an item with a given property
+
+**Question:** What is the index of the first element with property `P`?
+
+**Precondition:** At least one matching element is guaranteed to exist.
+
+### Algorithm / pseudocode
+
+```text
+i = 0
+WHILE NOT P(x[i])
+    i = i + 1
+END WHILE
+index = i
+```
+
+### Python example: find London
+
+```python
+x = ["Budapest", "New York", "Paris", "London", "Los Angeles"]
+i = 0
+
+while x[i] != "London":
+    i = i + 1
+
+index = i
+print("Index of London:", index)
+print("City:", x[index])
+```
+
+```text
+Index of London: 3
+City: London
+```
+
+The loop stops at index `3`, so London is the fourth element.
+
+::: {.callout-warning}
+### A match must exist
+
+This algorithm does not check the end of the sequence. If the match is absent, the code raises an `IndexError`. If existence is not guaranteed, use **linear search** instead.
+:::
+
+## 6. Linear search
+
+**Question:** Does a matching element exist and, if so, what is its first index?
+
+Unlike selection, linear search also handles the case when no match exists.
+
+### Algorithm / pseudocode
+
+```text
+i = 0
+WHILE i < N AND NOT P(x[i])
+    i = i + 1
+END WHILE
+exists = (i < N)
+IF exists
+    index = i
+ELSE
+    index = -1
+END IF
+```
+
+Here, `-1` is a **not-found marker**. It must not be used to access the list when the search fails: `x[-1]` would mean the last element in Python.
+
+### Python example: find the first occurrence of 5
+
+```python
+x = [8, 4, 7, 9, 5, 11]
+N = len(x)
+i = 0
+
+while i < N and x[i] != 5:
+    i = i + 1
+
+exists = (i < N)
+
+if exists:
+    index = i
+    print("Index of the first 5:", index)
+else:
+    index = -1
+    print("There is no 5 among the elements.")
+```
+
+```text
+Index of the first 5: 4
+```
+
+If more than one element matches, this algorithm returns the first matching index. If the list is empty or contains no match, `index` becomes `-1`.
+
+### Decision, selection, or linear search?
+
+| Algorithm | What do we need? | Must a match exist? |
+|---|---|---|
+| Decision | Whether a match exists | No |
+| Selection | The first matching index | Yes |
+| Linear search | Whether a match exists and its first index | No |
+
+Decision and linear search use the same loop. The difference is what information we use after the loop.
+
+## 7. Maximum selection
+
+**Question:** Which is the largest element in the sequence, and where is it?
+
+**Precondition:** The sequence is not empty.
+
+Store the **index of the largest element found so far**. Initially, this is `0`. Compare each remaining element with the current maximum and update the index when a larger value is found.
+
+### Algorithm / pseudocode
+
+```text
+max_index = 0
+FOR i FROM 1 TO N - 1
+    IF x[i] > x[max_index]
+        max_index = i
+    END IF
+END FOR
+maximum = x[max_index]
+```
+
+### Python example: find the maximum
+
+```python
+x = [8, 4, 7, 9, 5, 11]
+N = len(x)
+max_index = 0
+
+for i in range(1, N):
+    if x[i] > x[max_index]:
+        max_index = i
+
+print("Index of the largest element:", max_index)
+print("Largest element:", x[max_index])
+```
+
+```text
+Index of the largest element: 5
+Largest element: 11
+```
+
+::: {.callout-note}
+### Initial value and equal maxima
+
+Initialize the maximum from the **first element**, not from the numeric value `0`: a list can contain only negative numbers. Here, `max_index = 0` stores an index, so the initial candidate is `x[0]`.
+
+Because the comparison uses `>`, equal values do not replace the current candidate. If the maximum occurs several times, the algorithm keeps its **first index**.
+
+We use `max_index` instead of `max` to avoid hiding Python's built-in `max()` function.
+:::
+
+## 8. Summary
+
+| Algorithm | Initial value | Processing | Result |
+|---|---|---|---|
+| Decision | `i = 0` | Stop at the first match or the end | Boolean |
+| Summarization | `total = 0` | Add every element | Sum |
+| Counting | `count = 0` | Add one for each match | Count |
+| Selection | `i = 0` | Stop at the first match; existence guaranteed | Index |
+| Linear search | `i = 0` | Stop at the first match or the end | Index or `-1` |
+| Maximum selection | `max_index = 0` | Compare remaining elements with the best so far | Maximum index and value |
+
+Before choosing an algorithm, identify the required result: **a yes/no answer, a sum, a count, an index, or a maximum**. Then check its assumptions, especially whether the sequence can be empty and whether a match is guaranteed.

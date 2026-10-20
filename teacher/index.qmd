@@ -459,6 +459,8 @@ test period begins when Start succeeds (warmup: 10 minutes; Quiz 1: 45 minutes).
 </select>
 </div>
 
+<button id="exportDashboardButton" type="button" class="teacher-button">Export group to Excel</button>
+
 <button id="refreshButton" class="teacher-button">
 Refresh
 </button>
@@ -617,6 +619,36 @@ function apiUrl(functionName) {
     `?code=${encodeURIComponent(key)}`
   );
 }
+
+
+// Export all semester results for Group, independently of Test / Status filters.
+document.getElementById('exportDashboardButton').addEventListener('click', async () => {
+  const button = document.getElementById('exportDashboardButton');
+  const group = groupFilter.value;
+  if (!group) { setMessage('Select a group (G01–G07) before exporting.', true); return; }
+  if (!getKey()) { setMessage('Enter the teacher key first.', true); return; }
+  button.disabled = true;
+  setMessage(`Preparing the semester results for ${group}…`);
+  let downloadUrl;
+  try {
+    const response = await fetch(apiUrl('exportDashboard') + '&group=' + encodeURIComponent(group), {cache:'no-store'});
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      throw new Error(data.error || `Export failed (HTTP ${response.status}).`);
+    }
+    const blob = await response.blob();
+    downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = downloadUrl;
+    link.download = `dashboard-${group}-${new Date().toISOString().replace(/[:.]/g, '-')}.xlsx`;
+    document.body.appendChild(link); link.click(); link.remove();
+    setMessage(`Excel export downloaded for ${group}. Latest finalized semester results; Test and Status filters do not restrict this export.`);
+  } catch (error) { setMessage(error.message || 'Export failed. Please retry.', true); }
+  finally {
+    button.disabled = false;
+    if (downloadUrl) setTimeout(() => URL.revokeObjectURL(downloadUrl), 60000);
+  }
+});
 
 
 function escapeHtml(value) {
@@ -1029,6 +1061,12 @@ function hiddenTestsHtml(hiddenTests) {
 }
 
 
+function elapsedTime(seconds) {
+  if(typeof seconds !== 'number' || !Number.isFinite(seconds) || seconds < 0) return 'Not recorded';
+  const whole = Math.floor(seconds);
+  return `${Math.floor(whole / 60)} min ${whole % 60} sec`;
+}
+
 function reviewPanelHtml(row) {
   const solutions =
     Array.isArray(row.solutions)
@@ -1046,7 +1084,7 @@ function reviewPanelHtml(row) {
   }
 
   const theory = row.theory ? `<div class="review-panel"><strong>Theory: ${escapeHtml(row.theory.score)} / ${escapeHtml(row.theory.max)}</strong><p>${Object.entries(row.theory.perQuestion||{}).map(([id,ok])=>`Q${escapeHtml(id)}: ${ok?'✓':'✗'} (answer: ${escapeHtml(row.answers?.[id]||'—')})`).join(' · ')}</p></div>` : '';
-  return theory + solutions.map(
+  return `<div class="review-panel"><strong>Time spent: ${escapeHtml(elapsedTime(row.duration_seconds))}</strong><div class="small-muted">Elapsed time from test start to submission, including reading and thinking.</div></div>` + theory + solutions.map(
     (solution, index) => {
       const code =
         solution.code || "";
@@ -1308,6 +1346,7 @@ function renderRows() {
           class="teacher-button save-review">
           ${escapeHtml(actionLabel)}
         </button>
+        ${String(row.group||'').toUpperCase()==='G07' ? '<button type="button" class="teacher-button delete-teacher-test">Delete</button>' : ''}
 
         ${
           isFinal
@@ -1353,6 +1392,29 @@ function renderRows() {
             : "Review details";
       }
     );
+
+    const deleteButton = tr.querySelector('.delete-teacher-test');
+    if(deleteButton) deleteButton.addEventListener('click', async () => {
+      if(!window.confirm(`Delete the G07 test submission for ${row.neptun}?\n\nIts review and saved attempt will be removed from the dashboards. A private backup is kept. This allows a fresh test attempt.`)) return;
+      deleteButton.disabled = true;
+      try {
+        const response = await fetch(apiUrl('deleteTeacherTest'), {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({test_id:row.test_id||testSelect.value,neptun:row.neptun,submission_id:row.submission_id,confirm:true})
+        });
+        const data = await readJsonResponse(response,'Teacher test could not be deleted.');
+        if(!data.success) throw new Error(data.error||'Deletion failed.');
+        // Clear only this browser's matching G07 official-quiz cache, so reload can start anew.
+        if(row.test_id === 'midterm01') {
+          try {
+            const key='python-course-official-midterm01-v1', saved=JSON.parse(localStorage.getItem(key)||'null');
+            if(saved?.attempt?.neptun===row.neptun && saved.attempt.attemptId===row.submission_id) localStorage.removeItem(key);
+          } catch(_) {}
+        }
+        await loadResults();
+        setMessage('G07 test deleted. Open a new classroom code for a fresh attempt.');
+      } catch(error) { setMessage(error.message);deleteButton.disabled = false; }
+    });
 
     const saveButton =
       tr.querySelector(".save-review");

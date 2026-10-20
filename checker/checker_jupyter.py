@@ -21,7 +21,14 @@ TASKS={
 "week03_ex03":{"tests":[(["1","-5","6"],{"numbers":[2,3]}),(["1","0","1"],{"words_any":["no real","no solution"]})],"hint":"Calculate the discriminant first."},
 "week03_ex04":{"tests":[(["14","22","11"],{"numbers":[22]}),(["9","3","5"],{"numbers":[9]}),(["2","4","8"],{"numbers":[8]})],"hint":"Make sure every position can contain the largest value."},
 "week03_ex05":{"tests":[(["Anna","70","60","80"],{"words":["anna","passed"]}),(["Ben","90","35","90"],{"words":["ben","failed"]}),(["Cara","45","45","45"],{"words":["cara","failed"]})],"hint":"Passing requires overall ≥50 and every mark ≥40."},
-"week03_ex06":{"tests":[(["31"],{"words":["hot"]}),(["30"],{"words":["normal"]}),(["10"],{"words":["normal"]}),(["5"],{"words":["cold"]}),(["0"],{"words":["cold"]}),(["-1"],{"words":["freezing"]})],"hint":"Check the boundary values 30, 10 and 0."}
+"week03_ex06":{"tests":[(["31"],{"words":["hot"]}),(["30"],{"words":["normal"]}),(["10"],{"words":["normal"]}),(["5"],{"words":["cold"]}),(["0"],{"words":["cold"]}),(["-1"],{"words":["freezing"]})],"hint":"Check the boundary values 30, 10 and 0."},
+"week04_ex01":{"tests":[(["4"],{"numbers":[1,1,2,2**0.5,3,3**0.5,4,2]})],"hint":"Use a loop from 1 to n and calculate each square root with ** 0.5."},
+"week04_ex02":{"tests":[([],{"numbers":[1024144]})],"hint":"Accumulate the odd numbers in a variable inside a loop."},
+"week04_ex03":{"structure":["loop","if","random"],"hint":"Generate the number with random and test possible divisors in a loop."},
+"week04_ex04":{"tests":[(["2345"],{"numbers":[1000,2,100,3,10,4,1,5]})],"hint":"Use integer division and remainder for each denomination."},
+"week04_ex05":{"structure":["loop","if","random","input"],"hint":"Generate the target once, then repeat guesses for at most 8 attempts."},
+"week04_ex06":{"tests":[(["John","White"],{"words":["jote","etihw nhoj"]})],"hint":"Use string indexing/slicing and concatenation."},
+"week04_ex07":{"tests":[(["2","10"],{"numbers":[2,3,5,7]}),(["10","20"],{"numbers":[11,13,17,19]})],"hint":"Use nested loops: one for candidates and one for possible divisors."}
 }
 def _run(code,inputs=()):
  vals=iter(inputs); out=io.StringIO(); old=builtins.input
@@ -57,11 +64,41 @@ def _special(kind,code):
   expected=calendar.TextCalendar(firstweekday=0).formatmonth(2023,11)
   return out.split()==expected.split(),None
  return False,None
+W4_SHORTCUTS={"sum","min","max","sorted","reversed","enumerate","zip","any","all"}
+def _w4_rules(task_id,code):
+ try:t=ast.parse(code)
+ except SyntaxError as e:return [f"Syntax error: {e.msg}"]
+ imports=[];structures=[];shortcuts=[];methods=[]
+ for n in ast.walk(t):
+  if isinstance(n,ast.Import):imports += [a.name for a in n.names]
+  elif isinstance(n,ast.ImportFrom):imports.append(n.module or '')
+  elif isinstance(n,(ast.List,ast.Tuple,ast.Set,ast.Dict,ast.ListComp,ast.SetComp,ast.DictComp,ast.GeneratorExp)):structures.append(type(n).__name__)
+  elif isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id in W4_SHORTCUTS:shortcuts.append(n.func.id+'()')
+  elif isinstance(n,ast.Call) and isinstance(n.func,ast.Attribute):methods.append(n.func.attr+'()')
+ allowed={'random'} if task_id in {'week04_ex03','week04_ex05'} else set();v=[]
+ if structures:v.append('Do not use complex data structures or comprehensions yet.')
+ if shortcuts:v.append('Avoid Python shortcuts that replace the algorithm: '+', '.join(sorted(set(shortcuts))))
+ if methods:v.append('Avoid data-structure/string methods in these exercises: '+', '.join(sorted(set(methods))))
+ bad=[x for x in imports if x not in allowed]
+ if bad:v.append('Imported modules are not allowed here: '+', '.join(sorted(set(bad))))
+ return v
+def _w4_structure(code):
+ t=ast.parse(code)
+ return {'loop':any(isinstance(n,(ast.For,ast.While)) for n in ast.walk(t)),'if':any(isinstance(n,ast.If) for n in ast.walk(t)),'input':any(isinstance(n,ast.Call) and isinstance(n.func,ast.Name) and n.func.id=='input' for n in ast.walk(t)),'random':any((isinstance(n,ast.Import) and any(a.name=='random' for a in n.names)) or (isinstance(n,ast.ImportFrom) and n.module=='random') for n in ast.walk(t))}
+
 def check_solution(task_id,code):
  if task_id not in TASKS: raise ValueError(f'Unknown task id: {task_id}')
  try:compile(code,'<student-code>','exec')
  except SyntaxError as e:print(f'❌ Syntax error: {e.msg} (line {e.lineno})');return False
  t=TASKS[task_id]
+ if task_id.startswith('week04_'):
+  v=_w4_rules(task_id,code)
+  if v:
+   print('⚠️ Programming rules need attention.');[print('-',x) for x in v];return False
+  if 'structure' in t:
+   st=_w4_structure(code);missing=[x for x in t['structure'] if not st.get(x)]
+   if missing:print('⚠️ Expected structure is missing:',', '.join(missing));print('Hint:',t['hint']);return False
+   print('✅ Your solution follows the expected Week 4 structure and programming rules.');return True
  if 'kind' in t:
   ok,err=_special(t['kind'],code)
   if err:print('❌ Runtime error:',err);return False
@@ -84,3 +121,14 @@ def _find_previous_student_cell():
   return cell
  raise RuntimeError('No previous student code cell was found.')
 def check_previous_cell(task_id):return check_solution(task_id,_find_previous_student_cell())
+
+
+def check_button(task_id,label="Check my solution"):
+ import ipywidgets as widgets
+ from IPython.display import display
+ button=widgets.Button(description=label,button_style="primary",tooltip="Check your solution")
+ output=widgets.Output()
+ def on_click(_):
+  with output:
+   output.clear_output();check_previous_cell(task_id)
+ button.on_click(on_click);display(button,output)
