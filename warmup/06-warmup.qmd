@@ -359,6 +359,9 @@ Enter your **Neptun code** and the **classroom access code** displayed by your i
   let submitting = false;
   let submitted = false;
   let focusViolation = false;
+  let focusProtectionArmed = false;
+  let navigationPromptOpen = false;
+  let focusLossTimer = null;
 
 
 
@@ -725,7 +728,8 @@ Enter your **Neptun code** and the **classroom access code** displayed by your i
 
 
     startTimer();
-    if(focusViolation || document.hidden || !document.hasFocus()) {
+    focusProtectionArmed = true;
+    if(focusViolation || document.hidden) {
       focusViolation = true;
       sessionStorage.setItem(`pycourse_focus_violation_${TEST_ID}_${assignment.assignment_id}`, '1');
       submitSolution('window_switch');
@@ -957,7 +961,7 @@ Enter your **Neptun code** and the **classroom access code** displayed by your i
    */
 
   async function registerFocusLoss() {
-    if(!assignment || submitted || submitting || focusViolation) return;
+    if(!focusProtectionArmed || navigationPromptOpen || !assignment || submitted || submitting || focusViolation) return;
     focusViolation = true;
     sessionStorage.setItem(`pycourse_focus_violation_${TEST_ID}_${assignment.assignment_id}`, '1');
     warningOverlay.style.display = 'none';
@@ -967,10 +971,48 @@ Enter your **Neptun code** and the **classroom access code** displayed by your i
     if(document.hidden) registerFocusLoss();
     else if(focusViolation && assignment && !submitted && !submitting) submitSolution('window_switch');
   });
-  window.addEventListener('blur', registerFocusLoss);
+  window.addEventListener('blur', () => {
+    clearTimeout(focusLossTimer);
+    // Recheck after transient focus changes; tab hiding is handled immediately above.
+    if(navigationPromptOpen) return;
+    focusLossTimer = setTimeout(() => {
+      if(document.hidden || !document.hasFocus()) registerFocusLoss();
+    }, 150);
+  });
   window.addEventListener('focus', () => {
+    clearTimeout(focusLossTimer);
     if(focusViolation && assignment && !submitted && !submitting) submitSolution('window_switch');
   });
+
+  async function guardNavigation(event) {
+    if(!assignment || submitted || submitting || navigationPromptOpen) return;
+    const link = event.target.closest?.('a[href]');
+    if(!link) return;
+    if(link.matches('[data-bs-toggle], [data-toggle], [role="button"]')) return;
+    const href = link.getAttribute('href');
+    if(!href || href.startsWith('#')) return;
+    let target;
+    try { target = new URL(href, document.baseURI); } catch (_) { return; }
+    if(target.href.split('#')[0] === location.href.split('#')[0] && target.hash) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if(focusViolation) return;
+    clearTimeout(focusLossTimer);
+    navigationPromptOpen = true;
+    let confirmed = false;
+    try {
+      confirmed = window.confirm('Leaving this test page will submit your current solution and end the test. Continue?');
+    } finally {
+      navigationPromptOpen = false;
+      clearTimeout(focusLossTimer);
+    }
+    if(!confirmed) return;
+    await registerFocusLoss();
+    // Stay on the page if saving failed, so submission can be retried.
+    if(submitted) location.assign(target.href);
+  }
+  document.addEventListener('click', guardNavigation, true);
+  document.addEventListener('auxclick', guardNavigation, true);
 
   /*
    * Pyodide.
