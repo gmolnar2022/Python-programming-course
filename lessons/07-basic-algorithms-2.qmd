@@ -1,0 +1,389 @@
+---
+title: "Week 7 – Basic Algorithms II"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this part, you should be able to:
+
+- transform every element of a list and store the results in a new list;
+- collect all elements that satisfy a condition;
+- separate a list into two lists according to a condition;
+- sort a list using swap sort, minimum selection sort, and bubble sort;
+- explain the role of the outer and inner loops in each sorting algorithm;
+- translate pseudocode into Python using explicit loops and conditions.
+
+::: {.callout-note}
+### Connection to Week 6
+
+Week 6 focused on producing a single result: a Boolean value, a sum, a count, an index, or a maximum. Here, we create **new sequences** or change the **order** of an existing sequence.
+
+The examples use explicit loops. Built-in shortcuts and comprehensions are useful in other contexts, but these examples show how the algorithms work step by step.
+:::
+
+## 1. Common notation and indexing
+
+| Symbol | Meaning |
+|---|---|
+| `x` | The input list |
+| `N` | The number of elements: `len(x)` |
+| `y`, `z` | New output lists |
+| `i`, `j` | Indexes used in loops |
+| `P(x[i])` | A property, such as `x[i] % 5 == 0` |
+| `f(x[i])` | A transformation, such as `x[i] / 100` |
+
+::: {.callout-important}
+### Indexes start at 0
+
+As in the Week 6 material, **both pseudocode and Python use 0-based indexing**. Valid indexes are `0` to `N - 1`. In pseudocode, `FROM a TO b` includes both endpoints; Python's `range(a, b)` excludes `b`.
+
+`APPEND value TO y` means adding a new element at the end of `y`. In Python, use `y.append(value)`. An empty list does not yet have an element at index `0`: `y[0] = value` would raise an `IndexError`.
+:::
+
+## 2. Copying with transformation
+
+**Question:** How can we process every element and store the transformed values in a new sequence?
+
+For each input element, calculate `f(x[i])` and store it in the corresponding output position. The output has the **same number of elements** as the input.
+
+### Algorithm / pseudocode
+
+```text
+CREATE y WITH N ELEMENTS
+FOR i FROM 0 TO N - 1
+    y[i] = f(x[i])
+END FOR
+```
+
+### Python example: convert centimetres to metres
+
+```python
+values_in_cm = [170, 155, 185, 168, 172]
+N = len(values_in_cm)
+values_in_m = [0] * N
+
+for i in range(N):
+    values_in_m[i] = values_in_cm[i] / 100.0
+
+print("Heights in metres:", values_in_m)
+```
+
+```text
+Heights in metres: [1.7, 1.55, 1.85, 1.68, 1.72]
+```
+
+Here, `f(value)` is division by `100`. This notation describes the transformation; we do not need to define a Python function yet. The original list remains unchanged. For an empty input, the output is also empty.
+
+::: {.callout-note}
+### Copying versus assigning another name
+
+For a plain copy of a list, the transformation can leave every value unchanged: `y[i] = x[i]`.
+
+Writing only `y = x` does **not** create a new list: both names then refer to the same list. The example above creates a separate output list before filling it.
+:::
+
+## 3. Selection of all matching elements
+
+**Question:** Which elements satisfy property `P`?
+
+Start with an empty output list. Visit every input element and append it only if the condition is true. The output may contain no elements, some elements, or all elements.
+
+### Algorithm / pseudocode
+
+```text
+y = EMPTY LIST
+FOR i FROM 0 TO N - 1
+    IF P(x[i])
+        APPEND x[i] TO y
+    END IF
+END FOR
+```
+
+### Python example: collect numbers divisible by 5
+
+```python
+x = [170, 155, 185, 168, 172]
+N = len(x)
+y = []
+
+for i in range(N):
+    if x[i] % 5 == 0:
+        y.append(x[i])
+
+print("Numbers divisible by 5:", y)
+```
+
+```text
+Numbers divisible by 5: [170, 155, 185]
+```
+
+The original order is preserved. Repeated matching values are also preserved: this algorithm does not remove duplicates.
+
+### Selecting indexes instead of values
+
+If we need to know **where** the matching elements occur, append `i` instead of `x[i]`.
+
+```python
+x = [170, 155, 185, 168, 172]
+indexes = []
+
+for i in range(len(x)):
+    if x[i] % 5 == 0:
+        indexes.append(i)
+
+print("Indexes of matching elements:", indexes)
+```
+
+```text
+Indexes of matching elements: [0, 1, 2]
+```
+
+::: {.callout-important}
+### Selection in Week 6 and Week 7
+
+In Week 6, **selection** found the first matching index when a match was guaranteed to exist. Here, **selection of all matching elements** visits the entire list and creates a new list. A match does not need to exist.
+:::
+
+## 4. Separation
+
+**Question:** Which elements satisfy property `P`, and which elements do not?
+
+Create two empty output lists. Every input element goes into **exactly one** of them.
+
+### Algorithm / pseudocode
+
+```text
+y = EMPTY LIST
+z = EMPTY LIST
+FOR i FROM 0 TO N - 1
+    IF P(x[i])
+        APPEND x[i] TO y
+    ELSE
+        APPEND x[i] TO z
+    END IF
+END FOR
+```
+
+### Python example: separate numbers by divisibility by 5
+
+```python
+x = [170, 155, 185, 168, 172]
+N = len(x)
+y = []
+z = []
+
+for i in range(N):
+    if x[i] % 5 == 0:
+        y.append(x[i])
+    else:
+        z.append(x[i])
+
+print("Divisible by 5:", y)
+print("Not divisible by 5:", z)
+```
+
+```text
+Divisible by 5: [170, 155, 185]
+Not divisible by 5: [168, 172]
+```
+
+The order within each output list is preserved. Also, `len(y) + len(z) == len(x)`, because every input element is included once. For an empty input, both outputs are empty.
+
+## 5. Sorting and swapping
+
+**Sorting** rearranges elements into a chosen order. In **ascending order**, every element is less than or equal to the next one.
+
+All three sorting algorithms below change `x` **in place**: they rearrange the existing list rather than creating a separate output list. They preserve all values, including duplicates.
+
+### Swapping two values
+
+Using a temporary variable:
+
+```python
+x = [170, 155]
+temporary = x[0]
+x[0] = x[1]
+x[1] = temporary
+
+print("After swapping:", x)
+```
+
+```text
+After swapping: [155, 170]
+```
+
+Python also supports a shorter form:
+
+```python
+x = [170, 155]
+x[0], x[1] = x[1], x[0]
+print("After swapping:", x)
+```
+
+```text
+After swapping: [155, 170]
+```
+
+Python evaluates the right-hand side before assigning the new values. In the pseudocode below, `SWAP x[i], x[j]` represents this operation.
+
+## 6. Swap sort
+
+**Idea:** Move from left to right. Compare the current element with every element that follows it. Whenever a smaller value is found, swap immediately.
+
+After one complete inner loop, the smallest value in the current unsorted part is at index `i`.
+
+### Algorithm / pseudocode
+
+```text
+FOR i FROM 0 TO N - 2
+    FOR j FROM i + 1 TO N - 1
+        IF x[j] < x[i]
+            SWAP x[i], x[j]
+        END IF
+    END FOR
+END FOR
+```
+
+### Python example: ascending order
+
+```python
+x = [170, 155, 185, 168, 172]
+N = len(x)
+
+for i in range(N - 1):
+    for j in range(i + 1, N):
+        if x[j] < x[i]:
+            x[i], x[j] = x[j], x[i]
+
+print("Sorted list:", x)
+```
+
+```text
+Sorted list: [155, 168, 170, 172, 185]
+```
+
+### Trace after each outer-loop pass
+
+| Completed pass | List | Finalized prefix |
+|---|---|---|
+| `i = 0` | `[155, 170, 185, 168, 172]` | `[155]` |
+| `i = 1` | `[155, 168, 185, 170, 172]` | `[155, 168]` |
+| `i = 2` | `[155, 168, 170, 185, 172]` | `[155, 168, 170]` |
+| `i = 3` | `[155, 168, 170, 172, 185]` | The entire list is sorted |
+
+## 7. Minimum selection sort
+
+**Idea:** For each position, first find the index of the smallest value in the remaining part. After the search is complete, swap that value into the current position.
+
+This reuses the **extreme-value selection** pattern from Week 6, with `<` instead of `>`.
+
+### Algorithm / pseudocode
+
+```text
+FOR i FROM 0 TO N - 2
+    min_index = i
+    FOR j FROM i + 1 TO N - 1
+        IF x[j] < x[min_index]
+            min_index = j
+        END IF
+    END FOR
+    SWAP x[i], x[min_index]
+END FOR
+```
+
+### Python example: ascending order
+
+```python
+x = [170, 155, 185, 168, 172]
+N = len(x)
+
+for i in range(N - 1):
+    min_index = i
+    for j in range(i + 1, N):
+        if x[j] < x[min_index]:
+            min_index = j
+    x[i], x[min_index] = x[min_index], x[i]
+
+print("Sorted list:", x)
+```
+
+```text
+Sorted list: [155, 168, 170, 172, 185]
+```
+
+::: {.callout-warning}
+### The final swap belongs outside the inner loop
+
+The inner loop only finds `min_index`. The swap happens **after** that search, once per outer-loop pass. If `min_index == i`, the assignment swaps an element with itself, which is harmless.
+
+Use `min_index` rather than `min` to avoid hiding Python's built-in `min()` function.
+:::
+
+Swap sort can swap several times in one pass. Minimum selection sort finds the minimum first and performs one final swap assignment per pass.
+
+## 8. Bubble sort
+
+**Idea:** Compare adjacent elements. Swap them if the left value is larger. After a left-to-right pass, the largest value in the current unsorted part has moved to its final position on the right.
+
+Each new pass processes one fewer element because the sorted suffix has grown.
+
+### Algorithm / pseudocode
+
+```text
+FOR end FROM N - 1 DOWN TO 1
+    FOR j FROM 0 TO end - 1
+        IF x[j] > x[j + 1]
+            SWAP x[j], x[j + 1]
+        END IF
+    END FOR
+END FOR
+```
+
+### Python example: ascending order
+
+```python
+x = [170, 155, 185, 168, 172]
+N = len(x)
+
+for end in range(N - 1, 0, -1):
+    for j in range(end):
+        if x[j] > x[j + 1]:
+            x[j], x[j + 1] = x[j + 1], x[j]
+
+print("Sorted list:", x)
+```
+
+```text
+Sorted list: [155, 168, 170, 172, 185]
+```
+
+`range(N - 1, 0, -1)` produces decreasing end indexes, stopping before `0`. The largest possible `j` is `end - 1`, so `j + 1` remains a valid index.
+
+### Trace after each pass
+
+| `end` | List after the pass | Finalized suffix |
+|---|---|---|
+| `4` | `[155, 170, 168, 172, 185]` | `[185]` |
+| `3` | `[155, 168, 170, 172, 185]` | `[172, 185]` |
+| `2` | `[155, 168, 170, 172, 185]` | `[170, 172, 185]` |
+| `1` | `[155, 168, 170, 172, 185]` | The entire list is sorted |
+
+This version always completes its scheduled passes, even if the list becomes sorted earlier. It does not use `break`.
+
+## 9. Summary
+
+| Algorithm | Main operation | Result | Changes the input? |
+|---|---|---|---|
+| Copying with transformation | Transform every element | One output list, same length | No |
+| Selection of all matching elements | Append elements satisfying `P` | One output list | No |
+| Separation | Append each element to one of two lists | Two output lists | No |
+| Swap sort | Compare with later elements; swap immediately | Ascending list | Yes |
+| Minimum selection sort | Find the smallest remaining element; swap afterwards | Ascending list | Yes |
+| Bubble sort | Compare and swap adjacent elements | Ascending list | Yes |
+
+All three sorting examples also handle empty lists, single-element lists, negative values, and repeated values. Their nested loops perform `N * (N - 1) / 2` element comparisons in these unoptimized versions, so the work grows approximately with the square of the list length.
+
+

@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 7 – Basic Algorithms II – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../exercises/07-class-exercises.html" rel="next">
+<link href="../warmup/06-warmup.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/07-basic-algorithms-2.html">Week 07</a></li><li class="breadcrumb-item"><a href="../lessons/07-basic-algorithms-2.html">Theory: Basic Algorithms II</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../student/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My Progress</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Introduction and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Conditional Statements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Practice test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05-complex-data-types-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Complex Data Types I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/05-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Official test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06-basic-algorithms-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Basic Algorithms I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/06-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/06-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 07</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07-basic-algorithms-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Theory: Basic Algorithms II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/07-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/07-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#common-notation-and-indexing" id="toc-common-notation-and-indexing" class="nav-link" data-scroll-target="#common-notation-and-indexing">1. Common notation and indexing</a></li>
+  <li><a href="#copying-with-transformation" id="toc-copying-with-transformation" class="nav-link" data-scroll-target="#copying-with-transformation">2. Copying with transformation</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode" id="toc-algorithm-pseudocode" class="nav-link" data-scroll-target="#algorithm-pseudocode">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-convert-centimetres-to-metres" id="toc-python-example-convert-centimetres-to-metres" class="nav-link" data-scroll-target="#python-example-convert-centimetres-to-metres">Python example: convert centimetres to metres</a></li>
+  </ul></li>
+  <li><a href="#selection-of-all-matching-elements" id="toc-selection-of-all-matching-elements" class="nav-link" data-scroll-target="#selection-of-all-matching-elements">3. Selection of all matching elements</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode-1" id="toc-algorithm-pseudocode-1" class="nav-link" data-scroll-target="#algorithm-pseudocode-1">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-collect-numbers-divisible-by-5" id="toc-python-example-collect-numbers-divisible-by-5" class="nav-link" data-scroll-target="#python-example-collect-numbers-divisible-by-5">Python example: collect numbers divisible by 5</a></li>
+  <li><a href="#selecting-indexes-instead-of-values" id="toc-selecting-indexes-instead-of-values" class="nav-link" data-scroll-target="#selecting-indexes-instead-of-values">Selecting indexes instead of values</a></li>
+  </ul></li>
+  <li><a href="#separation" id="toc-separation" class="nav-link" data-scroll-target="#separation">4. Separation</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode-2" id="toc-algorithm-pseudocode-2" class="nav-link" data-scroll-target="#algorithm-pseudocode-2">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-separate-numbers-by-divisibility-by-5" id="toc-python-example-separate-numbers-by-divisibility-by-5" class="nav-link" data-scroll-target="#python-example-separate-numbers-by-divisibility-by-5">Python example: separate numbers by divisibility by 5</a></li>
+  </ul></li>
+  <li><a href="#sorting-and-swapping" id="toc-sorting-and-swapping" class="nav-link" data-scroll-target="#sorting-and-swapping">5. Sorting and swapping</a>
+  <ul class="collapse">
+  <li><a href="#swapping-two-values" id="toc-swapping-two-values" class="nav-link" data-scroll-target="#swapping-two-values">Swapping two values</a></li>
+  </ul></li>
+  <li><a href="#swap-sort" id="toc-swap-sort" class="nav-link" data-scroll-target="#swap-sort">6. Swap sort</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode-3" id="toc-algorithm-pseudocode-3" class="nav-link" data-scroll-target="#algorithm-pseudocode-3">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-ascending-order" id="toc-python-example-ascending-order" class="nav-link" data-scroll-target="#python-example-ascending-order">Python example: ascending order</a></li>
+  <li><a href="#trace-after-each-outer-loop-pass" id="toc-trace-after-each-outer-loop-pass" class="nav-link" data-scroll-target="#trace-after-each-outer-loop-pass">Trace after each outer-loop pass</a></li>
+  </ul></li>
+  <li><a href="#minimum-selection-sort" id="toc-minimum-selection-sort" class="nav-link" data-scroll-target="#minimum-selection-sort">7. Minimum selection sort</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode-4" id="toc-algorithm-pseudocode-4" class="nav-link" data-scroll-target="#algorithm-pseudocode-4">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-ascending-order-1" id="toc-python-example-ascending-order-1" class="nav-link" data-scroll-target="#python-example-ascending-order-1">Python example: ascending order</a></li>
+  </ul></li>
+  <li><a href="#bubble-sort" id="toc-bubble-sort" class="nav-link" data-scroll-target="#bubble-sort">8. Bubble sort</a>
+  <ul class="collapse">
+  <li><a href="#algorithm-pseudocode-5" id="toc-algorithm-pseudocode-5" class="nav-link" data-scroll-target="#algorithm-pseudocode-5">Algorithm / pseudocode</a></li>
+  <li><a href="#python-example-ascending-order-2" id="toc-python-example-ascending-order-2" class="nav-link" data-scroll-target="#python-example-ascending-order-2">Python example: ascending order</a></li>
+  <li><a href="#trace-after-each-pass" id="toc-trace-after-each-pass" class="nav-link" data-scroll-target="#trace-after-each-pass">Trace after each pass</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">9. Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/07-basic-algorithms-2.html">Week 07</a></li><li class="breadcrumb-item"><a href="../lessons/07-basic-algorithms-2.html">Theory: Basic Algorithms II</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 7 – Basic Algorithms II</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this part, you should be able to:</p>
+<ul>
+<li>transform every element of a list and store the results in a new list;</li>
+<li>collect all elements that satisfy a condition;</li>
+<li>separate a list into two lists according to a condition;</li>
+<li>sort a list using swap sort, minimum selection sort, and bubble sort;</li>
+<li>explain the role of the outer and inner loops in each sorting algorithm;</li>
+<li>translate pseudocode into Python using explicit loops and conditions.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Connection to Week 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Week 6 focused on producing a single result: a Boolean value, a sum, a count, an index, or a maximum. Here, we create <strong>new sequences</strong> or change the <strong>order</strong> of an existing sequence.</p>
+<p>The examples use explicit loops. Built-in shortcuts and comprehensions are useful in other contexts, but these examples show how the algorithms work step by step.</p>
+</div>
+</div>
+</section>
+<section id="common-notation-and-indexing" class="level2">
+<h2 class="anchored" data-anchor-id="common-notation-and-indexing">1. Common notation and indexing</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>x</code></td>
+<td>The input list</td>
+</tr>
+<tr class="even">
+<td><code>N</code></td>
+<td>The number of elements: <code>len(x)</code></td>
+</tr>
+<tr class="odd">
+<td><code>y</code>, <code>z</code></td>
+<td>New output lists</td>
+</tr>
+<tr class="even">
+<td><code>i</code>, <code>j</code></td>
+<td>Indexes used in loops</td>
+</tr>
+<tr class="odd">
+<td><code>P(x[i])</code></td>
+<td>A property, such as <code>x[i] % 5 == 0</code></td>
+</tr>
+<tr class="even">
+<td><code>f(x[i])</code></td>
+<td>A transformation, such as <code>x[i] / 100</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Indexes start at 0
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As in the Week 6 material, <strong>both pseudocode and Python use 0-based indexing</strong>. Valid indexes are <code>0</code> to <code>N - 1</code>. In pseudocode, <code>FROM a TO b</code> includes both endpoints; Python’s <code>range(a, b)</code> excludes <code>b</code>.</p>
+<p><code>APPEND value TO y</code> means adding a new element at the end of <code>y</code>. In Python, use <code>y.append(value)</code>. An empty list does not yet have an element at index <code>0</code>: <code>y[0] = value</code> would raise an <code>IndexError</code>.</p>
+</div>
+</div>
+</section>
+<section id="copying-with-transformation" class="level2">
+<h2 class="anchored" data-anchor-id="copying-with-transformation">2. Copying with transformation</h2>
+<p><strong>Question:</strong> How can we process every element and store the transformed values in a new sequence?</p>
+<p>For each input element, calculate <code>f(x[i])</code> and store it in the corresponding output position. The output has the <strong>same number of elements</strong> as the input.</p>
+<section id="algorithm-pseudocode" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode">Algorithm / pseudocode</h3>
+<pre class="text"><code>CREATE y WITH N ELEMENTS
+FOR i FROM 0 TO N - 1
+    y[i] = f(x[i])
+END FOR</code></pre>
+</section>
+<section id="python-example-convert-centimetres-to-metres" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-convert-centimetres-to-metres">Python example: convert centimetres to metres</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>values_in_cm <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(values_in_cm)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>values_in_m <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> N</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    values_in_m[i] <span class="op">=</span> values_in_cm[i] <span class="op">/</span> <span class="fl">100.0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Heights in metres:"</span>, values_in_m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Heights in metres: [1.7, 1.55, 1.85, 1.68, 1.72]</code></pre>
+<p>Here, <code>f(value)</code> is division by <code>100</code>. This notation describes the transformation; we do not need to define a Python function yet. The original list remains unchanged. For an empty input, the output is also empty.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Copying versus assigning another name
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For a plain copy of a list, the transformation can leave every value unchanged: <code>y[i] = x[i]</code>.</p>
+<p>Writing only <code>y = x</code> does <strong>not</strong> create a new list: both names then refer to the same list. The example above creates a separate output list before filling it.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="selection-of-all-matching-elements" class="level2">
+<h2 class="anchored" data-anchor-id="selection-of-all-matching-elements">3. Selection of all matching elements</h2>
+<p><strong>Question:</strong> Which elements satisfy property <code>P</code>?</p>
+<p>Start with an empty output list. Visit every input element and append it only if the condition is true. The output may contain no elements, some elements, or all elements.</p>
+<section id="algorithm-pseudocode-1" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode-1">Algorithm / pseudocode</h3>
+<pre class="text"><code>y = EMPTY LIST
+FOR i FROM 0 TO N - 1
+    IF P(x[i])
+        APPEND x[i] TO y
+    END IF
+END FOR</code></pre>
+</section>
+<section id="python-example-collect-numbers-divisible-by-5" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-collect-numbers-divisible-by-5">Python example: collect numbers divisible by 5</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x[i] <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        y.append(x[i])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Numbers divisible by 5:"</span>, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Numbers divisible by 5: [170, 155, 185]</code></pre>
+<p>The original order is preserved. Repeated matching values are also preserved: this algorithm does not remove duplicates.</p>
+</section>
+<section id="selecting-indexes-instead-of-values" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-indexes-instead-of-values">Selecting indexes instead of values</h3>
+<p>If we need to know <strong>where</strong> the matching elements occur, append <code>i</code> instead of <code>x[i]</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>indexes <span class="op">=</span> []</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x)):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x[i] <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        indexes.append(i)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Indexes of matching elements:"</span>, indexes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Indexes of matching elements: [0, 1, 2]</code></pre>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Selection in Week 6 and Week 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In Week 6, <strong>selection</strong> found the first matching index when a match was guaranteed to exist. Here, <strong>selection of all matching elements</strong> visits the entire list and creates a new list. A match does not need to exist.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="separation" class="level2">
+<h2 class="anchored" data-anchor-id="separation">4. Separation</h2>
+<p><strong>Question:</strong> Which elements satisfy property <code>P</code>, and which elements do not?</p>
+<p>Create two empty output lists. Every input element goes into <strong>exactly one</strong> of them.</p>
+<section id="algorithm-pseudocode-2" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode-2">Algorithm / pseudocode</h3>
+<pre class="text"><code>y = EMPTY LIST
+z = EMPTY LIST
+FOR i FROM 0 TO N - 1
+    IF P(x[i])
+        APPEND x[i] TO y
+    ELSE
+        APPEND x[i] TO z
+    END IF
+END FOR</code></pre>
+</section>
+<section id="python-example-separate-numbers-by-divisibility-by-5" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-separate-numbers-by-divisibility-by-5">Python example: separate numbers by divisibility by 5</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>z <span class="op">=</span> []</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x[i] <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        y.append(x[i])</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        z.append(x[i])</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Divisible by 5:"</span>, y)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Not divisible by 5:"</span>, z)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Divisible by 5: [170, 155, 185]
+Not divisible by 5: [168, 172]</code></pre>
+<p>The order within each output list is preserved. Also, <code>len(y) + len(z) == len(x)</code>, because every input element is included once. For an empty input, both outputs are empty.</p>
+</section>
+</section>
+<section id="sorting-and-swapping" class="level2">
+<h2 class="anchored" data-anchor-id="sorting-and-swapping">5. Sorting and swapping</h2>
+<p><strong>Sorting</strong> rearranges elements into a chosen order. In <strong>ascending order</strong>, every element is less than or equal to the next one.</p>
+<p>All three sorting algorithms below change <code>x</code> <strong>in place</strong>: they rearrange the existing list rather than creating a separate output list. They preserve all values, including duplicates.</p>
+<section id="swapping-two-values" class="level3">
+<h3 class="anchored" data-anchor-id="swapping-two-values">Swapping two values</h3>
+<p>Using a temporary variable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>temporary <span class="op">=</span> x[<span class="dv">0</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>] <span class="op">=</span> x[<span class="dv">1</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>] <span class="op">=</span> temporary</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After swapping:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>After swapping: [155, 170]</code></pre>
+<p>Python also supports a shorter form:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">0</span>], x[<span class="dv">1</span>] <span class="op">=</span> x[<span class="dv">1</span>], x[<span class="dv">0</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After swapping:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>After swapping: [155, 170]</code></pre>
+<p>Python evaluates the right-hand side before assigning the new values. In the pseudocode below, <code>SWAP x[i], x[j]</code> represents this operation.</p>
+</section>
+</section>
+<section id="swap-sort" class="level2">
+<h2 class="anchored" data-anchor-id="swap-sort">6. Swap sort</h2>
+<p><strong>Idea:</strong> Move from left to right. Compare the current element with every element that follows it. Whenever a smaller value is found, swap immediately.</p>
+<p>After one complete inner loop, the smallest value in the current unsorted part is at index <code>i</code>.</p>
+<section id="algorithm-pseudocode-3" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode-3">Algorithm / pseudocode</h3>
+<pre class="text"><code>FOR i FROM 0 TO N - 2
+    FOR j FROM i + 1 TO N - 1
+        IF x[j] &lt; x[i]
+            SWAP x[i], x[j]
+        END IF
+    END FOR
+END FOR</code></pre>
+</section>
+<section id="python-example-ascending-order" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-ascending-order">Python example: ascending order</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, N):</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x[j] <span class="op">&lt;</span> x[i]:</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>            x[i], x[j] <span class="op">=</span> x[j], x[i]</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sorted list:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sorted list: [155, 168, 170, 172, 185]</code></pre>
+</section>
+<section id="trace-after-each-outer-loop-pass" class="level3">
+<h3 class="anchored" data-anchor-id="trace-after-each-outer-loop-pass">Trace after each outer-loop pass</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Completed pass</th>
+<th>List</th>
+<th>Finalized prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>i = 0</code></td>
+<td><code>[155, 170, 185, 168, 172]</code></td>
+<td><code>[155]</code></td>
+</tr>
+<tr class="even">
+<td><code>i = 1</code></td>
+<td><code>[155, 168, 185, 170, 172]</code></td>
+<td><code>[155, 168]</code></td>
+</tr>
+<tr class="odd">
+<td><code>i = 2</code></td>
+<td><code>[155, 168, 170, 185, 172]</code></td>
+<td><code>[155, 168, 170]</code></td>
+</tr>
+<tr class="even">
+<td><code>i = 3</code></td>
+<td><code>[155, 168, 170, 172, 185]</code></td>
+<td>The entire list is sorted</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="minimum-selection-sort" class="level2">
+<h2 class="anchored" data-anchor-id="minimum-selection-sort">7. Minimum selection sort</h2>
+<p><strong>Idea:</strong> For each position, first find the index of the smallest value in the remaining part. After the search is complete, swap that value into the current position.</p>
+<p>This reuses the <strong>extreme-value selection</strong> pattern from Week 6, with <code>&lt;</code> instead of <code>&gt;</code>.</p>
+<section id="algorithm-pseudocode-4" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode-4">Algorithm / pseudocode</h3>
+<pre class="text"><code>FOR i FROM 0 TO N - 2
+    min_index = i
+    FOR j FROM i + 1 TO N - 1
+        IF x[j] &lt; x[min_index]
+            min_index = j
+        END IF
+    END FOR
+    SWAP x[i], x[min_index]
+END FOR</code></pre>
+</section>
+<section id="python-example-ascending-order-1" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-ascending-order-1">Python example: ascending order</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    min_index <span class="op">=</span> i</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, N):</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x[j] <span class="op">&lt;</span> x[min_index]:</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            min_index <span class="op">=</span> j</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    x[i], x[min_index] <span class="op">=</span> x[min_index], x[i]</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sorted list:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sorted list: [155, 168, 170, 172, 185]</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>The final swap belongs outside the inner loop
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The inner loop only finds <code>min_index</code>. The swap happens <strong>after</strong> that search, once per outer-loop pass. If <code>min_index == i</code>, the assignment swaps an element with itself, which is harmless.</p>
+<p>Use <code>min_index</code> rather than <code>min</code> to avoid hiding Python’s built-in <code>min()</code> function.</p>
+</div>
+</div>
+<p>Swap sort can swap several times in one pass. Minimum selection sort finds the minimum first and performs one final swap assignment per pass.</p>
+</section>
+</section>
+<section id="bubble-sort" class="level2">
+<h2 class="anchored" data-anchor-id="bubble-sort">8. Bubble sort</h2>
+<p><strong>Idea:</strong> Compare adjacent elements. Swap them if the left value is larger. After a left-to-right pass, the largest value in the current unsorted part has moved to its final position on the right.</p>
+<p>Each new pass processes one fewer element because the sorted suffix has grown.</p>
+<section id="algorithm-pseudocode-5" class="level3">
+<h3 class="anchored" data-anchor-id="algorithm-pseudocode-5">Algorithm / pseudocode</h3>
+<pre class="text"><code>FOR end FROM N - 1 DOWN TO 1
+    FOR j FROM 0 TO end - 1
+        IF x[j] &gt; x[j + 1]
+            SWAP x[j], x[j + 1]
+        END IF
+    END FOR
+END FOR</code></pre>
+</section>
+<section id="python-example-ascending-order-2" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-ascending-order-2">Python example: ascending order</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">170</span>, <span class="dv">155</span>, <span class="dv">185</span>, <span class="dv">168</span>, <span class="dv">172</span>]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(x)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> end <span class="kw">in</span> <span class="bu">range</span>(N <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(end):</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x[j] <span class="op">&gt;</span> x[j <span class="op">+</span> <span class="dv">1</span>]:</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>            x[j], x[j <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> x[j <span class="op">+</span> <span class="dv">1</span>], x[j]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sorted list:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sorted list: [155, 168, 170, 172, 185]</code></pre>
+<p><code>range(N - 1, 0, -1)</code> produces decreasing end indexes, stopping before <code>0</code>. The largest possible <code>j</code> is <code>end - 1</code>, so <code>j + 1</code> remains a valid index.</p>
+</section>
+<section id="trace-after-each-pass" class="level3">
+<h3 class="anchored" data-anchor-id="trace-after-each-pass">Trace after each pass</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><code>end</code></th>
+<th>List after the pass</th>
+<th>Finalized suffix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>4</code></td>
+<td><code>[155, 170, 168, 172, 185]</code></td>
+<td><code>[185]</code></td>
+</tr>
+<tr class="even">
+<td><code>3</code></td>
+<td><code>[155, 168, 170, 172, 185]</code></td>
+<td><code>[172, 185]</code></td>
+</tr>
+<tr class="odd">
+<td><code>2</code></td>
+<td><code>[155, 168, 170, 172, 185]</code></td>
+<td><code>[170, 172, 185]</code></td>
+</tr>
+<tr class="even">
+<td><code>1</code></td>
+<td><code>[155, 168, 170, 172, 185]</code></td>
+<td>The entire list is sorted</td>
+</tr>
+</tbody>
+</table>
+<p>This version always completes its scheduled passes, even if the list becomes sorted earlier. It does not use <code>break</code>.</p>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">9. Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algorithm</th>
+<th>Main operation</th>
+<th>Result</th>
+<th>Changes the input?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Copying with transformation</td>
+<td>Transform every element</td>
+<td>One output list, same length</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Selection of all matching elements</td>
+<td>Append elements satisfying <code>P</code></td>
+<td>One output list</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Separation</td>
+<td>Append each element to one of two lists</td>
+<td>Two output lists</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Swap sort</td>
+<td>Compare with later elements; swap immediately</td>
+<td>Ascending list</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>Minimum selection sort</td>
+<td>Find the smallest remaining element; swap afterwards</td>
+<td>Ascending list</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>Bubble sort</td>
+<td>Compare and swap adjacent elements</td>
+<td>Ascending list</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>All three sorting examples also handle empty lists, single-element lists, negative values, and repeated values. Their nested loops perform <code>N * (N - 1) / 2</code> element comparisons in these unoptimized versions, so the work grows approximately with the square of the list length.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../warmup/06-warmup.html" class="pagination-link" aria-label="Warm-up test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Warm-up test</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../exercises/07-class-exercises.html" class="pagination-link" aria-label="Class exercises">
+        <span class="nav-page-text">Class exercises</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

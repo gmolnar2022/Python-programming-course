@@ -3,9 +3,9 @@ project:
   output-dir: docs
   execute-dir: project
   resources:
-    - warmup/assets/**
     - assets/**
     - exercises/assets/**
+    - warmup/assets/**
     - quizzes/assets/**
     - exercises/*-colab.ipynb
     - exercises/*-jupyter.ipynb
@@ -31,8 +31,9 @@ project:
     - lessons/06-basic-algorithms-1.qmd
     - exercises/06-class-exercises.qmd
     - warmup/06-warmup.qmd
-    # - lessons/07-basic-algorithms-2.qmd
-    # - lessons/08-functions.qmd
+    - lessons/07-basic-algorithms-2.qmd
+    - exercises/07-class-exercises.qmd
+    - warmup/07-warmup.qmd
     # - lessons/09-complex-data-types-2.qmd
     # - lessons/10-oop.qmd
     # - lessons/11-complex-problem.qmd
@@ -103,14 +104,14 @@ website:
             text: "Warm-up test"
       # Add each future week only when its material is ready to publish.
       # Also uncomment its QMD in project.render above.
-      # - section: "Week 07"
-      #   contents:
-      #     - href: lessons/07-basic-algorithms-2.qmd
-      #       text: "Theory: Basic Algorithms II"
-      # - section: "Week 08"
-      #   contents:
-      #     - href: lessons/08-functions.qmd
-      #       text: "Theory: Procedures and Functions"
+      - section: "Week 07"
+        contents:
+          - href: lessons/07-basic-algorithms-2.qmd
+            text: "Theory: Basic Algorithms II"
+          - href: exercises/07-class-exercises.qmd
+            text: "Class exercises"
+          - href: warmup/07-warmup.qmd
+            text: "Warm-up test"
       # - section: "Week 09"
       #   contents:
       #     - href: lessons/09-complex-data-types-2.qmd
