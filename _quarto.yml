@@ -7,6 +7,7 @@ project:
     - exercises/assets/**
     - warmup/assets/**
     - quizzes/assets/**
+    - examples/week07/*.py
     - exercises/*-colab.ipynb
     - exercises/*-jupyter.ipynb
   render:
@@ -32,8 +33,11 @@ project:
     - exercises/06-class-exercises.qmd
     - warmup/06-warmup.qmd
     - lessons/07-basic-algorithms-2.qmd
+    - lessons/08-functions.qmd
     - exercises/07-class-exercises.qmd
+    - exercises/08-class-exercises.qmd
     - warmup/07-warmup.qmd
+    - warmup/08-warmup.qmd
     # - lessons/09-complex-data-types-2.qmd
     # - lessons/10-oop.qmd
     # - lessons/11-complex-problem.qmd
@@ -112,6 +116,14 @@ website:
             text: "Class exercises"
           - href: warmup/07-warmup.qmd
             text: "Warm-up test"
+      - section: "Week 08"
+        contents:
+           - href: lessons/08-functions.qmd
+             text: "Theory: Procedures and Functions"
+           - href: exercises/08-class-exercises.qmd
+             text: "Class exercises"
+           - href: warmup/08-warmup.qmd
+             text: "Warm-up test"
       # - section: "Week 09"
       #   contents:
       #     - href: lessons/09-complex-data-types-2.qmd

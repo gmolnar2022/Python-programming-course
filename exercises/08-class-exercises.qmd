@@ -1,0 +1,519 @@
+---
+title: "Class Exercises 8"
+subtitle: "Functions, Procedures and Modules"
+toc: false
+page-layout: full
+---
+
+<style>
+
+body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#222;line-height:1.5}
+h1{margin-bottom:0}.sub{color:#666;margin-bottom:26px}.ex{border:1px solid #ddd;border-radius:9px;padding:18px 20px;margin:18px 0}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}
+.status{font-size:.9rem;padding:5px 9px;background:#f4f4f4;border-radius:5px;white-space:nowrap}.controls button{padding:8px 13px;margin:8px 7px 8px 0;cursor:pointer}
+.workspace{display:none;border-top:1px solid #ddd;margin-top:14px;padding-top:14px}.workspace.active{display:block}
+textarea.code{width:100%;height:220px;box-sizing:border-box;font:14px/1.5 Consolas,monospace;padding:12px;border:1px solid #aaa;border-radius:6px}
+textarea.stdin{width:100%;height:58px;box-sizing:border-box;font:14px Consolas,monospace;padding:8px}
+pre{background:#f6f6f6;border:1px solid #ddd;border-radius:6px;padding:10px;white-space:pre-wrap;min-height:34px}
+.checkpanel{border:1px solid #ddd;border-radius:6px;padding:10px;margin-top:8px}.ok{font-weight:600}.bad{font-weight:600}.small{font-size:.9rem;color:#666}
+.timer{font-variant-numeric:tabular-nums}.hint{background:#f6f6f6;padding:9px;border-radius:5px;margin-top:8px}
+.summary{background:#f7f7f7;padding:12px 15px;border-radius:7px;margin:18px 0}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}
+
+.summary-grid{display:grid;grid-template-columns:1.5fr 1.4fr .9fr .55fr .65fr .55fr;margin-top:12px;border-top:1px solid #ddd;border-left:1px solid #ddd}.summary-grid>div{padding:8px;border-right:1px solid #ddd;border-bottom:1px solid #ddd}.summary-head{font-weight:700;background:#f5f5f5}@media(max-width:760px){.summary-grid{grid-template-columns:1fr 1fr}.summary-head{display:none}}
+
+
+
+
+
+/* Widen only the exercise content; keep Quarto's own page grid intact. */
+.ex,
+#summary {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.workspace,
+.workspace textarea,
+.workspace pre,
+.workspace .output {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+body {
+  overflow-x: clip;
+}
+
+
+
+.version-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.version-box p{margin:.35rem 0 .65rem}.version-links{display:flex;flex-direction:column;gap:.45rem}.version-links a,.version-current{display:block}.version-current{color:#444}
+.student-id-box{border:1px solid #d8dee4;border-radius:10px;padding:16px 18px;margin:0 0 18px;background:#f8f9fa}
+.student-id-row{display:flex;gap:8px;align-items:center;margin:8px 0 4px}
+.student-id-row input{width:150px;padding:8px 10px;border:1px solid #bbb;border-radius:6px;text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1rem}
+.expected-time{font-size:.9rem;color:#555;margin:.2rem 0 .8rem}
+button:disabled{opacity:.5;cursor:not-allowed}
+.live-input[hidden]{display:none}
+.live-input{display:flex;gap:8px;align-items:center;margin:8px 0 12px;flex-wrap:wrap}
+.live-input input{flex:1;min-width:160px;padding:8px;border:1px solid #aaa;border-radius:5px}
+</style>
+
+```{=html}
+<div class="version-box">
+  <strong>Exercise versions</strong>
+  <p class="small">The same exercise set is available in three versions.</p>
+  <div class="version-links">
+    <span class="version-current"><strong>Classroom Version</strong> — you are using this version</span>
+    <a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/08-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab Version</strong> — open the notebook, then choose File → Save a copy in Drive</a>
+    <a href="08-class-exercises-colab.ipynb" download>Download the Colab notebook to upload manually</a>
+    <a href="08-class-exercises-jupyter.ipynb" download><strong>Jupyter Version</strong> — download for Jupyter Notebook or JupyterLab</a>
+  </div>
+</div>
+
+
+<div id="student-identification" class="student-id-box">
+  <label for="neptun-code"><strong>Neptun code</strong></label>
+  <div class="student-id-row">
+    <input id="neptun-code" type="text" maxlength="6" autocomplete="off"
+           placeholder="ABC123" aria-label="Neptun code">
+    <button id="save-neptun" type="button">Save</button>
+  </div>
+  <div id="neptun-message" class="small">
+    Enter your 6-character Neptun code before starting the exercises.
+  </div>
+</div>
+
+<div class="summary"><strong>Programming rules:</strong> use functions and procedures with structured loops and conditions. <strong>Use lambda, map() and filter() only when explicitly requested: here, only in Exercise 5.</strong> Otherwise use structured algorithmic elements. Comprehensions, generators, break, continue and built-in algorithm shortcuts are not permitted. Return values from functions normally, but do not use return to escape a loop. Type annotations are optional. Use random only in Exercise 4; math is optional in Exercise 1. Meaningful input prompts and output labels are welcome. All inputs may be assumed valid. Suggested task time: 160 minutes, leaving 20 minutes for discussion and checking within the 180-minute class.</div>
+<div class="summary"><label><input type="checkbox" id="rules-accepted"> <strong>I understand and accept these programming rules.</strong></label></div>
+<div class="summary"><strong>Working model:</strong> only one exercise can be active at a time. Press <strong>Start/Continue</strong> to open its editor and start its active-time clock. Press <strong>Stop</strong> to pause and save it. Code and progress are stored in this browser.</div>
+<div id="list"></div>
+<section class="ex" id="evaluation-box">
+  <h2>Evaluate my work</h2>
+  <p>Run an indicative evaluation of your current Week 8 solutions.</p>
+  <p class="small"><strong>This evaluation is for feedback only and does not count toward your course grade.</strong></p>
+  <button id="evaluate-work" onclick="evaluateWork()">Evaluate my work</button>
+  <div id="evaluation-result"></div>
+</section>
+<div id="summary" style="display:none"></div>
+```
+
+<script>
+const PRACTICE_API_BASE = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
+const COURSE_CONFIG = {
+  requireNeptun: true,
+  showExpectedTime: true,
+  expectedTimeMinutes: 20,
+  enableAI: true,
+  enableAIScoring: true,
+  enableExport: false,
+  enableImport: false,
+  enableTracking: true,
+  enableSubmission: false
+};
+
+
+const EX=[{"id": "ex01", "title": "Exercise 1 – Prime numbers (20 minutes)", "description": "Define is_prime(n), returning a Boolean for an integer n. Values below 2 are not prime. Test possible divisors from 2 while divisor * divisor <= n, stopping when a divisor is found through the loop condition, not break or return inside the loop. Use the function to collect and display all primes from 1 to 100 as a list. Optional extension: implement a Fermat test and try base 2 with 341; passing this test does not prove primality. Type annotations are optional.", "pseudocode": "FUNCTION is_prime(n):\n    prime ← (n >= 2)\n    divisor ← 2\n    WHILE prime AND divisor * divisor <= n:\n        IF n MOD divisor = 0:\n            prime ← False\n        divisor ← divisor + 1\n    RETURN prime\nprimes ← empty list\nFOR n FROM 1 TO 100:\n    IF is_prime(n): APPEND n TO primes\nDISPLAY primes", "task": "<p>Define is_prime(n), returning a Boolean for an integer n. Values below 2 are not prime. Test possible divisors from 2 while divisor * divisor &lt;= n, stopping when a divisor is found through the loop condition, not break or return inside the loop. Use the function to collect and display all primes from 1 to 100 as a list. Optional extension: implement a Fermat test and try base 2 with 341; passing this test does not prove primality. Type annotations are optional.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FUNCTION is_prime(n):\n    prime ← (n &gt;= 2)\n    divisor ← 2\n    WHILE prime AND divisor * divisor &lt;= n:\n        IF n MOD divisor = 0:\n            prime ← False\n        divisor ← divisor + 1\n    RETURN prime\nprimes ← empty list\nFOR n FROM 1 TO 100:\n    IF is_prime(n): APPEND n TO primes\nDISPLAY primes</pre></details>", "starter": "def is_prime(n):\n    # Test divisors up to the square root.\n    pass\n\n# Use is_prime to collect primes from 1 to 100 and display the list.\n", "tests": [[[], null]], "need": ["function", "loop", "while", "print"], "match": "week8", "hint": "Use a Boolean flag in the while condition. Return the result after the loop. 1 is not prime.", "probe": "for n, expected in [(-7,False),(0,False),(1,False),(2,True),(3,True),(4,False),(25,False),(49,False),(97,True),(121,False),(341,False)]:\n    assert type(is_prime(n)) is bool and is_prime(n)==expected, \"Incorrect is_prime result for \" + str(n)\nassert _has_list(_main_output, [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97]), \"Display all primes from 1 to 100 as a list.\"\n"}, {"id": "ex02", "title": "Exercise 2 – Fibonacci procedure and default arguments (20 minutes)", "description": "Define a procedure-style function fibonacci(n, first=1, second=1). The n parameter is mandatory; both starting values are optional. Display the first n terms as a Python list and return None. Here n is a non-negative integer and counts terms, not the last index: n = 0 gives [], n = 1 gives [first]. For later terms add the previous two. Read n and demonstrate fibonacci(n), then fibonacci(n, 0, 1). The required defaults are 1 and 1, although the familiar alternative starts with 0 and 1.", "pseudocode": "PROCEDURE fibonacci(n, first = 1, second = 1):\n    terms ← empty list\n    previous ← first\n    current ← second\n    REPEAT n TIMES:\n        APPEND previous TO terms\n        next_value ← previous + current\n        previous ← current\n        current ← next_value\n    DISPLAY terms\nREAD n\nCALL fibonacci(n)\nCALL fibonacci(n, 0, 1)", "task": "<p>Define a procedure-style function fibonacci(n, first=1, second=1). The n parameter is mandatory; both starting values are optional. Display the first n terms as a Python list and return None. Here n is a non-negative integer and counts terms, not the last index: n = 0 gives [], n = 1 gives [first]. For later terms add the previous two. Read n and demonstrate fibonacci(n), then fibonacci(n, 0, 1). The required defaults are 1 and 1, although the familiar alternative starts with 0 and 1.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>PROCEDURE fibonacci(n, first = 1, second = 1):\n    terms ← empty list\n    previous ← first\n    current ← second\n    REPEAT n TIMES:\n        APPEND previous TO terms\n        next_value ← previous + current\n        previous ← current\n        current ← next_value\n    DISPLAY terms\nREAD n\nCALL fibonacci(n)\nCALL fibonacci(n, 0, 1)</pre></details>", "starter": "def fibonacci(n, first=1, second=1):\n    # Build and display the first n terms. No result value is needed.\n    pass\n\nn = int(input(\"Number of terms: \"))\nfibonacci(n)\nfibonacci(n, 0, 1)\n", "tests": [[["6"], null]], "need": ["function", "loop", "print", "input"], "match": "week8", "hint": "The first list starts 1, 1, 2, 3. The second starts 0, 1, 1, 2. Save the next value before updating both previous values.", "probe": "import inspect\n_parameters=inspect.signature(fibonacci).parameters\nassert _parameters[\"n\"].default is inspect.Parameter.empty and _parameters[\"first\"].default==1 and _parameters[\"second\"].default==1, \"n must be mandatory; both starting values default to 1.\"\nassert _has_list(_main_output,[1,1,2,3,5,8]) and _has_list(_main_output,[0,1,1,2,3,5]), \"Demonstrate both starting-value choices.\"\nfor args, expected in [((0,),[]),((1,),[1]),((6,),[1,1,2,3,5,8]),((6,0,1),[0,1,1,2,3,5]),((5,2,3),[2,3,5,8,13])]:\n    result, text = _capture(fibonacci,*args)\n    assert result is None and _has_list(text,expected), \"Incorrect Fibonacci list or procedure return value.\"\n"}, {"id": "ex03", "title": "Exercise 3 – Factorial, binomial coefficients and Pascal’s triangle (30 minutes)", "description": "Define factorial(n) for non-negative integers, including factorial(0) = 1. Define binomial(n, r), using your factorial function, for 0 <= r <= n; return an integer using exact integer division. Define a procedure pascal(rows) that displays the first rows rows of Pascal's triangle, one Python list per line, using binomial. Row numbering starts at 0: the first row is [1]. rows = 0 prints no rows. Read the number of rows and call pascal. You may use iteration or recursion for factorial; do not use math.factorial or math.comb.", "pseudocode": "FUNCTION factorial(n):\n    result ← 1\n    FOR value FROM 1 TO n: result ← result * value\n    RETURN result\nFUNCTION binomial(n, r):\n    RETURN factorial(n) DIV (factorial(r) * factorial(n - r))\nPROCEDURE pascal(rows):\n    FOR n FROM 0 TO rows - 1:\n        row ← empty list\n        FOR r FROM 0 TO n: APPEND binomial(n, r) TO row\n        DISPLAY row\nREAD rows\nCALL pascal(rows)", "task": "<p>Define factorial(n) for non-negative integers, including factorial(0) = 1. Define binomial(n, r), using your factorial function, for 0 &lt;= r &lt;= n; return an integer using exact integer division. Define a procedure pascal(rows) that displays the first rows rows of Pascal&#x27;s triangle, one Python list per line, using binomial. Row numbering starts at 0: the first row is [1]. rows = 0 prints no rows. Read the number of rows and call pascal. You may use iteration or recursion for factorial; do not use math.factorial or math.comb.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FUNCTION factorial(n):\n    result ← 1\n    FOR value FROM 1 TO n: result ← result * value\n    RETURN result\nFUNCTION binomial(n, r):\n    RETURN factorial(n) DIV (factorial(r) * factorial(n - r))\nPROCEDURE pascal(rows):\n    FOR n FROM 0 TO rows - 1:\n        row ← empty list\n        FOR r FROM 0 TO n: APPEND binomial(n, r) TO row\n        DISPLAY row\nREAD rows\nCALL pascal(rows)</pre></details>", "starter": "def factorial(n):\n    pass\n\ndef binomial(n, r):\n    # Use factorial and integer division.\n    pass\n\ndef pascal(rows):\n    # Print one row list per line.\n    pass\n\nrows = int(input(\"Number of rows: \"))\npascal(rows)\n", "tests": [[["5"], null]], "need": ["function", "loop", "input", "print"], "match": "week8", "hint": "Initialize the factorial accumulator to 1. For row n, calculate binomial(n, r) for r from 0 through n.", "probe": "for n,v in [(0,1),(1,1),(5,120),(10,3628800)]: assert type(factorial(n)) is int and factorial(n)==v, \"Incorrect factorial.\"\nfor n,r,v in [(0,0,1),(5,0,1),(5,2,10),(5,5,1),(10,3,120)]: assert type(binomial(n,r)) is int and binomial(n,r)==v, \"Incorrect integer binomial coefficient.\"\n_expected_rows=[[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]\nassert _lists(_main_output)==_expected_rows, \"Display the first five Pascal rows as lists.\"\nfor rows in [0,1,5]:\n    result,text=_capture(pascal,rows)\n    assert result is None and _lists(text)==_expected_rows[:rows], \"Incorrect Pascal procedure.\"\n"}, {"id": "ex04", "title": "Exercise 4 – A program organised into functions (20 minutes)", "description": "Define generate_numbers(n, a, b), returning a list of n random integers from a to b inclusive; sort_numbers(values), returning a new ascending list without changing values; and show_lists(original, ordered), displaying both lists and returning None. Use an explicit generation loop and one of the sorting algorithms from Week 7, not sorted() or sort(). Read n, a and b, then call the three functions. Assume n >= 0 and integer a <= b; duplicates are allowed. Keep the original list intact so it can be shown alongside the sorted one.", "pseudocode": "FUNCTION generate_numbers(n, a, b):\n    GENERATE n random integers in [a,b] using a loop INTO values\n    RETURN values\nFUNCTION sort_numbers(values):\n    COPY values element by element INTO ordered\n    SORT ordered with a previously learned explicit algorithm\n    RETURN ordered\nPROCEDURE show_lists(original, ordered):\n    DISPLAY original\n    DISPLAY ordered\nREAD n, a, b\noriginal ← generate_numbers(n,a,b)\nordered ← sort_numbers(original)\nCALL show_lists(original,ordered)", "task": "<p>Define generate_numbers(n, a, b), returning a list of n random integers from a to b inclusive; sort_numbers(values), returning a new ascending list without changing values; and show_lists(original, ordered), displaying both lists and returning None. Use an explicit generation loop and one of the sorting algorithms from Week 7, not sorted() or sort(). Read n, a and b, then call the three functions. Assume n &gt;= 0 and integer a &lt;= b; duplicates are allowed. Keep the original list intact so it can be shown alongside the sorted one.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FUNCTION generate_numbers(n, a, b):\n    GENERATE n random integers in [a,b] using a loop INTO values\n    RETURN values\nFUNCTION sort_numbers(values):\n    COPY values element by element INTO ordered\n    SORT ordered with a previously learned explicit algorithm\n    RETURN ordered\nPROCEDURE show_lists(original, ordered):\n    DISPLAY original\n    DISPLAY ordered\nREAD n, a, b\noriginal ← generate_numbers(n,a,b)\nordered ← sort_numbers(original)\nCALL show_lists(original,ordered)</pre></details>", "starter": "import random\n\ndef generate_numbers(n, a, b):\n    pass\n\ndef sort_numbers(values):\n    pass\n\ndef show_lists(original, ordered):\n    pass\n\nn = int(input(\"Number of values: \"))\na = int(input(\"Lower bound: \"))\nb = int(input(\"Upper bound: \"))\n# Call the functions and display both lists.\n", "tests": [[["8", "-5", "5"], null]], "need": ["function", "loop", "nested_loop", "input", "random", "print"], "match": "week8", "hint": "Make a separate list before sorting; ordered = values would refer to the same object.", "probe": "shown=_lists(_main_output)\nassert len(shown)==2 and len(shown[0])==8 and all(type(v) is int and -5<=v<=5 for v in shown[0]) and shown[1]==sorted(shown[0]), \"Show original and sorted lists.\"\nfor n,a,b in [(0,1,2),(1,-3,-3),(12,-2,2)]:\n    values=generate_numbers(n,a,b)\n    assert isinstance(values,list) and len(values)==n and all(type(v) is int and a<=v<=b for v in values), \"Incorrect generation.\"\nfor values in [[],[3],[3,1,3,-2],[-1,-7,-2]]:\n    before=values.copy(); ordered=sort_numbers(values)\n    assert values==before and ordered==sorted(before) and ordered is not values, \"Sort a separate copy.\"\nresult,text=_capture(show_lists,[3,1],[1,3]);assert result is None and _lists(text)==[[3,1],[1,3]], \"Incorrect display procedure.\"\n"}, {"id": "ex05", "title": "Exercise 5 – Character frequencies, map and filter (20 minutes)", "description": "Define char_frequencies(text), returning a dictionary of character counts using an explicit loop. Ignore ordinary spaces; preserve letter case and count other non-space characters as written. Read a text and display the dictionary. Then use map() with a lambda to double each dictionary value, rebuilding a dictionary with the same keys. Finally use filter() with a lambda on that doubled dictionary to keep entries whose values are divisible by 3. Display original counts, doubled counts and the filtered dictionary in that order. For \"Hello World\", the last dictionary is {\"l\": 6}. Lambda, map and filter are specifically requested in this exercise only.", "pseudocode": "FUNCTION char_frequencies(text):\n    counts ← empty dictionary\n    FOR character IN text:\n        IF character != space:\n            IF character not in counts: counts[character] ← 0\n            counts[character] ← counts[character] + 1\n    RETURN counts\nREAD text\ncounts ← char_frequencies(text)\ndoubled ← DICTIONARY(MAP(lambda pair: (key, value * 2), counts.items()))\nfiltered ← DICTIONARY(FILTER(lambda pair: value MOD 3 = 0, doubled.items()))\nDISPLAY counts\nDISPLAY doubled\nDISPLAY filtered", "task": "<p>Define char_frequencies(text), returning a dictionary of character counts using an explicit loop. Ignore ordinary spaces; preserve letter case and count other non-space characters as written. Read a text and display the dictionary. Then use map() with a lambda to double each dictionary value, rebuilding a dictionary with the same keys. Finally use filter() with a lambda on that doubled dictionary to keep entries whose values are divisible by 3. Display original counts, doubled counts and the filtered dictionary in that order. For &quot;Hello World&quot;, the last dictionary is {&quot;l&quot;: 6}. Lambda, map and filter are specifically requested in this exercise only.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FUNCTION char_frequencies(text):\n    counts ← empty dictionary\n    FOR character IN text:\n        IF character != space:\n            IF character not in counts: counts[character] ← 0\n            counts[character] ← counts[character] + 1\n    RETURN counts\nREAD text\ncounts ← char_frequencies(text)\ndoubled ← DICTIONARY(MAP(lambda pair: (key, value * 2), counts.items()))\nfiltered ← DICTIONARY(FILTER(lambda pair: value MOD 3 = 0, doubled.items()))\nDISPLAY counts\nDISPLAY doubled\nDISPLAY filtered</pre></details>", "starter": "def char_frequencies(text):\n    # Count non-space characters with an explicit loop.\n    pass\n\ntext = input(\"Text: \")\n# Call char_frequencies, then use map/lambda and filter/lambda.\n", "tests": [[["Hello World"], null]], "need": ["function", "loop", "input", "lambda", "map", "filter", "print"], "match": "week8", "hint": "Use counts.items() to pass key-value pairs to map and filter. Filter the doubled counts, not the original dictionary.", "probe": "for text,expected in [(\"\",{}),(\"   \",{}),(\"Hello World\",{\"H\":1,\"e\":1,\"l\":3,\"o\":2,\"W\":1,\"r\":1,\"d\":1}),(\"aaA a!\",{\"a\":3,\"A\":1,\"!\":1})]:\n    assert char_frequencies(text)==expected, \"Incorrect frequency dictionary.\"\nassert _dicts(_main_output)==[{\"H\":1,\"e\":1,\"l\":3,\"o\":2,\"W\":1,\"r\":1,\"d\":1},{\"H\":2,\"e\":2,\"l\":6,\"o\":4,\"W\":2,\"r\":2,\"d\":2},{\"l\":6}], \"Show counts, doubled counts and filtered doubled counts.\"\n"}, {"id": "ex06", "title": "Exercise 6 – A module for 3D vectors (30 minutes)", "description": "Write two virtual files in the editor, keeping the exact marker lines # === vectors.py === and # === main.py ===. In vectors.py define add(u, v), subtract(u, v), scalar_multiply(k, v), and dot(u, v). Vectors are lists or tuples of exactly three real coordinates. The first three functions return a list or tuple of three coordinates; dot returns a number. Use explicit arithmetic or loops, not sum(), comprehensions or map(). In main.py import vectors and demonstrate all four operations with u = [1, 2, 3], v = [4, -1, 2], k = 2. Display the two vector results and scalar-multiplication result as lists, then the dot product. The browser provides a temporary in-memory vectors module for this exercise; no filesystem or Python import tricks are needed in your solution. Outside this page, save the two marked sections as real vectors.py and main.py files.", "pseudocode": "FILE vectors.py:\n    FUNCTION add(u,v): RETURN the three coordinate sums\n    FUNCTION subtract(u,v): RETURN the three coordinate differences\n    FUNCTION scalar_multiply(k,v): RETURN each coordinate multiplied by k\n    FUNCTION dot(u,v): RETURN u[0]*v[0] + u[1]*v[1] + u[2]*v[2]\nFILE main.py:\n    IMPORT vectors\n    u ← [1,2,3]; v ← [4,-1,2]; k ← 2\n    DISPLAY LIST(vectors.add(u,v))\n    DISPLAY LIST(vectors.subtract(u,v))\n    DISPLAY LIST(vectors.scalar_multiply(k,v))\n    DISPLAY vectors.dot(u,v)", "task": "<p>Write two virtual files in the editor, keeping the exact marker lines # === vectors.py === and # === main.py ===. In vectors.py define add(u, v), subtract(u, v), scalar_multiply(k, v), and dot(u, v). Vectors are lists or tuples of exactly three real coordinates. The first three functions return a list or tuple of three coordinates; dot returns a number. Use explicit arithmetic or loops, not sum(), comprehensions or map(). In main.py import vectors and demonstrate all four operations with u = [1, 2, 3], v = [4, -1, 2], k = 2. Display the two vector results and scalar-multiplication result as lists, then the dot product. The browser provides a temporary in-memory vectors module for this exercise; no filesystem or Python import tricks are needed in your solution. Outside this page, save the two marked sections as real vectors.py and main.py files.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FILE vectors.py:\n    FUNCTION add(u,v): RETURN the three coordinate sums\n    FUNCTION subtract(u,v): RETURN the three coordinate differences\n    FUNCTION scalar_multiply(k,v): RETURN each coordinate multiplied by k\n    FUNCTION dot(u,v): RETURN u[0]*v[0] + u[1]*v[1] + u[2]*v[2]\nFILE main.py:\n    IMPORT vectors\n    u ← [1,2,3]; v ← [4,-1,2]; k ← 2\n    DISPLAY LIST(vectors.add(u,v))\n    DISPLAY LIST(vectors.subtract(u,v))\n    DISPLAY LIST(vectors.scalar_multiply(k,v))\n    DISPLAY vectors.dot(u,v)</pre></details>", "starter": "# === vectors.py ===\ndef add(u, v):\n    pass\n\ndef subtract(u, v):\n    pass\n\ndef scalar_multiply(k, v):\n    pass\n\ndef dot(u, v):\n    pass\n\n# === main.py ===\nimport vectors\n\nu = [1, 2, 3]\nv = [4, -1, 2]\nk = 2\n# Call and display one example of each operation.\n", "tests": [[[], null]], "need": ["function", "vectors", "print"], "match": "week8", "hint": "Keep both marker lines. Define functions in vectors.py and call them through the imported module in main.py.", "probe": "assert _lists(_main_output)==[[5,1,5],[-3,3,1],[8,-2,4]], \"Show addition, subtraction and scalar multiplication in that order.\"\nassert _last_number(_main_output)==8, \"Show the dot product last.\"\nfor u,v,k in [([1,2,3],[4,-1,2],2),([0,0,0],[1.5,-2,4],-3),([-1,2.5,0],[3,0,-4],0)]:\n    assert list(vectors.add(u,v))==[u[i]+v[i] for i in range(3)], \"Incorrect vector addition.\"\n    assert list(vectors.subtract(u,v))==[u[i]-v[i] for i in range(3)], \"Incorrect vector subtraction.\"\n    assert list(vectors.scalar_multiply(k,v))==[k*v[i] for i in range(3)], \"Incorrect scalar multiplication.\"\n    assert vectors.dot(u,v)==sum(u[i]*v[i] for i in range(3)), \"Incorrect dot product.\"\n"}, {"id": "ex07", "title": "Exercise 7 – Palindromic numbers (20 minutes)", "description": "Define is_palindromic(n), returning a Boolean for a non-negative integer. Reverse its digits with structured loops and arithmetic: repeatedly use % 10 and // 10, preserving the original number. Treat 0 as palindromic. Use the function to collect and display all palindromic numbers from 1 to 500 inclusive as a Python list. Do not reverse strings by slicing or use reversed(), map(), filter() or lambdas. This is Exercise 7 of the class exercise set.", "pseudocode": "FUNCTION is_palindromic(n):\n    original ← n\n    remaining ← n\n    reverse_number ← 0\n    WHILE remaining > 0:\n        digit ← remaining MOD 10\n        reverse_number ← reverse_number * 10 + digit\n        remaining ← remaining DIV 10\n    RETURN reverse_number = original\npalindromes ← empty list\nFOR n FROM 1 TO 500:\n    IF is_palindromic(n): APPEND n TO palindromes\nDISPLAY palindromes", "task": "<p>Define is_palindromic(n), returning a Boolean for a non-negative integer. Reverse its digits with structured loops and arithmetic: repeatedly use % 10 and // 10, preserving the original number. Treat 0 as palindromic. Use the function to collect and display all palindromic numbers from 1 to 500 inclusive as a Python list. Do not reverse strings by slicing or use reversed(), map(), filter() or lambdas. This is Exercise 7 of the class exercise set.</p><details><summary><strong>Algorithm / pseudocode</strong> (click to expand)</summary><pre>FUNCTION is_palindromic(n):\n    original ← n\n    remaining ← n\n    reverse_number ← 0\n    WHILE remaining &gt; 0:\n        digit ← remaining MOD 10\n        reverse_number ← reverse_number * 10 + digit\n        remaining ← remaining DIV 10\n    RETURN reverse_number = original\npalindromes ← empty list\nFOR n FROM 1 TO 500:\n    IF is_palindromic(n): APPEND n TO palindromes\nDISPLAY palindromes</pre></details>", "starter": "def is_palindromic(n):\n    # Reverse the digits using arithmetic and a loop.\n    pass\n\n# Collect and display the palindromic numbers from 1 through 500.\n", "tests": [[[], null]], "need": ["function", "loop", "while", "print"], "match": "week8", "hint": "Keep the original n for comparison. For n = 0 the digit loop does not run and the reversed value stays 0.", "probe": "for n,expected in [(0,True),(1,True),(10,False),(11,True),(100,False),(121,True),(341,False),(499,False),(500,False),(1001,True)]:\n    assert type(is_palindromic(n)) is bool and is_palindromic(n)==expected, \"Incorrect palindrome result for \"+str(n)\nexpected=[n for n in range(1,501) if str(n)==str(n)[::-1]]\nassert _has_list(_main_output,expected), \"Display all palindromic numbers from 1 to 500.\"\n"}];
+let active=null, lastTick=Date.now();
+
+function key(id){return "pycourse_week08_"+id}
+function state(id){return JSON.parse(localStorage.getItem(key(id))||'{"code":"","time":0,"runs":0,"checks":0,"hints":0,"completed":false,"started":false}')}
+function save(id,o){localStorage.setItem(key(id),JSON.stringify(o))}
+function fmt(s){s=Math.floor(s);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function renderSummary(){
+ let cells=EX.map(e=>{let s=state(e.id),status=s.completed?"✓ Completed":s.started?"In progress / paused":"Not started";return `<div>${e.title}</div><div>${status}</div><div>${fmt(s.time)}</div><div>${s.runs}</div><div>${s.checks}</div><div>${s.hints}</div>`}).join("");
+ let total=EX.reduce((a,e)=>a+state(e.id).time,0), done=EX.filter(e=>state(e.id).completed).length;
+ document.getElementById("summary").innerHTML=`<section class="ex"><h2>Week 8 summary</h2><div><strong>Completed:</strong> ${done} / ${EX.length} &nbsp; · &nbsp; <strong>Total active time:</strong> ${fmt(total)}</div><div class="summary-grid"><div class="summary-head">Exercise</div><div class="summary-head">Status</div><div class="summary-head">Active time</div><div class="summary-head">Runs</div><div class="summary-head">Checks</div><div class="summary-head">Hints</div>${cells}</div></section>`;
+}
+
+function validNeptun(v){return /^[A-Z0-9]{6}$/.test((v||"").trim().toUpperCase())}
+function getNeptun(){return (localStorage.getItem("pycourse_neptun")||"").trim().toUpperCase()}
+function setNeptunUI(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ if(!box)return;
+ const n=getNeptun(),ok=validNeptun(n); box.value=n;
+ msg.textContent=ok?`Neptun code saved: ${n}`:"Enter your 6-character Neptun code before starting the exercises.";
+ document.querySelectorAll("[id$='-start']").forEach(b=>b.disabled=COURSE_CONFIG.requireNeptun&&!ok);
+}
+function saveNeptun(){
+ const box=document.getElementById("neptun-code"),msg=document.getElementById("neptun-message");
+ const n=(box.value||"").trim().toUpperCase(); box.value=n;
+ if(!validNeptun(n)){msg.textContent="Please enter a valid 6-character Neptun code.";return}
+ localStorage.setItem("pycourse_neptun",n); setNeptunUI();
+
+
+}
+
+function render(){
+ list.innerHTML=EX.map(e=>{let s=state(e.id);return `<section class="ex" id="${e.id}">
+ <div class="head"><div><h2>${e.title}</h2><div>${e.task}</div></div><div class="status" id="${e.id}-status">${s.completed?"✓ Completed":s.started?"Paused":"Not started"} · <span class="timer">${fmt(s.time)}</span></div></div>
+ <div class="controls"><button id="${e.id}-start" onclick="startEx('${e.id}')">${s.started?"Continue exercise":"Start exercise"}</button></div>
+ <div class="workspace" id="${e.id}-ws">
+ <div class="small">Active time: <strong class="timer" id="${e.id}-time">${fmt(s.time)}</strong> · Runs: <span id="${e.id}-runs">${s.runs}</span> · Checks: <span id="${e.id}-checks">${s.checks}</span> · Hints: <span id="${e.id}-hints">${s.hints}</span></div>
+ <p><strong>Your Python code</strong></p><textarea class="code" id="${e.id}-code" spellcheck="false">${esc((s.code||e.starter))}</textarea>
+ <div class="controls"><button onclick="runEx('${e.id}')">▶ Run</button><button onclick="checkEx('${e.id}')">✓ Check my solution</button><button onclick="hintEx('${e.id}')">💡 Hint</button><button onclick="stopEx('${e.id}')">■ Stop</button></div>
+ <strong>Output</strong><pre id="${e.id}-out"></pre><div id="${e.id}-input" class="live-input" hidden></div><div class="checkpanel" id="${e.id}-panel">No check has been run yet.</div></div></section>`}).join("");
+ renderSummary();
+}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+// Student Python always runs in a killable Web Worker, never on the UI thread.
+const WEEK08_RUN_TIMEOUT_MS=3000;
+const WEEK08_WORKER_URL=new URL('assets/week08-python-worker.js',document.baseURI).href;
+let pythonWorker=null,workerJobs=new Map(),workerSeq=0;
+function resetPythonWorker(reason="Execution timed out. Check your loop condition and variable updates."){
+ if(pythonWorker){pythonWorker.terminate();pythonWorker=null;}
+ for(const job of workerJobs.values()){clearTimeout(job.timer);job.reject(new Error(reason));}
+ workerJobs.clear();
+ for(const e of EX){const area=document.getElementById(e.id+'-input');if(area){area.hidden=true;area.replaceChildren();}}
+}
+function getPythonWorker(){
+ if(pythonWorker)return pythonWorker;
+ pythonWorker=new Worker(WEEK08_WORKER_URL);
+ pythonWorker.onerror=e=>{resetPythonWorker("Python worker error: "+(e.message||"Unable to load worker. Retry Run."));};
+ pythonWorker.onmessage=({data:m})=>{
+  const job=workerJobs.get(m.id);if(!job)return;
+  const stopTimer=()=>{clearTimeout(job.timer);job.timer=null;};
+  const startTimer=()=>{stopTimer();job.timer=setTimeout(()=>resetPythonWorker(),WEEK08_RUN_TIMEOUT_MS);};
+  if(m.type==='ready'){job.ready=true;startTimer();return;}
+  if(m.type==='output'){if(job.onOutput)job.onOutput(m.chunk);return;}
+  if(m.type==='prompt'){
+   stopTimer(); // Waiting for a human to type is not Python execution time.
+   requestLiveInput(job.exerciseId,m.prompt).then(value=>{
+    if(workerJobs.has(m.id)&&pythonWorker){startTimer();pythonWorker.postMessage({type:'input',id:m.id,value});}
+   });return;
+  }
+  if(m.type==='done'||m.type==='error'){
+   stopTimer();workerJobs.delete(m.id);
+   if(m.type==='done')job.resolve(m.result);else job.reject(new Error(m.error));
+  }
+ };
+ return pythonWorker;
+}
+function workerTask(type,code,inputs=[],interactive=false,onOutput=null,exerciseId=null){
+ return new Promise((resolve,reject)=>{
+  if(workerJobs.size){reject(new Error('Python is busy. Finish the current run or press Stop.'));return;}
+  let worker;try{worker=getPythonWorker();}catch(e){reject(e);return;}
+  const id=++workerSeq;
+  workerJobs.set(id,{resolve,reject,onOutput,exerciseId,timer:setTimeout(()=>resetPythonWorker('Python runtime did not load within 45 seconds.'),45000),ready:false});
+  worker.postMessage({type,id,code,inputs,interactive,exerciseId});
+ });
+}
+async function execute(code,inputs,interactive=false,onOutput=null,exerciseId=null){
+ return workerTask('execute',code,inputs,interactive,onOutput,exerciseId);
+}
+async function ensurePy(){getPythonWorker();}
+async function startEx(id){
+ if(workerJobs.size && active!==id) resetPythonWorker("Run cancelled when switching exercises.");
+ if(!document.getElementById("rules-accepted")?.checked){
+   alert("Please confirm that you understand and accept the programming rules before starting.");
+   return;
+ }
+ if(COURSE_CONFIG.requireNeptun&&!validNeptun(getNeptun())){
+   document.getElementById("neptun-message").textContent="Save a valid Neptun code before starting an exercise.";
+   document.getElementById("neptun-code").focus(); return;
+ }
+ if(active&&active!==id) stopEx(active);
+ let s=state(id);
+ document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
+ document.getElementById(id+"-ws").classList.add("active");
+ document.getElementById(id+"-code").value=s.code || EX.find(e=>e.id===id).starter;
+ if(!s.completed){
+   active=id; s.started=true; save(id,s); lastTick=Date.now();
+ } else {
+   active=null; // review does not add to completion time
+ }
+ await ensurePy(); updateStatus(id);
+}
+function persistCode(id){let s=state(id),el=document.getElementById(id+"-code");if(el)s.code=el.value;save(id,s)}
+function stopEx(id){if(workerJobs.size)resetPythonWorker("Run cancelled with Stop.");if(active===id){tick();persistCode(id);active=null} document.getElementById(id+"-ws").classList.remove("active");updateStatus(id)}
+function tick(){let now=Date.now();if(active&&!document.hidden){let s=state(active);s.time+=(now-lastTick)/1000;save(active,s);let el=document.getElementById(active+"-time");if(el)el.textContent=fmt(s.time)}lastTick=now;renderSummary()}
+setInterval(tick,1000);document.addEventListener("visibilitychange",()=>{tick();lastTick=Date.now()});
+window.addEventListener("beforeunload",()=>{tick();if(active)persistCode(active)});
+function updateStatus(id){
+ let s=state(id),el=document.getElementById(id+"-status"),btn=document.getElementById(id+"-start");
+ if(el)el.innerHTML=(s.completed?"✓ Completed":active===id?"In progress":s.started?"Paused":"Not started")+" · <span class='timer'>"+fmt(s.time)+"</span>";
+ if(btn)btn.textContent=s.completed?"Review solution":s.started?"Continue exercise":"Start exercise";
+ renderSummary();
+}
+function requestLiveInput(id,message){
+ return new Promise((resolve)=>{
+   const area=document.getElementById(id+"-input");
+   const field=document.createElement("input");field.type="text";field.autocomplete="off";
+   field.setAttribute("aria-label",message||"Python input");
+   const label=document.createElement("span");label.textContent=message||"Input:";
+   const button=document.createElement("button");button.type="button";button.textContent="Enter";
+   area.replaceChildren(label,field,button);area.hidden=false;
+   let done=false;
+   const finish=(value)=>{if(done)return;done=true;area.hidden=true;area.replaceChildren();resolve(value)};
+   button.addEventListener("click",()=>finish(field.value));
+   field.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();finish(field.value)}});
+   // Yield to the browser to paint the output before focusing the input.
+   requestAnimationFrame(()=>field.focus());
+ });
+}
+async function structure(code){return workerTask('structure',code);}
+function inputPrompts(code){
+ // Extract simple input("prompt") / input('prompt') calls in source order.
+ const rx=/input\s*\(\s*(?:(["'])(.*?)\1)?\s*\)/g;
+ let a=[],m; while((m=rx.exec(code))!==null)a.push(m[2]||"Enter a value:");
+ return a;
+}
+async function runEx(id){
+ let s=state(id),code=document.getElementById(id+"-code").value;
+ s.code=code;s.runs++;save(id,s);document.getElementById(id+"-runs").textContent=s.runs;
+ const output=document.getElementById(id+"-out");
+ output.textContent="";
+ try{
+ const r=await execute(code,[],true,chunk=>{output.textContent+=chunk;output.scrollTop=output.scrollHeight},id);
+ output.textContent=r.ok?r.output:(r.output?r.output+"\n":"")+r.error;
+ }catch(err){output.textContent+="\n"+String(err.message||err)}
+}
+function numbersInLine(line){
+ return (line.match(/[-+]?(?:\d+(?:\.\d*)?|\.\d+)/g)||[]).map(Number)
+}
+function rootPairsMatch(out,inputs){
+ const n=Number(inputs[0]), lines=out.trim().split(/\r?\n/);
+ for(let i=1;i<=n;i++){
+   const root=Math.sqrt(i);
+   const ok=lines.some(line=>{
+     const nums=numbersInLine(line);
+     return nums.length>=2 && Math.abs(nums[0]-i)<1e-9 && Math.abs(nums[1]-root)<0.01;
+   });
+   if(!ok)return false;
+ }
+ return true;
+}
+function matches(e,out,expected,inputs=[]){
+ let o=out.trim().toLowerCase();
+ if(e.match==="structure") return false;
+ if(e.match==="rootpairs") return rootPairsMatch(out,inputs);
+ if(e.match==="allcontains"){
+   let vals=Array.isArray(expected)?expected:[expected];
+   return vals.every(v=>o.includes(String(v).toLowerCase()));
+ }
+ if(e.match==="quadratic"){if(Array.isArray(expected))return expected.every(v=>o.includes(v));return o.includes("no real")||o.includes("no solution")}
+ if(e.match==="ends")return o.endsWith(String(expected).toLowerCase());
+ return o.includes(String(expected).toLowerCase())
+}
+function algorithmicCheck(id,st){
+ const problems=[];
+ if(st.forbidden?.length)problems.push("Use structured flow: no break, continue, or return from inside a loop.");
+ if(st.comprehensions)problems.push("Use explicit loops, not comprehensions or generators.");
+ const shortcuts=(st.shortcuts||[]).filter(x=>!(id==='ex05'&&['map','filter'].includes(x)));
+ if(shortcuts.length)problems.push("Avoid algorithm shortcuts: "+shortcuts.join(', '));
+ if(id!=='ex05'&&st.lambda)problems.push("Lambda, map and filter are allowed only when explicitly requested (Exercise 5).");
+ const allowed=id==='ex04'?['random']:id==='ex01'?['math']:id==='ex06'?['vectors']:[];
+ if(st.imports.some(x=>!allowed.includes(x)))problems.push("Import only the module allowed by this task.");
+ if(st.methods.some(x=>['sort','count','index','find','factorial','comb'].includes(x)))problems.push("Implement the requested algorithm explicitly rather than using a method shortcut.");
+ return problems;
+}
+async function week8Match(id,out,inputs){return workerTask('match',out,inputs,false,null,id);}
+async function assessExercise(id,updateUI=true){
+ let e=EX.find(x=>x.id===id),s=state(id),el=document.getElementById(id+"-code"),code=el?el.value:s.code;
+ if(el){s.code=code;save(id,s)}
+ let result={id,syntax:false,structure:false,rules:false,functional:false,passed:0,total:e.tests.length,problems:[],missing:[],runtime:null};
+ // Empty and print-only placeholders are not meaningful solutions.
+ const normalizedCode=(code||"").trim();
+ const trivialPrint=/^print\s*\(\s*(?:(?:["'][^"']*["'])|\s*)\s*\)\s*;?\s*$/s.test(normalizedCode);
+ if(!normalizedCode || trivialPrint){
+   result.syntax=!!normalizedCode;
+   result.structure=false; result.rules=false; result.functional=false; result.passed=0;
+   result.problems=[!normalizedCode ? "No solution has been entered yet." : "A print-only placeholder does not solve this exercise."];
+   if(updateUI){const panel=document.getElementById(id+"-panel");if(panel)panel.innerHTML="<span class='bad'>✗ Not completed.</span><br>"+result.problems.map(esc).join("<br>");}
+   return result;
+ }
+
+ try{
+   await ensurePy(); let st=await structure(code); result.syntax=true;
+   result.missing=e.need.filter(n=>!st[n]); result.structure=result.missing.length===0;
+   result.problems=algorithmicCheck(id,st); result.rules=result.problems.length===0;
+   let rows=[],passed=0;
+   for(let t of e.tests){
+     let inputs=Array.isArray(t[0])?t[0]:[String(t[0])],r=await execute(code+"\n_main_output = __student_output__()\n"+e.probe+"\nprint(\"__WEEK08_CHECK_OK__\")",inputs,false,null,id);
+     if(!r.ok){result.runtime=r.error;break}
+     let ok=await week8Match(id,r.output,inputs);if(ok)passed++;
+     rows.push({inputs,exp:t[1],got:r.output,ok})
+   }
+   result.passed=passed;result.rows=rows;
+   result.functional=e.match==="structure" ? true : (passed===e.tests.length);
+   result.completed=result.syntax&&result.structure&&result.rules&&result.functional&&!result.runtime;
+   if(updateUI){
+     let panel=document.getElementById(id+"-panel");
+     panel.innerHTML="<div class='ok'>✓ Syntax</div>"+
+       "<div class='"+(result.structure?"ok":"bad")+"'>"+(result.structure?"✓":"✗")+" Expected structure</div>"+
+       "<div class='"+(result.rules?"ok":"bad")+"'>"+(result.rules?"✓":"✗")+" Algorithmic structure</div>"+
+       (result.problems.length?result.problems.map(p=>"<div class='bad'>• "+esc(p)+"</div>").join(""):"")+
+       (result.runtime?"<div class='bad'>✗ Runtime: "+esc(result.runtime)+"</div>":
+        "<div class='"+(result.functional?"ok":"bad")+"'>"+(result.functional?"✓":"✗")+" "+(e.match==="structure"?"Functional behaviour checked by structure":"Functional tests: "+passed+" / "+e.tests.length)+"</div>")+
+       rows.map(r=>"<div class='"+(r.ok?"ok":"bad")+"'>"+(r.ok?"✓":"✗")+" input "+esc(r.inputs.join(", "))+" → "+(r.ok?"passed":"output did not meet the task requirements · got: "+esc(r.got||"(no output)"))+"</div>").join("");
+     if(result.completed){
+       tick();s=state(id);s.completed=true;s.code=code;save(id,s);
+       panel.innerHTML+="<div class='hint'><strong>✓ Exercise completed.</strong> Active time: "+fmt(s.time)+". The timer has stopped automatically.</div>";
+       if(active===id)active=null;updateStatus(id);
+     }
+   }
+ }catch(err){result.runtime=String(err);if(updateUI)document.getElementById(id+"-panel").innerHTML="<div class='bad'>✗ Checker error</div><div>"+esc(String(err))+"</div>"}
+ return result;
+}
+async function checkEx(id){
+ let s=state(id);s.checks++;save(id,s);document.getElementById(id+"-checks").textContent=s.checks;
+ await assessExercise(id,true);
+}
+
+let practiceEvaluation=null;
+function practiceFeedbackPanel(){return `<div class="checkpanel" id="practice-feedback-panel">
+ <h3>Optional feedback</h3>
+ <p>AI feedback and its estimated percentage are separate from the local checks. Both are learning feedback, not official grades. The AI estimate uses equal weight across all seven exercises; unattempted tasks count as zero.</p>
+ <button type="button" id="practice-ai-button" onclick="requestPracticeAI()">Request AI feedback &amp; estimated score</button>
+ <div id="practice-ai-result" role="status"></div>
+ <hr><button type="button" onclick="showPracticeEmail()">Email my evaluation</button>
+ <p class="small">Your dashboard password is required to send this evaluation to your registered email address.</p>
+ <div id="practice-email-form" hidden>
+   <label for="practice-email-password">Dashboard password</label>
+   <input id="practice-email-password" type="password" autocomplete="current-password" maxlength="128">
+   <button type="button" id="practice-email-send" onclick="sendPracticeEmail()">Send evaluation</button>
+ </div>
+ <div id="practice-email-result" role="status"></div>
+ </div>`;}
+function currentPracticeSnapshot(){
+ const ev=practiceEvaluation;
+ if(!ev)throw new Error('Run Evaluate my work first.');
+ if(getNeptun()!==ev.neptun||EX.some(e=>(document.getElementById(e.id+'-code')?.value ?? state(e.id).code ?? '')!==ev.codes[e.id]))throw new Error('Your code or Neptun code has changed. Run Evaluate my work again before requesting AI feedback or email.');
+ return ev;
+}
+async function practiceRequest(ev,action,password){
+ const response=await fetch(PRACTICE_API_BASE+'/practiceFeedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({evaluation_id:ev.evaluation_id,feedback_token:ev.feedback_token,neptun:ev.neptun,action,...(action==='email'?{password}: {})})});
+ const data=await response.json().catch(()=>({}));
+ if(!response.ok)throw new Error(data.error||`Request failed (HTTP ${response.status}).`);
+ return data;
+}
+async function requestPracticeAI(){
+ const button=document.getElementById('practice-ai-button'),box=document.getElementById('practice-ai-result');
+ let ev;
+ try{
+   ev=currentPracticeSnapshot();button.disabled=true;
+   box.textContent='Preparing AI feedback. This may take about a minute…';
+   const data=await practiceRequest(ev,'ai');
+   if(practiceEvaluation!==ev)return;
+   const stale=EX.some(e=>(document.getElementById(e.id+'-code')?.value ?? state(e.id).code ?? '')!==ev.codes[e.id]);
+   box.innerHTML=`<h4>Estimated AI score: ${Number(data.ai.estimated_percent)}%</h4><p class="small">Indicative estimate, not an official grade. Based on the saved evaluation snapshot.${stale?' Your code has since changed; evaluate again for updated feedback.':''}</p>`+data.ai.exercises.map(e=>`<div class="hint"><strong>${esc(e.title)}: ${Number(e.percent)}%</strong><p>${esc(e.feedback).replace(/\n/g,'<br>')}</p></div>`).join('');
+ }catch(error){if(!ev||practiceEvaluation===ev)box.textContent=error.message||'AI feedback is unavailable. The local evaluation remains available.';}
+ finally{button.disabled=false;}
+}
+function showPracticeEmail(){
+ const box=document.getElementById('practice-email-result');
+ try{currentPracticeSnapshot();document.getElementById('practice-email-form').hidden=false;document.getElementById('practice-email-password').focus();box.textContent='The saved local evaluation and any completed AI feedback will be sent. No new AI evaluation is started.';}
+ catch(error){box.textContent=error.message;}
+}
+async function sendPracticeEmail(){
+ const button=document.getElementById('practice-email-send'),box=document.getElementById('practice-email-result'),field=document.getElementById('practice-email-password');
+ let ev;
+ try{ev=currentPracticeSnapshot();if(!field.value)throw new Error('Enter your dashboard password.');button.disabled=true;box.textContent='Verifying your password and sending the evaluation…';
+   const password=field.value;field.value='';
+   const data=await practiceRequest(ev,'email',password);
+   if(practiceEvaluation!==ev)return;
+   box.textContent=data.cached?'This evaluation has already been emailed.':'The email service confirmed sending the evaluation to your registered address.';
+   document.getElementById('practice-email-form').hidden=true;
+ }catch(error){if(!ev||practiceEvaluation===ev)box.textContent=error.message||'Email could not be confirmed.';}
+ finally{field.value='';button.disabled=false;}
+}
+
+async function evaluateWork(){
+ practiceEvaluation=null;
+ tick();
+ const snapshotCodes=Object.fromEntries(EX.map(e=>[e.id,document.getElementById(e.id+"-code")?.value ?? state(e.id).code ?? ""]));
+
+ const btn=document.getElementById("evaluate-work"),box=document.getElementById("evaluation-result");
+ btn.disabled=true;box.innerHTML="<p>Evaluating current solutions…</p>";
+ const results=[];
+ for(const e of EX){
+   const s=state(e.id);
+   if(!s.started && !s.code.trim()){results.push({id:e.id,attempted:false,completed:false});continue}
+   const r=await assessExercise(e.id,false);r.attempted=true;results.push(r);
+ }
+ const attempted=results.filter(r=>r.attempted), completed=results.filter(r=>r.completed);
+ const functional=attempted.filter(r=>r.functional).length, rules=attempted.filter(r=>r.rules&&r.structure).length;
+ let points=0;
+ for(const r of results){
+   if(!r.attempted)continue;
+   points += (r.functional?0.6:0)+(r.structure?0.2:0)+(r.rules?0.2:0);
+ }
+ const score=Math.round(100*points/EX.length);
+ const suggestions=[];
+ if(attempted.length<EX.length)suggestions.push("Continue with the exercises that have not been attempted yet.");
+ if(functional<attempted.length)suggestions.push("Review the task requirements for exercises whose functional tests do not pass.");
+ if(rules<attempted.length)suggestions.push("Review loop choice and structured control flow. Use return for function results, but not to escape loops. Lambda/map/filter belong only to explicitly requested tasks.");
+ if(results.some(r=>r.problems?.some(p=>p.includes("condition-controlled while"))))suggestions.push("For search-style tasks, use a while condition that stops the search as soon as the result is known.");
+ if(!suggestions.length)suggestions.push("Your current solutions satisfy the deterministic checks. Try explaining the loop condition and result of each algorithm.");
+ const no=(Number(localStorage.getItem("pycourse_week08_evaluation_no")||"0")+1);
+ localStorage.setItem("pycourse_week08_evaluation_no",String(no));
+
+ if(EX.some(e=>(document.getElementById(e.id+"-code")?.value ?? state(e.id).code ?? "")!==snapshotCodes[e.id])){box.textContent="Your code changed during evaluation. Run Evaluate my work again.";btn.disabled=false;return;}
+ const payload={
+   schema_version:"1.0",
+   week:"08",
+   neptun:getNeptun(),
+   evaluation_no:no,
+   evaluated_at:new Date().toISOString(),
+   indicative_score:score,
+   summary:{attempted:attempted.length,completed:completed.length,functional_passed:functional,rules_passed:rules,total:EX.length},
+   exercises:EX.map(e=>{
+     const s=state(e.id),r=results.find(x=>x.id===e.id)||{};
+     return {
+       exercise_id:e.id,
+       source_code:snapshotCodes[e.id],
+       started:!!s.started,
+       active_time_seconds:Math.round(s.time||0),
+       run_count:s.runs||0,
+       check_count:s.checks||0,
+       hint_count:s.hints||0,
+       attempted:!!r.attempted,
+       completed:!!r.completed,
+       syntax:!!r.syntax,
+       structure:!!r.structure,
+       rules:!!r.rules,
+       functional:!!r.functional,
+       rule_violations:r.problems||[]
+     };
+   })
+ };
+
+ let uploadMessage="<span class='small'>Saving learning analytics to Azure…</span>";
+ box.innerHTML=`<div class="hint"><strong>Indicative evaluation: ${score}%</strong><br>
+ ${completed.length} / ${EX.length} exercises currently completed successfully.<br>
+ Functional correctness: ${functional} / ${attempted.length||0} attempted.<br>
+ Programming and algorithmic rules: ${rules} / ${attempted.length||0} attempted.<br>
+ <strong>This evaluation is for feedback only and does not count toward your course grade.</strong>
+ <br><br><strong>Suggestions</strong><ul>${suggestions.map(x=>"<li>"+esc(x)+"</li>").join("")}</ul>
+ <span class="small">Evaluation #${no}. You can improve your solutions and evaluate again.</span><br>
+ <span id="practice-upload-status">${uploadMessage}</span></div>`;
+ renderSummary();document.getElementById("summary").style.display="block";
+
+ try{
+   if(!validNeptun(payload.neptun)) throw new Error("A valid Neptun code is required.");
+   const resp=await fetch(PRACTICE_API_BASE+"/submitPractice",{
+     method:"POST",
+     headers:{"Content-Type":"application/json"},
+     body:JSON.stringify(payload)
+   });
+   const data=await resp.json().catch(()=>({}));
+   if(!resp.ok) throw new Error(data.error||("HTTP "+resp.status));
+   document.getElementById("practice-upload-status").innerHTML="✓ Learning analytics saved successfully.";
+   if(data.evaluation_id && data.feedback_token){
+     practiceEvaluation={evaluation_id:data.evaluation_id,feedback_token:data.feedback_token,neptun:payload.neptun,codes:snapshotCodes};
+     document.getElementById('evaluation-result').insertAdjacentHTML('beforeend',practiceFeedbackPanel());
+   }
+ }catch(err){
+   document.getElementById("practice-upload-status").innerHTML="⚠ Evaluation completed locally, but the analytics upload failed: "+esc(String(err.message||err));
+ }
+ btn.disabled=false;
+}
+function hintEx(id){let s=state(id);s.hints++;save(id,s);document.getElementById(id+"-hints").textContent=s.hints;document.getElementById(id+"-panel").innerHTML+="<div class='hint'>"+esc(EX.find(e=>e.id===id).hint)+"</div>"}
+render();
+document.addEventListener("input",e=>{if(e.target.matches("textarea.code")){const id=e.target.id.replace(/-code$/,"");let s=state(id);s.code=e.target.value;s.completed=false;save(id,s);updateStatus(id)}});
+document.addEventListener("keydown",e=>{if(e.target.matches("textarea.code")&&e.key==="Tab"){e.preventDefault();const el=e.target,a=el.selectionStart,b=el.selectionEnd;el.setRangeText("    ",a,b,"end");el.dispatchEvent(new Event("input",{bubbles:true}))}});
+document.getElementById("save-neptun")?.addEventListener("click",saveNeptun);
+document.getElementById("neptun-code")?.addEventListener("keydown",e=>{if(e.key==="Enter")saveNeptun()});
+document.getElementById("neptun-code")?.addEventListener("input",e=>{e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6)});
+setNeptunUI();
+
+</script>

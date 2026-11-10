@@ -1,0 +1,625 @@
+---
+title: "Week 8 – Procedures, Functions and Modules"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this part, you should be able to:
+
+- define and call a Python function;
+- distinguish returning a result from printing or changing an object;
+- explain the difference between changing a shared list and rebinding a parameter;
+- use positional arguments, keyword arguments, default values, and `*args`;
+- identify a recursive step and a base case;
+- distinguish local variables from module-level global variables;
+- read simple lambda expressions and examples using `map()`, `filter()`, and `reduce()`;
+- create and import a module, and explain the purpose of the main guard.
+
+::: {.callout-note}
+### Connection to the algorithms
+
+In [Basic Algorithms II](07-basic-algorithms-2.qmd), each example was written as a complete sequence of statements. Functions let us give such a sequence a name and reuse it with different inputs.
+
+The examples below introduce `def`, `return`, lambdas, and modules. Their appearance here does not automatically mean that every construct is allowed in every assessed exercise: follow the rules of the specific task.
+:::
+
+## 1. User-defined functions and procedures
+
+A **function** groups statements that perform a specific task. Defining a function gives it a name; **calling** the function executes its body.
+
+A function can accept input through **parameters** and send a result back with `return`.
+
+### General structure
+
+```text
+def function_name(parameters):
+    """Optional description of the function."""
+    statements
+    return expression
+```
+
+Indentation identifies the function body. The `def` statement must run before the function can be called.
+
+### Python example: check whether a number is whole
+
+```python
+def is_whole_number(number):
+    """Check whether a finite number has no fractional part."""
+    return number == int(number)
+
+print(is_whole_number(5.0))
+print(is_whole_number(5.5))
+```
+
+```text
+True
+False
+```
+
+`number` is a **parameter** in the definition. `5.0` and `5.5` are **arguments** supplied by the calls. The example assumes a finite numeric argument suitable for conversion with `int()`.
+
+### A procedure-style function
+
+A **procedure** performs an action rather than returning a useful result. Python uses `def` for both styles: there is no separate procedure declaration.
+
+```python
+def duplicate_number(number):
+    """Double the first value in a non-empty list."""
+    number[0] = number[0] * 2
+
+x = [5]
+duplicate_number(x)
+print("After doubling:", x)
+```
+
+```text
+After doubling: [10]
+```
+
+The parameter refers to a list, so `number[0]` can be changed. This example requires a non-empty list whose first element is numeric.
+
+::: {.callout-important}
+### Every Python function returns a value
+
+A procedure-style function still returns **`None`** if it reaches the end without a `return` expression. A bare `return` also returns `None`.
+
+`print()` displays something for the user. `return` gives a value back to the caller and immediately leaves the current function call. Printing a result and returning a result are different actions.
+:::
+
+A **docstring** is an optional string at the beginning of the function body that documents its purpose. Function names should describe the task, and parameter names should describe the expected inputs.
+
+### Optional type annotations
+
+Python lets us indicate the expected types of parameters and the return value. These **type annotations** are optional.
+
+Write `: type` after a parameter name and `-> type` before the colon that starts the function body:
+
+```python
+def add_numbers(a: int, b: int) -> int:
+    return a + b
+
+print("Sum:", add_numbers(3, 5))
+```
+
+```text
+Sum: 8
+```
+
+Here, `a: int` and `b: int` indicate that integer arguments are expected, and `-> int` indicates that the function returns an integer. The function also works without these annotations:
+
+```python
+def add_numbers(a, b):
+    return a + b
+
+print("Sum:", add_numbers(3, 5))
+```
+
+```text
+Sum: 8
+```
+
+For a procedure-style function, use `-> None` to indicate that it does not return a useful result:
+
+```python
+def show_score(score: float) -> None:
+    print("Score:", score)
+
+show_score(8.5)
+```
+
+```text
+Score: 8.5
+```
+
+::: {.callout-note}
+### Annotations describe expectations
+
+Type annotations help readers, editors, and type-checking tools understand the intended use of a function. **Python does not automatically enforce them at runtime**, and they do not convert the supplied values. For example, `a: int` does not perform `int(a)`.
+
+You can omit annotations, or annotate only some parameters or the return value. They are not required in the examples in this course unless a task explicitly asks for them.
+:::
+
+## 2. Passing arguments: objects, mutation, and rebinding
+
+Python arguments are passed by **assignment**, also called **object sharing**: a local parameter name refers to the object supplied by the caller. Python does not automatically copy that object.
+
+The important distinction is between:
+
+- **mutation:** changing the shared object itself;
+- **rebinding:** making a local parameter name refer to another object.
+
+### Changing a mutable object
+
+Lists are mutable. A function can change the same list that the caller uses.
+
+```python
+def modify_list(my_list):
+    my_list.append(42)
+
+original_list = [1, 2, 3]
+modify_list(original_list)
+print("Original list after the call:", original_list)
+```
+
+```text
+Original list after the call: [1, 2, 3, 42]
+```
+
+`my_list` and `original_list` refer to the same list during the call. `append()` changes that object.
+
+### Rebinding a parameter referring to an immutable object
+
+Strings are immutable. An assignment to the parameter creates a different local binding; it does not change the caller's variable.
+
+```python
+def modify_string(s):
+    s = "Hello, world!"
+
+original_string = "Hi"
+modify_string(original_string)
+print("Original string after the call:", original_string)
+```
+
+```text
+Original string after the call: Hi
+```
+
+### Rebinding a list parameter also stays local
+
+```python
+def replace_list(my_list):
+    my_list = [42]
+
+original_list = [1, 2, 3]
+replace_list(original_list)
+print("Original list after rebinding:", original_list)
+```
+
+```text
+Original list after rebinding: [1, 2, 3]
+```
+
+::: {.callout-warning}
+### Avoid the “immutable by value, mutable by reference” shortcut
+
+Both kinds of object use the **same argument-passing mechanism**. The different behaviour comes from whether an operation mutates an existing object or rebinds a local name.
+
+Integers, floats, and strings are immutable. Lists and dictionaries are mutable. A tuple is immutable, but a mutable object stored inside a tuple can still be changed.
+:::
+
+If a function calculates a new value, a clear approach is to **return** it and let the caller assign it:
+
+```python
+def double_number(number):
+    return number * 2
+
+value = 5
+value = double_number(value)
+print("New value:", value)
+```
+
+```text
+New value: 10
+```
+
+## 3. Parameters and arguments
+
+### Positional arguments
+
+The order of the supplied arguments determines which parameter receives each value.
+
+```python
+def greet(name, greeting):
+    return f"{greeting}, {name}!"
+
+result = greet("Alice", "Hello")
+print(result)
+```
+
+```text
+Hello, Alice!
+```
+
+Here, `name` receives `"Alice"` and `greeting` receives `"Hello"`.
+
+### Default parameter values
+
+A default value is used when the corresponding argument is omitted.
+
+```python
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+print(greet("Bob"))
+print(greet("Bob", "Good morning"))
+```
+
+```text
+Hello, Bob!
+Good morning, Bob!
+```
+
+In this ordinary parameter list, parameters without defaults must appear before parameters with defaults.
+
+::: {.callout-warning}
+### Mutable default values
+
+Default values are evaluated when the function is defined, not separately for each call. Avoid a mutable default such as `items=[]` unless sharing that same list across calls is intentional. Use `None` as the default and create a new list inside the function when needed.
+:::
+
+### Keyword arguments
+
+Arguments can also be supplied by parameter name. The order of these named arguments can differ from the order in the definition.
+
+```python
+def greet(name, greeting="Hello"):
+    return f"{greeting}, {name}!"
+
+result = greet(greeting="Hi", name="Charlie")
+print(result)
+```
+
+```text
+Hi, Charlie!
+```
+
+For the calls shown here, positional arguments go before keyword arguments. Do not supply the same parameter twice.
+
+### A variable number of positional arguments: `*args`
+
+`*args` collects extra positional arguments into a **tuple**. The name `args` is a convention; the `*` gives it this behaviour.
+
+```python
+def sum_numbers(*args):
+    total = 0
+    for number in args:
+        total = total + number
+    return total
+
+print("Sum:", sum_numbers(1, 2, 3, 4, 5))
+print("Sum with no arguments:", sum_numbers())
+```
+
+```text
+Sum: 15
+Sum with no arguments: 0
+```
+
+| Form | Example | Meaning |
+|---|---|---|
+| Positional argument | `greet("Alice", "Hello")` | Match values by their order |
+| Default value | `def greet(name, greeting="Hello"):` | Supply a fallback when an argument is omitted |
+| Keyword argument | `greet(name="Charlie", greeting="Hi")` | Match values by parameter name |
+| Variable-length positional arguments | `def sum_numbers(*args):` | Collect extra positional values into a tuple |
+
+## 4. Recursion
+
+**Recursion** means that a function calls itself to solve a smaller instance of a problem.
+
+A recursive algorithm needs:
+
+1. a **base case** that can be answered directly;
+2. a **recursive step** that moves closer to the base case.
+
+### Python example: sum the integers from 1 to n
+
+**Precondition:** `n` is a positive integer.
+
+```python
+def recursive_sum(n):
+    """Return 1 + 2 + ... + n for a positive integer n."""
+    if n == 1:
+        return 1
+    else:
+        return n + recursive_sum(n - 1)
+
+result = recursive_sum(5)
+print("Sum from 1 to 5:", result)
+```
+
+```text
+Sum from 1 to 5: 15
+```
+
+### Following the calls and returns
+
+```text
+recursive_sum(5)
+= 5 + recursive_sum(4)
+= 5 + 4 + recursive_sum(3)
+= 5 + 4 + 3 + recursive_sum(2)
+= 5 + 4 + 3 + 2 + recursive_sum(1)
+= 5 + 4 + 3 + 2 + 1
+= 15
+```
+
+Each call has its own local `n`. The pending calls finish as the recursive results return.
+
+::: {.callout-warning}
+### Termination and valid input
+
+For this definition, `n = 0` or a negative value does not reach the base case. Repeated recursive calls eventually raise a `RecursionError`.
+
+Python also limits recursion depth, so very large positive inputs can fail. Recursion is useful for suitable problems, but a loop is usually more practical for this simple sum.
+:::
+
+## 5. Local and global variables
+
+A **local variable** belongs to a function call. A **global variable** in these examples is defined at the top level of the current module.
+
+### A local name can hide a global name
+
+```python
+x = 10
+
+def my_function():
+    x = 20
+    print("Inside the function:", x)
+
+my_function()
+print("Outside the function:", x)
+```
+
+```text
+Inside the function: 20
+Outside the function: 10
+```
+
+The local `x` and global `x` are different bindings. Assigning to `x` inside this function does not change the module-level `x`.
+
+### Rebinding a global name
+
+```python
+x = 10
+
+def my_function2():
+    global x
+    x = 20
+    print("Inside the function:", x)
+
+my_function2()
+print("Outside the function:", x)
+```
+
+```text
+Inside the function: 20
+Outside the function: 20
+```
+
+`global x` tells Python that assignments to `x` in this function refer to the current module's global name. A function can read an existing global value without `global` if it does not also bind that name locally.
+
+::: {.callout-important}
+### A block is not automatically a new scope
+
+An `if`, `for`, or `while` block does **not** create a separate local scope in Python. Indentation alone does not define a variable's scope. Function bodies create local scopes; the original slides' general reference to any “block” is too broad.
+
+Prefer parameters and return values for passing information between functions. They make dependencies easier to see than changing global variables.
+:::
+
+## 6. Lambda functions
+
+A **lambda expression** creates a small function from a single expression:
+
+```text
+lambda arguments: expression
+```
+
+It can have multiple parameters, but its body is one expression, not a block of statements. The expression's value is returned automatically.
+
+### A simple example
+
+```python
+add = lambda x, y: x + y
+print("Sum:", add(3, 5))
+```
+
+```text
+Sum: 8
+```
+
+This illustrates the syntax. For a named reusable function, a normal `def` is usually clearer. Lambdas are often used as short function arguments.
+
+### `map()`: transform each element
+
+```python
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+print("Squared values:", squared)
+```
+
+```text
+Squared values: [1, 4, 9, 16, 25]
+```
+
+`map()` applies the function to each value. In Python 3, it returns an iterator; `list()` collects the results into a list. This is related to **copying with transformation** from Part 1.
+
+### `filter()`: keep matching elements
+
+```python
+numbers = [1, 2, 3, 4, 5]
+numbers_below_4 = list(filter(lambda x: x < 4, numbers))
+print("Values below 4:", numbers_below_4)
+```
+
+```text
+Values below 4: [1, 2, 3]
+```
+
+`filter()` keeps the original elements for which the function returns a truthy value. The lambda supplies a **condition**, not the replacement value. This is related to **selection of all matching elements**.
+
+### `reduce()`: accumulate a result
+
+```python
+from functools import reduce
+
+numbers = [1, 2, 3, 4, 5]
+product = reduce(lambda x, y: x * y, numbers, 1)
+print("Product:", product)
+```
+
+```text
+Product: 120
+```
+
+The third argument, `1`, is the initial accumulator. The multiplication results are `1`, `2`, `6`, `24`, and `120`. Unlike `map()` and `filter()`, `reduce()` must be imported from `functools`.
+
+::: {.callout-note}
+### First understand the loop version
+
+These tools can express familiar processing patterns compactly. They do not replace the need to understand the explicit algorithms. In assessed tasks that require loops or forbid lambdas, `map()`, or `filter()`, use the required loop-based solution.
+:::
+
+## 7. Modules and packages
+
+A **module** is an importable unit of Python code. For our own examples, it is a `.py` file containing functions and variables.
+
+A **package** groups modules under a shared name. A regular package is typically a directory containing an `__init__.py` file and other modules. Python also supports namespace packages without that file.
+
+| Import style | Example | Use afterwards |
+|---|---|---|
+| Import a module | `import my_module` | `my_module.square(5)` |
+| Use an alias | `import my_module as mm` | `mm.square(5)` |
+| Import a specific function | `from my_module import square` | `square(5)` |
+
+::: {.callout-warning}
+### Import a name; call it afterwards
+
+Write `from my_module import square`, without parentheses. Parentheses are used when **calling** the imported function: `square(5)`.
+
+Do not name your own file `random.py`, `math.py`, or another name that conflicts with a module you intend to import.
+:::
+
+### Module example: `my_module.py`
+
+Save the following code in a file named **`my_module.py`**:
+
+```python
+# my_module.py
+
+def square(x):
+    """Return the square of x."""
+    return x * x
+
+
+def factorial(n):
+    """Return n! for a non-negative integer n."""
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+greeting = "Hello, World!"
+```
+
+`factorial()` requires a non-negative integer. Its base case is `0! = 1`; its recursive step is `n! = n * (n - 1)!`. Negative or unsuitable inputs are outside this example's intended domain, and large inputs can exceed the recursion limit.
+
+### Using the module: `main.py`
+
+Save this second file as **`main.py`** in the **same directory**:
+
+```python
+# main.py
+import my_module
+
+result1 = my_module.square(5)
+result2 = my_module.factorial(4)
+message = my_module.greeting
+
+print("Square:", result1)
+print("Factorial:", result2)
+print("Message:", message)
+```
+
+Run `python main.py` from that directory. On systems configured to use it, `python3 main.py` is equivalent.
+
+```text
+Square: 25
+Factorial: 24
+Message: Hello, World!
+```
+
+The examples are also included as downloadable files:
+
+- [my_module.py](../examples/week07/my_module.py)
+- [main.py](../examples/week07/main.py)
+
+In a notebook, the module file must be available on the kernel's import path; placing it in the notebook's working directory is the simplest approach for this example. Merely pasting the module code into another cell does not create a `.py` file.
+
+## 8. The main module
+
+When a Python file runs directly as a script, its `__name__` is set to `"__main__"`. When imported, its `__name__` is its module name instead.
+
+The **main guard** lets us choose which statements run only during direct execution.
+
+### Python example: `hello.py`
+
+```python
+def hello_world():
+    print("Hello, World!")
+
+
+if __name__ == "__main__":
+    hello_world()
+    print("This code runs in the main module.")
+```
+
+Running `python hello.py` displays:
+
+```text
+Hello, World!
+This code runs in the main module.
+```
+
+Importing it with `import hello` defines the function but does not execute the guarded statements. You can then explicitly call `hello.hello_world()`.
+
+::: {.callout-important}
+### The guard does not prevent all import-time execution
+
+Top-level statements **outside** the guard still run when the module is first imported in a process. Place demonstration calls under the guard when importing should only make definitions available.
+
+In a usual Jupyter notebook, `__name__` is also `"__main__"`, so guarded code in a cell will run. The direct-script-versus-import distinction is most useful when working with separate `.py` files.
+:::
+
+The runnable example is included as [hello.py](../examples/week07/hello.py).
+
+## 9. Summary
+
+| Concept | Main purpose | Key point |
+|---|---|---|
+| `def` | Define a reusable operation | The body runs when called |
+| `return` | Send a result to the caller | Also ends the current call |
+| Procedure-style function | Perform an action | Implicit result is `None` |
+| Parameter passing | Bind local names to argument objects | Mutation differs from rebinding |
+| Default value | Make an argument optional | Evaluated when the function is defined |
+| `*args` | Accept extra positional arguments | Collected into a tuple |
+| Recursion | Solve a smaller instance by calling the same function | Needs a reachable base case |
+| Local/global names | Organize access to variables | `global` refers to the current module |
+| Lambda | Create a short expression-based function | One expression, automatic result |
+| Module/package | Organize reusable code | Import names, then call functions |
+| Main guard | Separate direct execution from import | `if __name__ == "__main__":` |
+
+Before writing a function, decide what it receives, what it returns, and whether it changes any shared object. Before writing a recursive function, state its valid input domain and base case.

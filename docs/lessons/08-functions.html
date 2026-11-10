@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 8 – Procedures, Functions and Modules – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../exercises/08-class-exercises.html" rel="next">
+<link href="../warmup/07-warmup.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/08-functions.html">Week 08</a></li><li class="breadcrumb-item"><a href="../lessons/08-functions.html">Theory: Procedures and Functions</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../student/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My Progress</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Introduction and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Conditional Statements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Practice test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05-complex-data-types-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Complex Data Types I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/05-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Official test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06-basic-algorithms-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Basic Algorithms I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/06-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/06-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07-basic-algorithms-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Basic Algorithms II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/07-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/07-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 08</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08-functions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Theory: Procedures and Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/08-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/08-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#user-defined-functions-and-procedures" id="toc-user-defined-functions-and-procedures" class="nav-link" data-scroll-target="#user-defined-functions-and-procedures">1. User-defined functions and procedures</a>
+  <ul class="collapse">
+  <li><a href="#general-structure" id="toc-general-structure" class="nav-link" data-scroll-target="#general-structure">General structure</a></li>
+  <li><a href="#python-example-check-whether-a-number-is-whole" id="toc-python-example-check-whether-a-number-is-whole" class="nav-link" data-scroll-target="#python-example-check-whether-a-number-is-whole">Python example: check whether a number is whole</a></li>
+  <li><a href="#a-procedure-style-function" id="toc-a-procedure-style-function" class="nav-link" data-scroll-target="#a-procedure-style-function">A procedure-style function</a></li>
+  <li><a href="#optional-type-annotations" id="toc-optional-type-annotations" class="nav-link" data-scroll-target="#optional-type-annotations">Optional type annotations</a></li>
+  </ul></li>
+  <li><a href="#passing-arguments-objects-mutation-and-rebinding" id="toc-passing-arguments-objects-mutation-and-rebinding" class="nav-link" data-scroll-target="#passing-arguments-objects-mutation-and-rebinding">2. Passing arguments: objects, mutation, and rebinding</a>
+  <ul class="collapse">
+  <li><a href="#changing-a-mutable-object" id="toc-changing-a-mutable-object" class="nav-link" data-scroll-target="#changing-a-mutable-object">Changing a mutable object</a></li>
+  <li><a href="#rebinding-a-parameter-referring-to-an-immutable-object" id="toc-rebinding-a-parameter-referring-to-an-immutable-object" class="nav-link" data-scroll-target="#rebinding-a-parameter-referring-to-an-immutable-object">Rebinding a parameter referring to an immutable object</a></li>
+  <li><a href="#rebinding-a-list-parameter-also-stays-local" id="toc-rebinding-a-list-parameter-also-stays-local" class="nav-link" data-scroll-target="#rebinding-a-list-parameter-also-stays-local">Rebinding a list parameter also stays local</a></li>
+  </ul></li>
+  <li><a href="#parameters-and-arguments" id="toc-parameters-and-arguments" class="nav-link" data-scroll-target="#parameters-and-arguments">3. Parameters and arguments</a>
+  <ul class="collapse">
+  <li><a href="#positional-arguments" id="toc-positional-arguments" class="nav-link" data-scroll-target="#positional-arguments">Positional arguments</a></li>
+  <li><a href="#default-parameter-values" id="toc-default-parameter-values" class="nav-link" data-scroll-target="#default-parameter-values">Default parameter values</a></li>
+  <li><a href="#keyword-arguments" id="toc-keyword-arguments" class="nav-link" data-scroll-target="#keyword-arguments">Keyword arguments</a></li>
+  <li><a href="#a-variable-number-of-positional-arguments-args" id="toc-a-variable-number-of-positional-arguments-args" class="nav-link" data-scroll-target="#a-variable-number-of-positional-arguments-args">A variable number of positional arguments: <code>*args</code></a></li>
+  </ul></li>
+  <li><a href="#recursion" id="toc-recursion" class="nav-link" data-scroll-target="#recursion">4. Recursion</a>
+  <ul class="collapse">
+  <li><a href="#python-example-sum-the-integers-from-1-to-n" id="toc-python-example-sum-the-integers-from-1-to-n" class="nav-link" data-scroll-target="#python-example-sum-the-integers-from-1-to-n">Python example: sum the integers from 1 to n</a></li>
+  <li><a href="#following-the-calls-and-returns" id="toc-following-the-calls-and-returns" class="nav-link" data-scroll-target="#following-the-calls-and-returns">Following the calls and returns</a></li>
+  </ul></li>
+  <li><a href="#local-and-global-variables" id="toc-local-and-global-variables" class="nav-link" data-scroll-target="#local-and-global-variables">5. Local and global variables</a>
+  <ul class="collapse">
+  <li><a href="#a-local-name-can-hide-a-global-name" id="toc-a-local-name-can-hide-a-global-name" class="nav-link" data-scroll-target="#a-local-name-can-hide-a-global-name">A local name can hide a global name</a></li>
+  <li><a href="#rebinding-a-global-name" id="toc-rebinding-a-global-name" class="nav-link" data-scroll-target="#rebinding-a-global-name">Rebinding a global name</a></li>
+  </ul></li>
+  <li><a href="#lambda-functions" id="toc-lambda-functions" class="nav-link" data-scroll-target="#lambda-functions">6. Lambda functions</a>
+  <ul class="collapse">
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example">A simple example</a></li>
+  <li><a href="#map-transform-each-element" id="toc-map-transform-each-element" class="nav-link" data-scroll-target="#map-transform-each-element"><code>map()</code>: transform each element</a></li>
+  <li><a href="#filter-keep-matching-elements" id="toc-filter-keep-matching-elements" class="nav-link" data-scroll-target="#filter-keep-matching-elements"><code>filter()</code>: keep matching elements</a></li>
+  <li><a href="#reduce-accumulate-a-result" id="toc-reduce-accumulate-a-result" class="nav-link" data-scroll-target="#reduce-accumulate-a-result"><code>reduce()</code>: accumulate a result</a></li>
+  </ul></li>
+  <li><a href="#modules-and-packages" id="toc-modules-and-packages" class="nav-link" data-scroll-target="#modules-and-packages">7. Modules and packages</a>
+  <ul class="collapse">
+  <li><a href="#module-example-my_module.py" id="toc-module-example-my_module.py" class="nav-link" data-scroll-target="#module-example-my_module.py">Module example: <code>my_module.py</code></a></li>
+  <li><a href="#using-the-module-main.py" id="toc-using-the-module-main.py" class="nav-link" data-scroll-target="#using-the-module-main.py">Using the module: <code>main.py</code></a></li>
+  </ul></li>
+  <li><a href="#the-main-module" id="toc-the-main-module" class="nav-link" data-scroll-target="#the-main-module">8. The main module</a>
+  <ul class="collapse">
+  <li><a href="#python-example-hello.py" id="toc-python-example-hello.py" class="nav-link" data-scroll-target="#python-example-hello.py">Python example: <code>hello.py</code></a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">9. Summary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/08-functions.html">Week 08</a></li><li class="breadcrumb-item"><a href="../lessons/08-functions.html">Theory: Procedures and Functions</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 8 – Procedures, Functions and Modules</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this part, you should be able to:</p>
+<ul>
+<li>define and call a Python function;</li>
+<li>distinguish returning a result from printing or changing an object;</li>
+<li>explain the difference between changing a shared list and rebinding a parameter;</li>
+<li>use positional arguments, keyword arguments, default values, and <code>*args</code>;</li>
+<li>identify a recursive step and a base case;</li>
+<li>distinguish local variables from module-level global variables;</li>
+<li>read simple lambda expressions and examples using <code>map()</code>, <code>filter()</code>, and <code>reduce()</code>;</li>
+<li>create and import a module, and explain the purpose of the main guard.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Connection to the algorithms
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In <a href="../lessons/07-basic-algorithms-2.html">Basic Algorithms II</a>, each example was written as a complete sequence of statements. Functions let us give such a sequence a name and reuse it with different inputs.</p>
+<p>The examples below introduce <code>def</code>, <code>return</code>, lambdas, and modules. Their appearance here does not automatically mean that every construct is allowed in every assessed exercise: follow the rules of the specific task.</p>
+</div>
+</div>
+</section>
+<section id="user-defined-functions-and-procedures" class="level2">
+<h2 class="anchored" data-anchor-id="user-defined-functions-and-procedures">1. User-defined functions and procedures</h2>
+<p>A <strong>function</strong> groups statements that perform a specific task. Defining a function gives it a name; <strong>calling</strong> the function executes its body.</p>
+<p>A function can accept input through <strong>parameters</strong> and send a result back with <code>return</code>.</p>
+<section id="general-structure" class="level3">
+<h3 class="anchored" data-anchor-id="general-structure">General structure</h3>
+<pre class="text"><code>def function_name(parameters):
+    """Optional description of the function."""
+    statements
+    return expression</code></pre>
+<p>Indentation identifies the function body. The <code>def</code> statement must run before the function can be called.</p>
+</section>
+<section id="python-example-check-whether-a-number-is-whole" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-check-whether-a-number-is-whole">Python example: check whether a number is whole</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> is_whole_number(number):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Check whether a finite number has no fractional part."""</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number <span class="op">==</span> <span class="bu">int</span>(number)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_whole_number(<span class="fl">5.0</span>))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(is_whole_number(<span class="fl">5.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>True
+False</code></pre>
+<p><code>number</code> is a <strong>parameter</strong> in the definition. <code>5.0</code> and <code>5.5</code> are <strong>arguments</strong> supplied by the calls. The example assumes a finite numeric argument suitable for conversion with <code>int()</code>.</p>
+</section>
+<section id="a-procedure-style-function" class="level3">
+<h3 class="anchored" data-anchor-id="a-procedure-style-function">A procedure-style function</h3>
+<p>A <strong>procedure</strong> performs an action rather than returning a useful result. Python uses <code>def</code> for both styles: there is no separate procedure declaration.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> duplicate_number(number):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Double the first value in a non-empty list."""</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    number[<span class="dv">0</span>] <span class="op">=</span> number[<span class="dv">0</span>] <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">5</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>duplicate_number(x)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"After doubling:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>After doubling: [10]</code></pre>
+<p>The parameter refers to a list, so <code>number[0]</code> can be changed. This example requires a non-empty list whose first element is numeric.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Every Python function returns a value
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A procedure-style function still returns <strong><code>None</code></strong> if it reaches the end without a <code>return</code> expression. A bare <code>return</code> also returns <code>None</code>.</p>
+<p><code>print()</code> displays something for the user. <code>return</code> gives a value back to the caller and immediately leaves the current function call. Printing a result and returning a result are different actions.</p>
+</div>
+</div>
+<p>A <strong>docstring</strong> is an optional string at the beginning of the function body that documents its purpose. Function names should describe the task, and parameter names should describe the expected inputs.</p>
+</section>
+<section id="optional-type-annotations" class="level3">
+<h3 class="anchored" data-anchor-id="optional-type-annotations">Optional type annotations</h3>
+<p>Python lets us indicate the expected types of parameters and the return value. These <strong>type annotations</strong> are optional.</p>
+<p>Write <code>: type</code> after a parameter name and <code>-&gt; type</code> before the colon that starts the function body:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_numbers(a: <span class="bu">int</span>, b: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, add_numbers(<span class="dv">3</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sum: 8</code></pre>
+<p>Here, <code>a: int</code> and <code>b: int</code> indicate that integer arguments are expected, and <code>-&gt; int</code> indicates that the function returns an integer. The function also works without these annotations:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_numbers(a, b):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, add_numbers(<span class="dv">3</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sum: 8</code></pre>
+<p>For a procedure-style function, use <code>-&gt; None</code> to indicate that it does not return a useful result:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_score(score: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Score:"</span>, score)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>show_score(<span class="fl">8.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Score: 8.5</code></pre>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Annotations describe expectations
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Type annotations help readers, editors, and type-checking tools understand the intended use of a function. <strong>Python does not automatically enforce them at runtime</strong>, and they do not convert the supplied values. For example, <code>a: int</code> does not perform <code>int(a)</code>.</p>
+<p>You can omit annotations, or annotate only some parameters or the return value. They are not required in the examples in this course unless a task explicitly asks for them.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="passing-arguments-objects-mutation-and-rebinding" class="level2">
+<h2 class="anchored" data-anchor-id="passing-arguments-objects-mutation-and-rebinding">2. Passing arguments: objects, mutation, and rebinding</h2>
+<p>Python arguments are passed by <strong>assignment</strong>, also called <strong>object sharing</strong>: a local parameter name refers to the object supplied by the caller. Python does not automatically copy that object.</p>
+<p>The important distinction is between:</p>
+<ul>
+<li><strong>mutation:</strong> changing the shared object itself;</li>
+<li><strong>rebinding:</strong> making a local parameter name refer to another object.</li>
+</ul>
+<section id="changing-a-mutable-object" class="level3">
+<h3 class="anchored" data-anchor-id="changing-a-mutable-object">Changing a mutable object</h3>
+<p>Lists are mutable. A function can change the same list that the caller uses.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> modify_list(my_list):</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    my_list.append(<span class="dv">42</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>original_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>modify_list(original_list)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original list after the call:"</span>, original_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Original list after the call: [1, 2, 3, 42]</code></pre>
+<p><code>my_list</code> and <code>original_list</code> refer to the same list during the call. <code>append()</code> changes that object.</p>
+</section>
+<section id="rebinding-a-parameter-referring-to-an-immutable-object" class="level3">
+<h3 class="anchored" data-anchor-id="rebinding-a-parameter-referring-to-an-immutable-object">Rebinding a parameter referring to an immutable object</h3>
+<p>Strings are immutable. An assignment to the parameter creates a different local binding; it does not change the caller’s variable.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> modify_string(s):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="st">"Hello, world!"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>original_string <span class="op">=</span> <span class="st">"Hi"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>modify_string(original_string)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original string after the call:"</span>, original_string)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Original string after the call: Hi</code></pre>
+</section>
+<section id="rebinding-a-list-parameter-also-stays-local" class="level3">
+<h3 class="anchored" data-anchor-id="rebinding-a-list-parameter-also-stays-local">Rebinding a list parameter also stays local</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> replace_list(my_list):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    my_list <span class="op">=</span> [<span class="dv">42</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>original_list <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>replace_list(original_list)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Original list after rebinding:"</span>, original_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Original list after rebinding: [1, 2, 3]</code></pre>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Avoid the “immutable by value, mutable by reference” shortcut
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Both kinds of object use the <strong>same argument-passing mechanism</strong>. The different behaviour comes from whether an operation mutates an existing object or rebinds a local name.</p>
+<p>Integers, floats, and strings are immutable. Lists and dictionaries are mutable. A tuple is immutable, but a mutable object stored inside a tuple can still be changed.</p>
+</div>
+</div>
+<p>If a function calculates a new value, a clear approach is to <strong>return</strong> it and let the caller assign it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> double_number(number):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> number <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>value <span class="op">=</span> double_number(value)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"New value:"</span>, value)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>New value: 10</code></pre>
+</section>
+</section>
+<section id="parameters-and-arguments" class="level2">
+<h2 class="anchored" data-anchor-id="parameters-and-arguments">3. Parameters and arguments</h2>
+<section id="positional-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="positional-arguments">Positional arguments</h3>
+<p>The order of the supplied arguments determines which parameter receives each value.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name, greeting):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>greeting<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> greet(<span class="st">"Alice"</span>, <span class="st">"Hello"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Hello, Alice!</code></pre>
+<p>Here, <code>name</code> receives <code>"Alice"</code> and <code>greeting</code> receives <code>"Hello"</code>.</p>
+</section>
+<section id="default-parameter-values" class="level3">
+<h3 class="anchored" data-anchor-id="default-parameter-values">Default parameter values</h3>
+<p>A default value is used when the corresponding argument is omitted.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name, greeting<span class="op">=</span><span class="st">"Hello"</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>greeting<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(greet(<span class="st">"Bob"</span>))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(greet(<span class="st">"Bob"</span>, <span class="st">"Good morning"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Hello, Bob!
+Good morning, Bob!</code></pre>
+<p>In this ordinary parameter list, parameters without defaults must appear before parameters with defaults.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Mutable default values
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Default values are evaluated when the function is defined, not separately for each call. Avoid a mutable default such as <code>items=[]</code> unless sharing that same list across calls is intentional. Use <code>None</code> as the default and create a new list inside the function when needed.</p>
+</div>
+</div>
+</section>
+<section id="keyword-arguments" class="level3">
+<h3 class="anchored" data-anchor-id="keyword-arguments">Keyword arguments</h3>
+<p>Arguments can also be supplied by parameter name. The order of these named arguments can differ from the order in the definition.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> greet(name, greeting<span class="op">=</span><span class="st">"Hello"</span>):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>greeting<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">!"</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> greet(greeting<span class="op">=</span><span class="st">"Hi"</span>, name<span class="op">=</span><span class="st">"Charlie"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Hi, Charlie!</code></pre>
+<p>For the calls shown here, positional arguments go before keyword arguments. Do not supply the same parameter twice.</p>
+</section>
+<section id="a-variable-number-of-positional-arguments-args" class="level3">
+<h3 class="anchored" data-anchor-id="a-variable-number-of-positional-arguments-args">A variable number of positional arguments: <code>*args</code></h3>
+<p><code>*args</code> collects extra positional arguments into a <strong>tuple</strong>. The name <code>args</code> is a convention; the <code>*</code> gives it this behaviour.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sum_numbers(<span class="op">*</span>args):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> number <span class="kw">in</span> args:</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        total <span class="op">=</span> total <span class="op">+</span> number</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> total</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, sum_numbers(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum with no arguments:"</span>, sum_numbers())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sum: 15
+Sum with no arguments: 0</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Form</th>
+<th>Example</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Positional argument</td>
+<td><code>greet("Alice", "Hello")</code></td>
+<td>Match values by their order</td>
+</tr>
+<tr class="even">
+<td>Default value</td>
+<td><code>def greet(name, greeting="Hello"):</code></td>
+<td>Supply a fallback when an argument is omitted</td>
+</tr>
+<tr class="odd">
+<td>Keyword argument</td>
+<td><code>greet(name="Charlie", greeting="Hi")</code></td>
+<td>Match values by parameter name</td>
+</tr>
+<tr class="even">
+<td>Variable-length positional arguments</td>
+<td><code>def sum_numbers(*args):</code></td>
+<td>Collect extra positional values into a tuple</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="recursion" class="level2">
+<h2 class="anchored" data-anchor-id="recursion">4. Recursion</h2>
+<p><strong>Recursion</strong> means that a function calls itself to solve a smaller instance of a problem.</p>
+<p>A recursive algorithm needs:</p>
+<ol type="1">
+<li>a <strong>base case</strong> that can be answered directly;</li>
+<li>a <strong>recursive step</strong> that moves closer to the base case.</li>
+</ol>
+<section id="python-example-sum-the-integers-from-1-to-n" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-sum-the-integers-from-1-to-n">Python example: sum the integers from 1 to n</h3>
+<p><strong>Precondition:</strong> <code>n</code> is a positive integer.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recursive_sum(n):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return 1 + 2 + ... + n for a positive integer n."""</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">+</span> recursive_sum(n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> recursive_sum(<span class="dv">5</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum from 1 to 5:"</span>, result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sum from 1 to 5: 15</code></pre>
+</section>
+<section id="following-the-calls-and-returns" class="level3">
+<h3 class="anchored" data-anchor-id="following-the-calls-and-returns">Following the calls and returns</h3>
+<pre class="text"><code>recursive_sum(5)
+= 5 + recursive_sum(4)
+= 5 + 4 + recursive_sum(3)
+= 5 + 4 + 3 + recursive_sum(2)
+= 5 + 4 + 3 + 2 + recursive_sum(1)
+= 5 + 4 + 3 + 2 + 1
+= 15</code></pre>
+<p>Each call has its own local <code>n</code>. The pending calls finish as the recursive results return.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Termination and valid input
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For this definition, <code>n = 0</code> or a negative value does not reach the base case. Repeated recursive calls eventually raise a <code>RecursionError</code>.</p>
+<p>Python also limits recursion depth, so very large positive inputs can fail. Recursion is useful for suitable problems, but a loop is usually more practical for this simple sum.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="local-and-global-variables" class="level2">
+<h2 class="anchored" data-anchor-id="local-and-global-variables">5. Local and global variables</h2>
+<p>A <strong>local variable</strong> belongs to a function call. A <strong>global variable</strong> in these examples is defined at the top level of the current module.</p>
+<section id="a-local-name-can-hide-a-global-name" class="level3">
+<h3 class="anchored" data-anchor-id="a-local-name-can-hide-a-global-name">A local name can hide a global name</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function():</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Inside the function:"</span>, x)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>my_function()</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outside the function:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Inside the function: 20
+Outside the function: 10</code></pre>
+<p>The local <code>x</code> and global <code>x</code> are different bindings. Assigning to <code>x</code> inside this function does not change the module-level <code>x</code>.</p>
+</section>
+<section id="rebinding-a-global-name" class="level3">
+<h3 class="anchored" data-anchor-id="rebinding-a-global-name">Rebinding a global name</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function2():</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> x</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Inside the function:"</span>, x)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>my_function2()</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Outside the function:"</span>, x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Inside the function: 20
+Outside the function: 20</code></pre>
+<p><code>global x</code> tells Python that assignments to <code>x</code> in this function refer to the current module’s global name. A function can read an existing global value without <code>global</code> if it does not also bind that name locally.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A block is not automatically a new scope
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An <code>if</code>, <code>for</code>, or <code>while</code> block does <strong>not</strong> create a separate local scope in Python. Indentation alone does not define a variable’s scope. Function bodies create local scopes; the original slides’ general reference to any “block” is too broad.</p>
+<p>Prefer parameters and return values for passing information between functions. They make dependencies easier to see than changing global variables.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="lambda-functions" class="level2">
+<h2 class="anchored" data-anchor-id="lambda-functions">6. Lambda functions</h2>
+<p>A <strong>lambda expression</strong> creates a small function from a single expression:</p>
+<pre class="text"><code>lambda arguments: expression</code></pre>
+<p>It can have multiple parameters, but its body is one expression, not a block of statements. The expression’s value is returned automatically.</p>
+<section id="a-simple-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-simple-example">A simple example</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>add <span class="op">=</span> <span class="kw">lambda</span> x, y: x <span class="op">+</span> y</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sum:"</span>, add(<span class="dv">3</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Sum: 8</code></pre>
+<p>This illustrates the syntax. For a named reusable function, a normal <code>def</code> is usually clearer. Lambdas are often used as short function arguments.</p>
+</section>
+<section id="map-transform-each-element" class="level3">
+<h3 class="anchored" data-anchor-id="map-transform-each-element"><code>map()</code>: transform each element</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>squared <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span>, numbers))</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Squared values:"</span>, squared)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Squared values: [1, 4, 9, 16, 25]</code></pre>
+<p><code>map()</code> applies the function to each value. In Python 3, it returns an iterator; <code>list()</code> collects the results into a list. This is related to <strong>copying with transformation</strong> from Part 1.</p>
+</section>
+<section id="filter-keep-matching-elements" class="level3">
+<h3 class="anchored" data-anchor-id="filter-keep-matching-elements"><code>filter()</code>: keep matching elements</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>numbers_below_4 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(<span class="kw">lambda</span> x: x <span class="op">&lt;</span> <span class="dv">4</span>, numbers))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Values below 4:"</span>, numbers_below_4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Values below 4: [1, 2, 3]</code></pre>
+<p><code>filter()</code> keeps the original elements for which the function returns a truthy value. The lambda supplies a <strong>condition</strong>, not the replacement value. This is related to <strong>selection of all matching elements</strong>.</p>
+</section>
+<section id="reduce-accumulate-a-result" class="level3">
+<h3 class="anchored" data-anchor-id="reduce-accumulate-a-result"><code>reduce()</code>: accumulate a result</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>product <span class="op">=</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> x, y: x <span class="op">*</span> y, numbers, <span class="dv">1</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Product:"</span>, product)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Product: 120</code></pre>
+<p>The third argument, <code>1</code>, is the initial accumulator. The multiplication results are <code>1</code>, <code>2</code>, <code>6</code>, <code>24</code>, and <code>120</code>. Unlike <code>map()</code> and <code>filter()</code>, <code>reduce()</code> must be imported from <code>functools</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>First understand the loop version
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These tools can express familiar processing patterns compactly. They do not replace the need to understand the explicit algorithms. In assessed tasks that require loops or forbid lambdas, <code>map()</code>, or <code>filter()</code>, use the required loop-based solution.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="modules-and-packages" class="level2">
+<h2 class="anchored" data-anchor-id="modules-and-packages">7. Modules and packages</h2>
+<p>A <strong>module</strong> is an importable unit of Python code. For our own examples, it is a <code>.py</code> file containing functions and variables.</p>
+<p>A <strong>package</strong> groups modules under a shared name. A regular package is typically a directory containing an <code>__init__.py</code> file and other modules. Python also supports namespace packages without that file.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Import style</th>
+<th>Example</th>
+<th>Use afterwards</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Import a module</td>
+<td><code>import my_module</code></td>
+<td><code>my_module.square(5)</code></td>
+</tr>
+<tr class="even">
+<td>Use an alias</td>
+<td><code>import my_module as mm</code></td>
+<td><code>mm.square(5)</code></td>
+</tr>
+<tr class="odd">
+<td>Import a specific function</td>
+<td><code>from my_module import square</code></td>
+<td><code>square(5)</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Import a name; call it afterwards
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Write <code>from my_module import square</code>, without parentheses. Parentheses are used when <strong>calling</strong> the imported function: <code>square(5)</code>.</p>
+<p>Do not name your own file <code>random.py</code>, <code>math.py</code>, or another name that conflicts with a module you intend to import.</p>
+</div>
+</div>
+<section id="module-example-my_module.py" class="level3">
+<h3 class="anchored" data-anchor-id="module-example-my_module.py">Module example: <code>my_module.py</code></h3>
+<p>Save the following code in a file named <strong><code>my_module.py</code></strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_module.py</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> square(x):</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return the square of x."""</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">*</span> x</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> factorial(n):</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Return n! for a non-negative integer n."""</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> n <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> n <span class="op">*</span> factorial(n <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>greeting <span class="op">=</span> <span class="st">"Hello, World!"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>factorial()</code> requires a non-negative integer. Its base case is <code>0! = 1</code>; its recursive step is <code>n! = n * (n - 1)!</code>. Negative or unsuitable inputs are outside this example’s intended domain, and large inputs can exceed the recursion limit.</p>
+</section>
+<section id="using-the-module-main.py" class="level3">
+<h3 class="anchored" data-anchor-id="using-the-module-main.py">Using the module: <code>main.py</code></h3>
+<p>Save this second file as <strong><code>main.py</code></strong> in the <strong>same directory</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># main.py</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> my_module</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>result1 <span class="op">=</span> my_module.square(<span class="dv">5</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>result2 <span class="op">=</span> my_module.factorial(<span class="dv">4</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>message <span class="op">=</span> my_module.greeting</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Square:"</span>, result1)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Factorial:"</span>, result2)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Message:"</span>, message)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Run <code>python main.py</code> from that directory. On systems configured to use it, <code>python3 main.py</code> is equivalent.</p>
+<pre class="text"><code>Square: 25
+Factorial: 24
+Message: Hello, World!</code></pre>
+<p>The examples are also included as downloadable files:</p>
+<ul>
+<li><a href="../examples/week07/my_module.py">my_module.py</a></li>
+<li><a href="../examples/week07/main.py">main.py</a></li>
+</ul>
+<p>In a notebook, the module file must be available on the kernel’s import path; placing it in the notebook’s working directory is the simplest approach for this example. Merely pasting the module code into another cell does not create a <code>.py</code> file.</p>
+</section>
+</section>
+<section id="the-main-module" class="level2">
+<h2 class="anchored" data-anchor-id="the-main-module">8. The main module</h2>
+<p>When a Python file runs directly as a script, its <code>__name__</code> is set to <code>"__main__"</code>. When imported, its <code>__name__</code> is its module name instead.</p>
+<p>The <strong>main guard</strong> lets us choose which statements run only during direct execution.</p>
+<section id="python-example-hello.py" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-hello.py">Python example: <code>hello.py</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> hello_world():</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Hello, World!"</span>)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>    hello_world()</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"This code runs in the main module."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Running <code>python hello.py</code> displays:</p>
+<pre class="text"><code>Hello, World!
+This code runs in the main module.</code></pre>
+<p>Importing it with <code>import hello</code> defines the function but does not execute the guarded statements. You can then explicitly call <code>hello.hello_world()</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>The guard does not prevent all import-time execution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Top-level statements <strong>outside</strong> the guard still run when the module is first imported in a process. Place demonstration calls under the guard when importing should only make definitions available.</p>
+<p>In a usual Jupyter notebook, <code>__name__</code> is also <code>"__main__"</code>, so guarded code in a cell will run. The direct-script-versus-import distinction is most useful when working with separate <code>.py</code> files.</p>
+</div>
+</div>
+<p>The runnable example is included as <a href="../examples/week07/hello.py">hello.py</a>.</p>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">9. Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Main purpose</th>
+<th>Key point</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>def</code></td>
+<td>Define a reusable operation</td>
+<td>The body runs when called</td>
+</tr>
+<tr class="even">
+<td><code>return</code></td>
+<td>Send a result to the caller</td>
+<td>Also ends the current call</td>
+</tr>
+<tr class="odd">
+<td>Procedure-style function</td>
+<td>Perform an action</td>
+<td>Implicit result is <code>None</code></td>
+</tr>
+<tr class="even">
+<td>Parameter passing</td>
+<td>Bind local names to argument objects</td>
+<td>Mutation differs from rebinding</td>
+</tr>
+<tr class="odd">
+<td>Default value</td>
+<td>Make an argument optional</td>
+<td>Evaluated when the function is defined</td>
+</tr>
+<tr class="even">
+<td><code>*args</code></td>
+<td>Accept extra positional arguments</td>
+<td>Collected into a tuple</td>
+</tr>
+<tr class="odd">
+<td>Recursion</td>
+<td>Solve a smaller instance by calling the same function</td>
+<td>Needs a reachable base case</td>
+</tr>
+<tr class="even">
+<td>Local/global names</td>
+<td>Organize access to variables</td>
+<td><code>global</code> refers to the current module</td>
+</tr>
+<tr class="odd">
+<td>Lambda</td>
+<td>Create a short expression-based function</td>
+<td>One expression, automatic result</td>
+</tr>
+<tr class="even">
+<td>Module/package</td>
+<td>Organize reusable code</td>
+<td>Import names, then call functions</td>
+</tr>
+<tr class="odd">
+<td>Main guard</td>
+<td>Separate direct execution from import</td>
+<td><code>if __name__ == "__main__":</code></td>
+</tr>
+</tbody>
+</table>
+<p>Before writing a function, decide what it receives, what it returns, and whether it changes any shared object. Before writing a recursive function, state its valid input domain and base case.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../warmup/07-warmup.html" class="pagination-link" aria-label="Warm-up test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Warm-up test</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../exercises/08-class-exercises.html" class="pagination-link" aria-label="Class exercises">
+        <span class="nav-page-text">Class exercises</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
