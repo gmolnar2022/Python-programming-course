@@ -391,7 +391,7 @@ Note
 <p>This is a <strong>graded warm-up test</strong>.</p>
 <p>The topics are <strong>Summarization, Counting, guaranteed-match Selection, Copying with transformation, Selection of all matching elements, Separation, Swap sort, Minimum selection sort and Bubble sort</strong>, using one-dimensional lists and structured algorithms. You will receive <strong>one task worth 10 points</strong>.</p>
 <p>You have <strong>10 minutes</strong> from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.</p>
-<p><strong>Test window rule:</strong> During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The <strong>first detected switch</strong> automatically submits your current solution and ends the test. This warning is shown before you start; there is no return-to-test warning after switching.</p>
+<p><strong>Test window rule:</strong> During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The <strong>first detected loss of focus</strong> gives you a warning when you return. A <strong>second detected loss of focus</strong> automatically submits your current solution. The timer keeps running.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -616,7 +616,7 @@ Note
     <div class="rules-ack">
       <label>
         <input id="accept-rules" type="checkbox">
-        I confirm that I am present in the classroom and understand that the FIRST detected switch to another tab, window or application automatically submits my current solution and ends the test.
+        I confirm that I am present in the classroom and understand that the first detected loss of focus gives me a warning and the second automatically submits my current solution.
       </label>
     </div>
 
@@ -652,7 +652,9 @@ Note
       <strong>Your Python solution</strong>
     </label>
 
-    <textarea id="code-editor" spellcheck="false"></textarea>
+    <textarea id="code-editor" spellcheck="false" aria-describedby="warmup-editor-note"></textarea>
+    <p id="warmup-editor-note">Type your solution in the editor. Pasting and dropping text are disabled during the test.</p>
+    <p id="warmup-editor-status" role="status"></p>
 
     <div class="warmup-row">
 
@@ -678,12 +680,13 @@ Note
 
   </div>
 
-  <div id="warmup-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="warmup-warning-title">
+  <div id="warmup-warning-overlay" role="dialog" aria-modal="true" aria-labelledby="warmup-warning-title" aria-describedby="warmup-warning-text">
 
     <div id="warmup-warning-dialog">
 
-      <h3 id="warmup-warning-title" class="anchored">Window-switch policy</h3>
-      <p>The first detected switch automatically submits your current solution.</p>
+      <h3 id="warmup-warning-title" class="anchored">First focus warning</h3>
+      <p id="warmup-warning-text">The test page lost focus or was hidden. Your work has not been submitted, and the timer is still running. If the page loses focus again, your current solution will be submitted automatically.</p>
+      <button id="warmup-warning-continue" type="button">Continue test</button>
 
     </div>
 
@@ -741,6 +744,8 @@ Note
   let focusProtectionArmed = false;
   let navigationPromptOpen = false;
   let focusLossTimer = null;
+  let focusAway = false;
+  let focusWarningState = null;
 
 
 
@@ -792,6 +797,7 @@ Note
 
   const warningOverlay =
     $("warmup-warning-overlay");
+  const warningContinue = $("warmup-warning-continue");
 
 
 
@@ -1078,7 +1084,10 @@ Note
         .trim()
         .toUpperCase();
 
-    focusViolation = sessionStorage.getItem(`pycourse_focus_violation_${TEST_ID}_${assignment.assignment_id}`) === '1';
+    focusViolation = sessionStorage.getItem(focusStateKey('violation')) === '1';
+    focusWarningState = sessionStorage.getItem(focusStateKey('warning'));
+    // Reloading in the background does not count the same first absence again.
+    focusAway = focusWarningState === 'pending' && !testPageFocused();
     restoreRunCount();
 
     const savedDraft =
@@ -1108,11 +1117,9 @@ Note
 
     startTimer();
     focusProtectionArmed = true;
-    if(focusViolation || document.hidden) {
-      focusViolation = true;
-      sessionStorage.setItem(`pycourse_focus_violation_${TEST_ID}_${assignment.assignment_id}`, '1');
-      submitSolution('window_switch');
-    }
+    if (focusViolation) submitSolution('window_switch');
+    else if (document.hidden) registerFocusLoss();
+    else if (testPageFocused()) restoreTestFocus();
   }
 
 
@@ -1187,7 +1194,7 @@ Note
     }
 
 
-    if(!automatic && !window.confirm('Before starting: the FIRST detected switch to another tab, window or application automatically submits your current solution and ends this test. Stay on this page. Continue?')) return false;
+    if(!automatic && !window.confirm('Before starting: the first detected loss of focus gives you a warning. The second automatically submits your current solution. Stay on this page. Continue?')) return false;
 
     startButton.disabled = true;
 
@@ -1339,29 +1346,71 @@ Note
    * Window-switch detection.
    */
 
-  async function registerFocusLoss() {
-    if(!focusProtectionArmed || navigationPromptOpen || !assignment || submitted || submitting || focusViolation) return;
-    focusViolation = true;
-    sessionStorage.setItem(`pycourse_focus_violation_${TEST_ID}_${assignment.assignment_id}`, '1');
+  function focusStateKey(kind) {
+    return `pycourse_focus_${kind}_${TEST_ID}_${assignment.assignment_id}`;
+  }
+  function testPageFocused() {
+    return !document.hidden && document.hasFocus();
+  }
+  function closeFocusWarning() {
     warningOverlay.style.display = 'none';
+    panel.inert = false;
+  }
+  function showFocusWarning() {
+    if (warningOverlay.style.display === 'flex') return;
+    warningOverlay.style.display = 'flex';
+    panel.inert = true;
+    warningContinue.focus();
+  }
+  warningContinue.addEventListener('click', () => {
+    if (!assignment || submitted || submitting || focusViolation || !testPageFocused()) return;
+    focusWarningState = 'acknowledged';
+    sessionStorage.setItem(focusStateKey('warning'), focusWarningState);
+    closeFocusWarning();
+    editor.focus();
+  });
+  async function submitForLeaving() {
+    focusViolation = true;
+    sessionStorage.setItem(focusStateKey('violation'), '1');
     await submitSolution('window_switch');
   }
+  function registerFocusLoss() {
+    if (!focusProtectionArmed || navigationPromptOpen || !assignment ||
+        submitted || submitting || focusViolation || focusAway) return;
+    focusAway = true;
+    if (!focusWarningState) {
+      focusWarningState = 'pending';
+      sessionStorage.setItem(focusStateKey('warning'), focusWarningState);
+      return;
+    }
+    submitForLeaving();
+  }
+  function restoreTestFocus() {
+    if (!focusProtectionArmed || navigationPromptOpen || !assignment ||
+        submitted || submitting || !testPageFocused()) return;
+    clearTimeout(focusLossTimer);
+    if (focusViolation) {
+      submitSolution('window_switch');
+      return;
+    }
+    // Blur and hidden signals belong to the same absence until the page is visible and focused.
+    focusAway = false;
+    if (focusWarningState === 'pending') showFocusWarning();
+  }
   document.addEventListener('visibilitychange', () => {
-    if(document.hidden) registerFocusLoss();
-    else if(focusViolation && assignment && !submitted && !submitting) submitSolution('window_switch');
+    if (document.hidden) {
+      clearTimeout(focusLossTimer);
+      registerFocusLoss();
+    } else restoreTestFocus();
   });
   window.addEventListener('blur', () => {
     clearTimeout(focusLossTimer);
-    // Recheck after transient focus changes; tab hiding is handled immediately above.
-    if(navigationPromptOpen) return;
+    if (navigationPromptOpen || focusAway) return;
     focusLossTimer = setTimeout(() => {
-      if(document.hidden || !document.hasFocus()) registerFocusLoss();
+      if (!testPageFocused()) registerFocusLoss();
     }, 150);
   });
-  window.addEventListener('focus', () => {
-    clearTimeout(focusLossTimer);
-    if(focusViolation && assignment && !submitted && !submitting) submitSolution('window_switch');
-  });
+  window.addEventListener('focus', restoreTestFocus);
 
   async function guardNavigation(event) {
     if(!assignment || submitted || submitting || navigationPromptOpen) return;
@@ -1386,7 +1435,7 @@ Note
       clearTimeout(focusLossTimer);
     }
     if(!confirmed) return;
-    await registerFocusLoss();
+    await submitForLeaving();
     // Stay on the page if saving failed, so submission can be retried.
     if(submitted) location.assign(target.href);
   }
@@ -1491,7 +1540,7 @@ Note
         ? `
           <p class="result-note">
             <strong>Test ended.</strong>
-            A first window switch was detected and your current solution was submitted automatically.
+            Your current solution was submitted automatically after you left the test page or it lost focus again.
           </p>
         `
 
@@ -1561,6 +1610,7 @@ Note
 
     if(focusViolation) type = 'window_switch';
     submitting = true;
+    closeFocusWarning();
     cancelRun();
 
     runButton.disabled = true;
@@ -1710,6 +1760,20 @@ Note
     }
   }
 
+
+  const editorStatus = $("warmup-editor-status");
+  function blockExternalInsertion(event) {
+    if (!assignment || submitted || submitting) return;
+    event.preventDefault();
+    editorStatus.textContent = "Pasting and dropping text are disabled. Type your solution directly.";
+  }
+  editor.addEventListener("paste", blockExternalInsertion);
+  editor.addEventListener("drop", blockExternalInsertion);
+  editor.addEventListener("beforeinput", (event) => {
+    if (event.inputType === "insertFromPaste" ||
+        event.inputType === "insertFromPasteAsQuotation" ||
+        event.inputType === "insertFromDrop") blockExternalInsertion(event);
+  });
 
   /*
    * Use TAB inside the editor for Python indentation.
