@@ -349,6 +349,41 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 09</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/09-complex-data-types-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Complex Data Types II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/09-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/09-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study Project</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -377,6 +412,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p><a href="../project/register.html">Project team registration</a> — create your team or accept an invitation.</p>
 <style>
 .teacher-toolbar {
   display: flex;
@@ -2300,6 +2336,89 @@ pwEl('passwordInitial').addEventListener('click',async()=>{
  }finally{passwordBusy=false;passwordRender();}
 });
 
+})();
+</script>
+<section style="border:1px solid #d9e1eb;padding:18px;border-radius:10px;margin:24px 0">
+<h2 class="anchored">Project team registrations</h2>
+<p>Use the teacher API key above. Mixed-group teams are classified by the founder’s group.</p>
+<label>Workspace <select id="pt-teacher-scope"><option value="live">Student registrations</option><option value="test">Instructor test workspace</option></select></label>
+<button id="pt-teacher-load" type="button">Load teams</button>
+<details style="margin:12px 0"><summary>Instructor test accounts</summary><p>Requires PROJECT_TEAM_TEST_MODE=true in the backend. This creates or resets TST901 and TST902 only. It does not change your dashboard password or send email. Save the displayed virtual passwords before leaving.</p><label>G07 sponsor <input id="pt-sponsor" value="UJAENB" maxlength="6"></label><button id="pt-setup" type="button">Create / reset virtual passwords</button><pre id="pt-credentials" style="white-space:pre-wrap"></pre></details>
+<p id="pt-teacher-message" aria-live="polite"></p><div id="pt-teacher-list"></div>
+</section>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);let busy=false;
+ // The original dashboard helpers are private to its IIFE. Read its existing
+ // session key here without exposing those helpers or creating a second key.
+ const getKey=()=>sessionStorage.getItem('teacher_function_key')||'';
+ const apiUrl=name=>'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/'+name+'?code='+encodeURIComponent(getKey());
+ async function send(body){
+  if(!getKey())throw Error('Enter the teacher API key first.');
+  const response=await fetch(apiUrl('teacherProjectTeams'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});const data=await response.json();if(!response.ok||!data.success)throw Error(data.error||'Request failed.');return data;
+ }
+ function text(tag,value){const e=document.createElement(tag);e.textContent=value;return e;}
+ function render(data){const list=$('pt-teacher-list');list.replaceChildren();
+  if(!data.teams.length)list.append(text('p','No active teams in this workspace.'));
+  for(const t of data.teams){const section=document.createElement('section');section.style.cssText='border-top:1px solid #ddd;padding:12px 0';section.append(text('h3',t.name),text('p',`${t.group} · ${t.topic} · ${t.status} · ${t.team_id}`));const ul=document.createElement('ul');for(const m of t.members)ul.append(text('li',`${m.name} (${m.neptun}, ${m.group}) — ${m.accepted?'Accepted':'Pending'}${m.neptun===t.founder?' · Founder':''}`));section.append(ul);
+   const view=text('button','View project submissions');view.type='button';view.onclick=()=>window.dispatchEvent(new CustomEvent('project-team-selected',{detail:{team_id:t.team_id,scope:$('pt-teacher-scope').value,group:t.group,name:t.name}}));section.append(view);
+   for(const [action,label] of [['reopen','Reopen registration'],['cancel','Cancel team']]){if(action==='reopen'&&t.status!=='finalized')continue;const b=text('button',label);b.type='button';b.onclick=()=>{if(confirm(label+' for '+t.name+'?'))run(async()=>render(await send({action,scope:$('pt-teacher-scope').value,team_id:t.team_id})));};section.append(b);}list.append(section);
+  }
+ }
+ async function run(fn){if(busy)return;busy=true;try{await fn();$('pt-teacher-message').textContent='Done.';}catch(e){$('pt-teacher-message').textContent=e.message;}finally{busy=false;}}
+ $('pt-teacher-load').onclick=()=>run(async()=>render(await send({scope:$('pt-teacher-scope').value})));
+ $('pt-setup').onclick=()=>{if(confirm('Create or reset both virtual passwords? Existing virtual sessions will expire.'))run(async()=>{const d=await send({action:'setup_test',sponsor:$('pt-sponsor').value.trim().toUpperCase()});$('pt-credentials').textContent=d.passwords.map(p=>`${p.neptun} (${p.group}): ${p.password}`).join('\n')+'\n'+d.message;});};
+ $('pt-teacher-scope').onchange=()=>{$('pt-teacher-list').replaceChildren();};
+ $('logoutButton').addEventListener('click',()=>{$('pt-teacher-list').replaceChildren();$('pt-credentials').textContent='';$('pt-teacher-message').textContent='';});
+})();
+</script>
+<section id="ps-teacher-panel" style="border:1px solid #dae2ec;border-radius:10px;padding:18px;margin:20px 0" hidden="">
+<h2 id="ps-teacher-title" class="anchored">Team project submissions</h2>
+<p id="ps-teacher-context"></p><p id="ps-teacher-message" aria-live="polite"></p>
+<details><summary>Set the team's fixed assignment IDs</summary>
+<p>First test with an instructor test team. First save the fixed identifiers, then preview and release the detailed task and three CSVs below. Release is idempotent; an existing package is not regenerated. Existing assignments cannot be replaced here.</p>
+<form id="ps-assignment-form"><label>Variant <select id="ps-variant"></select></label> <label>Dataset ID <input id="ps-dataset" maxlength="80" required="" placeholder="TEST-RENTAL-v1"></label> <button type="submit">Assign once</button></form>
+</details>
+<button type="button" id="ps-preview-assignment">Preview task</button><button type="button" id="ps-release-assignment">Release task and CSVs</button><div id="ps-teacher-assignment"></div>
+<button type="button" id="ps-teacher-refresh">Refresh submissions</button><div id="ps-teacher-files"></div>
+</section>
+<script>
+(()=>{
+ const $=id=>document.getElementById(id);let selected=null,busy=false,epoch=0;
+ const text=(tag,s)=>{const e=document.createElement(tag);e.textContent=s;return e;};
+ async function send(body){const key=sessionStorage.getItem('teacher_function_key')||'';if(!key)throw Error('Enter the teacher API key first.');const r=await fetch('https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/teacherProjectSubmissions?code='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});const d=await r.json();if(!r.ok||!d.success)throw Error(d.error||'Request failed.');return d;}
+ async function run(fn){if(busy)return;busy=true;try{await fn();}catch(e){$('ps-teacher-message').textContent=e.message;}finally{busy=false;}}
+
+ function specView(target,pkg,onDownload){
+  target.replaceChildren();if(!pkg){target.append(text('p','Detailed task and CSV files have not been released yet.'));return;}
+  target.append(text('h2',pkg.specification.variant_id+' — '+pkg.specification.title),text('p','Dataset: '+pkg.specification.dataset_id+' · Specification: '+pkg.specification.version));
+  for(const section of pkg.specification.sections){const fold=document.createElement('details');fold.className='ps-card';fold.open=section.title==='Your four analysis functions';fold.append(text('summary',section.title));
+   const lines=section.text.split('\n');let table=null;
+   for(const line of lines){if(/^\s*\|/.test(line)){
+    if(/^\s*\|[\s:|-]+\|\s*$/.test(line))continue;
+    if(!table){const wrap=document.createElement('div');wrap.style.overflowX='auto';table=document.createElement('table');wrap.append(table);fold.append(wrap);}
+    const row=document.createElement('tr');for(const cell of line.trim().replace(/^\||\|$/g,'').split('|'))row.append(text(table.children.length?'td':'th',cell.trim().replace(/`/g,'')));table.append(row);
+   }else{table=null;if(line.trim()){const p=text('p',line.replace(/`/g,'').replace(/\*\*/g,''));p.style.whiteSpace='pre-wrap';fold.append(p);}}
+   }target.append(fold);
+  }
+  for(const file of pkg.files){const b=text('button','Download '+file.name);b.type='button';b.onclick=()=>onDownload(file.name);target.append(b);}
+ }
+ function render(d){
+  specView($('ps-teacher-assignment'),d.assignment_package,name=>run(()=>getAssignmentFile(name)));
+  $('ps-teacher-message').textContent=d.assignment?`Fixed variant: ${d.assignment.variant_id} · Dataset: ${d.assignment.dataset_id}`:'No fixed assignment yet.';
+  const root=$('ps-teacher-files');root.replaceChildren();if(!d.submissions.length)root.append(text('p','No submissions.'));
+  for(const sub of d.submissions){const section=document.createElement('details');if(sub.submission_id===d.current_submission_id)section.open=true;section.append(text('summary',`Version ${sub.version}${sub.submission_id===d.current_submission_id?' — Current':''} · ${new Date(sub.submitted_at).toLocaleString()} · ${sub.submitted_by}`));
+   for(const f of sub.files){const row=text('p',f.name+' '),button=text('button','Download');button.type='button';button.onclick=()=>run(async()=>{const version=epoch,c={...selected};const d=await send({...c,action:'download',submission_id:sub.submission_id,name:f.name});if(version!==epoch)return;const data=Uint8Array.from(atob(d.content_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([data],{type:'application/octet-stream'}));const a=document.createElement('a');a.href=url;a.download=f.name.split('/').pop();a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});row.append(button);section.append(row);}root.append(section);
+  }
+ }
+ async function load(){if(!selected)return;const version=epoch;const d=await send({...selected});if(version===epoch)render(d);}
+ window.addEventListener('project-team-selected',event=>{epoch++;selected={team_id:event.detail.team_id,scope:event.detail.scope};$('ps-teacher-panel').hidden=false;$('ps-teacher-title').textContent=event.detail.name+' — submissions';$('ps-teacher-context').textContent=`${event.detail.scope} workspace · ${event.detail.team_id}`;$('ps-teacher-files').replaceChildren();$('ps-teacher-assignment').replaceChildren();$('ps-assignment-form').reset();const prefix=event.detail.group==='G01'?'RENTAL':'SHOP';$('ps-variant').replaceChildren();for(const suffix of ['A','B','C','D']){const o=text('option',prefix+'-'+suffix);o.value=prefix+'-'+suffix;$('ps-variant').append(o);}run(load);});
+ $('ps-assignment-form').onsubmit=e=>{e.preventDefault();if(!selected||!confirm('Save this fixed assignment? It cannot be replaced by this form.'))return;run(async()=>{const version=epoch;await send({...selected,action:'assign',variant_id:$('ps-variant').value,dataset_id:$('ps-dataset').value.trim()});if(version===epoch)await load();});};
+ async function getAssignmentFile(name){const version=epoch;const d=await send({...selected,action:'download',kind:'assignment',name});if(version!==epoch)return;const bytes=Uint8Array.from(atob(d.content_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([bytes],{type:'application/octet-stream'}));const a=document.createElement('a');a.href=url;a.download=d.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+ $('ps-preview-assignment').onclick=()=>run(async()=>{if(!selected)return;const version=epoch;const d=await send({...selected,action:'preview'});if(version!==epoch)return;specView($('ps-teacher-assignment'),d.preview,()=>{ $('ps-teacher-message').textContent='Release the reviewed package before downloading its files.';});$('ps-teacher-message').textContent='Preview only — students cannot see this until you release it.';});
+ $('ps-release-assignment').onclick=()=>{if(!selected||!confirm('Release this fixed task and its three CSV files to all accepted team members?'))return;run(async()=>{const version=epoch;await send({...selected,action:'release'});if(version===epoch)await load();});};
+ $('ps-teacher-refresh').onclick=()=>run(load);
+ $('logoutButton').addEventListener('click',()=>{epoch++;selected=null;$('ps-teacher-files').replaceChildren();$('ps-teacher-assignment').replaceChildren();$('ps-teacher-message').textContent='';$('ps-teacher-panel').hidden=true;});
 })();
 </script>
 

@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 9 – Complex Data Types II: Text Files and Exceptions – Introduction to Data Science and Programming</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../exercises/09-class-exercises.html" rel="next">
+<link href="../warmup/08-warmup.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ef75a0fa32a0ab5c67dbc0e0e72a034.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/09-complex-data-types-2.html">Week 09</a></li><li class="breadcrumb-item"><a href="../lessons/09-complex-data-types-2.html">Theory: Complex Data Types II</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Introduction to Data Science and Programming</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../student/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">My Progress</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 01</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/01-introduction-to-programming-and-python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Introduction and Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/01-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 02</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/02-simple-data-types.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Simple Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/02-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 03</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/03-conditional-statements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Conditional Statements</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/03-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/03-warmup-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test sample</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 04</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/04-loops.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Loops</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/04-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/04-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01-practice.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Practice test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 05</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/05-complex-data-types-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Complex Data Types I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/05-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz 1: Official test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 06</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/06-basic-algorithms-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Basic Algorithms I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/06-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/06-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 07</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/07-basic-algorithms-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Basic Algorithms II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/07-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/07-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Week 08</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/08-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Theory: Procedures and Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/08-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/08-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 09</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../lessons/09-complex-data-types-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Theory: Complex Data Types II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../exercises/09-class-exercises.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../warmup/09-warmup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Warm-up test</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../project/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Case Study Project</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning objectives</a></li>
+  <li><a href="#files-and-data-structures" id="toc-files-and-data-structures" class="nav-link" data-scroll-target="#files-and-data-structures">1. Files and data structures</a>
+  <ul class="collapse">
+  <li><a href="#text-versus-binary" id="toc-text-versus-binary" class="nav-link" data-scroll-target="#text-versus-binary">Text versus binary</a></li>
+  </ul></li>
+  <li><a href="#opening-and-closing-text-files" id="toc-opening-and-closing-text-files" class="nav-link" data-scroll-target="#opening-and-closing-text-files">2. Opening and closing text files</a>
+  <ul class="collapse">
+  <li><a href="#general-structure" id="toc-general-structure" class="nav-link" data-scroll-target="#general-structure">General structure</a></li>
+  <li><a href="#modes" id="toc-modes" class="nav-link" data-scroll-target="#modes">Modes</a></li>
+  <li><a href="#a-first-example-create-and-read-a-file" id="toc-a-first-example-create-and-read-a-file" class="nav-link" data-scroll-target="#a-first-example-create-and-read-a-file">A first example: create and read a file</a></li>
+  <li><a href="#working-directory-and-paths" id="toc-working-directory-and-paths" class="nav-link" data-scroll-target="#working-directory-and-paths">Working directory and paths</a></li>
+  <li><a href="#explicit-closing" id="toc-explicit-closing" class="nav-link" data-scroll-target="#explicit-closing">Explicit closing</a></li>
+  </ul></li>
+  <li><a href="#lines-end-of-line-and-end-of-file" id="toc-lines-end-of-line-and-end-of-file" class="nav-link" data-scroll-target="#lines-end-of-line-and-end-of-file">3. Lines, end-of-line, and end-of-file</a></li>
+  <li><a href="#reading-text-files" id="toc-reading-text-files" class="nav-link" data-scroll-target="#reading-text-files">4. Reading text files</a>
+  <ul class="collapse">
+  <li><a href="#read-all-remaining-text-read" id="toc-read-all-remaining-text-read" class="nav-link" data-scroll-target="#read-all-remaining-text-read">Read all remaining text: <code>read()</code></a></li>
+  <li><a href="#read-a-limited-number-of-characters-readn" id="toc-read-a-limited-number-of-characters-readn" class="nav-link" data-scroll-target="#read-a-limited-number-of-characters-readn">Read a limited number of characters: <code>read(n)</code></a></li>
+  <li><a href="#read-one-line-readline" id="toc-read-one-line-readline" class="nav-link" data-scroll-target="#read-one-line-readline">Read one line: <code>readline()</code></a></li>
+  <li><a href="#iterate-directly-over-the-file" id="toc-iterate-directly-over-the-file" class="nav-link" data-scroll-target="#iterate-directly-over-the-file">Iterate directly over the file</a></li>
+  <li><a href="#an-explicit-eof-controlled-loop" id="toc-an-explicit-eof-controlled-loop" class="nav-link" data-scroll-target="#an-explicit-eof-controlled-loop">An explicit EOF-controlled loop</a></li>
+  <li><a href="#read-remaining-lines-into-a-list-readlines" id="toc-read-remaining-lines-into-a-list-readlines" class="nav-link" data-scroll-target="#read-remaining-lines-into-a-list-readlines">Read remaining lines into a list: <code>readlines()</code></a></li>
+  </ul></li>
+  <li><a href="#writing-and-appending-text" id="toc-writing-and-appending-text" class="nav-link" data-scroll-target="#writing-and-appending-text">5. Writing and appending text</a>
+  <ul class="collapse">
+  <li><a href="#write-writes-a-string-as-supplied" id="toc-write-writes-a-string-as-supplied" class="nav-link" data-scroll-target="#write-writes-a-string-as-supplied"><code>write()</code> writes a string as supplied</a></li>
+  <li><a href="#writelines-does-not-add-separators" id="toc-writelines-does-not-add-separators" class="nav-link" data-scroll-target="#writelines-does-not-add-separators"><code>writelines()</code> does not add separators</a></li>
+  <li><a href="#append-by-opening-with-a" id="toc-append-by-opening-with-a" class="nav-link" data-scroll-target="#append-by-opening-with-a">Append by opening with <code>"a"</code></a></li>
+  </ul></li>
+  <li><a href="#file-position-tell-and-seek" id="toc-file-position-tell-and-seek" class="nav-link" data-scroll-target="#file-position-tell-and-seek">6. File position: <code>tell()</code> and <code>seek()</code></a>
+  <ul class="collapse">
+  <li><a href="#save-and-restore-a-text-position" id="toc-save-and-restore-a-text-position" class="nav-link" data-scroll-target="#save-and-restore-a-text-position">Save and restore a text position</a></li>
+  <li><a href="#reference-points" id="toc-reference-points" class="nav-link" data-scroll-target="#reference-points">Reference points</a></li>
+  </ul></li>
+  <li><a href="#creating-renaming-and-deleting-files" id="toc-creating-renaming-and-deleting-files" class="nav-link" data-scroll-target="#creating-renaming-and-deleting-files">7. Creating, renaming, and deleting files</a>
+  <ul class="collapse">
+  <li><a href="#python-example-a-complete-lifecycle" id="toc-python-example-a-complete-lifecycle" class="nav-link" data-scroll-target="#python-example-a-complete-lifecycle">Python example: a complete lifecycle</a></li>
+  </ul></li>
+  <li><a href="#string-methods-for-processing-lines" id="toc-string-methods-for-processing-lines" class="nav-link" data-scroll-target="#string-methods-for-processing-lines">8. String methods for processing lines</a>
+  <ul class="collapse">
+  <li><a href="#remove-leading-or-trailing-whitespace" id="toc-remove-leading-or-trailing-whitespace" class="nav-link" data-scroll-target="#remove-leading-or-trailing-whitespace">Remove leading or trailing whitespace</a></li>
+  <li><a href="#split-fields-and-convert-values" id="toc-split-fields-and-convert-values" class="nav-link" data-scroll-target="#split-fields-and-convert-values">Split fields and convert values</a></li>
+  <li><a href="#splitting-on-whitespace-versus-a-delimiter" id="toc-splitting-on-whitespace-versus-a-delimiter" class="nav-link" data-scroll-target="#splitting-on-whitespace-versus-a-delimiter">Splitting on whitespace versus a delimiter</a></li>
+  </ul></li>
+  <li><a href="#handling-exceptions" id="toc-handling-exceptions" class="nav-link" data-scroll-target="#handling-exceptions">9. Handling exceptions</a>
+  <ul class="collapse">
+  <li><a href="#general-structure-1" id="toc-general-structure-1" class="nav-link" data-scroll-target="#general-structure-1">General structure</a></li>
+  <li><a href="#example-validate-a-numeric-input" id="toc-example-validate-a-numeric-input" class="nav-link" data-scroll-target="#example-validate-a-numeric-input">Example: validate a numeric input</a></li>
+  <li><a href="#example-report-a-missing-input-file" id="toc-example-report-a-missing-input-file" class="nav-link" data-scroll-target="#example-report-a-missing-input-file">Example: report a missing input file</a></li>
+  </ul></li>
+  <li><a href="#putting-the-pieces-together" id="toc-putting-the-pieces-together" class="nav-link" data-scroll-target="#putting-the-pieces-together">10. Putting the pieces together</a>
+  <ul class="collapse">
+  <li><a href="#example-input-file" id="toc-example-input-file" class="nav-link" data-scroll-target="#example-input-file">Example input file</a></li>
+  <li><a href="#read-process-and-write-a-report" id="toc-read-process-and-write-a-report" class="nav-link" data-scroll-target="#read-process-and-write-a-report">Read, process, and write a report</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">11. Summary</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../lessons/09-complex-data-types-2.html">Week 09</a></li><li class="breadcrumb-item"><a href="../lessons/09-complex-data-types-2.html">Theory: Complex Data Types II</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 9 – Complex Data Types II: Text Files and Exceptions</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h2>
+<p>By the end of this lesson, you should be able to:</p>
+<ul>
+<li>distinguish text files from binary files and recognize common file structures;</li>
+<li>open a text file with a suitable mode and explicit encoding;</li>
+<li>use a context manager to close a file automatically;</li>
+<li>read complete contents, individual lines, or a sequence of lines;</li>
+<li>write and append text, including line endings;</li>
+<li>explain the file position and use safe text-mode positioning;</li>
+<li>create, rename, and delete a file;</li>
+<li>clean and split text before converting values;</li>
+<li>handle expected errors using specific exceptions.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Connection to the previous weeks
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Lists and dictionaries store data while a program runs. Files allow us to save data and load it in a later run. Functions from <a href="../lessons/08-functions.html">Week 8</a> let us separate reading, processing, and displaying results.</p>
+<p>The supplied slides use the heading “Python seminar 10”. In this course, this material belongs to <strong>Week 9</strong>. The focus here is text files and exception handling.</p>
+</div>
+</div>
+</section>
+<section id="files-and-data-structures" class="level2">
+<h2 class="anchored" data-anchor-id="files-and-data-structures">1. Files and data structures</h2>
+<p>A <strong>file</strong> stores data under a name in a filesystem. Its contents remain available after the program ends, unless the file is deleted or changed.</p>
+<p>A filename extension suggests a format, but does not itself determine how the contents are organized.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Organization</th>
+<th>Typical example</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sequential</td>
+<td>A text file with one value per line</td>
+<td>Process values from beginning to end</td>
+</tr>
+<tr class="even">
+<td>Hierarchical</td>
+<td>JSON or XML</td>
+<td>Nested objects or parent-child relationships</td>
+</tr>
+<tr class="odd">
+<td>Tabular</td>
+<td>CSV</td>
+<td>Rows containing fields separated by a delimiter</td>
+</tr>
+<tr class="even">
+<td>Binary</td>
+<td>An image or audio file</td>
+<td>Bytes interpreted according to a specific format</td>
+</tr>
+<tr class="odd">
+<td>Custom</td>
+<td>An application-specific file</td>
+<td>Rules defined by the application</td>
+</tr>
+</tbody>
+</table>
+<p>These categories describe different aspects and can overlap: JSON and CSV are commonly stored as text, while a custom format can be textual or binary.</p>
+<section id="text-versus-binary" class="level3">
+<h3 class="anchored" data-anchor-id="text-versus-binary">Text versus binary</h3>
+<p>In <strong>text mode</strong>, Python decodes file bytes into strings and encodes strings when writing. An <strong>encoding</strong>, such as UTF-8, specifies this conversion.</p>
+<p>In <strong>binary mode</strong>, Python reads and writes <code>bytes</code> without text decoding. This lesson mainly uses text mode.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A file is not a Python list
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Reading a text file does not automatically interpret its lines as numbers or Python collections. Read text first, then split and convert values according to the file’s format.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="opening-and-closing-text-files" class="level2">
+<h2 class="anchored" data-anchor-id="opening-and-closing-text-files">2. Opening and closing text files</h2>
+<section id="general-structure" class="level3">
+<h3 class="anchored" data-anchor-id="general-structure">General structure</h3>
+<pre class="text"><code>with open(filename, mode, encoding="utf-8") as file:
+    statements using the file</code></pre>
+<p><code>open()</code> returns a <strong>file object</strong>. The <code>with</code> statement closes it when the block is left, including when an exception leaves the block.</p>
+</section>
+<section id="modes" class="level3">
+<h3 class="anchored" data-anchor-id="modes">Modes</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>Purpose</th>
+<th>Must the file exist?</th>
+<th>What happens to existing contents?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"r"</code></td>
+<td>Read text; default mode</td>
+<td>Yes</td>
+<td>Preserved</td>
+</tr>
+<tr class="even">
+<td><code>"w"</code></td>
+<td>Write text</td>
+<td>No</td>
+<td>Truncated immediately when opened</td>
+</tr>
+<tr class="odd">
+<td><code>"a"</code></td>
+<td>Append text</td>
+<td>No</td>
+<td>Preserved; new writes go to the end</td>
+</tr>
+<tr class="even">
+<td><code>"x"</code></td>
+<td>Create a new text file</td>
+<td>No; it must not exist</td>
+<td>Raises <code>FileExistsError</code> if it exists</td>
+</tr>
+<tr class="odd">
+<td><code>"r+"</code></td>
+<td>Read and write</td>
+<td>Yes</td>
+<td>Preserved initially; writes can overwrite</td>
+</tr>
+<tr class="even">
+<td><code>"w+"</code></td>
+<td>Write and read</td>
+<td>No</td>
+<td>Truncated immediately</td>
+</tr>
+<tr class="odd">
+<td><code>"a+"</code></td>
+<td>Append and read</td>
+<td>No</td>
+<td>Preserved; writes go to the end</td>
+</tr>
+</tbody>
+</table>
+<p>Adding <code>b</code> selects binary mode, for example <code>"rb"</code>. Do not specify an encoding in binary mode.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Writing is not automatically appending
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Opening an existing file with <code>"w"</code> or <code>"w+"</code> removes its old contents before the first write. Use <code>"a"</code> to add data at the end, or <code>"x"</code> when creating a file should fail if the name already exists.</p>
+<p>The encoding is a <strong>keyword argument</strong>: <code>open("a.txt", "r", encoding="utf-8")</code>. Do not put <code>"utf-8"</code> in the third positional argument; that position specifies buffering.</p>
+</div>
+</div>
+</section>
+<section id="a-first-example-create-and-read-a-file" class="level3">
+<h3 class="anchored" data-anchor-id="a-first-example-create-and-read-a-file">A first example: create and read a file</h3>
+<p>The following example creates or replaces a small practice file. Use these demonstration filenames only for practice data.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_greeting.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(<span class="st">"Hello, Python!</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_greeting.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text, end<span class="op">=</span><span class="st">""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Hello, Python!</code></pre>
+</section>
+<section id="working-directory-and-paths" class="level3">
+<h3 class="anchored" data-anchor-id="working-directory-and-paths">Working directory and paths</h3>
+<p>A relative path such as <code>"week09_greeting.txt"</code> is interpreted relative to the program’s <strong>current working directory</strong>, not necessarily the directory of the script.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Working directory:"</span>, Path.cwd())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>An absolute path specifies its location from the filesystem root. A path can also include directories, for example <code>"data/scores.txt"</code>. Opening a file does not create missing parent directories.</p>
+<p>In Jupyter, files belong to the kernel’s filesystem. In Colab, upload input files to the runtime and download any outputs you want to keep; runtime files are separate from the saved notebook.</p>
+</section>
+<section id="explicit-closing" class="level3">
+<h3 class="anchored" data-anchor-id="explicit-closing">Explicit closing</h3>
+<p>It is possible to call <code>close()</code> yourself. The following pattern also closes the file if reading fails:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> <span class="bu">open</span>(<span class="st">"week09_greeting.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.close()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"File closed:"</span>, <span class="bu">file</span>.closed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>File closed: True</code></pre>
+<p>The file must already exist for this example. For ordinary file processing, prefer <code>with open(...)</code>.</p>
+</section>
+</section>
+<section id="lines-end-of-line-and-end-of-file" class="level2">
+<h2 class="anchored" data-anchor-id="lines-end-of-line-and-end-of-file">3. Lines, end-of-line, and end-of-file</h2>
+<p>A <strong>newline</strong> separates lines. Common physical line endings are LF (<code>\n</code>) and CRLF (<code>\r\n</code>). With the default text-mode newline handling, Python translates these common endings to <code>\n</code> when reading.</p>
+<p>A file need not finish with a newline. For ordinary files, <strong>EOF</strong> is the position after the last data; it need not be represented by a special stored character.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Read result</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"apple\n"</code> from <code>readline()</code></td>
+<td>A non-empty line ending in a newline</td>
+</tr>
+<tr class="even">
+<td><code>"\n"</code> from <code>readline()</code></td>
+<td>A blank line, not EOF</td>
+</tr>
+<tr class="odd">
+<td><code>"apple"</code> from <code>readline()</code></td>
+<td>A final line without a newline, or a limited read</td>
+</tr>
+<tr class="even">
+<td><code>""</code> from <code>readline()</code> with no size limit</td>
+<td>EOF</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Empty strings and limited reads
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For an ordinary text file, a positive-size <code>read(n)</code> returns <code>""</code> at EOF. However, <code>read(0)</code> returns <code>""</code> even before EOF. Use a positive size or the usual no-argument read when checking for EOF.</p>
+</div>
+</div>
+</section>
+<section id="reading-text-files" class="level2">
+<h2 class="anchored" data-anchor-id="reading-text-files">4. Reading text files</h2>
+<p>The examples in this section share this input file. Run its creation cell first.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(<span class="st">"apple orange</span><span class="ch">\n</span><span class="st">banana pear plum</span><span class="ch">\n</span><span class="st">melon</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="read-all-remaining-text-read" class="level3">
+<h3 class="anchored" data-anchor-id="read-all-remaining-text-read">Read all remaining text: <code>read()</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(text, end<span class="op">=</span><span class="st">""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>apple orange
+banana pear plum
+melon</code></pre>
+<p><code>read()</code> reads from the <strong>current position</strong> to EOF, not automatically from the beginning every time.</p>
+</section>
+<section id="read-a-limited-number-of-characters-readn" class="level3">
+<h3 class="anchored" data-anchor-id="read-a-limited-number-of-characters-readn">Read a limited number of characters: <code>read(n)</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> <span class="bu">file</span>.read(<span class="dv">5</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    following <span class="op">=</span> <span class="bu">file</span>.read(<span class="dv">7</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First:"</span>, <span class="bu">repr</span>(first))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Following:"</span>, <span class="bu">repr</span>(following))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>First: 'apple'
+Following: ' orange'</code></pre>
+<p>In text mode, <code>n</code> counts <strong>characters</strong>, not bytes. <code>repr()</code> makes spaces and escape sequences visible.</p>
+</section>
+<section id="read-one-line-readline" class="level3">
+<h3 class="anchored" data-anchor-id="read-one-line-readline">Read one line: <code>readline()</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    first_line <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    second_line <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"First line:"</span>, <span class="bu">repr</span>(first_line))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Second line:"</span>, <span class="bu">repr</span>(second_line))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>First line: 'apple orange\n'
+Second line: 'banana pear plum\n'</code></pre>
+<p><code>readline(n)</code> reads at most <code>n</code> characters and can return part of a line. Without a limit it reads through the next newline, or to EOF.</p>
+</section>
+<section id="iterate-directly-over-the-file" class="level3">
+<h3 class="anchored" data-anchor-id="iterate-directly-over-the-file">Iterate directly over the file</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Line:"</span>, line.rstrip(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Line: apple orange
+Line: banana pear plum
+Line: melon</code></pre>
+<p>This processes one line at a time. It is usually clearer and uses less memory than reading a large file into a list.</p>
+</section>
+<section id="an-explicit-eof-controlled-loop" class="level3">
+<h3 class="anchored" data-anchor-id="an-explicit-eof-controlled-loop">An explicit EOF-controlled loop</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    line <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> line <span class="op">!=</span> <span class="st">""</span>:</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Line:"</span>, line.rstrip(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        line <span class="op">=</span> <span class="bu">file</span>.readline()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This produces the same three labelled lines. The last statement advances the input; omitting it would repeatedly process the same line.</p>
+</section>
+<section id="read-remaining-lines-into-a-list-readlines" class="level3">
+<h3 class="anchored" data-anchor-id="read-remaining-lines-into-a-list-readlines">Read remaining lines into a list: <code>readlines()</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    lines <span class="op">=</span> <span class="bu">file</span>.readlines()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(lines)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>['apple orange\n', 'banana pear plum\n', 'melon\n']</code></pre>
+<p><code>readlines(hint)</code> accepts an approximate size hint; it is <strong>not</strong> an exact character limit or a maximum number of lines. Without a hint, it reads all remaining lines.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Result</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>read()</code></td>
+<td>One string</td>
+<td>Small complete text</td>
+</tr>
+<tr class="even">
+<td><code>read(n)</code></td>
+<td>Up to <code>n</code> text characters</td>
+<td>Limited chunks</td>
+</tr>
+<tr class="odd">
+<td><code>readline()</code></td>
+<td>One line string, or <code>""</code> at EOF</td>
+<td>Explicit line processing</td>
+</tr>
+<tr class="even">
+<td><code>readlines()</code></td>
+<td>List of remaining line strings</td>
+<td>Reuse lines in memory</td>
+</tr>
+<tr class="odd">
+<td><code>for line in file:</code></td>
+<td>Successive line strings</td>
+<td>Sequential processing</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="writing-and-appending-text" class="level2">
+<h2 class="anchored" data-anchor-id="writing-and-appending-text">5. Writing and appending text</h2>
+<section id="write-writes-a-string-as-supplied" class="level3">
+<h3 class="anchored" data-anchor-id="write-writes-a-string-as-supplied"><code>write()</code> writes a string as supplied</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_notes.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    count <span class="op">=</span> <span class="bu">file</span>.write(<span class="st">"First line</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(<span class="st">"Second line</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Characters in the first write:"</span>, count)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Characters in the first write: 11</code></pre>
+<p><code>write()</code> does not add a newline. Text-mode <code>write()</code> returns the number of characters written. Convert numbers to text before writing, for example <code>file.write(str(score) + "\n")</code>.</p>
+</section>
+<section id="writelines-does-not-add-separators" class="level3">
+<h3 class="anchored" data-anchor-id="writelines-does-not-add-separators"><code>writelines()</code> does not add separators</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> [<span class="st">"Alice</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"Bob</span><span class="ch">\n</span><span class="st">"</span>, <span class="st">"Charlie</span><span class="ch">\n</span><span class="st">"</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_names.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.writelines(lines)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The file contains one name per line because each string already includes <code>\n</code>. A list such as <code>["Alice", "Bob"]</code> would produce <code>AliceBob</code>.</p>
+</section>
+<section id="append-by-opening-with-a" class="level3">
+<h3 class="anchored" data-anchor-id="append-by-opening-with-a">Append by opening with <code>"a"</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_notes.txt"</span>, <span class="st">"a"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(<span class="st">"Third line</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_notes.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">file</span>.read(), end<span class="op">=</span><span class="st">""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>First line
+Second line
+Third line</code></pre>
+<p>Run the earlier writing example first. Repeating only the append example adds another third line each time.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>File methods differ from list methods
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A normal Python file object has <strong>no <code>append()</code> method</strong>. Use <code>open(..., "a")</code> and <code>write()</code> to append text.</p>
+<p>The correct method name for writing a sequence of strings is <strong><code>writelines()</code></strong>, not <code>writeline()</code>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="file-position-tell-and-seek" class="level2">
+<h2 class="anchored" data-anchor-id="file-position-tell-and-seek">6. File position: <code>tell()</code> and <code>seek()</code></h2>
+<p>Reading and writing use a <strong>current file position</strong>. <code>tell()</code> reports a position that <code>seek()</code> can use to return there.</p>
+<p>In text mode, this position can be an opaque value containing decoding information. Do not treat it as a general character index or perform arithmetic on it.</p>
+<section id="save-and-restore-a-text-position" class="level3">
+<h3 class="anchored" data-anchor-id="save-and-restore-a-text-position">Save and restore a text position</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_fruits.txt"</span>, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    first_line <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    saved_position <span class="op">=</span> <span class="bu">file</span>.tell()</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    second_line <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.seek(saved_position)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    second_line_again <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.seek(<span class="dv">0</span>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    first_line_again <span class="op">=</span> <span class="bu">file</span>.readline()</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Same second line:"</span>, second_line <span class="op">==</span> second_line_again)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Same first line:"</span>, first_line <span class="op">==</span> first_line_again)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Same second line: True
+Same first line: True</code></pre>
+<p>The input file is the one created in Section 4. Repositioning backward is possible in text mode using <code>seek(0)</code> or an appropriate saved <code>tell()</code> value.</p>
+</section>
+<section id="reference-points" class="level3">
+<h3 class="anchored" data-anchor-id="reference-points">Reference points</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Call</th>
+<th>Meaning for a normal seekable text file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>file.seek(0)</code></td>
+<td>Return to the beginning</td>
+</tr>
+<tr class="even">
+<td><code>file.seek(saved_position)</code></td>
+<td>Restore a value previously returned by <code>tell()</code></td>
+</tr>
+<tr class="odd">
+<td><code>file.seek(0, 1)</code></td>
+<td>Keep the current position</td>
+</tr>
+<tr class="even">
+<td><code>file.seek(0, 2)</code></td>
+<td>Move to the end</td>
+</tr>
+</tbody>
+</table>
+<p>Arbitrary non-zero offsets relative to the current position or end are not supported for normal text files. In binary mode, offsets are byte counts and allow more general positioning.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Positioning does not change the opening mode
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>seek(0)</code> cannot undo the truncation caused by <code>"w"</code>. In append mode, seeking does not turn the next write into an overwrite at that position.</p>
+<p>Text position values are not reliably interchangeable with byte offsets, particularly for variable-width encodings such as UTF-8.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-renaming-and-deleting-files" class="level2">
+<h2 class="anchored" data-anchor-id="creating-renaming-and-deleting-files">7. Creating, renaming, and deleting files</h2>
+<p>Creating a file can be done with <code>open()</code>. Rename and removal operations work on filesystem paths; close the file before renaming or deleting it.</p>
+<section id="python-example-a-complete-lifecycle" class="level3">
+<h3 class="anchored" data-anchor-id="python-example-a-complete-lifecycle">Python example: a complete lifecycle</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tempfile <span class="im">import</span> TemporaryDirectory</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> TemporaryDirectory(prefix<span class="op">=</span><span class="st">"week09_demo_"</span>) <span class="im">as</span> folder:</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    original <span class="op">=</span> os.path.join(folder, <span class="st">"note.txt"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    renamed <span class="op">=</span> os.path.join(folder, <span class="st">"renamed_note.txt"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(original, <span class="st">"x"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">file</span>.write(<span class="st">"A temporary note.</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Created:"</span>, os.path.exists(original))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    os.rename(original, renamed)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Renamed:"</span>, os.path.exists(renamed))</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    os.remove(renamed)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Deleted:"</span>, <span class="kw">not</span> os.path.exists(renamed))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Created: True
+Renamed: True
+Deleted: True</code></pre>
+<p><code>TemporaryDirectory</code> gives this demonstration its own folder and cleans it up afterwards. In ordinary programs, supply the intended source and destination paths directly.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Rename and delete carefully
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Renaming to an existing destination can behave differently across operating systems: do not assume that it is always rejected. Deleting with <code>os.remove()</code> does not move the file to the desktop Recycle Bin. Use practice files, and check the paths before running destructive operations.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="string-methods-for-processing-lines" class="level2">
+<h2 class="anchored" data-anchor-id="string-methods-for-processing-lines">8. String methods for processing lines</h2>
+<p>File methods read strings. String methods help separate meaningful fields from formatting.</p>
+<section id="remove-leading-or-trailing-whitespace" class="level3">
+<h3 class="anchored" data-anchor-id="remove-leading-or-trailing-whitespace">Remove leading or trailing whitespace</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> <span class="st">"  Alice; 8.5  </span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Both sides:"</span>, <span class="bu">repr</span>(line.strip()))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Left only:"</span>, <span class="bu">repr</span>(line.lstrip()))</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Right only:"</span>, <span class="bu">repr</span>(line.rstrip()))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Both sides: 'Alice; 8.5'
+Left only: 'Alice; 8.5  \n'
+Right only: '  Alice; 8.5'</code></pre>
+<p>Without arguments, these methods remove surrounding whitespace, including spaces, tabs, and newlines. They return new strings; the original string is unchanged.</p>
+<p>If surrounding spaces are meaningful, use <code>line.rstrip("\n")</code> to remove only trailing newline characters after ordinary text-mode reading.</p>
+</section>
+<section id="split-fields-and-convert-values" class="level3">
+<h3 class="anchored" data-anchor-id="split-fields-and-convert-values">Split fields and convert values</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>line <span class="op">=</span> <span class="st">"Alice;8.5</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fields <span class="op">=</span> line.strip().split(<span class="st">";"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> fields[<span class="dv">0</span>]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> <span class="bu">float</span>(fields[<span class="dv">1</span>])</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Name:"</span>, name)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Score:"</span>, score)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Name: Alice
+Score: 8.5</code></pre>
+<p>This assumes exactly two fields and a valid numeric second field. A delimiter-separated file needs an agreed format.</p>
+</section>
+<section id="splitting-on-whitespace-versus-a-delimiter" class="level3">
+<h3 class="anchored" data-anchor-id="splitting-on-whitespace-versus-a-delimiter">Splitting on whitespace versus a delimiter</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Whitespace:"</span>, <span class="st">"apple  pear</span><span class="ch">\t</span><span class="st">plum"</span>.split())</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Delimiter:"</span>, <span class="st">"apple;;plum"</span>.split(<span class="st">";"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Whitespace: ['apple', 'pear', 'plum']
+Delimiter: ['apple', '', 'plum']</code></pre>
+<p>With no argument, <code>split()</code> groups consecutive whitespace and omits surrounding empty fields. With an explicit separator, consecutive separators can produce empty fields.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Simple splitting is not a complete CSV parser
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For simple, controlled data, <code>split(";")</code> is enough. If fields may contain quoted delimiters or embedded newlines, use Python’s <code>csv</code> module rather than implementing the format with a simple split.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="handling-exceptions" class="level2">
+<h2 class="anchored" data-anchor-id="handling-exceptions">9. Handling exceptions</h2>
+<p>An <strong>exception</strong> reports a runtime problem. A <code>try</code> statement lets a program handle an expected problem and respond appropriately.</p>
+<section id="general-structure-1" class="level3">
+<h3 class="anchored" data-anchor-id="general-structure-1">General structure</h3>
+<pre class="text"><code>try:
+    statements that may fail
+except SpecificError as error:
+    statements handling that error
+else:
+    statements executed if the try block finishes normally
+finally:
+    cleanup statements executed when leaving the construct</code></pre>
+<p>The <code>else</code> and <code>finally</code> parts are optional. <code>finally</code> normally executes on both success and failure, including when an unhandled exception propagates. It is not a guarantee against process termination or power loss.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Exception</th>
+<th>Example cause</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>FileNotFoundError</code></td>
+<td>Input path does not exist</td>
+</tr>
+<tr class="even">
+<td><code>FileExistsError</code></td>
+<td>Opening an existing path in <code>"x"</code> mode</td>
+</tr>
+<tr class="odd">
+<td><code>PermissionError</code></td>
+<td>The process lacks permission for the operation</td>
+</tr>
+<tr class="even">
+<td><code>UnicodeDecodeError</code></td>
+<td>File bytes cannot be decoded with the selected encoding</td>
+</tr>
+<tr class="odd">
+<td><code>ValueError</code></td>
+<td>A field cannot be converted to the required numeric type</td>
+</tr>
+<tr class="even">
+<td><code>ZeroDivisionError</code></td>
+<td>Dividing by zero</td>
+</tr>
+<tr class="odd">
+<td><code>OSError</code></td>
+<td>General filesystem errors; includes several more specific subclasses</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="example-validate-a-numeric-input" class="level3">
+<h3 class="anchored" data-anchor-id="example-validate-a-numeric-input">Example: validate a numeric input</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>raw_value <span class="op">=</span> <span class="st">"not a number"</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    number <span class="op">=</span> <span class="bu">float</span>(raw_value)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Please provide a numeric value."</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Number:"</span>, number)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="cf">finally</span>:</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Conversion attempt finished."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Please provide a numeric value.
+Conversion attempt finished.</code></pre>
+<p>Replace <code>raw_value</code> with <code>"8.5"</code> to follow the success path. The <code>else</code> block then prints <code>Number: 8.5</code>.</p>
+</section>
+<section id="example-report-a-missing-input-file" class="level3">
+<h3 class="anchored" data-anchor-id="example-report-a-missing-input-file">Example: report a missing input file</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tempfile <span class="im">import</span> TemporaryDirectory</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> TemporaryDirectory(prefix<span class="op">=</span><span class="st">"week09_missing_"</span>) <span class="im">as</span> folder:</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    missing <span class="op">=</span> Path(folder) <span class="op">/</span> <span class="st">"missing.txt"</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">with</span> <span class="bu">open</span>(missing, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>            text <span class="op">=</span> <span class="bu">file</span>.read()</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Input file not found."</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(text)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Input file not found.</code></pre>
+<p>The temporary folder ensures that this demonstration does not accidentally read a real file with the same name.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Catch expected errors specifically
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avoid a bare <code>except:</code> that hides every problem, including interruption signals. Catch the errors you can meaningfully handle. When catching several related types, place more specific handlers before broader ones: <code>FileNotFoundError</code> before <code>OSError</code>, for example.</p>
+<p>A <code>with</code> block closes the file; it does not suppress reading or conversion errors.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="putting-the-pieces-together" class="level2">
+<h2 class="anchored" data-anchor-id="putting-the-pieces-together">10. Putting the pieces together</h2>
+<p>The next example uses two small files in the working directory. Run the setup first to create predictable input.</p>
+<section id="example-input-file" class="level3">
+<h3 class="anchored" data-anchor-id="example-input-file">Example input file</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_scores.txt"</span>, <span class="st">"w"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">file</span>.write(<span class="st">"Alice;8.5</span><span class="ch">\n</span><span class="st">Bob;6.0</span><span class="ch">\n</span><span class="st">Charlie;9.0</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="read-process-and-write-a-report" class="level3">
+<h3 class="anchored" data-anchor-id="read-process-and-write-a-report">Read, process, and write a report</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_scores(filename):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> []</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(filename, <span class="st">"r"</span>, encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> line <span class="kw">in</span> <span class="bu">file</span>:</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> line.strip() <span class="op">!=</span> <span class="st">""</span>:</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                fields <span class="op">=</span> line.strip().split(<span class="st">";"</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> <span class="bu">len</span>(fields) <span class="op">!=</span> <span class="dv">2</span>:</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Each record needs two fields."</span>)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                name <span class="op">=</span> fields[<span class="dv">0</span>].strip()</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>                score <span class="op">=</span> <span class="bu">float</span>(fields[<span class="dv">1</span>])</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>                records.append((name, score))</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> records</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    records <span class="op">=</span> load_scores(<span class="st">"week09_scores.txt"</span>)</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">FileNotFoundError</span>:</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"The input file is missing."</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">PermissionError</span>:</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"The input file cannot be accessed."</span>)</span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">UnicodeDecodeError</span>:</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Use a UTF-8 input file."</span>)</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> error:</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Invalid score data:"</span>, error)</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">OSError</span> <span class="im">as</span> error:</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"File operation failed:"</span>, error)</span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>    total <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, score <span class="kw">in</span> records:</span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>        total <span class="op">+=</span> score</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(records) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>        average <span class="op">=</span> total <span class="op">/</span> <span class="bu">len</span>(records)</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> <span class="bu">open</span>(<span class="st">"week09_report.txt"</span>, <span class="st">"w"</span>,</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>                      encoding<span class="op">=</span><span class="st">"utf-8"</span>) <span class="im">as</span> <span class="bu">file</span>:</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>                <span class="bu">file</span>.write(<span class="ss">f"Students: </span><span class="sc">{</span><span class="bu">len</span>(records)<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>                <span class="bu">file</span>.write(<span class="ss">f"Average score: </span><span class="sc">{</span>average<span class="sc">:.2f}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">OSError</span> <span class="im">as</span> error:</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Cannot write report:"</span>, error)</span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Students:"</span>, <span class="bu">len</span>(records))</span>
+<span id="cb40-43"><a href="#cb40-43" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Average score: </span><span class="sc">{</span>average<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb40-44"><a href="#cb40-44" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"Report saved to week09_report.txt"</span>)</span>
+<span id="cb40-45"><a href="#cb40-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb40-46"><a href="#cb40-46" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No score records were found."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre class="text"><code>Students: 3
+Average score: 7.83
+Report saved to week09_report.txt</code></pre>
+<p>The report file contains the first two lines. The calculation uses an explicit loop, and an empty input file is handled before dividing.</p>
+<p>The write operation has its own <code>try</code> block because exceptions raised inside an <code>else</code> block are not caught by the earlier <code>except</code> clauses.</p>
+</section>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">11. Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Main purpose</th>
+<th>Key point</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Encoding</td>
+<td>Convert between text and bytes</td>
+<td>Specify <code>encoding="utf-8"</code> for these examples</td>
+</tr>
+<tr class="even">
+<td><code>with open(...)</code></td>
+<td>Manage an open file</td>
+<td>Closes automatically when leaving the block</td>
+</tr>
+<tr class="odd">
+<td>Read mode</td>
+<td>Load existing data</td>
+<td>Missing input can raise <code>FileNotFoundError</code></td>
+</tr>
+<tr class="even">
+<td>Write mode</td>
+<td>Create or replace contents</td>
+<td><code>"w"</code> truncates immediately</td>
+</tr>
+<tr class="odd">
+<td>Append mode</td>
+<td>Add at the end</td>
+<td>Use <code>"a"</code> with <code>write()</code></td>
+</tr>
+<tr class="even">
+<td><code>read()</code> / <code>readline()</code></td>
+<td>Read text</td>
+<td>Empty no-limit line read signals EOF</td>
+</tr>
+<tr class="odd">
+<td><code>readlines()</code></td>
+<td>Collect remaining lines</td>
+<td>Keeps line endings; hint is approximate</td>
+</tr>
+<tr class="even">
+<td><code>write()</code> / <code>writelines()</code></td>
+<td>Write strings</td>
+<td>Neither adds line separators automatically</td>
+</tr>
+<tr class="odd">
+<td><code>tell()</code> / <code>seek()</code></td>
+<td>Save and restore position</td>
+<td>Text positions are not general byte offsets</td>
+</tr>
+<tr class="even">
+<td><code>os.rename()</code> / <code>os.remove()</code></td>
+<td>Change file paths or remove a file</td>
+<td>Check paths and close the file first</td>
+</tr>
+<tr class="odd">
+<td><code>strip()</code> / <code>split()</code></td>
+<td>Clean and separate text</td>
+<td>Choose a method suited to the data format</td>
+</tr>
+<tr class="even">
+<td><code>try</code> / <code>except</code></td>
+<td>Handle expected failures</td>
+<td>Catch specific errors</td>
+</tr>
+<tr class="odd">
+<td><code>else</code> / <code>finally</code></td>
+<td>Separate success and cleanup</td>
+<td>Different roles; both are optional</td>
+</tr>
+</tbody>
+</table>
+<p>Before processing a file, decide its format, encoding, opening mode, and error policy. Before writing, renaming, or deleting, check which file the operation will affect.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<ul>
+<li><a href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Python tutorial: reading and writing files</a></li>
+<li><a href="https://docs.python.org/3/library/functions.html#open">Python reference: the open() function</a></li>
+<li><a href="https://docs.python.org/3/library/io.html#io.TextIOBase.seek">Python reference: text-stream positioning</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../warmup/08-warmup.html" class="pagination-link" aria-label="Warm-up test">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Warm-up test</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../exercises/09-class-exercises.html" class="pagination-link" aria-label="Class exercises">
+        <span class="nav-page-text">Class exercises</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

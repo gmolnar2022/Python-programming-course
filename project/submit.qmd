@@ -1,0 +1,100 @@
+---
+title: "Team project submission"
+page-layout: full
+toc: false
+---
+
+[Project overview](index.qmd) · [Team registration](register.qmd)
+
+**Submission deadline: 8 December 2026, 20:00 (Budapest time).**
+
+The **founder submits exactly three files together**: one Jupyter/Colab notebook (`.ipynb`), one PDF document and one PowerPoint presentation (`.pptx`). Accepted teammates can view and download the same shared submission. Do not upload the original CSVs, separate test data, `.py` files or a README. The notebook creates its own test data and outputs; the PDF contains the documentation.
+
+
+```{=html}
+<style>
+#ps-app{max-width:1000px;margin:auto}.ps-card{padding:18px;border:1px solid #dae2ec;border-radius:10px;margin:16px 0}.ps-flex{display:flex;gap:12px;flex-wrap:wrap;align-items:end}.ps-flex label{display:flex;flex-direction:column;gap:5px}#ps-app input{padding:8px;max-width:100%}#ps-app button{padding:8px 12px;margin:6px 8px 6px 0;cursor:pointer}.ps-warning{background:#fff4cf;padding:12px}.ps-file{overflow-wrap:anywhere}#ps-message{white-space:pre-wrap}
+</style>
+<div id="ps-app">
+<form id="ps-login" class="ps-card ps-flex"><label>Neptun code<input id="ps-neptun" maxlength="6" autocomplete="username" required></label><label>Dashboard password<input id="ps-password" type="password" maxlength="128" autocomplete="current-password" required></label><button type="submit">View team project</button></form>
+<p id="ps-message" role="status" aria-live="polite"></p>
+<div id="ps-active" hidden>
+<p><strong id="ps-who"></strong> · Time remaining: <span id="ps-time"></span> <button id="ps-refresh" type="button">Refresh</button><button id="ps-close" type="button">Close</button></p>
+<div id="ps-test" class="ps-warning" hidden>Instructor test workspace. Released task packages here are for instructor testing. Uploads do not affect grades.</div>
+<div id="ps-team" class="ps-card"></div>
+<div id="ps-assignment" class="ps-card"></div>
+<form id="ps-upload" class="ps-card" hidden>
+<h2>Submit the three project files</h2>
+<p>Use the downloaded notebook file, including when working in Colab; a sharing link is not accepted. Restart and Run All before saving your notebook. Upload one complete team package per version.</p>
+<div class="ps-flex">
+<label>Notebook — .ipynb, max. 10 MiB<input id="ps-notebook" type="file" accept=".ipynb" required></label>
+<label>Documentation — .pdf, max. 5 MiB<input id="ps-document" type="file" accept=".pdf" required></label>
+<label>Presentation — .pptx, max. 10 MiB<input id="ps-presentation" type="file" accept=".pptx" required></label>
+</div>
+<p id="ps-selection"></p><button type="submit">Submit team project</button>
+<p>Identical filenames and content do not create another version. Changed files create a new version; older versions remain accessible. Upload success does not mean the solution has been checked or graded.</p>
+</form>
+<h2>Shared submission history</h2><div id="ps-history"></div>
+</div></div>
+<script>
+(()=>{
+ const API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api';const $=id=>document.getElementById(id);
+ let token='',teamId='',assignmentId='',deadline=0,epoch=0,busy=false;
+ const say=(s,bad=false)=>{$('ps-message').textContent=s;$('ps-message').style.color=bad?'#a32121':'';};
+ function close(s='Session closed.'){epoch++;token='';teamId='';assignmentId='';$('ps-password').value='';for(const id of ['ps-notebook','ps-document','ps-presentation'])$(id).value='';$('ps-selection').textContent='';$('ps-team').replaceChildren();$('ps-history').replaceChildren();$('ps-assignment').replaceChildren();$('ps-who').textContent='';$('ps-active').hidden=true;$('ps-login').hidden=false;say(s);}
+ async function call(name,body){const r=await fetch(API+'/'+name,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});const d=await r.json();if(!r.ok||!d.success){if(r.status===401)close('Session expired. Enter your password again.');throw Error(d.error||'Request failed.');}return d;}
+ async function run(fn){if(busy)return;busy=true;$('ps-app').querySelectorAll('button').forEach(b=>b.disabled=true);try{await fn();}catch(e){say(e.message,true);}finally{busy=false;$('ps-app').querySelectorAll('button').forEach(b=>b.disabled=false);}}
+ const text=(tag,value)=>{const e=document.createElement(tag);e.textContent=value;return e;};
+ async function download(submission,name,kind){const version=epoch;const d=await call('downloadProjectFile',{token,team_id:teamId,submission_id:submission,name,kind});if(version!==epoch)return;const bytes=Uint8Array.from(atob(d.content_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([bytes],{type:'application/octet-stream'}));const a=document.createElement('a');a.href=url;a.download=d.name.split('/').pop();a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+
+ function specView(target,pkg,onDownload){
+  target.replaceChildren();if(!pkg){target.append(text('p','Detailed task and CSV files have not been released yet.'));return;}
+  target.append(text('h2',pkg.specification.variant_id+' — '+pkg.specification.title),text('p','Dataset: '+pkg.specification.dataset_id+' · Specification: '+pkg.specification.version));
+  for(const section of pkg.specification.sections){const fold=document.createElement('details');fold.className='ps-card';fold.open=section.title==='Your four analysis functions';fold.append(text('summary',section.title));
+   const lines=section.text.split('\n');let table=null;
+   for(const line of lines){if(/^\s*\|/.test(line)){
+    if(/^\s*\|[\s:|-]+\|\s*$/.test(line))continue;
+    if(!table){const wrap=document.createElement('div');wrap.style.overflowX='auto';table=document.createElement('table');wrap.append(table);fold.append(wrap);}
+    const row=document.createElement('tr');for(const cell of line.trim().replace(/^\||\|$/g,'').split('|'))row.append(text(table.children.length?'td':'th',cell.trim().replace(/`/g,'')));table.append(row);
+   }else{table=null;if(line.trim()){const p=text('p',line.replace(/`/g,'').replace(/\*\*/g,''));p.style.whiteSpace='pre-wrap';fold.append(p);}}
+   }target.append(fold);
+  }
+  for(const file of pkg.files){const b=text('button','Download '+file.name);b.type='button';b.onclick=()=>onDownload(file.name);target.append(b);}
+ }
+
+ function render(s){
+  specView($('ps-assignment'),s.assignment_package,name=>run(()=>download(null,name,'assignment')));
+  assignmentId=s.assignment?.assignment_id||'';$('ps-who').textContent=s.me.name+' ('+s.me.neptun+')';$('ps-test').hidden=s.scope!=='test';
+  const card=$('ps-team');card.replaceChildren();card.append(text('h2',s.team.name),text('p',`${s.team.group} · ${s.team.topic} · Founder: ${s.team.founder}`));
+  card.append(text('p',s.assignment?`Assigned variant: ${s.assignment.variant_id} · Dataset: ${s.assignment.dataset_id}`:'Your fixed assignment has not been released yet.'));
+  if(s.deadline)card.append(text('p','Submission deadline: '+new Date(s.deadline).toLocaleString()));
+  if(s.submission_message)card.append(text('p',s.submission_message));$('ps-upload').hidden=!s.can_submit;
+  const history=$('ps-history');history.replaceChildren();if(!s.submissions.length)history.append(text('p','No submission has been received.'));
+  for(const sub of s.submissions){const box=sub.submission_id===s.current_submission_id?document.createElement('section'):document.createElement('details');box.className='ps-card';const title=`Version ${sub.version}${sub.submission_id===s.current_submission_id?' — Current':''} · ${new Date(sub.submitted_at).toLocaleString()}`;
+   box.append(text(box.tagName==='DETAILS'?'summary':'h3',title));box.append(text('p',`Submitted by ${sub.submitted_by} · Status: Received (not yet evaluated) · ID: ${sub.submission_id}`));
+   for(const f of sub.files){const row=text('div',`${f.name} (${f.size} bytes) `);row.className='ps-file';const b=text('button','Download');b.type='button';b.onclick=()=>run(()=>download(sub.submission_id,f.name));row.append(b);box.append(row);}history.append(box);
+  }
+ }
+ async function refresh(){const version=epoch;const d=await call('projectSubmissionState',{token,team_id:teamId});if(version===epoch)render(d.state);}
+ $('ps-login').onsubmit=e=>{e.preventDefault();run(async()=>{const version=++epoch;const password=$('ps-password').value;$('ps-password').value='';const d=await call('projectTeamLogin',{neptun:$('ps-neptun').value.trim().toUpperCase(),password});if(version!==epoch)return;
+  const t=d.state.teams.find(t=>t.members.some(m=>m.neptun===d.state.me.neptun&&m.accepted));if(!t)throw Error('You have no accepted team membership. Open team registration first.');token=d.access.token;teamId=t.team_id;deadline=Date.now()+Math.min(300000,Math.max(0,Date.parse(d.access.expires_at)-Date.parse(d.access.server_time)));$('ps-login').hidden=true;$('ps-active').hidden=false;await refresh();say('');});};
+ const fileFields=['ps-notebook','ps-document','ps-presentation'];
+ const selectedFiles=()=>fileFields.map(id=>$(id).files[0]).filter(Boolean);
+ for(const id of fileFields)$(id).onchange=()=>{$('ps-selection').textContent=selectedFiles().map(f=>`${f.name} (${f.size} bytes)`).join(' · ');};
+
+ async function encode(file){const bytes=new Uint8Array(await file.arrayBuffer());let binary='';for(let i=0;i<bytes.length;i+=32768)binary+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(binary);}
+ $('ps-upload').onsubmit=e=>{e.preventDefault();run(async()=>{
+  const files=selectedFiles();const extensions=['ipynb','pdf','pptx'];const maxSizes=[10485760,5242880,10485760];
+  if(files.length!==3)throw Error('Select one notebook, one PDF and one PPTX.');
+  for(let i=0;i<3;i++)if(!files[i].name.toLowerCase().endsWith('.'+extensions[i])||files[i].size===0||files[i].size>maxSizes[i])throw Error('Check the file type and displayed size limit for each field.');
+  if(files.reduce((n,f)=>n+f.size,0)>26214400)throw Error('Maximum total size is 25 MiB.');
+
+  const version=epoch;const requestToken=token;const requestTeam=teamId;const requestAssignment=assignmentId;const payload=[];for(const f of files)payload.push({name:f.name,content_base64:await encode(f)});if(version!==epoch)return;
+  say('Uploading… Keep this page open. If a connection error occurs, retry with the same files.');const d=await call('submitTeamProject',{token:requestToken,team_id:requestTeam,assignment_id:requestAssignment,files:payload});if(version!==epoch)return;await refresh();if(version!==epoch)return;
+  say(d.duplicate?`These exact files are already recorded as version ${d.submission.version}. No new version was created; the current submission is unchanged.`:`Version ${d.submission.version} received. Submission ID: ${d.submission.submission_id}. This is a receipt, not a grade.`);
+ });};
+ $('ps-refresh').onclick=()=>run(async()=>{await refresh();say('Refreshed.');});$('ps-close').onclick=()=>close();
+ setInterval(()=>{if(!token)return;const n=Math.ceil((deadline-Date.now())/1000);if(n<=0)close('Viewing time expired. Enter your password again.');else $('ps-time').textContent=Math.floor(n/60)+':'+String(n%60).padStart(2,'0');},500);
+})();
+</script>
+```

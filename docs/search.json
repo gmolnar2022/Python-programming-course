@@ -1,5 +1,30 @@
 [
   {
+    "objectID": "project/submit.html",
+    "href": "project/submit.html",
+    "title": "Team project submission",
+    "section": "",
+    "text": "Project overview · Team registration\nSubmission deadline: 8 December 2026, 20:00 (Budapest time).\nThe founder submits exactly three files together: one Jupyter/Colab notebook (.ipynb), one PDF document and one PowerPoint presentation (.pptx). Accepted teammates can view and download the same shared submission. Do not upload the original CSVs, separate test data, .py files or a README. The notebook creates its own test data and outputs; the PDF contains the documentation.\n\n\nNeptun codeDashboard passwordView team project\n\n\n · Time remaining:  RefreshClose\nInstructor test workspace. Released task packages here are for instructor testing. Uploads do not affect grades.\n\n\n\nSubmit the three project files\nUse the downloaded notebook file, including when working in Colab; a sharing link is not accepted. Restart and Run All before saving your notebook. Upload one complete team package per version.\n\nNotebook — .ipynb, max. 10 MiB\nDocumentation — .pdf, max. 5 MiB\nPresentation — .pptx, max. 10 MiB\n\nSubmit team project\nIdentical filenames and content do not create another version. Changed files create a new version; older versions remain accessible. Upload success does not mean the solution has been checked or graded.\n\nShared submission history"
+  },
+  {
+    "objectID": "project/register.html",
+    "href": "project/register.html",
+    "title": "Project team registration",
+    "section": "",
+    "text": "Register a team of 2–3 students. Members may attend different practical groups. The founder’s group determines the project topic: G01 — Equipment rental, G02 — Webshop. Each invited student must accept individually. The founder finalizes registration after everyone has accepted.\nOpen your team project / submissions — available to accepted team members; only the founder can submit.\n\n\n \n  Neptun code\n  Dashboard password\n  View my team / register\n Use your own dashboard password. Never share it with teammates.\n \n \n   · Viewing time:  Close Refresh team status\n  Instructor test workspace. These registrations are separate from student teams. Virtual accounts do not receive email.\n  \n  Create a team\n   \n    Team name\n    Second member — Neptun code\n    Third member — optional\n    Test project groupG01G02\n    Create team and invitations\n   \n  \n  Invitations appear here when each teammate enters their own Neptun code and password. No invitation emails are sent. Refresh to see newly accepted invitations. After finalization, contact the teacher for changes."
+  },
+  {
+    "objectID": "exercises/09-class-exercises.html",
+    "href": "exercises/09-class-exercises.html",
+    "title": "Class Exercises 9",
+    "section": "",
+    "text": "Exercise versions\n  The same exercise set is available in three versions.\n  \n    Classroom Version — you are using this version\n    Google Colab Version — open the notebook, then choose File → Save a copy in Drive\n    Download the Colab notebook to upload manually\n    Jupyter Version — download for Jupyter Notebook or JupyterLab\n  \n\n\n\n\n  Neptun code\n  \n    \n    Save\n  \n  \n    Enter your 6-character Neptun code before starting the exercises.\n  \n\n\nProgramming rules: use functions, context managers, explicit loops and conditions. No comprehensions, generators, lambda, map/filter, break/continue or return from inside loops. Do not use algorithm shortcuts such as sum/min/max/sorted/sort/count/index. Only Exercise 5 permits imports (os and your fileops module). In Exercise 2 split() and len() are allowed for the split-based word count, but not for the manual word-count helper; line counts must use a loop. Other tasks may use split(), strip(), join(), len() and normal string formatting. Meaningful input prompts and output labels are welcome. Class duration: 180 minutes, including 160 minutes of tasks and 20 minutes for discussion.\nInput files: a.txt · b.txt · c.csv\nEvery Run and Check starts with fresh copies in a temporary Python folder. The source downloads use UTF-8 without a BOM and preserve the supplied text and records. Files have no connection to files on your computer. The CSV has a header; trim surrounding field whitespace. A sorted_c.txt generated during Run can be downloaded below its output.\n I understand and accept these programming rules.\nWorking model: only one exercise can be active at a time. Press Start/Continue to open its editor and start its active-time clock. Press Stop to pause and save it. Code and progress are stored in this browser.\n\n\n  Evaluate my work\n  Run an indicative evaluation of your current Week 9 solutions.\n  This evaluation is for feedback only and does not count toward your course grade.\n  Evaluate my work",
+    "crumbs": [
+      "Week 09",
+      "Class exercises"
+    ]
+  },
+  {
     "objectID": "warmup/08-warmup.html",
     "href": "warmup/08-warmup.html",
     "title": "Warm-up Test – Week 8",
@@ -1130,14 +1155,14 @@
     "href": "teacher/index.html",
     "title": "Teacher Dashboard",
     "section": "",
-    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+    "text": "Project team registration — create your team or accept an invitation."
   },
   {
     "objectID": "teacher/index.html#teacher-access",
     "href": "teacher/index.html#teacher-access",
     "title": "Teacher Dashboard",
-    "section": "",
-    "text": "Enter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
+    "section": "Teacher access",
+    "text": "Teacher access\nEnter the Azure Function key for the teacher API.\nThe key is kept only for this browser-tab session.\n\n\nOpen dashboard"
   },
   {
     "objectID": "lessons/05-complex-data-types-1.html",
@@ -1342,7 +1367,7 @@
     "href": "student/index.html",
     "title": "Student Dashboard",
     "section": "",
-    "text": "Your finalized results remain available throughout the semester. Enter your Neptun code and password to view them for 5 minutes. Contact your instructor if you need a new password.\n\nNeptun code\nPassword\nShow my progress\nClear\n\n\n\n\n\n\nFinalized assessments12 places across the semester\nSemester points earned so farProvisional until the required results are available\nWarmups completedThe best 3 of 8 count toward 15%\n\n\n\n\n\n\nAssessment\nScore\nResult\nStatus\nInstructor feedback\nUpdated\n\n\n\n\n\n\nWeights: best 3 warmups 15% · Quiz 1 10% · Quiz 2 10% · End-term test 35% · Project 30%. Only instructor-finalized results are shown. A missing result means “not available”, not a completed zero-point assessment.",
+    "text": "Project team registration — create your team or accept an invitation.\n\n\nYour finalized results remain available throughout the semester. Enter your Neptun code and password to view them for 5 minutes. Contact your instructor if you need a new password.\n\nNeptun code\nPassword\nShow my progress\nClear\n\n\n\n\n\n\nFinalized assessments12 places across the semester\nSemester points earned so farProvisional until the required results are available\nWarmups completedThe best 3 of 8 count toward 15%\n\n\n\n\n\n\nAssessment\nScore\nResult\nStatus\nInstructor feedback\nUpdated\n\n\n\n\n\n\nWeights: best 3 warmups 15% · Quiz 1 10% · Quiz 2 10% · End-term test 35% · Project 30%. Only instructor-finalized results are shown. A missing result means “not available”, not a completed zero-point assessment.",
     "crumbs": [
       "My Progress"
     ]
@@ -1510,6 +1535,303 @@
     "crumbs": [
       "Week 07",
       "Warm-up test"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html",
+    "href": "lessons/09-complex-data-types-2.html",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "",
+    "text": "By the end of this lesson, you should be able to:\n\ndistinguish text files from binary files and recognize common file structures;\nopen a text file with a suitable mode and explicit encoding;\nuse a context manager to close a file automatically;\nread complete contents, individual lines, or a sequence of lines;\nwrite and append text, including line endings;\nexplain the file position and use safe text-mode positioning;\ncreate, rename, and delete a file;\nclean and split text before converting values;\nhandle expected errors using specific exceptions.\n\n\n\n\n\n\n\nNoteConnection to the previous weeks\n\n\n\nLists and dictionaries store data while a program runs. Files allow us to save data and load it in a later run. Functions from Week 8 let us separate reading, processing, and displaying results.\nThe supplied slides use the heading “Python seminar 10”. In this course, this material belongs to Week 9. The focus here is text files and exception handling.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#learning-objectives",
+    "href": "lessons/09-complex-data-types-2.html#learning-objectives",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "",
+    "text": "By the end of this lesson, you should be able to:\n\ndistinguish text files from binary files and recognize common file structures;\nopen a text file with a suitable mode and explicit encoding;\nuse a context manager to close a file automatically;\nread complete contents, individual lines, or a sequence of lines;\nwrite and append text, including line endings;\nexplain the file position and use safe text-mode positioning;\ncreate, rename, and delete a file;\nclean and split text before converting values;\nhandle expected errors using specific exceptions.\n\n\n\n\n\n\n\nNoteConnection to the previous weeks\n\n\n\nLists and dictionaries store data while a program runs. Files allow us to save data and load it in a later run. Functions from Week 8 let us separate reading, processing, and displaying results.\nThe supplied slides use the heading “Python seminar 10”. In this course, this material belongs to Week 9. The focus here is text files and exception handling.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#files-and-data-structures",
+    "href": "lessons/09-complex-data-types-2.html#files-and-data-structures",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "1. Files and data structures",
+    "text": "1. Files and data structures\nA file stores data under a name in a filesystem. Its contents remain available after the program ends, unless the file is deleted or changed.\nA filename extension suggests a format, but does not itself determine how the contents are organized.\n\n\n\n\n\n\n\n\nOrganization\nTypical example\nInterpretation\n\n\n\n\nSequential\nA text file with one value per line\nProcess values from beginning to end\n\n\nHierarchical\nJSON or XML\nNested objects or parent-child relationships\n\n\nTabular\nCSV\nRows containing fields separated by a delimiter\n\n\nBinary\nAn image or audio file\nBytes interpreted according to a specific format\n\n\nCustom\nAn application-specific file\nRules defined by the application\n\n\n\nThese categories describe different aspects and can overlap: JSON and CSV are commonly stored as text, while a custom format can be textual or binary.\n\nText versus binary\nIn text mode, Python decodes file bytes into strings and encodes strings when writing. An encoding, such as UTF-8, specifies this conversion.\nIn binary mode, Python reads and writes bytes without text decoding. This lesson mainly uses text mode.\n\n\n\n\n\n\nImportantA file is not a Python list\n\n\n\nReading a text file does not automatically interpret its lines as numbers or Python collections. Read text first, then split and convert values according to the file’s format.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#opening-and-closing-text-files",
+    "href": "lessons/09-complex-data-types-2.html#opening-and-closing-text-files",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "2. Opening and closing text files",
+    "text": "2. Opening and closing text files\n\nGeneral structure\nwith open(filename, mode, encoding=\"utf-8\") as file:\n    statements using the file\nopen() returns a file object. The with statement closes it when the block is left, including when an exception leaves the block.\n\n\nModes\n\n\n\n\n\n\n\n\n\nMode\nPurpose\nMust the file exist?\nWhat happens to existing contents?\n\n\n\n\n\"r\"\nRead text; default mode\nYes\nPreserved\n\n\n\"w\"\nWrite text\nNo\nTruncated immediately when opened\n\n\n\"a\"\nAppend text\nNo\nPreserved; new writes go to the end\n\n\n\"x\"\nCreate a new text file\nNo; it must not exist\nRaises FileExistsError if it exists\n\n\n\"r+\"\nRead and write\nYes\nPreserved initially; writes can overwrite\n\n\n\"w+\"\nWrite and read\nNo\nTruncated immediately\n\n\n\"a+\"\nAppend and read\nNo\nPreserved; writes go to the end\n\n\n\nAdding b selects binary mode, for example \"rb\". Do not specify an encoding in binary mode.\n\n\n\n\n\n\nWarningWriting is not automatically appending\n\n\n\nOpening an existing file with \"w\" or \"w+\" removes its old contents before the first write. Use \"a\" to add data at the end, or \"x\" when creating a file should fail if the name already exists.\nThe encoding is a keyword argument: open(\"a.txt\", \"r\", encoding=\"utf-8\"). Do not put \"utf-8\" in the third positional argument; that position specifies buffering.\n\n\n\n\nA first example: create and read a file\nThe following example creates or replaces a small practice file. Use these demonstration filenames only for practice data.\nwith open(\"week09_greeting.txt\", \"w\", encoding=\"utf-8\") as file:\n    file.write(\"Hello, Python!\\n\")\n\nwith open(\"week09_greeting.txt\", \"r\", encoding=\"utf-8\") as file:\n    text = file.read()\n\nprint(text, end=\"\")\nHello, Python!\n\n\nWorking directory and paths\nA relative path such as \"week09_greeting.txt\" is interpreted relative to the program’s current working directory, not necessarily the directory of the script.\nfrom pathlib import Path\n\nprint(\"Working directory:\", Path.cwd())\nAn absolute path specifies its location from the filesystem root. A path can also include directories, for example \"data/scores.txt\". Opening a file does not create missing parent directories.\nIn Jupyter, files belong to the kernel’s filesystem. In Colab, upload input files to the runtime and download any outputs you want to keep; runtime files are separate from the saved notebook.\n\n\nExplicit closing\nIt is possible to call close() yourself. The following pattern also closes the file if reading fails:\nfile = open(\"week09_greeting.txt\", \"r\", encoding=\"utf-8\")\ntry:\n    text = file.read()\nfinally:\n    file.close()\n\nprint(\"File closed:\", file.closed)\nFile closed: True\nThe file must already exist for this example. For ordinary file processing, prefer with open(...).",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#lines-end-of-line-and-end-of-file",
+    "href": "lessons/09-complex-data-types-2.html#lines-end-of-line-and-end-of-file",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "3. Lines, end-of-line, and end-of-file",
+    "text": "3. Lines, end-of-line, and end-of-file\nA newline separates lines. Common physical line endings are LF (\\n) and CRLF (\\r\\n). With the default text-mode newline handling, Python translates these common endings to \\n when reading.\nA file need not finish with a newline. For ordinary files, EOF is the position after the last data; it need not be represented by a special stored character.\n\n\n\n\n\n\n\nRead result\nMeaning\n\n\n\n\n\"apple\\n\" from readline()\nA non-empty line ending in a newline\n\n\n\"\\n\" from readline()\nA blank line, not EOF\n\n\n\"apple\" from readline()\nA final line without a newline, or a limited read\n\n\n\"\" from readline() with no size limit\nEOF\n\n\n\n\n\n\n\n\n\nNoteEmpty strings and limited reads\n\n\n\nFor an ordinary text file, a positive-size read(n) returns \"\" at EOF. However, read(0) returns \"\" even before EOF. Use a positive size or the usual no-argument read when checking for EOF.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#reading-text-files",
+    "href": "lessons/09-complex-data-types-2.html#reading-text-files",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "4. Reading text files",
+    "text": "4. Reading text files\nThe examples in this section share this input file. Run its creation cell first.\nwith open(\"week09_fruits.txt\", \"w\", encoding=\"utf-8\") as file:\n    file.write(\"apple orange\\nbanana pear plum\\nmelon\\n\")\n\nRead all remaining text: read()\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    text = file.read()\n\nprint(text, end=\"\")\napple orange\nbanana pear plum\nmelon\nread() reads from the current position to EOF, not automatically from the beginning every time.\n\n\nRead a limited number of characters: read(n)\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    first = file.read(5)\n    following = file.read(7)\n\nprint(\"First:\", repr(first))\nprint(\"Following:\", repr(following))\nFirst: 'apple'\nFollowing: ' orange'\nIn text mode, n counts characters, not bytes. repr() makes spaces and escape sequences visible.\n\n\nRead one line: readline()\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    first_line = file.readline()\n    second_line = file.readline()\n\nprint(\"First line:\", repr(first_line))\nprint(\"Second line:\", repr(second_line))\nFirst line: 'apple orange\\n'\nSecond line: 'banana pear plum\\n'\nreadline(n) reads at most n characters and can return part of a line. Without a limit it reads through the next newline, or to EOF.\n\n\nIterate directly over the file\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    for line in file:\n        print(\"Line:\", line.rstrip(\"\\n\"))\nLine: apple orange\nLine: banana pear plum\nLine: melon\nThis processes one line at a time. It is usually clearer and uses less memory than reading a large file into a list.\n\n\nAn explicit EOF-controlled loop\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    line = file.readline()\n    while line != \"\":\n        print(\"Line:\", line.rstrip(\"\\n\"))\n        line = file.readline()\nThis produces the same three labelled lines. The last statement advances the input; omitting it would repeatedly process the same line.\n\n\nRead remaining lines into a list: readlines()\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    lines = file.readlines()\n\nprint(lines)\n['apple orange\\n', 'banana pear plum\\n', 'melon\\n']\nreadlines(hint) accepts an approximate size hint; it is not an exact character limit or a maximum number of lines. Without a hint, it reads all remaining lines.\n\n\n\n\n\n\n\n\nOperation\nResult\nTypical use\n\n\n\n\nread()\nOne string\nSmall complete text\n\n\nread(n)\nUp to n text characters\nLimited chunks\n\n\nreadline()\nOne line string, or \"\" at EOF\nExplicit line processing\n\n\nreadlines()\nList of remaining line strings\nReuse lines in memory\n\n\nfor line in file:\nSuccessive line strings\nSequential processing",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#writing-and-appending-text",
+    "href": "lessons/09-complex-data-types-2.html#writing-and-appending-text",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "5. Writing and appending text",
+    "text": "5. Writing and appending text\n\nwrite() writes a string as supplied\nwith open(\"week09_notes.txt\", \"w\", encoding=\"utf-8\") as file:\n    count = file.write(\"First line\\n\")\n    file.write(\"Second line\\n\")\n\nprint(\"Characters in the first write:\", count)\nCharacters in the first write: 11\nwrite() does not add a newline. Text-mode write() returns the number of characters written. Convert numbers to text before writing, for example file.write(str(score) + \"\\n\").\n\n\nwritelines() does not add separators\nlines = [\"Alice\\n\", \"Bob\\n\", \"Charlie\\n\"]\nwith open(\"week09_names.txt\", \"w\", encoding=\"utf-8\") as file:\n    file.writelines(lines)\nThe file contains one name per line because each string already includes \\n. A list such as [\"Alice\", \"Bob\"] would produce AliceBob.\n\n\nAppend by opening with \"a\"\nwith open(\"week09_notes.txt\", \"a\", encoding=\"utf-8\") as file:\n    file.write(\"Third line\\n\")\n\nwith open(\"week09_notes.txt\", \"r\", encoding=\"utf-8\") as file:\n    print(file.read(), end=\"\")\nFirst line\nSecond line\nThird line\nRun the earlier writing example first. Repeating only the append example adds another third line each time.\n\n\n\n\n\n\nImportantFile methods differ from list methods\n\n\n\nA normal Python file object has no append() method. Use open(..., \"a\") and write() to append text.\nThe correct method name for writing a sequence of strings is writelines(), not writeline().",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#file-position-tell-and-seek",
+    "href": "lessons/09-complex-data-types-2.html#file-position-tell-and-seek",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "6. File position: tell() and seek()",
+    "text": "6. File position: tell() and seek()\nReading and writing use a current file position. tell() reports a position that seek() can use to return there.\nIn text mode, this position can be an opaque value containing decoding information. Do not treat it as a general character index or perform arithmetic on it.\n\nSave and restore a text position\nwith open(\"week09_fruits.txt\", \"r\", encoding=\"utf-8\") as file:\n    first_line = file.readline()\n    saved_position = file.tell()\n    second_line = file.readline()\n    file.seek(saved_position)\n    second_line_again = file.readline()\n    file.seek(0)\n    first_line_again = file.readline()\n\nprint(\"Same second line:\", second_line == second_line_again)\nprint(\"Same first line:\", first_line == first_line_again)\nSame second line: True\nSame first line: True\nThe input file is the one created in Section 4. Repositioning backward is possible in text mode using seek(0) or an appropriate saved tell() value.\n\n\nReference points\n\n\n\n\n\n\n\nCall\nMeaning for a normal seekable text file\n\n\n\n\nfile.seek(0)\nReturn to the beginning\n\n\nfile.seek(saved_position)\nRestore a value previously returned by tell()\n\n\nfile.seek(0, 1)\nKeep the current position\n\n\nfile.seek(0, 2)\nMove to the end\n\n\n\nArbitrary non-zero offsets relative to the current position or end are not supported for normal text files. In binary mode, offsets are byte counts and allow more general positioning.\n\n\n\n\n\n\nWarningPositioning does not change the opening mode\n\n\n\nseek(0) cannot undo the truncation caused by \"w\". In append mode, seeking does not turn the next write into an overwrite at that position.\nText position values are not reliably interchangeable with byte offsets, particularly for variable-width encodings such as UTF-8.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#creating-renaming-and-deleting-files",
+    "href": "lessons/09-complex-data-types-2.html#creating-renaming-and-deleting-files",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "7. Creating, renaming, and deleting files",
+    "text": "7. Creating, renaming, and deleting files\nCreating a file can be done with open(). Rename and removal operations work on filesystem paths; close the file before renaming or deleting it.\n\nPython example: a complete lifecycle\nimport os\nfrom tempfile import TemporaryDirectory\n\nwith TemporaryDirectory(prefix=\"week09_demo_\") as folder:\n    original = os.path.join(folder, \"note.txt\")\n    renamed = os.path.join(folder, \"renamed_note.txt\")\n\n    with open(original, \"x\", encoding=\"utf-8\") as file:\n        file.write(\"A temporary note.\\n\")\n    print(\"Created:\", os.path.exists(original))\n\n    os.rename(original, renamed)\n    print(\"Renamed:\", os.path.exists(renamed))\n\n    os.remove(renamed)\n    print(\"Deleted:\", not os.path.exists(renamed))\nCreated: True\nRenamed: True\nDeleted: True\nTemporaryDirectory gives this demonstration its own folder and cleans it up afterwards. In ordinary programs, supply the intended source and destination paths directly.\n\n\n\n\n\n\nWarningRename and delete carefully\n\n\n\nRenaming to an existing destination can behave differently across operating systems: do not assume that it is always rejected. Deleting with os.remove() does not move the file to the desktop Recycle Bin. Use practice files, and check the paths before running destructive operations.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#string-methods-for-processing-lines",
+    "href": "lessons/09-complex-data-types-2.html#string-methods-for-processing-lines",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "8. String methods for processing lines",
+    "text": "8. String methods for processing lines\nFile methods read strings. String methods help separate meaningful fields from formatting.\n\nRemove leading or trailing whitespace\nline = \"  Alice; 8.5  \\n\"\nprint(\"Both sides:\", repr(line.strip()))\nprint(\"Left only:\", repr(line.lstrip()))\nprint(\"Right only:\", repr(line.rstrip()))\nBoth sides: 'Alice; 8.5'\nLeft only: 'Alice; 8.5  \\n'\nRight only: '  Alice; 8.5'\nWithout arguments, these methods remove surrounding whitespace, including spaces, tabs, and newlines. They return new strings; the original string is unchanged.\nIf surrounding spaces are meaningful, use line.rstrip(\"\\n\") to remove only trailing newline characters after ordinary text-mode reading.\n\n\nSplit fields and convert values\nline = \"Alice;8.5\\n\"\nfields = line.strip().split(\";\")\nname = fields[0]\nscore = float(fields[1])\n\nprint(\"Name:\", name)\nprint(\"Score:\", score)\nName: Alice\nScore: 8.5\nThis assumes exactly two fields and a valid numeric second field. A delimiter-separated file needs an agreed format.\n\n\nSplitting on whitespace versus a delimiter\nprint(\"Whitespace:\", \"apple  pear\\tplum\".split())\nprint(\"Delimiter:\", \"apple;;plum\".split(\";\"))\nWhitespace: ['apple', 'pear', 'plum']\nDelimiter: ['apple', '', 'plum']\nWith no argument, split() groups consecutive whitespace and omits surrounding empty fields. With an explicit separator, consecutive separators can produce empty fields.\n\n\n\n\n\n\nNoteSimple splitting is not a complete CSV parser\n\n\n\nFor simple, controlled data, split(\";\") is enough. If fields may contain quoted delimiters or embedded newlines, use Python’s csv module rather than implementing the format with a simple split.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#handling-exceptions",
+    "href": "lessons/09-complex-data-types-2.html#handling-exceptions",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "9. Handling exceptions",
+    "text": "9. Handling exceptions\nAn exception reports a runtime problem. A try statement lets a program handle an expected problem and respond appropriately.\n\nGeneral structure\ntry:\n    statements that may fail\nexcept SpecificError as error:\n    statements handling that error\nelse:\n    statements executed if the try block finishes normally\nfinally:\n    cleanup statements executed when leaving the construct\nThe else and finally parts are optional. finally normally executes on both success and failure, including when an unhandled exception propagates. It is not a guarantee against process termination or power loss.\n\n\n\n\n\n\n\nException\nExample cause\n\n\n\n\nFileNotFoundError\nInput path does not exist\n\n\nFileExistsError\nOpening an existing path in \"x\" mode\n\n\nPermissionError\nThe process lacks permission for the operation\n\n\nUnicodeDecodeError\nFile bytes cannot be decoded with the selected encoding\n\n\nValueError\nA field cannot be converted to the required numeric type\n\n\nZeroDivisionError\nDividing by zero\n\n\nOSError\nGeneral filesystem errors; includes several more specific subclasses\n\n\n\n\n\nExample: validate a numeric input\nraw_value = \"not a number\"\n\ntry:\n    number = float(raw_value)\nexcept ValueError:\n    print(\"Please provide a numeric value.\")\nelse:\n    print(\"Number:\", number)\nfinally:\n    print(\"Conversion attempt finished.\")\nPlease provide a numeric value.\nConversion attempt finished.\nReplace raw_value with \"8.5\" to follow the success path. The else block then prints Number: 8.5.\n\n\nExample: report a missing input file\nfrom tempfile import TemporaryDirectory\nfrom pathlib import Path\n\nwith TemporaryDirectory(prefix=\"week09_missing_\") as folder:\n    missing = Path(folder) / \"missing.txt\"\n    try:\n        with open(missing, \"r\", encoding=\"utf-8\") as file:\n            text = file.read()\n    except FileNotFoundError:\n        print(\"Input file not found.\")\n    else:\n        print(text)\nInput file not found.\nThe temporary folder ensures that this demonstration does not accidentally read a real file with the same name.\n\n\n\n\n\n\nImportantCatch expected errors specifically\n\n\n\nAvoid a bare except: that hides every problem, including interruption signals. Catch the errors you can meaningfully handle. When catching several related types, place more specific handlers before broader ones: FileNotFoundError before OSError, for example.\nA with block closes the file; it does not suppress reading or conversion errors.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#putting-the-pieces-together",
+    "href": "lessons/09-complex-data-types-2.html#putting-the-pieces-together",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "10. Putting the pieces together",
+    "text": "10. Putting the pieces together\nThe next example uses two small files in the working directory. Run the setup first to create predictable input.\n\nExample input file\nwith open(\"week09_scores.txt\", \"w\", encoding=\"utf-8\") as file:\n    file.write(\"Alice;8.5\\nBob;6.0\\nCharlie;9.0\\n\")\n\n\nRead, process, and write a report\ndef load_scores(filename):\n    records = []\n    with open(filename, \"r\", encoding=\"utf-8\") as file:\n        for line in file:\n            if line.strip() != \"\":\n                fields = line.strip().split(\";\")\n                if len(fields) != 2:\n                    raise ValueError(\"Each record needs two fields.\")\n                name = fields[0].strip()\n                score = float(fields[1])\n                records.append((name, score))\n    return records\n\n\ntry:\n    records = load_scores(\"week09_scores.txt\")\nexcept FileNotFoundError:\n    print(\"The input file is missing.\")\nexcept PermissionError:\n    print(\"The input file cannot be accessed.\")\nexcept UnicodeDecodeError:\n    print(\"Use a UTF-8 input file.\")\nexcept ValueError as error:\n    print(\"Invalid score data:\", error)\nexcept OSError as error:\n    print(\"File operation failed:\", error)\nelse:\n    total = 0\n    for name, score in records:\n        total += score\n\n    if len(records) &gt; 0:\n        average = total / len(records)\n        try:\n            with open(\"week09_report.txt\", \"w\",\n                      encoding=\"utf-8\") as file:\n                file.write(f\"Students: {len(records)}\\n\")\n                file.write(f\"Average score: {average:.2f}\\n\")\n        except OSError as error:\n            print(\"Cannot write report:\", error)\n        else:\n            print(\"Students:\", len(records))\n            print(f\"Average score: {average:.2f}\")\n            print(\"Report saved to week09_report.txt\")\n    else:\n        print(\"No score records were found.\")\nStudents: 3\nAverage score: 7.83\nReport saved to week09_report.txt\nThe report file contains the first two lines. The calculation uses an explicit loop, and an empty input file is handled before dividing.\nThe write operation has its own try block because exceptions raised inside an else block are not caught by the earlier except clauses.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#summary",
+    "href": "lessons/09-complex-data-types-2.html#summary",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "11. Summary",
+    "text": "11. Summary\n\n\n\n\n\n\n\n\nConcept\nMain purpose\nKey point\n\n\n\n\nEncoding\nConvert between text and bytes\nSpecify encoding=\"utf-8\" for these examples\n\n\nwith open(...)\nManage an open file\nCloses automatically when leaving the block\n\n\nRead mode\nLoad existing data\nMissing input can raise FileNotFoundError\n\n\nWrite mode\nCreate or replace contents\n\"w\" truncates immediately\n\n\nAppend mode\nAdd at the end\nUse \"a\" with write()\n\n\nread() / readline()\nRead text\nEmpty no-limit line read signals EOF\n\n\nreadlines()\nCollect remaining lines\nKeeps line endings; hint is approximate\n\n\nwrite() / writelines()\nWrite strings\nNeither adds line separators automatically\n\n\ntell() / seek()\nSave and restore position\nText positions are not general byte offsets\n\n\nos.rename() / os.remove()\nChange file paths or remove a file\nCheck paths and close the file first\n\n\nstrip() / split()\nClean and separate text\nChoose a method suited to the data format\n\n\ntry / except\nHandle expected failures\nCatch specific errors\n\n\nelse / finally\nSeparate success and cleanup\nDifferent roles; both are optional\n\n\n\nBefore processing a file, decide its format, encoding, opening mode, and error policy. Before writing, renaming, or deleting, check which file the operation will affect.",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "lessons/09-complex-data-types-2.html#further-reading",
+    "href": "lessons/09-complex-data-types-2.html#further-reading",
+    "title": "Week 9 – Complex Data Types II: Text Files and Exceptions",
+    "section": "Further reading",
+    "text": "Further reading\n\nPython tutorial: reading and writing files\nPython reference: the open() function\nPython reference: text-stream positioning",
+    "crumbs": [
+      "Week 09",
+      "Theory: Complex Data Types II"
+    ]
+  },
+  {
+    "objectID": "warmup/09-warmup.html",
+    "href": "warmup/09-warmup.html",
+    "title": "Warm-up Test – Week 9",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nThe topics are functions, parameters, return values and testing function calls, using lists, tuples, dictionaries or sets and the twelve basic algorithms studied in Weeks 6–7. You will receive one task worth 10 points. Every task asks you to write a function and call it for three specified collection-based test cases. No keyboard input is required. There are no module tasks.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected loss of focus gives you a warning when you return. A second detected loss of focus automatically submits your current solution. The timer keeps running.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\n\n\n\n\n\n\nImportantFunction and algorithm rules\n\n\n\nDefine the required function(s) and return the calculated result. Create the supplied collection test data and print the returned results in the main program, not inside the function. Call the function for all three cases specified in your task. Type annotations are optional.\nUse explicit loops and conditions. Normal return statements after a loop or in a non-loop conditional are allowed; do not use return to escape a loop. Avoid imports/modules, comprehensions/generators, lambda, map/filter/reduce, break/continue, ternary expressions and built-in algorithm shortcuts (sum/min/max/sorted/sort/any/all/index/count/find/reversed/enumerate/zip). Follow additional task-specific restrictions. Meaningful prompts and labelled output are encouraged. Assume valid inputs.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and understand that the first detected loss of focus gives me a warning and the second automatically submits my current solution.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n    Type your solution in the editor. Pasting and dropping text are disabled during the test.\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n      The test page lost focus or was hidden. Your work has not been submitted, and the timer is still running. If the page loses focus again, your current solution will be submitted automatically.\n      Continue test",
+    "crumbs": [
+      "Week 09",
+      "Warm-up test"
+    ]
+  },
+  {
+    "objectID": "warmup/09-warmup.html#week-9-warm-up-test---functions",
+    "href": "warmup/09-warmup.html#week-9-warm-up-test---functions",
+    "title": "Warm-up Test – Week 9",
+    "section": "",
+    "text": "Note\n\n\n\nThis is a graded warm-up test.\nThe topics are functions, parameters, return values and testing function calls, using lists, tuples, dictionaries or sets and the twelve basic algorithms studied in Weeks 6–7. You will receive one task worth 10 points. Every task asks you to write a function and call it for three specified collection-based test cases. No keyboard input is required. There are no module tasks.\nYou have 10 minutes from the moment you start. You may run your code while working. There is no correctness feedback. Submit your solution before the timer reaches zero; if the page remains open, it will be submitted automatically when time expires.\nTest window rule: During the test, you must remain on this test page. Do not switch to another browser tab, window, or application. The first detected loss of focus gives you a warning when you return. A second detected loss of focus automatically submits your current solution. The timer keeps running.\n\n\n\n\n\n\n\n\nWarningImportant – in-class assessment\n\n\n\nThis test may only be completed by students who are physically present in the scheduled practical session.\nCompleting the test without being present in the classroom is not permitted and will result in 0 points for the test.\n\n\n\n\n\n\n\n\nImportantFunction and algorithm rules\n\n\n\nDefine the required function(s) and return the calculated result. Create the supplied collection test data and print the returned results in the main program, not inside the function. Call the function for all three cases specified in your task. Type annotations are optional.\nUse explicit loops and conditions. Normal return statements after a loop or in a non-loop conditional are allowed; do not use return to escape a loop. Avoid imports/modules, comprehensions/generators, lambda, map/filter/reduce, break/continue, ternary expressions and built-in algorithm shortcuts (sum/min/max/sorted/sort/any/all/index/count/find/reversed/enumerate/zip). Follow additional task-specific restrictions. Meaningful prompts and labelled output are encouraged. Assume valid inputs.\n\n\nEnter your Neptun code and the classroom access code displayed by your instructor.\n\n\n\n  \n\n    \n\n      \n        \n          Neptun code\n        \n\n        \n      \n\n      \n        \n          Classroom access code\n        \n\n        \n      \n\n    \n\n    \n      The classroom access code is displayed by your instructor at the beginning of the test.\n    \n\n    \n      \n        \n        I confirm that I am present in the classroom and understand that the first detected loss of focus gives me a warning and the second automatically submits my current solution.\n      \n    \n\n    \n      \n        Start test\n      \n    \n\n    \n\n  \n\n  \n\n    \n\n      \n        Session group:\n        \n      \n\n      \n        Time remaining:\n        10:00\n      \n\n    \n\n    \n\n    \n      Your Python solution\n    \n\n    \n    Type your solution in the editor. Pasting and dropping text are disabled during the test.\n    \n\n    \n\n      \n        Run\n      \n\n      \n        Submit\n      \n\n      \n\n    \n\n    \n      Program output\n    \n\n    \n\n    \n\n  \n\n  \n\n    \n\n      \n      The test page lost focus or was hidden. Your work has not been submitted, and the timer is still running. If the page loses focus again, your current solution will be submitted automatically.\n      Continue test",
+    "crumbs": [
+      "Week 09",
+      "Warm-up test"
+    ]
+  },
+  {
+    "objectID": "project/index.html",
+    "href": "project/index.html",
+    "title": "Case Study Project",
+    "section": "",
+    "text": "Develop your solution in Jupyter Notebook or Google Colab, using Python to process three related CSV text files. Treat the files as related tables: use identifiers to find records and combine information across files, then answer useful business questions.\nWork in a team of 2–3 students. Your solution must use functions, appropriate collections, explicit loops and conditions, text-file handling, and error handling.\nOrganize one notebook into clearly labelled sections for loading the data, maintaining customer records, running the assigned analyses, and demonstrating the results.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#your-goal",
+    "href": "project/index.html#your-goal",
+    "title": "Case Study Project",
+    "section": "",
+    "text": "Develop your solution in Jupyter Notebook or Google Colab, using Python to process three related CSV text files. Treat the files as related tables: use identifiers to find records and combine information across files, then answer useful business questions.\nWork in a team of 2–3 students. Your solution must use functions, appropriate collections, explicit loops and conditions, text-file handling, and error handling.\nOrganize one notebook into clearly labelled sections for loading the data, maintaining customer records, running the assigned analyses, and demonstrating the results.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#how-to-register-your-team",
+    "href": "project/index.html#how-to-register-your-team",
+    "title": "Case Study Project",
+    "section": "How to register your team",
+    "text": "How to register your team\n\n\n1. Form a team of 2–3 students, preferably from groups G01–G02.\n\n\n\nOptional: teammates from other groups\n\nYou may also invite students from groups G03–G06. Please agree on this with the instructor of each invited student’s practical group first.\nThen email me the invited students’ names and Neptun codes so I can arrange their dashboard passwords. They will need these passwords to accept the team invitation.\nThe team founder must be from G01 or G02.\n\n\n\n\n2. Choose your founder.\n\nTheir practical group determines the team’s topic. For example, a G02 student who joins a G01 founder’s team will work on Equipment rental, not Webshop.\n\n\n\n3. The founder creates the team.\n\nOpen the registration page, enter your own Neptun code and dashboard password, then enter the team name and the Neptun codes of one or two teammates.\n\n\n\n4. Every invited member accepts separately.\n\nEach teammate opens the registration page with their own Neptun code and dashboard password and selects Accept invitation. Invitation emails are not sent; the founder should notify the invited members.\n\n\n\n5. The founder checks and finalizes the team.\n\nAll 2–3 members must show Accepted before the founder selects Finalize team registration. Use Refresh team status to see recent acceptances.\n\n\n\n6. Access your assigned project when assignment release opens.\n\nAfter finalization and release, your team will be able to access its task variant, complete dataset, and submission instructions. Each member will use their own credentials.\n\n\n\nBefore you finalize\n\nYou may have several pending invitations, but you can be an accepted member of only one team. Do not share passwords. While a team is a draft, the founder can edit it and members can leave.\n\nOpen team registration",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#topic-overview-g01-equipment-rental",
+    "href": "project/index.html#topic-overview-g01-equipment-rental",
+    "title": "Case Study Project",
+    "section": "Topic overview: G01 — Equipment rental",
+    "text": "Topic overview: G01 — Equipment rental\nYou are helping a small equipment-rental business understand its rentals, customers, and equipment use. Depending on your assigned variant, your work may focus on late returns, revenue, customer activity, or availability.\n\nThe data model\n\n\n\n\n\n\n\n\nFile\nOne row represents\nMain identifiers\n\n\n\n\nequipment.csv\nOne individually identifiable equipment item\nequipment_id\n\n\ncustomers.csv\nOne customer\ncustomer_id\n\n\nrentals.csv\nOne rental of one equipment item by one customer\nrental_id, equipment_id, customer_id\n\n\n\nEach rental refers to an existing customer and equipment item. One customer can have several rentals; one equipment item can be rented several times at different times.\n\n\nSmall illustrative data example — not the assigned dataset\n\nequipment.csv\nequipment_id;name;category;daily_fee_huf\nE001;Cordless drill;Tools;2000\nE002;Projector;Electronics;4500\nE003;Camping tent;Outdoor;3000\ncustomers.csv\ncustomer_id;name;city;customer_type\nC001;Anna Kovacs;Budapest;regular\nC002;Ben Nagy;Gyor;student\nC003;City Events;Budapest;business\nrentals.csv\nrental_id;customer_id;equipment_id;start_day;due_day;return_day\nR001;C001;E001;1;4;5\nR002;C002;E002;6;9;\nR003;C001;E003;8;10;10\nFor this project, dates are represented by integer day numbers so that you can concentrate on Python algorithms. An empty return_day means that the equipment has not been returned. Exact calculation rules will be included in your assigned task.\nFor example, to display a rental together with a customer’s name and an equipment item’s daily fee, you need information from all three files.\n\n\n\nTypes of questions\nExamples include identifying overdue rentals, calculating fees, finding equipment with little use, comparing customer activity, and producing ranked reports. These are examples of the topic, not a list of functions that every team must implement.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#topic-overview-g02-webshop",
+    "href": "project/index.html#topic-overview-g02-webshop",
+    "title": "Case Study Project",
+    "section": "Topic overview: G02 — Webshop",
+    "text": "Topic overview: G02 — Webshop\nYou are helping a small webshop analyze its products, customers, and purchases. Depending on your assigned variant, your work may focus on pending orders, product performance, customer activity, or category performance.\n\nThe data model\n\n\n\n\n\n\n\n\nFile\nOne row represents\nMain identifiers\n\n\n\n\nproducts.csv\nOne product\nproduct_id\n\n\ncustomers.csv\nOne customer\ncustomer_id\n\n\norder_items.csv\nOne product line within an order\norder_id + line_no, product_id, customer_id\n\n\n\nAn order can contain several lines. Lines with the same order_id belong to the same order, so the number of rows is not necessarily the number of orders. The combination of order_id and line_no identifies a line.\n\n\nSmall illustrative data example — not the assigned dataset\n\nproducts.csv\nproduct_id;name;category;unit_price_huf;stock\nP001;Notebook;Stationery;900;25\nP002;Desk lamp;Home;6500;8\nP003;USB cable;Electronics;1800;30\ncustomers.csv\ncustomer_id;name;city;customer_type\nC001;Anna Kovacs;Budapest;regular\nC002;Ben Nagy;Gyor;student\nC003;City Events;Budapest;business\norder_items.csv\norder_id;line_no;customer_id;product_id;quantity;unit_price_huf;order_day;status\nO001;1;C001;P001;2;900;3;paid\nO001;2;C001;P003;1;1800;3;paid\nO002;1;C002;P002;1;6500;7;pending\nThe first two rows form one order, with a value of 2 × 900 + 1 × 1800 = 3600 HUF. Order-line prices record the price at the time of ordering; they may differ from the current product price.\nThe project uses integer day numbers and integer HUF amounts. The assigned task will explain the treatment of paid, pending, and cancelled orders.\n\n\n\nTypes of questions\nExamples include calculating pending order values, measuring product revenue, identifying repeat customers, finding products without paid sales, and comparing categories. Your assigned variant will specify the exact questions and required functions.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#what-every-team-must-build",
+    "href": "project/index.html#what-every-team-must-build",
+    "title": "Case Study Project",
+    "section": "What every team must build",
+    "text": "What every team must build\n\n\n1. Load and connect the files\n\n\nRead the three supplied CSV files using UTF-8 encoding and the ; delimiter. Skip the header and convert numeric fields to numbers.\nStore the records in appropriate Python collections, such as lists of dictionaries.\nUse identifiers to connect related records. Do not rely on matching row positions across files.\nHandle missing files and invalid data with understandable messages. Keep the original supplied dataset unchanged.\n\n\n\n\n2. Maintain customer records\n\nImplement customer Create, Read, Update, and Delete (CRUD) operations:\n\nadd a new customer with a unique identifier;\nfind and display a customer by identifier;\nupdate a customer’s name, city, or type, while keeping the identifier unchanged;\ndelete a customer only if no rental or order line refers to that customer.\n\nSave customer changes to a separate output file, then demonstrate that the saved file can be read again. Do not require the user to edit the CSV manually.\n\n\n\n3. Answer four assigned business questions\n\nYour team will receive four analysis functions, including a ranking/report function. The tasks will involve several of the basic algorithms studied in class: searching, summarization, counting, selection, copying/transformation, separation, or sorting.\nAt least two assigned analyses will combine information from multiple files. The task specifications will identify which records to include, how to calculate results, and how to handle ties or empty results.\n\n\n\n4. Demonstrate and export the results\n\n\nUse clearly labelled notebook cells to demonstrate all required operations.\nUse meaningful prompts, headings, and output labels. Exact decorative wording is not assessed.\nExport at least one assigned report to a separate CSV or text file with clear column names or labels.\nKeep calculation functions separate from keyboard input and displayed output. Return values from those functions so that they can be tested independently.\n\n\n\n\n5. Notebook structure and reproducibility\n\nYour notebook must run from top to bottom in a fresh Jupyter or Google Colab session using only the three supplied CSV files as external input.\n\nCreate all additional small test datasets within notebook cells. File-handling tests must create their own temporary CSV files in a separate test directory; reports and other output files must also be generated by the notebook.\nDo not modify or overwrite the supplied CSV files. Do not depend on extra uploaded files, a personal Google Drive location, files from another computer, or variables left over from a previous session.\nKeep function definitions before their use. Use clear headings for data loading, CRUD operations, the four analyses, tests, and report export.\nBefore submission, restart the kernel/runtime and run all cells in order. All cells must finish without an unhandled error. Intentionally invalid test cases should catch and explain the expected exception rather than stop execution.\nUse the three input CSVs from one documented working directory. Explain how to place or upload them in the PDF documentation.\n\nSubmit the downloaded .ipynb file, including when working in Colab or in Jupyter.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#function-specifications-and-implementation-rules",
+    "href": "project/index.html#function-specifications-and-implementation-rules",
+    "title": "Case Study Project",
+    "section": "Function specifications and implementation rules",
+    "text": "Function specifications and implementation rules\n\n\nView function specifications and implementation rules\n\nYour assigned task will provide a compact specification for each required function:\n\n\n\n\n\n\n\nItem\nWhat will be specified\n\n\n\n\nFunction name\nThe exact name to define\n\n\nParameters\nTheir names, types, and meanings\n\n\nReturns\nThe type and meaning of the returned value\n\n\nRules\nIncluded records, calculation rules, ordering, ties, and empty results\n\n\nExample\nA small call with its expected result\n\n\n\nUse structured algorithms with explicit loops and conditions. For functions intended to demonstrate a basic algorithm, do not replace the algorithm with sum(), min(), max(), sorted(), .sort(), any(), all(), .index(), or .count().\nDo not use comprehensions, generator expressions, lambda, map(), filter(), break, continue, or a return statement to leave a loop early. Normal function return statements after loops are allowed. Type annotations are optional.\nOrdinary collection operations, including indexing, dictionary lookup, .items(), .append(), and set membership, may be used where appropriate. Do not use import statements, including imports from the Python standard library. Read and write the supplied simple semicolon-separated CSV files using open(), readline(), explicit loops, split() and write(). Do not use the csv module, pandas, NumPy, a database engine, or other imported modules in the notebook code.\nObject-oriented programming is not required. Prefer clear functions and simple data structures over unnecessary complexity.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#testing-and-individual-understanding",
+    "href": "project/index.html#testing-and-individual-understanding",
+    "title": "Case Study Project",
+    "section": "Testing and individual understanding",
+    "text": "Testing and individual understanding\n\n\nView testing and individual requirements\n\nFor each of the four analysis functions, provide at least three tests with inputs and expected results:\n\na normal case;\nan empty/no-match case, where valid for that function;\na boundary or special case, such as equal values, a threshold, or an order with several lines.\n\nIf a function requires non-empty data, test its documented response to an invalid empty input rather than inventing a result. Also demonstrate duplicate-ID rejection, rejection of a missing referenced identifier during data loading, and protection against deleting a referenced customer.\nFor each test, display or check the expected result and actual result, and explain any difference. Printing a value without stating what should have been returned is not a complete test. Include tests and their results in the notebook.\nEach member must understand the shared solution. During the project presentation, each member should be able to explain a function, trace it on a few records, and make a small change to a requirement. Describe each member’s contribution in the PDF documentation.\n\n\nUse of AI assistance\n\nUse AI assistance to support understanding, explain errors, or discuss your own code. Do not submit a complete generated project as if it were your own work.\nInclude a brief AI-use statement in the PDF documentation describing what assistance you used and how you checked it, or state that no AI assistance was used. Every team member remains responsible for understanding and testing the submitted solution. Code that you cannot explain or adapt does not demonstrate the required individual understanding.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#deliverables",
+    "href": "project/index.html#deliverables",
+    "title": "Case Study Project",
+    "section": "Deliverables",
+    "text": "Deliverables\n\n\nView the three required submission files\n\nThe founder submits one shared package for the whole team, containing exactly these three files:\n\n\n\n\n\n\n\nFile\nRequired content\n\n\n\n\nOne .ipynb notebook\nFunctions, demonstrations, self-created test data, tests with expected and actual results, displayed outputs, and code that generates any test files and reports.\n\n\nOne .pdf document\nTeam members and Neptun codes; assigned variant and dataset ID/version; how to run the notebook; data model and file relationships; solution approach; test findings, results and limitations; division of work; AI-use statement.\n\n\nOne .pptx presentation\nA clear introduction to the problem and solution, important results, and selected examples showing how the solution works.\n\n\n\nAccepted teammates can view the team’s shared submission. Only the founder submits or uploads a revised complete package. Do not submit separate copies for each team member. Technical upload instructions will be provided on the submission page.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#assessment-30-points-30-of-the-course-result",
+    "href": "project/index.html#assessment-30-points-30-of-the-course-result",
+    "title": "Case Study Project",
+    "section": "Assessment — 30 points / 30% of the course result",
+    "text": "Assessment — 30 points / 30% of the course result\n\n\nView assessment criteria: 20 team points + 10 individual defence points\n\nThe project contributes 30% of the final course result: 20% for the shared submitted work and 10% for the individual defence. The submitted work receives the same team score for all members; defence scores may differ between members.\n\nShared submission — 20 points\n\n\n\n\n\n\n\n\nComponent\nAssessment criterion\nPoints\n\n\n\n\nNotebook — 10 points\nCorrect data loading, relationships between files, and data management, including customer CRUD operations\n2\n\n\n\nCorrect implementation of the four assigned business-analysis functions\n4\n\n\n\nClear reusable functions, appropriate basic algorithms, and error handling\n2\n\n\n\nMeaningful tests with expected results, and successful Run All in a fresh session\n2\n\n\nPDF documentation — 5 points\nClear description of the data model and solution approach\n2\n\n\n\nExplanation of testing, results, and limitations\n2\n\n\n\nRunning instructions, division of work, and AI-use statement\n1\n\n\nPPTX presentation — 5 points\nClear presentation of the problem and solution\n2\n\n\n\nRelevant results and examples demonstrating operation\n2\n\n\n\nLogical structure and readable slides\n1\n\n\nShared total\n\n20\n\n\n\n\n\nIndividual defence — 10 points per student\n\n\n\n\n\n\n\nAssessment criterion\nPoints\n\n\n\n\nExplain your own contribution and demonstrate understanding of the submitted code\n4\n\n\nExplain a function, its algorithm and tests; trace it on a small example\n3\n\n\nIndependently implement a small modification to a requirement\n3\n\n\nIndividual total\n10\n\n\n\nPartial credit is available for correctly implemented functionality. The notebook does not have to be entirely correct to earn points for independently correct parts. Automatic checks support assessment; the teacher reviews the submitted work and assesses individual understanding during the defence.\nFor example, 16/20 team points + 8/10 individual defence points = 24/30 project points, contributing 24 percentage points to the final course result.",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
+    ]
+  },
+  {
+    "objectID": "project/index.html#dates-and-submission-access",
+    "href": "project/index.html#dates-and-submission-access",
+    "title": "Case Study Project",
+    "section": "Dates and submission access",
+    "text": "Dates and submission access\n\n\nView the deadline and release arrangements\n\nAll three files — notebook, PDF documentation and PPTX presentation — are due on 8 December 2026 at 20:00 (Budapest time).\n\nRegister your team or check your invitations",
+    "crumbs": [
+      "Week 09",
+      "Case Study Project"
     ]
   }
 ]

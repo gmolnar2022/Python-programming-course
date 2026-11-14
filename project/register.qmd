@@ -1,0 +1,93 @@
+---
+title: "Project team registration"
+page-layout: full
+toc: false
+---
+
+Register a team of **2–3 students**. Members may attend different practical groups. The **founder’s group** determines the project topic: **G01 — Equipment rental**, **G02 — Webshop**. Each invited student must accept individually. The founder finalizes registration after everyone has accepted.
+
+[**Open your team project / submissions**](submit.qmd) — available to accepted team members; only the founder can submit.
+
+```{=html}
+<style>
+#project-registration{max-width:1000px;margin:auto}.pt-card{padding:18px;border:1px solid #d9e1eb;border-radius:10px;margin:14px 0;background:#fff}.pt-fields{display:flex;flex-wrap:wrap;gap:12px;align-items:end}.pt-fields label{display:flex;flex-direction:column;gap:5px}.pt-fields input,.pt-fields select{padding:8px;border:1px solid #abb8c6;border-radius:5px;max-width:100%}.pt-card button{padding:8px 14px;margin:5px 8px 5px 0;cursor:pointer}.pt-status{font-weight:600}.pt-test{background:#fff2cb;padding:12px;border-radius:8px}.pt-list{padding-left:22px}#pt-message{white-space:pre-wrap}#pt-message[role=alert]{color:#a32121}
+</style>
+<div id="project-registration">
+ <div id="pt-login" class="pt-card"><form id="pt-login-form" class="pt-fields">
+  <label>Neptun code<input id="pt-neptun" maxlength="6" autocomplete="username" required></label>
+  <label>Dashboard password<input id="pt-password" type="password" autocomplete="current-password" required maxlength="128"></label>
+  <button type="submit">View my team / register</button>
+ </form><p>Use your own dashboard password. Never share it with teammates.</p></div>
+ <p id="pt-message" aria-live="polite"></p>
+ <div id="pt-active" hidden>
+  <p><strong id="pt-me"></strong> · Viewing time: <span id="pt-time"></span> <button id="pt-close" type="button">Close</button> <button id="pt-refresh" type="button">Refresh team status</button></p>
+  <div id="pt-test" class="pt-test" hidden>Instructor test workspace. These registrations are separate from student teams. Virtual accounts do not receive email.</div>
+  <div id="pt-teams"></div>
+  <div id="pt-create" class="pt-card" hidden><h2>Create a team</h2>
+   <form id="pt-create-form" class="pt-fields">
+    <label>Team name<input id="pt-name" minlength="2" maxlength="60" required></label>
+    <label>Second member — Neptun code<input id="pt-member2" maxlength="6" required></label>
+    <label>Third member — optional<input id="pt-member3" maxlength="6"></label>
+    <label id="pt-group-label" hidden>Test project group<select id="pt-group"><option>G01</option><option>G02</option></select></label>
+    <button type="submit">Create team and invitations</button>
+   </form>
+  </div>
+  <p>Invitations appear here when each teammate enters their own Neptun code and password. No invitation emails are sent. Refresh to see newly accepted invitations. After finalization, contact the teacher for changes.</p>
+ </div>
+</div>
+<script>
+(()=>{
+ 'use strict';
+ const API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api';
+ const $=id=>document.getElementById(id);
+ let token='',deadline=0,busy=false,epoch=0;
+ const say=(s,error=false)=>{$('pt-message').textContent=s;$('pt-message').setAttribute('role',error?'alert':'status');};
+ function close(message='Viewing session closed. Enter your password to continue.'){
+  epoch++;token='';deadline=0;$('pt-teams').replaceChildren();$('pt-create-form').reset();$('pt-me').textContent='';$('pt-active').hidden=true;$('pt-login').hidden=false;$('pt-password').value='';say(message);
+ }
+ async function request(endpoint,body){
+  const response=await fetch(API+'/'+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});
+  const data=await response.json();if(!response.ok||!data.success){if(response.status===401)close('Session expired. Enter your password again.');throw Error(data.error||'Request failed.');}return data;
+ }
+ function element(tag,text,cls){const e=document.createElement(tag);if(text)e.textContent=text;if(cls)e.className=cls;return e;}
+ async function run(fn){if(busy)return;busy=true;const root=$('project-registration');root.querySelectorAll('button').forEach(b=>b.disabled=true);try{await fn();}catch(e){say(e.message,true);}finally{busy=false;root.querySelectorAll('button').forEach(b=>b.disabled=false);}}
+ async function action(payload){const version=epoch;const result=await request('projectTeamAction',{token,...payload});if(version!==epoch)return;render(result.state);say('Team registration updated.');}
+ function button(parent,text,payload,confirmation){const b=element('button',text);b.type='button';b.onclick=()=>{if(!confirmation||confirm(confirmation))run(()=>action(payload));};parent.append(b);}
+ function render(state){
+  $('pt-me').textContent=state.me.name+' ('+state.me.neptun+', '+state.me.group+')';$('pt-test').hidden=state.scope!=='test';$('pt-group-label').hidden=!state.can_choose_group;
+  const container=$('pt-teams');container.replaceChildren();const mine=state.teams.find(t=>t.members.some(m=>m.neptun===state.me.neptun&&m.accepted));$('pt-create').hidden=!!mine||(!['G01','G02'].includes(state.me.group)&&!state.can_choose_group);
+  for(const t of state.teams){
+   const card=element('section','', 'pt-card');card.append(element('h2',t.name));card.append(element('p',`${t.group} · ${t.topic==='webshop'?'Webshop':'Equipment rental'} · ${t.status==='finalized'?'Finalized':'Draft'}`,'pt-status'));card.append(element('p','Team ID: '+t.team_id));
+   const ul=element('ul','', 'pt-list');for(const m of t.members)ul.append(element('li',`${m.name} (${m.neptun}, ${m.group}) — ${m.accepted?'Accepted':'Invitation pending'}${m.neptun===t.founder?' · Founder':''}`));card.append(ul);
+   const me=t.members.find(m=>m.neptun===state.me.neptun);
+   if(t.status==='draft'){
+    if(t.founder===state.me.neptun){
+     const edit=element('details');edit.append(element('summary','Edit team name / members'));const form=element('form');form.className='pt-fields';
+     const fields=[];const others=t.members.filter(m=>m.neptun!==t.founder);
+     for(const [i,label] of ['Team name','Second member','Third member — optional'].entries()){
+      const l=element('label',label),input=element('input');input.value=i===0?t.name:(others[i-1]?.neptun||'');input.maxLength=i===0?60:6;input.required=i<2;l.append(input);form.append(l);fields.push(input);
+     }
+     const save=element('button','Save draft');save.type='submit';form.append(save);form.onsubmit=e=>{e.preventDefault();run(()=>action({action:'edit',team_id:t.team_id,name:fields[0].value,members:fields.slice(1).map(x=>x.value.trim()).filter(Boolean)}));};edit.append(form);card.append(edit);
+     if(t.members.length>=2&&t.members.every(m=>m.accepted))button(card,'Finalize team registration',{action:'finalize',team_id:t.team_id},'Finalize this team? Only the teacher can change it afterwards.');
+     else card.append(element('p','Waiting for at least two accepted members.'));
+     button(card,'Cancel draft team',{action:'cancel',team_id:t.team_id},'Cancel the draft team? Members will be free to join another team.');
+    }else if(!me.accepted){if(!mine)button(card,'Accept invitation',{action:'accept',team_id:t.team_id});button(card,'Decline invitation',{action:'decline',team_id:t.team_id});}
+    else button(card,'Leave draft team',{action:'leave',team_id:t.team_id},'Leave this draft team?');
+   }
+   container.append(card);
+  }
+  if(!state.teams.length)container.append(element('p','You have no team or pending invitations yet.'));
+ }
+ $('pt-login-form').onsubmit=e=>{e.preventDefault();run(async()=>{
+  const version=++epoch;const body={neptun:$('pt-neptun').value.trim().toUpperCase(),password:$('pt-password').value};$('pt-password').value='';
+  const result=await request('projectTeamLogin',body);if(version!==epoch)return;
+  token=result.access.token;deadline=Date.now()+Math.min(300000,Math.max(0,Date.parse(result.access.expires_at)-Date.parse(result.access.server_time)));
+  $('pt-login').hidden=true;$('pt-active').hidden=false;render(result.state);say('');
+ });};
+ $('pt-create-form').onsubmit=e=>{e.preventDefault();run(()=>action({action:'create',name:$('pt-name').value,members:[$('pt-member2').value,$('pt-member3').value].map(s=>s.trim()).filter(Boolean),group:$('pt-group').value}));};
+ $('pt-refresh').onclick=()=>run(async()=>{const version=epoch;const result=await request('projectTeamState',{token});if(version!==epoch)return;render(result.state);say('Team status refreshed.');});
+ $('pt-close').onclick=()=>close();
+ setInterval(()=>{if(!token)return;const left=Math.ceil((deadline-Date.now())/1000);if(left<=0)close('Viewing time expired. Enter your password again.');else $('pt-time').textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');},500);
+})();
+</script>
+```

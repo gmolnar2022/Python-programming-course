@@ -1,0 +1,656 @@
+---
+title: "Week 9 – Complex Data Types II: Text Files and Exceptions"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this lesson, you should be able to:
+
+- distinguish text files from binary files and recognize common file structures;
+- open a text file with a suitable mode and explicit encoding;
+- use a context manager to close a file automatically;
+- read complete contents, individual lines, or a sequence of lines;
+- write and append text, including line endings;
+- explain the file position and use safe text-mode positioning;
+- create, rename, and delete a file;
+- clean and split text before converting values;
+- handle expected errors using specific exceptions.
+
+::: {.callout-note}
+### Connection to the previous weeks
+
+Lists and dictionaries store data while a program runs. Files allow us to save data and load it in a later run. Functions from [Week 8](08-functions.qmd) let us separate reading, processing, and displaying results.
+
+The supplied slides use the heading “Python seminar 10”. In this course, this material belongs to **Week 9**. The focus here is text files and exception handling.
+:::
+
+## 1. Files and data structures
+
+A **file** stores data under a name in a filesystem. Its contents remain available after the program ends, unless the file is deleted or changed.
+
+A filename extension suggests a format, but does not itself determine how the contents are organized.
+
+| Organization | Typical example | Interpretation |
+|---|---|---|
+| Sequential | A text file with one value per line | Process values from beginning to end |
+| Hierarchical | JSON or XML | Nested objects or parent-child relationships |
+| Tabular | CSV | Rows containing fields separated by a delimiter |
+| Binary | An image or audio file | Bytes interpreted according to a specific format |
+| Custom | An application-specific file | Rules defined by the application |
+
+These categories describe different aspects and can overlap: JSON and CSV are commonly stored as text, while a custom format can be textual or binary.
+
+### Text versus binary
+
+In **text mode**, Python decodes file bytes into strings and encodes strings when writing. An **encoding**, such as UTF-8, specifies this conversion.
+
+In **binary mode**, Python reads and writes `bytes` without text decoding. This lesson mainly uses text mode.
+
+::: {.callout-important}
+### A file is not a Python list
+
+Reading a text file does not automatically interpret its lines as numbers or Python collections. Read text first, then split and convert values according to the file's format.
+:::
+
+## 2. Opening and closing text files
+
+### General structure
+
+```text
+with open(filename, mode, encoding="utf-8") as file:
+    statements using the file
+```
+
+`open()` returns a **file object**. The `with` statement closes it when the block is left, including when an exception leaves the block.
+
+### Modes
+
+| Mode | Purpose | Must the file exist? | What happens to existing contents? |
+|---|---|---|---|
+| `"r"` | Read text; default mode | Yes | Preserved |
+| `"w"` | Write text | No | Truncated immediately when opened |
+| `"a"` | Append text | No | Preserved; new writes go to the end |
+| `"x"` | Create a new text file | No; it must not exist | Raises `FileExistsError` if it exists |
+| `"r+"` | Read and write | Yes | Preserved initially; writes can overwrite |
+| `"w+"` | Write and read | No | Truncated immediately |
+| `"a+"` | Append and read | No | Preserved; writes go to the end |
+
+Adding `b` selects binary mode, for example `"rb"`. Do not specify an encoding in binary mode.
+
+::: {.callout-warning}
+### Writing is not automatically appending
+
+Opening an existing file with `"w"` or `"w+"` removes its old contents before the first write. Use `"a"` to add data at the end, or `"x"` when creating a file should fail if the name already exists.
+
+The encoding is a **keyword argument**: `open("a.txt", "r", encoding="utf-8")`. Do not put `"utf-8"` in the third positional argument; that position specifies buffering.
+:::
+
+### A first example: create and read a file
+
+The following example creates or replaces a small practice file. Use these demonstration filenames only for practice data.
+
+```python
+with open("week09_greeting.txt", "w", encoding="utf-8") as file:
+    file.write("Hello, Python!\n")
+
+with open("week09_greeting.txt", "r", encoding="utf-8") as file:
+    text = file.read()
+
+print(text, end="")
+```
+
+```text
+Hello, Python!
+```
+
+### Working directory and paths
+
+A relative path such as `"week09_greeting.txt"` is interpreted relative to the program's **current working directory**, not necessarily the directory of the script.
+
+```python
+from pathlib import Path
+
+print("Working directory:", Path.cwd())
+```
+
+An absolute path specifies its location from the filesystem root. A path can also include directories, for example `"data/scores.txt"`. Opening a file does not create missing parent directories.
+
+In Jupyter, files belong to the kernel's filesystem. In Colab, upload input files to the runtime and download any outputs you want to keep; runtime files are separate from the saved notebook.
+
+### Explicit closing
+
+It is possible to call `close()` yourself. The following pattern also closes the file if reading fails:
+
+```python
+file = open("week09_greeting.txt", "r", encoding="utf-8")
+try:
+    text = file.read()
+finally:
+    file.close()
+
+print("File closed:", file.closed)
+```
+
+```text
+File closed: True
+```
+
+The file must already exist for this example. For ordinary file processing, prefer `with open(...)`.
+
+## 3. Lines, end-of-line, and end-of-file
+
+A **newline** separates lines. Common physical line endings are LF (`\n`) and CRLF (`\r\n`). With the default text-mode newline handling, Python translates these common endings to `\n` when reading.
+
+A file need not finish with a newline. For ordinary files, **EOF** is the position after the last data; it need not be represented by a special stored character.
+
+| Read result | Meaning |
+|---|---|
+| `"apple\n"` from `readline()` | A non-empty line ending in a newline |
+| `"\n"` from `readline()` | A blank line, not EOF |
+| `"apple"` from `readline()` | A final line without a newline, or a limited read |
+| `""` from `readline()` with no size limit | EOF |
+
+::: {.callout-note}
+### Empty strings and limited reads
+
+For an ordinary text file, a positive-size `read(n)` returns `""` at EOF. However, `read(0)` returns `""` even before EOF. Use a positive size or the usual no-argument read when checking for EOF.
+:::
+
+## 4. Reading text files
+
+The examples in this section share this input file. Run its creation cell first.
+
+```python
+with open("week09_fruits.txt", "w", encoding="utf-8") as file:
+    file.write("apple orange\nbanana pear plum\nmelon\n")
+```
+
+### Read all remaining text: `read()`
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    text = file.read()
+
+print(text, end="")
+```
+
+```text
+apple orange
+banana pear plum
+melon
+```
+
+`read()` reads from the **current position** to EOF, not automatically from the beginning every time.
+
+### Read a limited number of characters: `read(n)`
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    first = file.read(5)
+    following = file.read(7)
+
+print("First:", repr(first))
+print("Following:", repr(following))
+```
+
+```text
+First: 'apple'
+Following: ' orange'
+```
+
+In text mode, `n` counts **characters**, not bytes. `repr()` makes spaces and escape sequences visible.
+
+### Read one line: `readline()`
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    first_line = file.readline()
+    second_line = file.readline()
+
+print("First line:", repr(first_line))
+print("Second line:", repr(second_line))
+```
+
+```text
+First line: 'apple orange\n'
+Second line: 'banana pear plum\n'
+```
+
+`readline(n)` reads at most `n` characters and can return part of a line. Without a limit it reads through the next newline, or to EOF.
+
+### Iterate directly over the file
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print("Line:", line.rstrip("\n"))
+```
+
+```text
+Line: apple orange
+Line: banana pear plum
+Line: melon
+```
+
+This processes one line at a time. It is usually clearer and uses less memory than reading a large file into a list.
+
+### An explicit EOF-controlled loop
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    line = file.readline()
+    while line != "":
+        print("Line:", line.rstrip("\n"))
+        line = file.readline()
+```
+
+This produces the same three labelled lines. The last statement advances the input; omitting it would repeatedly process the same line.
+
+### Read remaining lines into a list: `readlines()`
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    lines = file.readlines()
+
+print(lines)
+```
+
+```text
+['apple orange\n', 'banana pear plum\n', 'melon\n']
+```
+
+`readlines(hint)` accepts an approximate size hint; it is **not** an exact character limit or a maximum number of lines. Without a hint, it reads all remaining lines.
+
+| Operation | Result | Typical use |
+|---|---|---|
+| `read()` | One string | Small complete text |
+| `read(n)` | Up to `n` text characters | Limited chunks |
+| `readline()` | One line string, or `""` at EOF | Explicit line processing |
+| `readlines()` | List of remaining line strings | Reuse lines in memory |
+| `for line in file:` | Successive line strings | Sequential processing |
+
+## 5. Writing and appending text
+
+### `write()` writes a string as supplied
+
+```python
+with open("week09_notes.txt", "w", encoding="utf-8") as file:
+    count = file.write("First line\n")
+    file.write("Second line\n")
+
+print("Characters in the first write:", count)
+```
+
+```text
+Characters in the first write: 11
+```
+
+`write()` does not add a newline. Text-mode `write()` returns the number of characters written. Convert numbers to text before writing, for example `file.write(str(score) + "\n")`.
+
+### `writelines()` does not add separators
+
+```python
+lines = ["Alice\n", "Bob\n", "Charlie\n"]
+with open("week09_names.txt", "w", encoding="utf-8") as file:
+    file.writelines(lines)
+```
+
+The file contains one name per line because each string already includes `\n`. A list such as `["Alice", "Bob"]` would produce `AliceBob`.
+
+### Append by opening with `"a"`
+
+```python
+with open("week09_notes.txt", "a", encoding="utf-8") as file:
+    file.write("Third line\n")
+
+with open("week09_notes.txt", "r", encoding="utf-8") as file:
+    print(file.read(), end="")
+```
+
+```text
+First line
+Second line
+Third line
+```
+
+Run the earlier writing example first. Repeating only the append example adds another third line each time.
+
+::: {.callout-important}
+### File methods differ from list methods
+
+A normal Python file object has **no `append()` method**. Use `open(..., "a")` and `write()` to append text.
+
+The correct method name for writing a sequence of strings is **`writelines()`**, not `writeline()`.
+:::
+
+## 6. File position: `tell()` and `seek()`
+
+Reading and writing use a **current file position**. `tell()` reports a position that `seek()` can use to return there.
+
+In text mode, this position can be an opaque value containing decoding information. Do not treat it as a general character index or perform arithmetic on it.
+
+### Save and restore a text position
+
+```python
+with open("week09_fruits.txt", "r", encoding="utf-8") as file:
+    first_line = file.readline()
+    saved_position = file.tell()
+    second_line = file.readline()
+    file.seek(saved_position)
+    second_line_again = file.readline()
+    file.seek(0)
+    first_line_again = file.readline()
+
+print("Same second line:", second_line == second_line_again)
+print("Same first line:", first_line == first_line_again)
+```
+
+```text
+Same second line: True
+Same first line: True
+```
+
+The input file is the one created in Section 4. Repositioning backward is possible in text mode using `seek(0)` or an appropriate saved `tell()` value.
+
+### Reference points
+
+| Call | Meaning for a normal seekable text file |
+|---|---|
+| `file.seek(0)` | Return to the beginning |
+| `file.seek(saved_position)` | Restore a value previously returned by `tell()` |
+| `file.seek(0, 1)` | Keep the current position |
+| `file.seek(0, 2)` | Move to the end |
+
+Arbitrary non-zero offsets relative to the current position or end are not supported for normal text files. In binary mode, offsets are byte counts and allow more general positioning.
+
+::: {.callout-warning}
+### Positioning does not change the opening mode
+
+`seek(0)` cannot undo the truncation caused by `"w"`. In append mode, seeking does not turn the next write into an overwrite at that position.
+
+Text position values are not reliably interchangeable with byte offsets, particularly for variable-width encodings such as UTF-8.
+:::
+
+## 7. Creating, renaming, and deleting files
+
+Creating a file can be done with `open()`. Rename and removal operations work on filesystem paths; close the file before renaming or deleting it.
+
+### Python example: a complete lifecycle
+
+```python
+import os
+from tempfile import TemporaryDirectory
+
+with TemporaryDirectory(prefix="week09_demo_") as folder:
+    original = os.path.join(folder, "note.txt")
+    renamed = os.path.join(folder, "renamed_note.txt")
+
+    with open(original, "x", encoding="utf-8") as file:
+        file.write("A temporary note.\n")
+    print("Created:", os.path.exists(original))
+
+    os.rename(original, renamed)
+    print("Renamed:", os.path.exists(renamed))
+
+    os.remove(renamed)
+    print("Deleted:", not os.path.exists(renamed))
+```
+
+```text
+Created: True
+Renamed: True
+Deleted: True
+```
+
+`TemporaryDirectory` gives this demonstration its own folder and cleans it up afterwards. In ordinary programs, supply the intended source and destination paths directly.
+
+::: {.callout-warning}
+### Rename and delete carefully
+
+Renaming to an existing destination can behave differently across operating systems: do not assume that it is always rejected. Deleting with `os.remove()` does not move the file to the desktop Recycle Bin. Use practice files, and check the paths before running destructive operations.
+:::
+
+## 8. String methods for processing lines
+
+File methods read strings. String methods help separate meaningful fields from formatting.
+
+### Remove leading or trailing whitespace
+
+```python
+line = "  Alice; 8.5  \n"
+print("Both sides:", repr(line.strip()))
+print("Left only:", repr(line.lstrip()))
+print("Right only:", repr(line.rstrip()))
+```
+
+```text
+Both sides: 'Alice; 8.5'
+Left only: 'Alice; 8.5  \n'
+Right only: '  Alice; 8.5'
+```
+
+Without arguments, these methods remove surrounding whitespace, including spaces, tabs, and newlines. They return new strings; the original string is unchanged.
+
+If surrounding spaces are meaningful, use `line.rstrip("\n")` to remove only trailing newline characters after ordinary text-mode reading.
+
+### Split fields and convert values
+
+```python
+line = "Alice;8.5\n"
+fields = line.strip().split(";")
+name = fields[0]
+score = float(fields[1])
+
+print("Name:", name)
+print("Score:", score)
+```
+
+```text
+Name: Alice
+Score: 8.5
+```
+
+This assumes exactly two fields and a valid numeric second field. A delimiter-separated file needs an agreed format.
+
+### Splitting on whitespace versus a delimiter
+
+```python
+print("Whitespace:", "apple  pear\tplum".split())
+print("Delimiter:", "apple;;plum".split(";"))
+```
+
+```text
+Whitespace: ['apple', 'pear', 'plum']
+Delimiter: ['apple', '', 'plum']
+```
+
+With no argument, `split()` groups consecutive whitespace and omits surrounding empty fields. With an explicit separator, consecutive separators can produce empty fields.
+
+::: {.callout-note}
+### Simple splitting is not a complete CSV parser
+
+For simple, controlled data, `split(";")` is enough. If fields may contain quoted delimiters or embedded newlines, use Python's `csv` module rather than implementing the format with a simple split.
+:::
+
+## 9. Handling exceptions
+
+An **exception** reports a runtime problem. A `try` statement lets a program handle an expected problem and respond appropriately.
+
+### General structure
+
+```text
+try:
+    statements that may fail
+except SpecificError as error:
+    statements handling that error
+else:
+    statements executed if the try block finishes normally
+finally:
+    cleanup statements executed when leaving the construct
+```
+
+The `else` and `finally` parts are optional. `finally` normally executes on both success and failure, including when an unhandled exception propagates. It is not a guarantee against process termination or power loss.
+
+| Exception | Example cause |
+|---|---|
+| `FileNotFoundError` | Input path does not exist |
+| `FileExistsError` | Opening an existing path in `"x"` mode |
+| `PermissionError` | The process lacks permission for the operation |
+| `UnicodeDecodeError` | File bytes cannot be decoded with the selected encoding |
+| `ValueError` | A field cannot be converted to the required numeric type |
+| `ZeroDivisionError` | Dividing by zero |
+| `OSError` | General filesystem errors; includes several more specific subclasses |
+
+### Example: validate a numeric input
+
+```python
+raw_value = "not a number"
+
+try:
+    number = float(raw_value)
+except ValueError:
+    print("Please provide a numeric value.")
+else:
+    print("Number:", number)
+finally:
+    print("Conversion attempt finished.")
+```
+
+```text
+Please provide a numeric value.
+Conversion attempt finished.
+```
+
+Replace `raw_value` with `"8.5"` to follow the success path. The `else` block then prints `Number: 8.5`.
+
+### Example: report a missing input file
+
+```python
+from tempfile import TemporaryDirectory
+from pathlib import Path
+
+with TemporaryDirectory(prefix="week09_missing_") as folder:
+    missing = Path(folder) / "missing.txt"
+    try:
+        with open(missing, "r", encoding="utf-8") as file:
+            text = file.read()
+    except FileNotFoundError:
+        print("Input file not found.")
+    else:
+        print(text)
+```
+
+```text
+Input file not found.
+```
+
+The temporary folder ensures that this demonstration does not accidentally read a real file with the same name.
+
+::: {.callout-important}
+### Catch expected errors specifically
+
+Avoid a bare `except:` that hides every problem, including interruption signals. Catch the errors you can meaningfully handle. When catching several related types, place more specific handlers before broader ones: `FileNotFoundError` before `OSError`, for example.
+
+A `with` block closes the file; it does not suppress reading or conversion errors.
+:::
+
+## 10. Putting the pieces together
+
+The next example uses two small files in the working directory. Run the setup first to create predictable input.
+
+### Example input file
+
+```python
+with open("week09_scores.txt", "w", encoding="utf-8") as file:
+    file.write("Alice;8.5\nBob;6.0\nCharlie;9.0\n")
+```
+
+### Read, process, and write a report
+
+```python
+def load_scores(filename):
+    records = []
+    with open(filename, "r", encoding="utf-8") as file:
+        for line in file:
+            if line.strip() != "":
+                fields = line.strip().split(";")
+                if len(fields) != 2:
+                    raise ValueError("Each record needs two fields.")
+                name = fields[0].strip()
+                score = float(fields[1])
+                records.append((name, score))
+    return records
+
+
+try:
+    records = load_scores("week09_scores.txt")
+except FileNotFoundError:
+    print("The input file is missing.")
+except PermissionError:
+    print("The input file cannot be accessed.")
+except UnicodeDecodeError:
+    print("Use a UTF-8 input file.")
+except ValueError as error:
+    print("Invalid score data:", error)
+except OSError as error:
+    print("File operation failed:", error)
+else:
+    total = 0
+    for name, score in records:
+        total += score
+
+    if len(records) > 0:
+        average = total / len(records)
+        try:
+            with open("week09_report.txt", "w",
+                      encoding="utf-8") as file:
+                file.write(f"Students: {len(records)}\n")
+                file.write(f"Average score: {average:.2f}\n")
+        except OSError as error:
+            print("Cannot write report:", error)
+        else:
+            print("Students:", len(records))
+            print(f"Average score: {average:.2f}")
+            print("Report saved to week09_report.txt")
+    else:
+        print("No score records were found.")
+```
+
+```text
+Students: 3
+Average score: 7.83
+Report saved to week09_report.txt
+```
+
+The report file contains the first two lines. The calculation uses an explicit loop, and an empty input file is handled before dividing.
+
+The write operation has its own `try` block because exceptions raised inside an `else` block are not caught by the earlier `except` clauses.
+
+## 11. Summary
+
+| Concept | Main purpose | Key point |
+|---|---|---|
+| Encoding | Convert between text and bytes | Specify `encoding="utf-8"` for these examples |
+| `with open(...)` | Manage an open file | Closes automatically when leaving the block |
+| Read mode | Load existing data | Missing input can raise `FileNotFoundError` |
+| Write mode | Create or replace contents | `"w"` truncates immediately |
+| Append mode | Add at the end | Use `"a"` with `write()` |
+| `read()` / `readline()` | Read text | Empty no-limit line read signals EOF |
+| `readlines()` | Collect remaining lines | Keeps line endings; hint is approximate |
+| `write()` / `writelines()` | Write strings | Neither adds line separators automatically |
+| `tell()` / `seek()` | Save and restore position | Text positions are not general byte offsets |
+| `os.rename()` / `os.remove()` | Change file paths or remove a file | Check paths and close the file first |
+| `strip()` / `split()` | Clean and separate text | Choose a method suited to the data format |
+| `try` / `except` | Handle expected failures | Catch specific errors |
+| `else` / `finally` | Separate success and cleanup | Different roles; both are optional |
+
+Before processing a file, decide its format, encoding, opening mode, and error policy. Before writing, renaming, or deleting, check which file the operation will affect.
+
+## Further reading
+
+- [Python tutorial: reading and writing files](https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files)
+- [Python reference: the open() function](https://docs.python.org/3/library/functions.html#open)
+- [Python reference: text-stream positioning](https://docs.python.org/3/library/io.html#io.TextIOBase.seek)

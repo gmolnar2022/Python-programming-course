@@ -4,6 +4,9 @@ page-layout: full
 toc: false
 ---
 
+[Project team registration](../project/register.qmd) — create your team or accept an invitation.
+
+
 ```{=html}
 <style>
 #student-progress{max-width:1100px;margin:auto;color:#233044}.sd-login,.sd-note,.sd-card{border:1px solid #dce3eb;border-radius:12px;padding:18px;background:#fff}.sd-login{display:flex;gap:12px;align-items:end;flex-wrap:wrap;background:#f6f8fb}.sd-login label{display:flex;flex-direction:column;gap:6px;font-weight:600}.sd-login input{padding:10px;border:1px solid #abb9cb;border-radius:6px;text-transform:uppercase;width:160px;font-family:monospace}.sd-button{padding:10px 16px;border:0;border-radius:6px;background:#215b9a;color:white;cursor:pointer}.sd-button:disabled{opacity:.6;cursor:wait}.sd-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.sd-card strong{display:block;font-size:1.65rem;margin:6px 0}.sd-muted{color:#657389;font-size:.9rem}.sd-note{background:#f6f8fb;margin:16px 0}.sd-table-wrap{overflow-x:auto}.sd-table{width:100%;border-collapse:collapse}.sd-table td,.sd-table th{text-align:left;padding:13px 10px;border-bottom:1px solid #dce3eb;vertical-align:top}.sd-table th{font-size:.9rem;color:#657389}.sd-badge{display:inline-block;padding:3px 8px;border-radius:12px;font-size:.8rem;background:#edf0f5;color:#657389}.sd-final{background:#e3f3ea;color:#22663d}.sd-best{background:#e6effa;color:#215b9a}.sd-meter{width:100%;height:12px;margin:10px 0;accent-color:#215b9a}#sd-message{margin:12px 0}#sd-results[hidden]{display:none}@media(max-width:700px){.sd-cards{grid-template-columns:1fr}.sd-table td,.sd-table th{padding:10px 6px}}

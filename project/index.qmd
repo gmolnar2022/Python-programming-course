@@ -1,0 +1,394 @@
+---
+title: "Case Study Project"
+subtitle: "Text-file processing with Python"
+page-layout: full
+toc: true
+toc-depth: 2
+number-sections: false
+---
+
+<style>
+.project-fold {
+  margin: 12px 0;
+  border: 1px solid #dce3eb;
+  border-radius: 8px;
+  background: #fff;
+}
+.project-fold > summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #233044;
+}
+.project-fold > summary:hover { background: #f5f7fa; border-radius: 8px; }
+.project-fold > summary:focus-visible { outline: 3px solid #4489be; outline-offset: 2px; }
+.project-fold > :not(summary) { margin-left: 16px; margin-right: 16px; }
+.project-fold > :last-child { margin-bottom: 16px; }
+.project-fold[open] > summary { border-bottom: 1px solid #e4e9ef; margin-bottom: 12px; }
+.project-fold .project-fold { background: #f8fafc; }
+@media print {
+  .project-fold { break-inside: auto; }
+}
+</style>
+
+
+## Your goal
+
+Develop your solution in **Jupyter Notebook or Google Colab**, using Python to process **three related CSV text files**. Treat the files as related tables: use identifiers to find records and combine information across files, then answer useful business questions.
+
+Work in a team of **2–3 students**. Your solution must use functions, appropriate collections, explicit loops and conditions, text-file handling, and error handling. 
+
+Organize **one notebook** into clearly labelled sections for loading the data, maintaining customer records, running the assigned analyses, and demonstrating the results. 
+
+## How to register your team
+
+<details class="project-fold">
+<summary><strong>1. Form a team of 2–3 students, preferably from groups G01–G02.</strong></summary>
+
+<details class="project-fold">
+<summary><strong>Optional: teammates from other groups</strong></summary>
+
+You may also invite students from groups **G03–G06**. Please agree on this with the instructor of each invited student's practical group first.
+
+Then **email me the invited students' names and Neptun codes** so I can arrange their dashboard passwords. They will need these passwords to accept the team invitation.
+
+The team founder must be from **G01 or G02**.
+
+</details>
+
+</details>
+
+<details class="project-fold">
+<summary><strong>2. Choose your founder.</strong></summary>
+
+Their practical group determines the team's topic. For example, a G02 student who joins a G01 founder's team will work on **Equipment rental**, not Webshop.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>3. The founder creates the team.</strong></summary>
+
+Open the registration page, enter your own Neptun code and dashboard password, then enter the team name and the Neptun codes of one or two teammates.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>4. Every invited member accepts separately.</strong></summary>
+
+Each teammate opens the registration page with their own Neptun code and dashboard password and selects **Accept invitation**. Invitation emails are not sent; the founder should notify the invited members.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>5. The founder checks and finalizes the team.</strong></summary>
+
+All 2–3 members must show **Accepted** before the founder selects **Finalize team registration**. Use **Refresh team status** to see recent acceptances.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>6. Access your assigned project when assignment release opens.</strong></summary>
+
+After finalization and release, your team will be able to access its task variant, complete dataset, and submission instructions. Each member will use their own credentials.
+
+</details>
+
+
+<details class="project-fold">
+<summary><strong>Before you finalize</strong></summary>
+
+You may have several pending invitations, but you can be an **accepted member of only one team**. Do not share passwords.
+While a team is a draft, the founder can edit it and members can leave.
+
+</details>
+
+[**Open team registration**](register.qmd){.btn .btn-primary}
+
+## Topic overview: G01 — Equipment rental
+
+You are helping a small equipment-rental business understand its rentals, customers, and equipment use. Depending on your assigned variant, your work may focus on late returns, revenue, customer activity, or availability.
+
+### The data model
+
+| File | One row represents | Main identifiers |
+|---|---|---|
+| `equipment.csv` | One individually identifiable equipment item | `equipment_id` |
+| `customers.csv` | One customer | `customer_id` |
+| `rentals.csv` | One rental of one equipment item by one customer | `rental_id`, `equipment_id`, `customer_id` |
+
+Each rental refers to an existing customer and equipment item. One customer can have several rentals; one equipment item can be rented several times at different times.
+
+<details class="project-fold">
+<summary><strong>Small illustrative data example</strong> — not the assigned dataset</summary>
+
+`equipment.csv`
+
+```text
+equipment_id;name;category;daily_fee_huf
+E001;Cordless drill;Tools;2000
+E002;Projector;Electronics;4500
+E003;Camping tent;Outdoor;3000
+```
+
+`customers.csv`
+
+```text
+customer_id;name;city;customer_type
+C001;Anna Kovacs;Budapest;regular
+C002;Ben Nagy;Gyor;student
+C003;City Events;Budapest;business
+```
+
+`rentals.csv`
+
+```text
+rental_id;customer_id;equipment_id;start_day;due_day;return_day
+R001;C001;E001;1;4;5
+R002;C002;E002;6;9;
+R003;C001;E003;8;10;10
+```
+
+For this project, dates are represented by **integer day numbers** so that you can concentrate on Python algorithms. An empty `return_day` means that the equipment has not been returned. Exact calculation rules will be included in your assigned task.
+
+For example, to display a rental together with a customer's name and an equipment item's daily fee, you need information from **all three files**.
+
+</details>
+
+### Types of questions
+
+Examples include identifying overdue rentals, calculating fees, finding equipment with little use, comparing customer activity, and producing ranked reports. **These are examples of the topic, not a list of functions that every team must implement.**
+
+## Topic overview: G02 — Webshop
+
+You are helping a small webshop analyze its products, customers, and purchases. Depending on your assigned variant, your work may focus on pending orders, product performance, customer activity, or category performance.
+
+### The data model
+
+| File | One row represents | Main identifiers |
+|---|---|---|
+| `products.csv` | One product | `product_id` |
+| `customers.csv` | One customer | `customer_id` |
+| `order_items.csv` | One product line within an order | `order_id` + `line_no`, `product_id`, `customer_id` |
+
+An order can contain **several lines**. Lines with the same `order_id` belong to the same order, so the number of rows is not necessarily the number of orders. The combination of `order_id` and `line_no` identifies a line.
+
+<details class="project-fold">
+<summary><strong>Small illustrative data example</strong> — not the assigned dataset</summary>
+
+`products.csv`
+
+```text
+product_id;name;category;unit_price_huf;stock
+P001;Notebook;Stationery;900;25
+P002;Desk lamp;Home;6500;8
+P003;USB cable;Electronics;1800;30
+```
+
+`customers.csv`
+
+```text
+customer_id;name;city;customer_type
+C001;Anna Kovacs;Budapest;regular
+C002;Ben Nagy;Gyor;student
+C003;City Events;Budapest;business
+```
+
+`order_items.csv`
+
+```text
+order_id;line_no;customer_id;product_id;quantity;unit_price_huf;order_day;status
+O001;1;C001;P001;2;900;3;paid
+O001;2;C001;P003;1;1800;3;paid
+O002;1;C002;P002;1;6500;7;pending
+```
+
+The first two rows form **one order**, with a value of `2 × 900 + 1 × 1800 = 3600 HUF`. Order-line prices record the price at the time of ordering; they may differ from the current product price.
+
+The project uses integer day numbers and integer HUF amounts. The assigned task will explain the treatment of `paid`, `pending`, and `cancelled` orders.
+
+</details>
+
+### Types of questions
+
+Examples include calculating pending order values, measuring product revenue, identifying repeat customers, finding products without paid sales, and comparing categories. **Your assigned variant will specify the exact questions and required functions.**
+
+## What every team must build
+
+<details class="project-fold">
+<summary><strong>1. Load and connect the files</strong></summary>
+
+- Read the three supplied CSV files using **UTF-8** encoding and the `;` delimiter. Skip the header and convert numeric fields to numbers.
+- Store the records in appropriate Python collections, such as **lists of dictionaries**.
+- Use identifiers to connect related records. Do not rely on matching row positions across files.
+- Handle missing files and invalid data with understandable messages. Keep the original supplied dataset unchanged.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>2. Maintain customer records</strong></summary>
+
+Implement customer **Create, Read, Update, and Delete (CRUD)** operations:
+
+- add a new customer with a unique identifier;
+- find and display a customer by identifier;
+- update a customer's name, city, or type, while keeping the identifier unchanged;
+- delete a customer **only if no rental or order line refers to that customer**.
+
+Save customer changes to a **separate output file**, then demonstrate that the saved file can be read again. Do not require the user to edit the CSV manually.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>3. Answer four assigned business questions</strong></summary>
+
+Your team will receive **four analysis functions**, including a ranking/report function. The tasks will involve several of the basic algorithms studied in class: searching, summarization, counting, selection, copying/transformation, separation, or sorting.
+
+At least **two assigned analyses will combine information from multiple files**. The task specifications will identify which records to include, how to calculate results, and how to handle ties or empty results.
+
+</details>
+
+<details class="project-fold">
+<summary><strong>4. Demonstrate and export the results</strong></summary>
+
+- Use clearly labelled notebook cells to demonstrate all required operations.
+- Use meaningful prompts, headings, and output labels. Exact decorative wording is not assessed.
+- Export at least one assigned report to a separate **CSV or text file** with clear column names or labels.
+- Keep calculation functions separate from keyboard input and displayed output. Return values from those functions so that they can be tested independently.
+
+</details>
+
+
+<details class="project-fold">
+<summary><strong>5. Notebook structure and reproducibility</strong></summary>
+
+**Your notebook must run from top to bottom in a fresh Jupyter or Google Colab session using only the three supplied CSV files as external input.**
+
+- Create all additional small test datasets **within notebook cells**. File-handling tests must create their own temporary CSV files in a separate test directory; reports and other output files must also be generated by the notebook.
+- Do not modify or overwrite the supplied CSV files. Do not depend on extra uploaded files, a personal Google Drive location, files from another computer, or variables left over from a previous session.
+- Keep function definitions before their use. Use clear headings for data loading, CRUD operations, the four analyses, tests, and report export.
+- Before submission, **restart the kernel/runtime and run all cells in order**. All cells must finish without an unhandled error. Intentionally invalid test cases should catch and explain the expected exception rather than stop execution.
+- Use the three input CSVs from one documented working directory. Explain how to place or upload them in the PDF documentation.
+
+Submit the downloaded `.ipynb` file, including when working in Colab or in Jupyter.
+
+</details>
+
+
+## Function specifications and implementation rules
+
+<details class="project-fold">
+<summary><strong>View function specifications and implementation rules</strong></summary>
+
+Your assigned task will provide a compact specification for each required function:
+
+| Item | What will be specified |
+|---|---|
+| Function name | The exact name to define |
+| Parameters | Their names, types, and meanings |
+| Returns | The type and meaning of the returned value |
+| Rules | Included records, calculation rules, ordering, ties, and empty results |
+| Example | A small call with its expected result |
+
+Use **structured algorithms with explicit loops and conditions**. For functions intended to demonstrate a basic algorithm, do not replace the algorithm with `sum()`, `min()`, `max()`, `sorted()`, `.sort()`, `any()`, `all()`, `.index()`, or `.count()`.
+
+Do not use comprehensions, generator expressions, `lambda`, `map()`, `filter()`, `break`, `continue`, or a `return` statement to leave a loop early. Normal function return statements **after loops** are allowed. Type annotations are optional.
+
+Ordinary collection operations, including indexing, dictionary lookup, `.items()`, `.append()`, and set membership, may be used where appropriate. **Do not use `import` statements, including imports from the Python standard library.** Read and write the supplied simple semicolon-separated CSV files using `open()`, `readline()`, explicit loops, `split()` and `write()`. Do not use the `csv` module, pandas, NumPy, a database engine, or other imported modules in the notebook code.
+
+Object-oriented programming is not required. Prefer clear functions and simple data structures over unnecessary complexity.
+
+</details>
+
+## Testing and individual understanding
+
+<details class="project-fold">
+<summary><strong>View testing and individual requirements</strong></summary>
+
+For **each of the four analysis functions**, provide at least **three tests** with inputs and expected results:
+
+- a normal case;
+- an empty/no-match case, where valid for that function;
+- a boundary or special case, such as equal values, a threshold, or an order with several lines.
+
+If a function requires non-empty data, test its documented response to an invalid empty input rather than inventing a result. Also demonstrate duplicate-ID rejection, rejection of a missing referenced identifier during data loading, and protection against deleting a referenced customer.
+
+For each test, display or check the **expected result and actual result**, and explain any difference. Printing a value without stating what should have been returned is not a complete test. Include tests and their results in the notebook.
+
+Each member must understand the shared solution. During the project presentation, each member should be able to explain a function, trace it on a few records, and make a small change to a requirement. Describe each member's contribution in the PDF documentation.
+
+<details class="project-fold">
+<summary><strong>Use of AI assistance</strong></summary>
+
+Use AI assistance to support understanding, explain errors, or discuss your own code. Do not submit a complete generated project as if it were your own work.
+
+Include a brief **AI-use statement in the PDF documentation** describing what assistance you used and how you checked it, or state that no AI assistance was used. Every team member remains responsible for understanding and testing the submitted solution. Code that you cannot explain or adapt does not demonstrate the required individual understanding.
+
+</details>
+
+</details>
+
+## Deliverables
+
+<details class="project-fold">
+<summary><strong>View the three required submission files</strong></summary>
+
+The **founder submits one shared package for the whole team**, containing exactly these three files:
+
+| File | Required content |
+|---|---|
+| **One `.ipynb` notebook** | Functions, demonstrations, self-created test data, tests with expected and actual results, displayed outputs, and code that generates any test files and reports. |
+| **One `.pdf` document** | Team members and Neptun codes; assigned variant and dataset ID/version; how to run the notebook; data model and file relationships; solution approach; test findings, results and limitations; division of work; AI-use statement. |
+| **One `.pptx` presentation** | A clear introduction to the problem and solution, important results, and selected examples showing how the solution works. |
+
+Accepted teammates can view the team's shared submission. Only the founder submits or uploads a revised complete package. Do not submit separate copies for each team member. Technical upload instructions will be provided on the submission page.
+
+</details>
+
+## Assessment — 30 points / 30% of the course result
+
+<details class="project-fold">
+<summary><strong>View assessment criteria: 20 team points + 10 individual defence points</strong></summary>
+
+The project contributes **30% of the final course result**: **20% for the shared submitted work** and **10% for the individual defence**. The submitted work receives the same team score for all members; defence scores may differ between members.
+
+### Shared submission — 20 points
+
+| Component | Assessment criterion | Points |
+|---|---|---:|
+| **Notebook — 10 points** | Correct data loading, relationships between files, and data management, including customer CRUD operations | 2 |
+| | Correct implementation of the four assigned business-analysis functions | 4 |
+| | Clear reusable functions, appropriate basic algorithms, and error handling | 2 |
+| | Meaningful tests with expected results, and successful **Run All** in a fresh session | 2 |
+| **PDF documentation — 5 points** | Clear description of the data model and solution approach | 2 |
+| | Explanation of testing, results, and limitations | 2 |
+| | Running instructions, division of work, and AI-use statement | 1 |
+| **PPTX presentation — 5 points** | Clear presentation of the problem and solution | 2 |
+| | Relevant results and examples demonstrating operation | 2 |
+| | Logical structure and readable slides | 1 |
+| **Shared total** | | **20** |
+
+### Individual defence — 10 points per student
+
+| Assessment criterion | Points |
+|---|---:|
+| Explain your own contribution and demonstrate understanding of the submitted code | 4 |
+| Explain a function, its algorithm and tests; trace it on a small example | 3 |
+| Independently implement a small modification to a requirement | 3 |
+| **Individual total** | **10** |
+
+**Partial credit is available for correctly implemented functionality.** The notebook does not have to be entirely correct to earn points for independently correct parts. Automatic checks support assessment; the teacher reviews the submitted work and assesses individual understanding during the defence.
+
+For example, **16/20 team points + 8/10 individual defence points = 24/30 project points**, contributing **24 percentage points** to the final course result.
+
+</details>
+
+## Dates and submission access
+
+<details class="project-fold">
+<summary><strong>View the deadline and release arrangements</strong></summary>
+
+**All three files — notebook, PDF documentation and PPTX presentation — are due on 8 December 2026 at 20:00 (Budapest time).**
+
+</details>
+
+[**Register your team or check your invitations**](register.qmd){.btn .btn-primary}

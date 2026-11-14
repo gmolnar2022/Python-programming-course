@@ -38,7 +38,12 @@ project:
     - exercises/08-class-exercises.qmd
     - warmup/07-warmup.qmd
     - warmup/08-warmup.qmd
-    # - lessons/09-complex-data-types-2.qmd
+    - lessons/09-complex-data-types-2.qmd
+    - exercises/09-class-exercises.qmd    
+    - warmup/09-warmup.qmd
+    - project/register.qmd
+    - project/index.qmd
+    - project/submit.qmd
     # - lessons/10-oop.qmd
     # - lessons/11-complex-problem.qmd
     # - lessons/12-review.qmd
@@ -124,11 +129,17 @@ website:
              text: "Class exercises"
            - href: warmup/08-warmup.qmd
              text: "Warm-up test"
-      # - section: "Week 09"
-      #   contents:
-      #     - href: lessons/09-complex-data-types-2.qmd
-      #       text: "Theory: Complex Data Types II"
-      # - section: "Week 10"
+      - section: "Week 09"
+        contents:
+           - href: lessons/09-complex-data-types-2.qmd
+             text: "Theory: Complex Data Types II"
+           - href: exercises/09-class-exercises.qmd
+             text: "Class exercises"
+           - href: warmup/09-warmup.qmd
+             text: "Warm-up test"
+           - href: project/index.qmd
+             text: "Case Study Project"
+    # - section: "Week 10"
       #   contents:
       #     - href: lessons/10-oop.qmd
       #       text: "Theory: Object-Oriented Programming"
