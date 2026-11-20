@@ -2343,33 +2343,58 @@ pwEl('passwordInitial').addEventListener('click',async()=>{
 <p>Use the teacher API key above. Mixed-group teams are classified by the founder’s group.</p>
 <label>Workspace <select id="pt-teacher-scope"><option value="live">Student registrations</option><option value="test">Instructor test workspace</option></select></label>
 <button id="pt-teacher-load" type="button">Load teams</button>
+<label hidden="" id="pt-assignment-filter-label"><input type="checkbox" id="pt-assignment-filter"> <span id="pt-assignment-filter-text">Finalized – no task assigned</span></label>
 <details style="margin:12px 0"><summary>Instructor test accounts</summary><p>Requires PROJECT_TEAM_TEST_MODE=true in the backend. This creates or resets TST901 and TST902 only. It does not change your dashboard password or send email. Save the displayed virtual passwords before leaving.</p><label>G07 sponsor <input id="pt-sponsor" value="UJAENB" maxlength="6"></label><button id="pt-setup" type="button">Create / reset virtual passwords</button><pre id="pt-credentials" style="white-space:pre-wrap"></pre></details>
 <p id="pt-teacher-message" aria-live="polite"></p><div id="pt-teacher-list"></div>
 </section>
 <script>
 (()=>{
- const $=id=>document.getElementById(id);let busy=false;
+ const $=id=>document.getElementById(id);let busy=false, snapshot=null, listEpoch=0;
  // The original dashboard helpers are private to its IIFE. Read its existing
  // session key here without exposing those helpers or creating a second key.
  const getKey=()=>sessionStorage.getItem('teacher_function_key')||'';
  const apiUrl=name=>'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/'+name+'?code='+encodeURIComponent(getKey());
- async function send(body){
+ async function send(body, endpoint='teacherProjectTeams'){
   if(!getKey())throw Error('Enter the teacher API key first.');
-  const response=await fetch(apiUrl('teacherProjectTeams'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});const data=await response.json();if(!response.ok||!data.success)throw Error(data.error||'Request failed.');return data;
+  const response=await fetch(apiUrl(endpoint),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),cache:'no-store'});const data=await response.json();if(!response.ok||!data.success)throw Error(data.error||'Request failed.');return data;
  }
  function text(tag,value){const e=document.createElement(tag);e.textContent=value;return e;}
+ const labels={unassigned:'No task assigned',assigned:'Assigned – not released',released:'Released',unknown:'Status unavailable'};
  function render(data){const list=$('pt-teacher-list');list.replaceChildren();
-  if(!data.teams.length)list.append(text('p','No active teams in this workspace.'));
-  for(const t of data.teams){const section=document.createElement('section');section.style.cssText='border-top:1px solid #ddd;padding:12px 0';section.append(text('h3',t.name),text('p',`${t.group} · ${t.topic} · ${t.status} · ${t.team_id}`));const ul=document.createElement('ul');for(const m of t.members)ul.append(text('li',`${m.name} (${m.neptun}, ${m.group}) — ${m.accepted?'Accepted':'Pending'}${m.neptun===t.founder?' · Founder':''}`));section.append(ul);
-   const view=text('button','View project submissions');view.type='button';view.onclick=()=>window.dispatchEvent(new CustomEvent('project-team-selected',{detail:{team_id:t.team_id,scope:$('pt-teacher-scope').value,group:t.group,name:t.name}}));section.append(view);
-   for(const [action,label] of [['reopen','Reopen registration'],['cancel','Cancel team']]){if(action==='reopen'&&t.status!=='finalized')continue;const b=text('button',label);b.type='button';b.onclick=()=>{if(confirm(label+' for '+t.name+'?'))run(async()=>render(await send({action,scope:$('pt-teacher-scope').value,team_id:t.team_id})));};section.append(b);}list.append(section);
+  const statuses=data.assignment_status||{};
+  const waiting=data.teams.filter(t=>t.status==='finalized'&&statuses[t.team_id]==='unassigned');
+  const unknown=data.teams.filter(t=>t.status==='finalized'&&(!statuses[t.team_id]||statuses[t.team_id]==='unknown')).length;
+  $('pt-assignment-filter-label').hidden=false;
+  $('pt-assignment-filter-text').textContent='Finalized – no task assigned ('+waiting.length+')'+(unknown?' · '+unknown+' unavailable':'');
+  const filtered=$('pt-assignment-filter').checked;
+  const teams=filtered?waiting:data.teams;
+  if(!teams.length)list.append(text('p',filtered?'No confirmed unassigned finalized teams.':'No active teams in this workspace.'));
+  for(const t of teams){const section=document.createElement('section');section.style.cssText='border-top:1px solid #ddd;padding:12px 0';const heading=text('h3',t.name);
+   if(t.status==='finalized'){const badge=text('small',' · '+(labels[statuses[t.team_id]]||labels.unknown));heading.append(badge);}
+   section.append(heading,text('p',`${t.group} · ${t.topic} · ${t.status} · ${t.team_id}`));const ul=document.createElement('ul');for(const m of t.members)ul.append(text('li',`${m.name} (${m.neptun}, ${m.group}) — ${m.accepted?'Accepted':'Pending'}${m.neptun===t.founder?' · Founder':''}`));section.append(ul);
+   const view=text('button','View project submissions');view.type='button';view.onclick=()=>window.dispatchEvent(new CustomEvent('project-team-selected',{detail:{team_id:t.team_id,scope:data.scope,group:t.group,name:t.name}}));section.append(view);
+   for(const [action,label] of [['reopen','Reopen registration'],['cancel','Cancel team']]){if(action==='reopen'&&t.status!=='finalized')continue;const b=text('button',label);b.type='button';b.onclick=()=>{if(confirm(label+' for '+t.name+'?'))run(async()=>{await send({action,scope:data.scope,team_id:t.team_id});await loadTeams(data.scope);});};section.append(b);}list.append(section);
   }
  }
- async function run(fn){if(busy)return;busy=true;try{await fn();$('pt-teacher-message').textContent='Done.';}catch(e){$('pt-teacher-message').textContent=e.message;}finally{busy=false;}}
- $('pt-teacher-load').onclick=()=>run(async()=>render(await send({scope:$('pt-teacher-scope').value})));
+ async function loadTeams(scope){
+  if(scope!==$('pt-teacher-scope').value)return;
+  const version=listEpoch;
+  const data=await send({action:'overview',scope},'teacherProjectSubmissions');
+  if(version!==listEpoch||scope!==$('pt-teacher-scope').value)return;
+  snapshot=data;render(snapshot);
+ }
+ async function run(fn){if(busy)return;busy=true;const version=listEpoch;try{await fn();if(version===listEpoch)$('pt-teacher-message').textContent='Done.';}catch(e){if(version===listEpoch)$('pt-teacher-message').textContent=e.message;}finally{busy=false;}}
+ $('pt-teacher-load').onclick=()=>run(()=>loadTeams($('pt-teacher-scope').value));
+ $('pt-assignment-filter').onchange=()=>{if(snapshot)render(snapshot);};
+ window.addEventListener('project-assignment-status',event=>{
+  const {scope,team_id,status}=event.detail;
+  if(!snapshot||snapshot.scope!==scope||!getKey())return;
+  snapshot.assignment_status[team_id]=status;render(snapshot);
+ });
  $('pt-setup').onclick=()=>{if(confirm('Create or reset both virtual passwords? Existing virtual sessions will expire.'))run(async()=>{const d=await send({action:'setup_test',sponsor:$('pt-sponsor').value.trim().toUpperCase()});$('pt-credentials').textContent=d.passwords.map(p=>`${p.neptun} (${p.group}): ${p.password}`).join('\n')+'\n'+d.message;});};
- $('pt-teacher-scope').onchange=()=>{$('pt-teacher-list').replaceChildren();};
- $('logoutButton').addEventListener('click',()=>{$('pt-teacher-list').replaceChildren();$('pt-credentials').textContent='';$('pt-teacher-message').textContent='';});
+ function clearList(){listEpoch++;snapshot=null;$('pt-teacher-list').replaceChildren();$('pt-assignment-filter').checked=false;$('pt-assignment-filter-label').hidden=true;$('pt-teacher-message').textContent='';}
+ $('pt-teacher-scope').onchange=clearList;
+ $('logoutButton').addEventListener('click',()=>{clearList();$('pt-credentials').textContent='';});
 })();
 </script>
 <section id="ps-teacher-panel" style="border:1px solid #dae2ec;border-radius:10px;padding:18px;margin:20px 0" hidden="">
@@ -2411,14 +2436,16 @@ pwEl('passwordInitial').addEventListener('click',async()=>{
    for(const f of sub.files){const row=text('p',f.name+' '),button=text('button','Download');button.type='button';button.onclick=()=>run(async()=>{const version=epoch,c={...selected};const d=await send({...c,action:'download',submission_id:sub.submission_id,name:f.name});if(version!==epoch)return;const data=Uint8Array.from(atob(d.content_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([data],{type:'application/octet-stream'}));const a=document.createElement('a');a.href=url;a.download=f.name.split('/').pop();a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});row.append(button);section.append(row);}root.append(section);
   }
  }
- async function load(){if(!selected)return;const version=epoch;const d=await send({...selected});if(version===epoch)render(d);}
+ async function load(){if(!selected)return;const version=epoch;const d=await send({...selected});if(version===epoch){render(d);window.dispatchEvent(new CustomEvent('project-assignment-status',{detail:{...selected,status:!d.assignment?'unassigned':d.assignment_package?'released':'assigned'}}));}}
  window.addEventListener('project-team-selected',event=>{epoch++;selected={team_id:event.detail.team_id,scope:event.detail.scope};$('ps-teacher-panel').hidden=false;$('ps-teacher-title').textContent=event.detail.name+' — submissions';$('ps-teacher-context').textContent=`${event.detail.scope} workspace · ${event.detail.team_id}`;$('ps-teacher-files').replaceChildren();$('ps-teacher-assignment').replaceChildren();$('ps-assignment-form').reset();const prefix=event.detail.group==='G01'?'RENTAL':'SHOP';$('ps-variant').replaceChildren();for(const suffix of ['A','B','C','D']){const o=text('option',prefix+'-'+suffix);o.value=prefix+'-'+suffix;$('ps-variant').append(o);}run(load);});
  $('ps-assignment-form').onsubmit=e=>{e.preventDefault();if(!selected||!confirm('Save this fixed assignment? It cannot be replaced by this form.'))return;run(async()=>{const version=epoch;await send({...selected,action:'assign',variant_id:$('ps-variant').value,dataset_id:$('ps-dataset').value.trim()});if(version===epoch)await load();});};
  async function getAssignmentFile(name){const version=epoch;const d=await send({...selected,action:'download',kind:'assignment',name});if(version!==epoch)return;const bytes=Uint8Array.from(atob(d.content_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([bytes],{type:'application/octet-stream'}));const a=document.createElement('a');a.href=url;a.download=d.name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
  $('ps-preview-assignment').onclick=()=>run(async()=>{if(!selected)return;const version=epoch;const d=await send({...selected,action:'preview'});if(version!==epoch)return;specView($('ps-teacher-assignment'),d.preview,()=>{ $('ps-teacher-message').textContent='Release the reviewed package before downloading its files.';});$('ps-teacher-message').textContent='Preview only — students cannot see this until you release it.';});
  $('ps-release-assignment').onclick=()=>{if(!selected||!confirm('Release this fixed task and its three CSV files to all accepted team members?'))return;run(async()=>{const version=epoch;await send({...selected,action:'release'});if(version===epoch)await load();});};
  $('ps-teacher-refresh').onclick=()=>run(load);
- $('logoutButton').addEventListener('click',()=>{epoch++;selected=null;$('ps-teacher-files').replaceChildren();$('ps-teacher-assignment').replaceChildren();$('ps-teacher-message').textContent='';$('ps-teacher-panel').hidden=true;});
+ function clearDetails(){epoch++;selected=null;$('ps-teacher-files').replaceChildren();$('ps-teacher-assignment').replaceChildren();$('ps-teacher-message').textContent='';$('ps-teacher-panel').hidden=true;}
+ $('pt-teacher-scope').addEventListener('change',clearDetails);
+ $('logoutButton').addEventListener('click',clearDetails);
 })();
 </script>
 
