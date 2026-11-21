@@ -21,10 +21,20 @@ Exercises 2, 3 and 6 build on earlier work. Paste the earlier class into the new
 </style>
 <div id="oop-week10">
 <p><label for="oop-neptun">Neptun code</label> <input id="oop-neptun" maxlength="6" autocomplete="off"></p>
+<ul aria-label="Notebook versions">
+<li><a href="10-class-exercises-jupyter.ipynb" download><strong>Jupyter Notebook</strong> — download for Jupyter or JupyterLab</a></li>
+<li><a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/10-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab</strong> — open, then choose File → Save a copy in Drive</a> · <a href="10-class-exercises-colab.ipynb" download>Download Colab notebook</a></li>
+</ul>
 <p id="oop-timing-note">Timing counts focused time with the most recently opened exercise expanded.</p>
-<details class="oop-task"><summary>Exercise 1 – Person: class and instance (15 minutes)</summary>
-<p>Define Person with __init__(self, person_id, name, birth_year, salary). Store these values as _person_id, _name, _birth_year and _salary. Define __del__ so that it prints Goodbye, followed by the person&#x27;s name (for example, Goodbye, Joe White). Create p = Person(2023, &#x27;Joe White&#x27;, 1995, 5600). You can try del p in a separate demonstration; the timing of finalization is not graded.</p>
+<summary>Exercise 1 – Person: class and instance (15 minutes)</summary>
+<ol>
+<li><strong>Define the class.</strong> Create <code>Person</code> with <code>__init__(self, person_id, name, birth_year, salary)</code>.</li>
+<li><strong>Store the data.</strong> Use <code>_person_id</code>, <code>_name</code>, <code>_birth_year</code> and <code>_salary</code>.</li>
+<li><strong>Add a finalizer.</strong> Define <code>__del__</code> to print a farewell, e.g. <code>Goodbye, Joe White</code>.</li>
+<li><strong>Create an instance.</strong> Write <code>p = Person(2023, &quot;Joe White&quot;, 1995, 5600)</code>.</li>
+</ol><p><strong>Optional demonstration:</strong> Try <code>del p</code>. The timing of finalization is not graded.</p>
 <details><summary>Class diagram</summary><img src="assets/week10-person.svg" alt="Person and Student (Exercises 1–3)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-1">00:00</strong> <span id="oop-timer-state-1">Paused</span></p>
 <label for="oop-code-1">Python solution</label>
 <textarea id="oop-code-1" spellcheck="false">class Person:
     def __init__(self, person_id, name, birth_year, salary):
@@ -36,41 +46,72 @@ Exercises 2, 3 and 6 build on earlier work. Paste the earlier class into the new
 </textarea>
 <p><button type="button" data-run="1">Run</button> <button type="button" data-check="1">Check solution</button> <button type="button" data-stop>Stop</button></p>
 <pre id="oop-out-1" role="status"></pre></details>
-<details class="oop-task"><summary>Exercise 2 – Person: public methods and property (15 minutes)</summary>
-<p>Copy your Person class from Exercise 1. Add set_salary(amount) and get_name(). Reject a negative salary with ValueError; add get_salary() so callers can check the updated value without reading _salary. Use @property and @birth_year.setter for birth_year. Accept positive integer years only; raise ValueError otherwise. Use the same validation when initializing salary and birth_year. Demonstrate the public interface.</p>
+<summary>Exercise 2 – Person: public methods and property (15 minutes)</summary>
+<ol>
+<li><strong>Start from Exercise 1.</strong> Copy your <code>Person</code> class.</li>
+<li><strong>Add public methods.</strong> Implement <code>get_name()</code>, <code>get_salary()</code> and <code>set_salary(amount)</code>. Reject negative salaries with <code>ValueError</code>.</li>
+<li><strong>Add a property.</strong> Use <code>@property</code> and <code>@birth_year.setter</code> for <code>birth_year</code>. Reject values other than positive integers with <code>ValueError</code>.</li>
+<li><strong>Initialize and demonstrate.</strong> Apply the same validation in <code>__init__</code>. Demonstrate the public methods and property.</li>
+</ol>
 <details><summary>Class diagram</summary><img src="assets/week10-person.svg" alt="Person and Student (Exercises 1–3)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-2">00:00</strong> <span id="oop-timer-state-2">Paused</span></p>
 <label for="oop-code-2">Python solution</label>
 <textarea id="oop-code-2" spellcheck="false"># Paste and extend your Person class here.
 </textarea>
 <p><button type="button" data-run="2">Run</button> <button type="button" data-check="2">Check solution</button> <button type="button" data-stop>Stop</button></p>
 <pre id="oop-out-2" role="status"></pre></details>
-<details class="oop-task"><summary>Exercise 3 – Student: inheritance (30 minutes)</summary>
-<p>Copy your Person class from Exercise 2. Define Student(Person) with parameters person_id, name, birth_year, salary, neptun_code, semester. Initialize Person with super().__init__, and store the two new fields with leading underscores. Implement age_in(reference_year), returning reference_year minus birth_year (year-based estimate), and __str__, returning &#x27;Name (Neptun: CODE, semester: N)&#x27;. Test one Student instance through its public interface.</p>
+<summary>Exercise 3 – Student: inheritance (30 minutes)</summary>
+<ol>
+<li><strong>Start from Exercise 2.</strong> Copy your <code>Person</code> class and define <code>Student(Person)</code>.</li>
+<li><strong>Initialize the student.</strong> Use parameters <code>person_id</code>, <code>name</code>, <code>birth_year</code>, <code>salary</code>, <code>neptun_code</code> and <code>semester</code>. Call <code>super().__init__</code> and use leading underscores for the two new fields.</li>
+<li><strong>Add behavior.</strong> Return <code>reference_year - birth_year</code> from <code>age_in(reference_year)</code>. Return text in the form <code>Name (Neptun: CODE, semester: N)</code> from <code>__str__</code>.</li>
+<li><strong>Test.</strong> Create one student and use its public interface.</li>
+</ol>
 <details><summary>Class diagram</summary><img src="assets/week10-person.svg" alt="Person and Student (Exercises 1–3)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-3">00:00</strong> <span id="oop-timer-state-3">Paused</span></p>
 <label for="oop-code-3">Python solution</label>
 <textarea id="oop-code-3" spellcheck="false"># Paste Person here, then define Student.
 </textarea>
 <p><button type="button" data-run="3">Run</button> <button type="button" data-check="3">Check solution</button> <button type="button" data-stop>Stop</button></p>
 <pre id="oop-out-3" role="status"></pre></details>
-<details class="oop-task"><summary>Exercise 4 – Shape: rectangle and circle (30 minutes)</summary>
-<p>Define Shape with non-public class constant _PI = 3.14159. Its area() and perimeter() raise NotImplementedError. Define Rectangle(width, height=None) and Circle(radius) as subclasses with non-public dimensions and overridden methods. A rectangle with no height is a square. Assume dimensions are positive. Use the inherited constant for circle calculations. Test a rectangle, a square and a circle through their public methods.</p>
+<summary>Exercise 4 – Shape: rectangle and circle (30 minutes)</summary>
+<ol>
+<li><strong>Define the base class.</strong> In <code>Shape</code>, set <code>_PI = 3.14159</code>. Define <code>area()</code> and <code>perimeter()</code> to raise <code>NotImplementedError</code>.</li>
+<li><strong>Define the subclasses.</strong> Implement <code>Rectangle(width, height=None)</code> and <code>Circle(radius)</code> with non-public dimensions. Assume positive dimensions. If height is omitted, make a square.</li>
+<li><strong>Override both methods.</strong> Implement area and perimeter for each subclass. Use the inherited constant in circle calculations.</li>
+<li><strong>Test.</strong> Create a rectangle, a square and a circle. Call their public methods.</li>
+</ol>
 <details><summary>Class diagram</summary><img src="assets/week10-shape.svg" alt="Shape and its subclasses (Exercise 4)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-4">00:00</strong> <span id="oop-timer-state-4">Paused</span></p>
 <label for="oop-code-4">Python solution</label>
 <textarea id="oop-code-4" spellcheck="false"># Define Shape, Rectangle and Circle here.
 </textarea>
 <p><button type="button" data-run="4">Run</button> <button type="button" data-check="4">Check solution</button> <button type="button" data-stop>Stop</button></p>
 <pre id="oop-out-4" role="status"></pre></details>
-<details class="oop-task"><summary>Exercise 5 – Fraction: arithmetic operators (40 minutes)</summary>
-<p>Define Fraction(numerator, denominator=1) with non-public fields and read-only numerator and denominator properties. Use integer inputs. Raise ValueError for a zero denominator. Reduce each fraction with a loop-based GCD and keep the denominator positive. Implement __str__ as numerator/denominator (also for denominator 1). Implement +, -, * and / between Fraction objects; return new instances and leave operands unchanged. Raise ZeroDivisionError when dividing by a fraction with numerator zero. Return NotImplemented for unsupported operand types. Try 1/2 and 3/4: the four operations should give 5/4, -1/4, 3/8 and 2/3. Fraction(4) minus Fraction(1, 2) should give 7/2.</p>
+<summary>Exercise 5 – Fraction: arithmetic operators (40 minutes)</summary>
+<ol>
+<li><strong>Initialize and normalize.</strong> Define <code>Fraction(numerator, denominator=1)</code> with integer inputs and non-public fields. Reject a zero denominator with <code>ValueError</code>. Reduce using a loop-based GCD and keep the denominator positive.</li>
+<li><strong>Expose and display values.</strong> Provide read-only <code>numerator</code> and <code>denominator</code> properties. Return <code>numerator/denominator</code> from <code>__str__</code>, even when the denominator is 1.</li>
+<li><strong>Implement arithmetic.</strong> Support <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code> between fractions. Return new instances and leave the operands unchanged.</li>
+<li><strong>Handle exceptional cases.</strong> Raise <code>ZeroDivisionError</code> when dividing by a fraction whose numerator is zero. Return <code>NotImplemented</code> for unsupported operand types.</li>
+<li><strong>Test the operators.</strong> For <code>1/2</code> and <code>3/4</code>, expect <code>5/4</code>, <code>-1/4</code>, <code>3/8</code> and <code>2/3</code>, respectively. Check that <code>Fraction(4) - Fraction(1, 2)</code> gives <code>7/2</code>.</li>
+</ol>
 <details><summary>Class diagram</summary><img src="assets/week10-fraction.svg" alt="Fraction interface (Exercises 5–6)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-5">00:00</strong> <span id="oop-timer-state-5">Paused</span></p>
 <label for="oop-code-5">Python solution</label>
 <textarea id="oop-code-5" spellcheck="false"># Define Fraction here.
 </textarea>
 <p><button type="button" data-run="5">Run</button> <button type="button" data-check="5">Check solution</button> <button type="button" data-stop>Stop</button></p>
 <pre id="oop-out-5" role="status"></pre></details>
-<details class="oop-task"><summary>Exercise 6 – Fraction: comparison operators (20 minutes)</summary>
-<p>Copy your Fraction class from Exercise 5 and add __eq__, __lt__ and __gt__. Compare fractions exactly using cross multiplication, without converting to float. Return NotImplemented for unsupported operands. Test equivalent fractions, different fractions and negative values. This is an in-class exercise.</p>
+<summary>Exercise 6 – Fraction: comparison operators (20 minutes)</summary>
+<ol>
+<li><strong>Start from Exercise 5.</strong> Copy your <code>Fraction</code> class.</li>
+<li><strong>Add comparisons.</strong> Implement <code>__eq__</code>, <code>__lt__</code> and <code>__gt__</code>. Use exact cross multiplication without converting to <code>float</code>.</li>
+<li><strong>Handle unsupported types.</strong> Return <code>NotImplemented</code> for unsupported operands.</li>
+<li><strong>Test.</strong> Try equivalent fractions, different fractions and negative values. This is an in-class exercise.</li>
+</ol>
 <details><summary>Class diagram</summary><img src="assets/week10-fraction.svg" alt="Fraction interface (Exercises 5–6)" style="max-width:100%;height:auto"></details>
+<p>Active time: <strong id="oop-timer-6">00:00</strong> <span id="oop-timer-state-6">Paused</span></p>
 <label for="oop-code-6">Python solution</label>
 <textarea id="oop-code-6" spellcheck="false"># Paste Fraction and add its three comparison methods.
 </textarea>
@@ -138,6 +179,17 @@ Exercises 2, 3 and 6 build on earlier work. Paste the earlier class into the new
   }));
   ['focus','blur'].forEach(e=>window.addEventListener(e,accrue));
   document.addEventListener('visibilitychange',accrue);
+  function refreshTimers() {
+    accrue();
+    activity.forEach(({ms},i)=>{
+      const sec = Math.floor(ms/1000);
+      el('oop-timer-'+(i+1)).textContent =
+        String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');
+      el('oop-timer-state-'+(i+1)).textContent = focused===i?'Running':'Paused';
+    });
+  }
+  refreshTimers();
+  setInterval(refreshTimers, 250);
   const idField = el('oop-neptun');
   idField.oninput = () => {idField.value=neptun(el).replace(/[^A-Z0-9]/g,'').slice(0,6);};
   const fields = cases.map((_,i) => el('oop-code-'+(i+1)));
