@@ -456,7 +456,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://colab.research.google.com/github/gmolnar2022/Python-programming-course/blob/main/exercises/10-class-exercises-colab.ipynb" target="_blank" rel="noopener"><strong>Google Colab</strong> — open, then choose File → Save a copy in Drive</a> · <a href="10-class-exercises-colab.ipynb" download="">Download Colab notebook</a></li>
 </ul>
 <p id="oop-timing-note">Timing counts focused time with the most recently opened exercise expanded.</p>
-<summary>Exercise 1 – Person: class and instance (15 minutes)</summary>
+<details class="oop-task"><summary>Exercise 1 – Person: class and instance (15 minutes)</summary>
 <ol>
 <li><strong>Define the class.</strong> Create <code>Person</code> with <code>__init__(self, person_id, name, birth_year, salary)</code>.</li>
 <li><strong>Store the data.</strong> Use <code>_person_id</code>, <code>_name</code>, <code>_birth_year</code> and <code>_salary</code>.</li>
@@ -475,8 +475,8 @@ ul.task-list li input[type="checkbox"] {
 
 </textarea>
 <p><button type="button" data-run="1">Run</button> <button type="button" data-check="1">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-1" role="status"></pre>
-<summary>Exercise 2 – Person: public methods and property (15 minutes)</summary>
+<pre id="oop-out-1" role="status"></pre></details>
+<details class="oop-task"><summary>Exercise 2 – Person: public methods and property (15 minutes)</summary>
 <ol>
 <li><strong>Start from Exercise 1.</strong> Copy your <code>Person</code> class.</li>
 <li><strong>Add public methods.</strong> Implement <code>get_name()</code>, <code>get_salary()</code> and <code>set_salary(amount)</code>. Reject negative salaries with <code>ValueError</code>.</li>
@@ -489,8 +489,8 @@ ul.task-list li input[type="checkbox"] {
 <textarea id="oop-code-2" spellcheck="false"># Paste and extend your Person class here.
 </textarea>
 <p><button type="button" data-run="2">Run</button> <button type="button" data-check="2">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-2" role="status"></pre>
-<summary>Exercise 3 – Student: inheritance (30 minutes)</summary>
+<pre id="oop-out-2" role="status"></pre></details>
+<details class="oop-task"><summary>Exercise 3 – Student: inheritance (30 minutes)</summary>
 <ol>
 <li><strong>Start from Exercise 2.</strong> Copy your <code>Person</code> class and define <code>Student(Person)</code>.</li>
 <li><strong>Initialize the student.</strong> Use parameters <code>person_id</code>, <code>name</code>, <code>birth_year</code>, <code>salary</code>, <code>neptun_code</code> and <code>semester</code>. Call <code>super().__init__</code> and use leading underscores for the two new fields.</li>
@@ -503,8 +503,8 @@ ul.task-list li input[type="checkbox"] {
 <textarea id="oop-code-3" spellcheck="false"># Paste Person here, then define Student.
 </textarea>
 <p><button type="button" data-run="3">Run</button> <button type="button" data-check="3">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-3" role="status"></pre>
-<summary>Exercise 4 – Shape: rectangle and circle (30 minutes)</summary>
+<pre id="oop-out-3" role="status"></pre></details>
+<details class="oop-task"><summary>Exercise 4 – Shape: rectangle and circle (30 minutes)</summary>
 <ol>
 <li><strong>Define the base class.</strong> In <code>Shape</code>, set <code>_PI = 3.14159</code>. Define <code>area()</code> and <code>perimeter()</code> to raise <code>NotImplementedError</code>.</li>
 <li><strong>Define the subclasses.</strong> Implement <code>Rectangle(width, height=None)</code> and <code>Circle(radius)</code> with non-public dimensions. Assume positive dimensions. If height is omitted, make a square.</li>
@@ -517,8 +517,8 @@ ul.task-list li input[type="checkbox"] {
 <textarea id="oop-code-4" spellcheck="false"># Define Shape, Rectangle and Circle here.
 </textarea>
 <p><button type="button" data-run="4">Run</button> <button type="button" data-check="4">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-4" role="status"></pre>
-<summary>Exercise 5 – Fraction: arithmetic operators (40 minutes)</summary>
+<pre id="oop-out-4" role="status"></pre></details>
+<details class="oop-task"><summary>Exercise 5 – Fraction: arithmetic operators (40 minutes)</summary>
 <ol>
 <li><strong>Initialize and normalize.</strong> Define <code>Fraction(numerator, denominator=1)</code> with integer inputs and non-public fields. Reject a zero denominator with <code>ValueError</code>. Reduce using a loop-based GCD and keep the denominator positive.</li>
 <li><strong>Expose and display values.</strong> Provide read-only <code>numerator</code> and <code>denominator</code> properties. Return <code>numerator/denominator</code> from <code>__str__</code>, even when the denominator is 1.</li>
@@ -532,8 +532,8 @@ ul.task-list li input[type="checkbox"] {
 <textarea id="oop-code-5" spellcheck="false"># Define Fraction here.
 </textarea>
 <p><button type="button" data-run="5">Run</button> <button type="button" data-check="5">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-5" role="status"></pre>
-<summary>Exercise 6 – Fraction: comparison operators (20 minutes)</summary>
+<pre id="oop-out-5" role="status"></pre></details>
+<details class="oop-task"><summary>Exercise 6 – Fraction: comparison operators (20 minutes)</summary>
 <ol>
 <li><strong>Start from Exercise 5.</strong> Copy your <code>Fraction</code> class.</li>
 <li><strong>Add comparisons.</strong> Implement <code>__eq__</code>, <code>__lt__</code> and <code>__gt__</code>. Use exact cross multiplication without converting to <code>float</code>.</li>
@@ -546,7 +546,7 @@ ul.task-list li input[type="checkbox"] {
 <textarea id="oop-code-6" spellcheck="false"># Paste Fraction and add its three comparison methods.
 </textarea>
 <p><button type="button" data-run="6">Run</button> <button type="button" data-check="6">Check solution</button> <button type="button" data-stop="">Stop</button></p>
-<pre id="oop-out-6" role="status"></pre>
+<pre id="oop-out-6" role="status"></pre></details>
 <p><button type="button" id="oop-evaluate">Evaluate my work</button></p>
 <pre id="oop-summary" role="status"></pre>
 <p id="oop-save" role="status"></p>
