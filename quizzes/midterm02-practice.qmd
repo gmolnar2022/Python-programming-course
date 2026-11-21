@@ -1,0 +1,45 @@
+---
+title: "Midterm 02 – Practice Test (Not Graded)"
+toc: false
+page-layout: full
+execute:
+  enabled: false
+---
+
+```{=html}
+<style>
+#w09-practice {max-width: 960px; margin: auto}
+#w09-practice [hidden] {display: none !important}
+#w09-practice fieldset {min-width: 0}
+#w09-practice .w09-card {border: 1px solid #bcc6cf; border-radius: .6rem; padding: 1rem; margin: .8rem 0}
+#w09-practice label {display: block; margin: .4rem 0}
+#w09-practice textarea {display: block; width: 100%; min-height: 12rem; font-family: monospace; tab-size: 4}
+#w09-practice pre {white-space: pre-wrap; overflow-wrap: anywhere; padding: .5rem}
+#w09-practice summary {cursor: pointer; font-weight: 600; margin: .4rem 0}
+#w09-warning {border-left: 4px solid #ac7400; padding: .5rem 1rem}
+#w09-timer {font-variant-numeric: tabular-nums}
+</style>
+<div id="w09-practice">
+<p><strong>13 questions · 22 points · 45 minutes</strong></p>
+<section id="w09-intro">
+<p><strong>Practice only — not graded.</strong> Work individually. For a realistic attempt, keep this tab active and do not use notes, external websites or AI tools.</p>
+<p>Your answers stay in this browser. Leaving the tab or window can trigger a warning, but your attempt continues and there is no point penalty.</p>
+<button id="w09-start" type="button">Start practice test</button>
+</section>
+<section id="w09-work" hidden>
+<p><strong>Time remaining: <span id="w09-timer">45:00</span></strong> · <span id="w09-switches"></span></p>
+<p id="w09-warning" role="status" hidden></p>
+<fieldset id="w09-answers" aria-label="Practice questions">
+<h2>Theory (10 points)</h2><div id="w09-theory"></div>
+<h2>Python (12 points)</h2>
+<p>Allow about 8–10 minutes per exercise. Use explicit loops and conditions. No imports, break, continue, comprehensions, lambda or built-in algorithm shortcuts (such as sum, max, min, sorted or list.sort). Starter data are supplied automatically; no keyboard input is needed.</p>
+<div id="w09-tasks"></div>
+</fieldset>
+<button id="w09-evaluate" type="button">Evaluate my work</button>
+<button id="w09-restart" type="button">Start a new attempt</button>
+<p id="w09-message" role="status"></p><div id="w09-result"></div>
+</section>
+</div>
+<script src="assets/week09-practice-data.js"></script>
+<script src="assets/week09-practice-ui.js"></script>
+```

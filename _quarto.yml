@@ -44,6 +44,7 @@ project:
     - project/register.qmd
     - project/index.qmd
     - project/submit.qmd
+    - quizzes/midterm02-practice.qmd
     # - lessons/10-oop.qmd
     # - lessons/11-complex-problem.qmd
     # - lessons/12-review.qmd
@@ -139,6 +140,9 @@ website:
              text: "Warm-up test"
            - href: project/index.qmd
              text: "Case Study Project"
+           - href: quizzes/midterm02-practice.qmd
+             text: "Quiz 2: Practice test"
+           
     # - section: "Week 10"
       #   contents:
       #     - href: lessons/10-oop.qmd
