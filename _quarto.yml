@@ -45,7 +45,7 @@ project:
     - project/index.qmd
     - project/submit.qmd
     - quizzes/midterm02-practice.qmd
-    # - lessons/10-oop.qmd
+    - lessons/10-oop.qmd
     # - lessons/11-complex-problem.qmd
     # - lessons/12-review.qmd
     # - assessments/index.qmd
@@ -142,11 +142,11 @@ website:
              text: "Case Study Project"
            - href: quizzes/midterm02-practice.qmd
              text: "Quiz 2: Practice test"
-           
-    # - section: "Week 10"
-      #   contents:
-      #     - href: lessons/10-oop.qmd
-      #       text: "Theory: Object-Oriented Programming"
+        
+      - section: "Week 10"
+        contents:
+           - href: lessons/10-oop.qmd
+             text: "Theory: Object-Oriented Programming"
       # - section: "Week 11"
       #   contents:
       #     - href: lessons/11-complex-problem.qmd

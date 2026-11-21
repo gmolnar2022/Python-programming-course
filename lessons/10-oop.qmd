@@ -1,0 +1,240 @@
+---
+title: "Week 10 – Object-Oriented Programming in Python"
+toc: true
+toc-depth: 3
+number-sections: false
+---
+
+## Learning objectives
+
+By the end of this lesson, you should be able to:
+
+- define a class and create independent instances;
+- initialize instance attributes and explain the role of `self`;
+- validate an attribute through a property and distinguish instance methods from static methods;
+- use default arguments and `*args` to support different calls;
+- define string representations and customize operators with special methods;
+- use inheritance, method overriding and polymorphism;
+- distinguish a naming convention from enforced access control.
+
+::: {.callout-note}
+### Connection to the previous weeks
+
+[Week 8](08-functions.qmd) introduced functions that operate on data passed as arguments. [Week 9](09-complex-data-types-2.qmd) showed how to store data in files. A class brings related data and behavior together: a program can read a record from a file and then create an object to work with that record.
+
+The supplied slides are labelled “Python seminar 11”. In this course, this material belongs to **Week 10**.
+:::
+
+## 1. Classes, objects and methods
+
+A **class** defines the attributes and behavior of a kind of object. An **instance** is a concrete object created by calling the class. Each instance can hold its own state.
+
+```python
+class Book:
+    """A book with a title and a page count."""
+
+    def __init__(self, title, pages=0):
+        self.title = title
+        self.pages = pages
+
+    def add_pages(self, amount):
+        self.pages += amount
+
+
+first = Book("Python Basics", 120)
+second = Book(title="Practice Notes")
+
+first.add_pages(10)
+print(first.pages, second.pages)  # 130 0
+```
+
+`__init__` initializes a newly created instance. It takes `self` as its first parameter and does not return the object. Python supplies the instance when you call a bound method: `first.add_pages(10)` is equivalent to `Book.add_pages(first, 10)`. Both positional and keyword arguments work when creating an instance.
+
+### Object lifetime and cleanup
+
+Python generally manages object memory for you. A class can define a finalizer, `__del__`, but you should not depend on when it runs. Writing `del first` removes a name; an object may still have other references. For resources such as open files, use the explicit lifetime provided by `with`, as in Week 9.
+
+## 2. Properties and data hiding
+
+A **getter** reads an attribute; a **setter** changes it and can validate the new value. A property lets these methods run behind ordinary attribute syntax. Here, initialization and later assignment both use the setter.
+
+```python
+class ReadingProgress:
+    def __init__(self, pages=0):
+        self.pages = pages
+
+    @property
+    def pages(self):
+        return self._pages
+
+    @pages.setter
+    def pages(self, value):
+        if type(value) is not int or value < 0:
+            raise ValueError("Pages must be a non-negative integer.")
+        self._pages = value
+
+
+progress = ReadingProgress(12)
+progress.pages = 20
+print(progress.pages)  # 20
+```
+
+The setter writes to `self._pages`; writing to `self.pages` inside it would call the setter again. As an alternative to decorators, define methods such as `get_pages` and `set_pages` and combine them with `pages = property(get_pages, set_pages)` inside the class. A deleter is optional.
+
+| Name form | Meaning |
+|---|---|
+| `pages` | Public interface |
+| `_pages` | Internal by convention; still accessible |
+| `__pages` | Name mangling helps prevent accidental collisions in subclasses; it does not make the attribute inaccessible |
+| `__init__` | A special name defined by Python; double underscores on both ends are a different convention |
+
+## 3. Static methods and flexible parameters
+
+An instance method receives `self`. A static method receives only the explicitly supplied arguments and is useful when an operation belongs with the class but needs no instance state.
+
+```python
+class Duration:
+    @staticmethod
+    def to_minutes(hours, minutes=0):
+        return 60 * hours + minutes
+
+
+print(Duration.to_minutes(2))      # 120
+print(Duration.to_minutes(2, 15))  # 135
+```
+
+Python does not choose between several definitions of the same method by their parameter lists. A later definition with the same name replaces the earlier one. Use default arguments, as above, or collect a varying number of positional arguments with `*args`.
+
+```python
+class PageLog:
+    def __init__(self):
+        self.total = 0
+
+    def record(self, *amounts):
+        for amount in amounts:
+            self.total += amount
+
+
+log = PageLog()
+log.record(12)
+log.record(4, 6)
+print(log.total)  # 22
+```
+
+## 4. Special methods and operators
+
+Special methods connect objects to Python operations such as `print(obj)`, `len(obj)` and `a + b`.
+
+| Method | Used by | Typical purpose |
+|---|---|---|
+| `__str__` | `str(obj)`, `print(obj)` | Display text for the reader |
+| `__repr__` | `repr(obj)` | More precise representation for developers |
+| `__len__` | `len(obj)` | Number of contained items |
+| `__contains__` | `item in obj` | Membership test |
+| `__add__` | `a + b` | Addition defined by the class |
+| `__eq__`, `__lt__` | `a == b`, `a < b` | Equality and ordering |
+
+```python
+class ReadingTime:
+    def __init__(self, minutes):
+        self.minutes = minutes
+
+    def __str__(self):
+        return f"{self.minutes} min"
+
+    def __repr__(self):
+        return f"ReadingTime({self.minutes})"
+
+    def __add__(self, other):
+        if not isinstance(other, ReadingTime):
+            return NotImplemented
+        return ReadingTime(self.minutes + other.minutes)
+
+
+total = ReadingTime(20) + ReadingTime(15)
+print(total)        # 35 min
+print(repr(total))  # ReadingTime(35)
+```
+
+`__add__` creates a new object and leaves both operands unchanged. Returning `NotImplemented` signals that the method does not support the other operand's type.
+
+Python also provides special **attributes** for inspecting objects and definitions. For example, `total.__class__.__name__` is `"ReadingTime"`; `Book.__doc__` contains the class docstring, and `Book.__bases__` is a tuple of its direct base classes. `__module__` identifies the module where a class or function was defined. At module level, `__name__` identifies the module (or is `"__main__"` when run as the main program), and `__file__`, when available, gives its file path.
+
+## 5. Inheritance, overriding and polymorphism
+
+A **subclass** can reuse behavior from a base class and override methods that need to behave differently. `super()` lets the subclass call the inherited implementation, for example to initialize the attributes shared by both classes.
+
+```python
+class Loan:
+    def __init__(self, title):
+        self.title = title
+
+    def loan_days(self):
+        return 14
+
+
+class ShortLoan(Loan):
+    def __init__(self, title, reason):
+        super().__init__(title)
+        self.reason = reason
+
+    def loan_days(self):
+        return 3
+
+
+loans = [Loan("Python Basics"), ShortLoan("Reference Guide", "High demand")]
+for loan in loans:
+    print(f"{loan.title}: {loan.loan_days()} days")
+```
+
+```text
+Python Basics: 14 days
+Reference Guide: 3 days
+```
+
+This is **polymorphism**: the loop makes the same method call for both objects, and each object supplies the appropriate behavior. Python allows multiple base classes, for example `class Child(FirstBase, SecondBase):`; the examples here use one base class to keep method lookup easy to follow.
+
+### Abstract methods
+
+An abstract method specifies a method that a concrete subclass must provide. Use the standard library's `abc` module when you want Python to prevent instantiation of a class with unimplemented abstract methods.
+
+```python
+from abc import ABC, abstractmethod
+
+
+class LoanPolicy(ABC):
+    @abstractmethod
+    def loan_days(self):
+        """Return the number of days allowed for this loan."""
+
+
+class StandardPolicy(LoanPolicy):
+    def loan_days(self):
+        return 14
+
+
+print(StandardPolicy().loan_days())  # 14
+```
+
+Without `abc`, a base method can raise `NotImplementedError`. That version signals the missing implementation when the method is **called**, not when the class is instantiated. `NotImplementedError` is an exception; it differs from the `NotImplemented` value returned by the operator example.
+
+## 6. Summary
+
+| Concept | Key point |
+|---|---|
+| Class and instance | The class defines behavior; each instance can have its own state |
+| `self` and `__init__` | Refer to and initialize the current instance |
+| Property | Expose attribute syntax while controlling reads and writes |
+| Static method | Receives no automatic instance argument |
+| Default arguments and `*args` | Support different calls with one method definition |
+| Special methods | Connect objects to Python operations |
+| Inheritance and overriding | Reuse shared behavior and customize it in a subclass |
+| Polymorphism | The same call can behave differently for different objects |
+| Abstract method | Specifies behavior concrete subclasses must implement |
+| `with` versus `__del__` | Use `with` when cleanup must happen at a known point |
+
+## Further reading
+
+- [Python tutorial: Classes](https://docs.python.org/3/tutorial/classes.html)
+- [Python reference: Data model](https://docs.python.org/3/reference/datamodel.html)
+- [Python standard library: Abstract base classes](https://docs.python.org/3/library/abc.html)
