@@ -46,6 +46,7 @@ project:
     - project/submit.qmd
     - quizzes/midterm02-practice.qmd
     - lessons/10-oop.qmd
+    - exercises/10-class-exercises.qmd
     # - lessons/11-complex-problem.qmd
     # - lessons/12-review.qmd
     # - assessments/index.qmd
@@ -147,6 +148,8 @@ website:
         contents:
            - href: lessons/10-oop.qmd
              text: "Theory: Object-Oriented Programming"
+           - href: exercises/10-class-exercises.qmd
+             text: "Class exercises"
       # - section: "Week 11"
       #   contents:
       #     - href: lessons/11-complex-problem.qmd
