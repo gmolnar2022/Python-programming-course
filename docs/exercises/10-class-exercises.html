@@ -552,6 +552,16 @@ ul.task-list li input[type="checkbox"] {
 <p id="oop-save" role="status"></p>
 <button id="oop-ai" type="button" hidden="">Request AI feedback &amp; estimated score</button>
 <pre id="oop-ai-output" role="status"></pre>
+<div id="oop-email-panel" hidden="">
+<button id="oop-email" type="button" aria-expanded="false" aria-controls="oop-email-form">Email my evaluation</button>
+<p>Your dashboard password is required to send this evaluation to your registered email address.</p>
+<div id="oop-email-form" hidden="">
+<label for="oop-email-password">Dashboard password</label>
+<input id="oop-email-password" type="password" autocomplete="current-password" maxlength="128">
+<button id="oop-email-send" type="button">Send evaluation</button>
+</div>
+<p id="oop-email-result" role="status"></p>
+</div>
 </div>
 <script>
 (() => {
@@ -655,6 +665,14 @@ ul.task-list li input[type="checkbox"] {
   }
   root.querySelectorAll('[data-run]').forEach(b => b.onclick = () => perform([Number(b.dataset.run)-1],false));
   root.querySelectorAll('[data-check]').forEach(b => b.onclick = () => perform([Number(b.dataset.check)-1],true));
+  const emailPanel=el('oop-email-panel'), emailButton=el('oop-email'), emailForm=el('oop-email-form');
+  const emailPassword=el('oop-email-password'), emailSend=el('oop-email-send'), emailResult=el('oop-email-result');
+  function closeEmail() {
+    emailPassword.value='';
+    emailForm.hidden=true;
+    emailButton.setAttribute('aria-expanded','false');
+  }
+  const currentSnapshot=s=>s && neptun(el)===s.id && fields.every((f,i)=>f.value===s.codes[i]);
   const evalButton = el('oop-evaluate'), aiButton = el('oop-ai'), status = el('oop-save'), aiOutput = el('oop-ai-output');
   let evaluationNo = 0;
   try { evaluationNo = Number(sessionStorage.getItem('week10-evaluation-no'))||0; } catch {}
@@ -663,6 +681,7 @@ ul.task-list li input[type="checkbox"] {
     const id = neptun(el);
     if (!/^[A-Z0-9]{6}$/.test(id)) {status.textContent='Enter a valid six-character Neptun code.';idField.focus();return;}
     evalButton.disabled=true; aiButton.hidden=true; savedEvaluation=null; aiOutput.textContent='';
+    closeEmail(); emailPanel.hidden=true; emailResult.textContent='';
     status.textContent='';
     try {
       const evaluation=await perform(cases.map((_,i)=>i),true);
@@ -692,22 +711,63 @@ ul.task-list li input[type="checkbox"] {
       if (!data.saved || !data.feedback_token) throw Error('Azure did not confirm the save.');
       status.textContent='Evaluation saved in Azure.';
       savedEvaluation={id,codes,evaluation_id:data.evaluation_id,feedback_token:data.feedback_token};
-      aiButton.hidden=false;
+      aiButton.hidden=false; emailPanel.hidden=false;
     } catch(e){status.textContent='Local checks remain available. Azure: '+e.message;}
     finally{evalButton.disabled=false;}
+  };
+  emailButton.onclick=()=>{
+    if (!currentSnapshot(savedEvaluation)) {
+      closeEmail();
+      emailResult.textContent='Your work has changed. Evaluate again first.';
+      return;
+    }
+    emailForm.hidden=false;
+    emailButton.setAttribute('aria-expanded','true');
+    emailPassword.focus();
+    emailResult.textContent='The saved evaluation and any completed AI feedback will be sent.';
+  };
+  emailSend.onclick=async()=>{
+    const s=savedEvaluation;
+    if (!currentSnapshot(s)) {
+      closeEmail();
+      emailResult.textContent='Your work has changed. Evaluate again first.';
+      return;
+    }
+    if (emailSend.disabled || aiButton.disabled) return;
+    const password=emailPassword.value;
+    if (!password) {
+      emailResult.textContent='Enter your dashboard password.';
+      emailPassword.focus();
+      return;
+    }
+    emailPassword.value='';
+    emailSend.disabled=true; aiButton.disabled=true; evalButton.disabled=true;
+    emailResult.textContent='Sending evaluation…';
+    try {
+      const d=await post('practiceFeedback',{action:'email',neptun:s.id,
+        evaluation_id:s.evaluation_id,feedback_token:s.feedback_token,password});
+      if (d.email_status!=='sent') throw Error('Email delivery could not be confirmed.');
+      closeEmail();
+      emailResult.textContent=d.cached?'This evaluation has already been emailed.':
+        'The email service confirmed sending the evaluation to your registered address.';
+    } catch(e) {
+      emailResult.textContent=e.message;
+    } finally {
+      emailSend.disabled=false; aiButton.disabled=false; evalButton.disabled=false;
+    }
   };
   aiButton.onclick=async()=>{
     const s=savedEvaluation;
     if(!s || neptun(el)!==s.id || fields.some((f,i)=>f.value!==s.codes[i])){
       aiOutput.textContent='Your work has changed. Evaluate again first.';return;
     }
-    aiButton.disabled=true;aiOutput.textContent='Requesting AI feedback…';
+    aiButton.disabled=true; emailSend.disabled=true; aiOutput.textContent='Requesting AI feedback…';
     try{
       const d=await post('practiceFeedback',{action:'ai',neptun:s.id,evaluation_id:s.evaluation_id,feedback_token:s.feedback_token});
       if(savedEvaluation!==s)return;
       aiOutput.textContent='Estimated AI score: '+d.ai.estimated_percent+'% (not an official grade)\n'+d.ai.exercises.map(x=>x.title+': '+x.percent+'% — '+x.feedback).join('\n');
     }catch(e){if(savedEvaluation===s)aiOutput.textContent=e.message;}
-    finally{aiButton.disabled=false;}
+    finally{aiButton.disabled=false; emailSend.disabled=false;}
   };
 })();
 </script>
