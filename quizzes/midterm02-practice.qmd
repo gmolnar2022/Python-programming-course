@@ -1,5 +1,5 @@
 ---
-title: "Midterm 02 – Practice Test (Not Graded)"
+title: "Midterm Quiz 02 – Practice Test (Not Graded)"
 toc: false
 page-layout: full
 execute:
@@ -23,7 +23,9 @@ execute:
 <p><strong>13 questions · 22 points · 45 minutes</strong></p>
 <section id="w09-intro">
 <p><strong>Practice only — not graded.</strong> Work individually. For a realistic attempt, keep this tab active and do not use notes, external websites or AI tools.</p>
-<p>Your answers stay in this browser. Leaving the tab or window can trigger a warning, but your attempt continues and there is no point penalty.</p>
+<p>Enter your Neptun code to start. Drafts stay in this browser; Evaluate my work saves your answers and Python code in Azure and requests AI feedback on your Python code. Leaving the tab or window can trigger a warning, but your attempt continues and there is no point penalty.</p>
+<label>Neptun code <input id="w09-neptun" maxlength="6" autocomplete="off" spellcheck="false"></label>
+<p id="w09-start-message" role="status"></p>
 <button id="w09-start" type="button">Start practice test</button>
 </section>
 <section id="w09-work" hidden>
@@ -36,6 +38,7 @@ execute:
 <div id="w09-tasks"></div>
 </fieldset>
 <button id="w09-evaluate" type="button">Evaluate my work</button>
+<button id="w09-retry-save" type="button" hidden>Retry Azure submission</button>
 <button id="w09-restart" type="button">Start a new attempt</button>
 <p id="w09-message" role="status"></p><div id="w09-result"></div>
 </section>

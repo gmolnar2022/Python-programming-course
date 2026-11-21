@@ -1,9 +1,22 @@
 'use strict';
 (() => {
   const el = id => document.getElementById('w09-' + id);
-  const KEY = 'week09-practice-v2';
+  const KEY = 'midterm02-practice-azure-v1';
   const DURATION = 45 * 60 * 1000;
   const workerUrl = new URL('assets/week09-practice-worker.js', document.baseURI);
+  const API = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/';
+  const QUIZ = 'midterm02-practice';
+  async function request(route, payload) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 45000);
+    try {
+      const r = await fetch(API + route, {method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({quizId:QUIZ,...payload}),signal:controller.signal,cache:'no-store'});
+      const d = await r.json().catch(()=>null);
+      if (!r.ok || !d?.success) throw Error(d?.error || 'The practice service is unavailable.');
+      return d;
+    } finally { clearTimeout(timer); }
+  }
   let state = null, busy = false, away = false;
   const editors = [], outputs = [], runButtons = [], radios = [];
   const add = (parent, tag, text) => {
@@ -35,10 +48,18 @@
       return input;
     }));
   });
+  const supplied = [
+    'The runner provides stops. Do not define or replace it. Build the dictionary totals; no print() is required.',
+    'Only define count_changes(values). The runner supplies values and calls the function for you. Do not add a call or print the result.',
+    'The runner creates deliveries.txt. Open it for reading and store the result in result. Do not upload or create a file.'
+  ];
   W09_TASKS.forEach((task, i) => {
     const card = add(el('tasks'), 'details'); card.className = 'w09-card';
     add(card, 'summary', 'Question ' + (i + 11) + ' — ' + task.title + ' (4 points)');
     add(card, 'p').innerHTML = task.desc; // Static authored markup.
+    const runner = add(card, 'p');
+    add(runner, 'strong', 'Provided by the runner: ');
+    runner.append(document.createTextNode(supplied[i]));
     const examples = add(card, 'details'); add(examples, 'summary', 'Example'); add(examples, 'pre', task.example);
     if (task.hint) {
       const hints = add(card, 'details'); add(hints, 'summary', 'Optional hint'); add(hints, 'p', task.hint);
@@ -89,7 +110,9 @@
     el('evaluate').disabled = busy || Boolean(state.result && !state.result.unavailable);
     el('evaluate').textContent = state.result?.unavailable ? 'Retry evaluation' : 'Evaluate my work';
     el('restart').disabled = busy;
-    if (!state.finished && !remaining && !busy) el('message').textContent = 'Time is up. Your answers are locked; select Evaluate my work to see feedback.';
+    el('retry-save').hidden = !state.finished || Boolean(state.cloud);
+    el('retry-save').disabled = busy;
+    if (!state.finished && !remaining && !busy) el('message').textContent = 'Time is up. Your answers are locked. Select Evaluate my work now to submit within the two-minute grace period.';
   }
   function show() {
     el('intro').hidden = true; el('work').hidden = false;
@@ -98,9 +121,34 @@
     el('warning').hidden = true; el('message').textContent = '';
     updateSwitches(); showResult(); tick();
   }
-  function start() {
-    state = {deadline:Date.now()+DURATION, answers:Array(10).fill(null), code:W09_TASKS.map(t=>t.starter), switches:0, finished:false};
-    away = false; save(); show();
+  async function start() {
+    if (busy) return;
+    const neptun = el('neptun').value.trim().toUpperCase();
+    const message = el('start-message');
+    if (!/^[A-Z0-9]{6}$/.test(neptun)) { message.textContent = 'Enter your six-character Neptun code.'; return; }
+    busy = true; el('start').disabled = true; el('restart').disabled = true;
+    message.textContent = 'Starting practice attempt…';
+    try {
+      const d = await request('startQuizPractice02',{neptun});
+      state = {deadline:Date.parse(d.deadline), attemptId:d.attemptId, sessionToken:d.sessionToken, neptun,
+        answers:Array(10).fill(null),code:W09_TASKS.map(t=>t.starter),switches:0,finished:false};
+      away = false; save(); show();
+    } catch (e) {
+      message.textContent = e.message;
+      if (state) el('message').textContent = e.message;
+    } finally { el('start').disabled = false; setBusy(false); }
+  }
+  async function submitCloud() {
+    if (state.cloud) return;
+    const answers = {}, code = {};
+    state.answers.forEach((v,i)=>{if(v!==null) answers[i+1]='abcd'[v];});
+    state.code.forEach((v,i)=>{code[i+11]=v;});
+    try {
+      state.cloud = await request('submitQuizPractice02',{neptun:state.neptun,attemptId:state.attemptId,
+        sessionToken:state.sessionToken,answers,code,switches:state.switches});
+      delete state.cloudError;
+    } catch (e) { state.cloudError = e.message; }
+    save();
   }
   function updateSwitches() { el('switches').textContent = 'Detected tab/window departures: ' + state.switches; }
   function departure() {
@@ -117,6 +165,15 @@
   });
   function showResult() {
     const box = el('result'); box.replaceChildren();
+    if (state.cloud) {
+      add(box,'p','Submission saved in Azure. Server theory score: '+state.cloud.theory.score+'/10.');
+      const ai = state.cloud.ai;
+      if (ai?.status === 'ready') {
+        const fold = add(box,'details');
+        add(fold,'summary','AI feedback (estimate, separate from automated checks)');
+        add(fold,'pre',ai.feedback);
+      } else add(box,'p','AI feedback is currently unavailable. Your submission was saved.');
+    } else if (state.cloudError) add(box,'p','Azure did not confirm the submission: '+state.cloudError);
     if (!state.result) return;
     const r = state.result;
     add(box,'h2','Practice results');
@@ -145,6 +202,7 @@
     state.finished = true; save(); setBusy(true);
     const theory = W09_THEORY.filter((q,i)=>q[2]===state.answers[i]).length;
     const tasks = [];
+    const cloud = submitCloud();
     try {
       for (const [i, task] of W09_TASKS.entries()) {
         el('message').textContent = 'Checking question '+(i+11)+'…';
@@ -152,12 +210,20 @@
         tasks.push({...r,points:r.cases?.filter(c=>c.passed).length||0});
       }
       state.result = {theory,tasks,python:tasks.reduce((sum,r)=>sum+r.points,0),unavailable:tasks.some(r=>r.unavailable)};
-      save(); showResult(); el('message').textContent = '';
+      save(); showResult();
+      if (!state.cloud && !state.cloudError) el('message').textContent = 'Waiting for Azure and AI feedback…';
+      await cloud; showResult(); el('message').textContent = '';
     } finally { setBusy(false); }
+  };
+  el('retry-save').onclick = async () => {
+    if (busy || !state.finished || state.cloud) return;
+    setBusy(true); el('message').textContent = 'Submitting to Azure…';
+    try { await submitCloud(); showResult(); el('message').textContent = ''; }
+    finally { setBusy(false); }
   };
   el('start').onclick = start;
   el('restart').onclick = ()=>{if(!busy && confirm('Discard this attempt and start again?')) start();};
   state = restore();
-  if (state) show();
+  if (state) { el('neptun').value = state.neptun; show(); }
   setInterval(tick, 250);
 })();
