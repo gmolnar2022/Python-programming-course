@@ -453,7 +453,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quiz-intro">
 <p><strong>10 theory questions + 3 Python tasks · 22 points · 45 minutes · one attempt</strong></p>
 <p>This is the official Quiz 2. The approved result contributes 10% to your semester grade.</p>
-<div class="quiz-note">Start only when instructed by your teacher. Enter your Neptun code and the classroom code displayed by the teacher. The classroom code is different from your Student Dashboard password. Refreshing or leaving this page does not stop the timer or create a new attempt. At the deadline, the last draft saved on the server is submitted automatically. The first time you leave this tab, you will see a warning on return. Leaving the tab a second time triggers automatic submission.</div>
+<p>Start only when instructed by your teacher. Enter your Neptun code and the classroom code displayed by the teacher. The classroom code is different from your Student Dashboard password.</p>
+<section class="quiz-note" aria-labelledby="quiz-window-rules-title">
+<h2 id="quiz-window-rules-title" class="anchored">Test window rules</h2>
+<ul>
+<li>Keep the quiz tab visible. Switching tabs, minimizing the browser or otherwise hiding the quiz page counts as leaving the tab. Losing focus alone does not count if the page stays visible.</li>
+<li><strong>First recorded switch:</strong> You will see a warning when you return and can continue working.</li>
+<li><strong>Second recorded switch:</strong> Your answers are locked and submitted automatically, without a confirmation dialog.</li>
+<li>Refreshing or leaving the page does not pause the timer or give you a new attempt. At the deadline, the last draft saved on the server is submitted automatically.</li>
+</ul>
+</section>
+<section class="quiz-note" aria-labelledby="quiz-python-rules-title">
+<h2 id="quiz-python-rules-title" class="anchored">Function and algorithmic rules</h2>
+<ul>
+<li>Use sequence, selection (<code>if</code>) and explicit <code>for</code> or <code>while</code> loops. When a function is requested, use the specified name and parameters and return the requested value. Add test calls only if the task asks for them; otherwise, you may use temporary calls to try your code.</li>
+<li>Do not use imports, <code>break</code>, <code>continue</code>, comprehensions, <code>lambda</code>, <code>map</code> or <code>filter</code>. Implement the required algorithm yourself: do not use shortcuts such as <code>sum()</code>, <code>min()</code>, <code>max()</code>, <code>sorted()</code>, <code>.sort()</code>, <code>.count()</code> or <code>.index()</code> to perform it for you.</li>
+<li>Use the exact variable names given in the task and descriptive labels when printing. Do not hard-code the examples: your solution should work with other valid data.</li>
+</ul>
+</section>
 <p><label>Neptun code <input id="quiz-neptun" maxlength="6" autocomplete="off"></label></p>
 <p><label>Classroom code <input id="quiz-access" maxlength="6" autocomplete="off"></label></p>
 <button type="button" id="quiz-start">Start quiz</button>
