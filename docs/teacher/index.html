@@ -385,7 +385,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../quizzes/midterm02-practice.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quiz 2: Practice test</span></a>
+ <span class="menu-text">Quiz02: Practice test</span></a>
   </div>
 </li>
       </ul>
@@ -409,6 +409,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="../exercises/10-class-exercises.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Class exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../quizzes/midterm02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quiz02: Official test</span></a>
   </div>
 </li>
       </ul>
@@ -937,14 +943,15 @@ const API_BASE =
   "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api";
 
 let allRows = [];
+let resultsRequest = 0, loadedTestId = null, evaluating = false;
 const assessmentSlots = [
  ...Array.from({length:8},(_,i)=>({id:`warmup${i+1}`,label:`Warmup ${i+1}`})),
  {id:'quiz1',label:'Quiz 1'},{id:'quiz2',label:'Quiz 2'},
  {id:'final',label:'End-term test'},{id:'project',label:'Project'}
 ];
 function isPracticeQuiz(){return testSelect.value==='midterm01-practice'}
-function isOfficialQuiz(){return testSelect.value==='midterm01'}
-function updateTestControls(){openSessionButton.disabled=!/^week\d{2}$/.test(testSelect.value);document.getElementById('openQuizButton').disabled=!isOfficialQuiz();document.getElementById('evaluateButton').disabled=testSelect.value==='midterm02';document.getElementById('finalizeUnchangedButton').disabled=testSelect.value==='midterm02';}
+function isOfficialQuiz(){return ['midterm01','midterm02'].includes(testSelect.value)}
+function updateTestControls(){openSessionButton.disabled=!/^week\d{2}$/.test(testSelect.value);document.getElementById('openQuizButton').disabled=!isOfficialQuiz();document.getElementById('evaluateButton').disabled=evaluating||loadedTestId!==testSelect.value;document.getElementById('finalizeUnchangedButton').disabled=evaluating||loadedTestId!==testSelect.value;}
 
 
 const loginBox =
@@ -1265,43 +1272,37 @@ async function openTestSession() {
 ------------------------------------------------- */
 
 async function loadResults() {
-  if(testSelect.value==='midterm02'){allRows=[];renderRows();updateTestControls();setMessage('Quiz 2 is listed for semester planning; its official test is not configured yet.');return;}
-  const testId =
-    testSelect.value;
+  const testId = testSelect.value;
+  const official = isOfficialQuiz();
+  const request = ++resultsRequest;
+  const isCurrent = () => request === resultsRequest && testSelect.value === testId;
 
-  setMessage(
-    "Loading results..."
-  );
-
-  const url =
-    apiUrl(isOfficialQuiz()?"teacherOfficialQuizResults":isPracticeQuiz()?"teacherQuizResults":"teacherResults") +
-    `&test_id=${encodeURIComponent(testId)}`;
-
-  const response =
-    await fetch(url);
-
-  const data =
-    await readJsonResponse(
-      response,
-      "Could not load teacher results."
-    );
-
-  if (!data.success) {
-    throw new Error(
-      data.error ||
-      "Could not load teacher results."
-    );
-  }
-
-  allRows =
-    data.submissions || [];
+  loadedTestId = null;
+  allRows = [];
   updateTestControls();
-
   renderRows();
+  setMessage("Loading results...");
 
-  setMessage(
-    `${allRows.length} submission(s) loaded.`
-  );
+  try {
+    const url = apiUrl(official ? "teacherOfficialQuizResults" : isPracticeQuiz() ? "teacherQuizResults" : "teacherResults") +
+      `&test_id=${encodeURIComponent(testId)}`;
+    const response = await fetch(url, {cache: 'no-store', signal: AbortSignal.timeout(30000)});
+    const data = await readJsonResponse(response, "Could not load teacher results.");
+    if (!isCurrent()) return;
+    if (!data.success) throw new Error(data.error || "Could not load teacher results.");
+    const submissions = data.submissions || [];
+    if (official && (data.test_id !== testId || submissions.some(row => row.test_id !== testId))) {
+      const received = data.test_id || "an unidentified test";
+      throw new Error(`Azure returned ${received} for ${testId}. Results and grading actions are blocked. Check the deployed Quiz backend.`);
+    }
+    allRows = submissions;
+    loadedTestId = testId;
+    updateTestControls();
+    renderRows();
+    setMessage(`${allRows.length} submission(s) loaded.`);
+  } catch (error) {
+    if (isCurrent()) throw error;
+  }
 }
 
 
@@ -1732,7 +1733,7 @@ function renderRows() {
 
       <td>
         <label class="small-muted">Semester assessment</label>
-        <select class="assessment-slot">${assessmentSlots.filter(a=>isOfficialQuiz()?a.id==='quiz1':!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
+        <select class="assessment-slot">${assessmentSlots.filter(a=>isOfficialQuiz()?a.id===(row.test_id==='midterm02'?'quiz2':'quiz1'):!isPracticeQuiz()||a.id.startsWith('quiz')).map(a=>`<option value="${a.id}" ${a.id===row.assessment_slot?'selected':''}>${a.label}</option>`).join('')}</select>
         <label class="small-muted"><input type="checkbox" class="counts-grade" ${isOfficialQuiz()?'disabled':''} ${row.counts_toward_grade!==false?'checked':''}> Include in semester result</label>
         <div class="small-muted">${isPracticeQuiz()?'Practice attempt: enable inclusion only after an explicit grading decision.':''}</div>
         <input
@@ -1811,9 +1812,9 @@ function renderRows() {
         const data = await readJsonResponse(response,'Teacher test could not be deleted.');
         if(!data.success) throw new Error(data.error||'Deletion failed.');
         // Clear only this browser's matching G07 official-quiz cache, so reload can start anew.
-        if(row.test_id === 'midterm01') {
+        if(['midterm01','midterm02'].includes(row.test_id)) {
           try {
-            const key='python-course-official-midterm01-v1', saved=JSON.parse(localStorage.getItem(key)||'null');
+            const key=`python-course-official-${row.test_id}-v1`, saved=JSON.parse(localStorage.getItem(key)||'null');
             if(saved?.attempt?.neptun===row.neptun && saved.attempt.attemptId===row.submission_id) localStorage.removeItem(key);
           } catch(_) {}
         }
@@ -1857,7 +1858,7 @@ async function saveReviewRequest(
 ) {
   const response =
     await fetch(
-      apiUrl(row.test_id==='midterm01'?"saveOfficialQuizReview":row.test_id==='midterm01-practice'?"saveQuizReview":"saveReview"),
+      apiUrl(['midterm01','midterm02'].includes(row.test_id)?"saveOfficialQuizReview":row.test_id==='midterm01-practice'?"saveQuizReview":"saveReview"),
       {
         method: "POST",
 
@@ -2007,6 +2008,7 @@ function unchangedRows() {
 
 
 async function finalizeUnchanged() {
+  if (evaluating || loadedTestId !== testSelect.value) return;
   const button =
     document.getElementById(
       "finalizeUnchangedButton"
@@ -2082,12 +2084,11 @@ async function finalizeUnchanged() {
 
 
 async function evaluatePending() {
-  const button =
-    document.getElementById(
-      "evaluateButton"
-    );
-
-  button.disabled = true;
+  const testId = testSelect.value;
+  if (evaluating || loadedTestId !== testId) return;
+  const route = isOfficialQuiz() ? "evaluateOfficialQuiz" : isPracticeQuiz() ? "evaluateQuizPractice" : "evaluateTest";
+  evaluating = true;
+  updateTestControls();
 
   try {
     let remaining = null;
@@ -2102,7 +2103,7 @@ async function evaluatePending() {
 
       const response =
         await fetch(
-          apiUrl(isOfficialQuiz()?"evaluateOfficialQuiz":isPracticeQuiz()?"evaluateQuizPractice":"evaluateTest"),
+          apiUrl(route),
           {
             method: "POST",
 
@@ -2112,8 +2113,7 @@ async function evaluatePending() {
             },
 
             body: JSON.stringify({
-              test_id:
-                testSelect.value
+              test_id: testId
             })
           }
         );
@@ -2124,6 +2124,7 @@ async function evaluatePending() {
           "Evaluation failed."
         );
 
+      if (testSelect.value !== testId) return;
       if (
         data.failed_this_batch > 0
       ) {
@@ -2154,7 +2155,8 @@ async function evaluatePending() {
     );
 
   } finally {
-    button.disabled = false;
+    evaluating = false;
+    updateTestControls();
   }
 }
 
@@ -2296,6 +2298,7 @@ statusFilter.addEventListener(
 testSelect.addEventListener(
   "change",
   async () => {
+    updateTestControls();
     stopSessionCountdown();
 
     sessionExpiresAt = null;

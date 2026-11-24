@@ -2,14 +2,13 @@ project:
   type: website
   output-dir: docs
   execute-dir: project
-  resources:
+  resources: 
     - assets/**
     - exercises/assets/**
-    - warmup/assets/**
     - quizzes/assets/**
-    - examples/week07/*.py
     - exercises/*-colab.ipynb
     - exercises/*-jupyter.ipynb
+   
   render:
     - index.qmd
     - lessons/01-introduction-to-programming-and-python.qmd
@@ -47,6 +46,7 @@ project:
     - quizzes/midterm02-practice.qmd
     - lessons/10-oop.qmd
     - exercises/10-class-exercises.qmd
+    - quizzes/midterm02.qmd
     # - lessons/11-complex-problem.qmd
     # - lessons/12-review.qmd
     # - assessments/index.qmd
@@ -142,14 +142,15 @@ website:
            - href: project/index.qmd
              text: "Case Study Project"
            - href: quizzes/midterm02-practice.qmd
-             text: "Quiz 2: Practice test"
-        
+             text: "Quiz02: Practice test"
       - section: "Week 10"
         contents:
-           - href: lessons/10-oop.qmd
-             text: "Theory: Object-Oriented Programming"
-           - href: exercises/10-class-exercises.qmd
-             text: "Class exercises"
+          - href: lessons/10-oop.qmd
+            text: "Theory: Object-Oriented Programming"
+          - href: exercises/10-class-exercises.qmd
+            text: "Class exercises"
+          - href: quizzes/midterm02.qmd
+            text: "Quiz02: Official test"
       # - section: "Week 11"
       #   contents:
       #     - href: lessons/11-complex-problem.qmd
